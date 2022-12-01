@@ -5,4 +5,4 @@ import { SecondaryLayout } from './secondary.layout';
   declarations: [SecondaryLayout],
   imports: [],
 })
-export class PrimaryLayoutModule {}
+export class SecondaryLayoutModule {}
