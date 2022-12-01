@@ -5,18 +5,18 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./pages/home/home.module').then((m) => m.HomeModule),
+      import('./pages/home/home-page.module').then((m) => m.HomePageModule),
   },
   {
     path: 'login',
     loadChildren: () =>
-      import('./pages/login/login.module').then((m) => m.LoginModule),
+      import('./pages/login/login-page.module').then((m) => m.LoginPageModule),
   },
   {
     path: 'page-not-found',
     loadChildren: () =>
-      import('./pages/page-not-found/page-not-found.module').then(
-        (m) => m.PageNotFoundModule
+      import('./pages/page-not-found/page-not-found-page.module').then(
+        (m) => m.PageNotFoundPageModule
       ),
   },
   //{ path: '', redirectTo: '', pathMatch: 'full' },

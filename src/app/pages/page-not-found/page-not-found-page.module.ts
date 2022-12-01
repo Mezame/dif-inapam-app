@@ -8,4 +8,4 @@ const routes: Routes = [{ path: '', component: PageNotFoundPage }];
   declarations: [PageNotFoundPage],
   imports: [RouterModule.forChild(routes)],
 })
-export class PageNotFoundModule {}
+export class PageNotFoundPageModule {}
