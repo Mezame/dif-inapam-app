@@ -5,4 +5,4 @@ import { PrimaryLayout } from './primary.layout';
   declarations: [PrimaryLayout],
   imports: [],
 })
-export class PrimaryModule {}
+export class PrimaryLayoutModule {}
