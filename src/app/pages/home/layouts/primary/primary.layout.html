@@ -1,1 +1,47 @@
-<p>primary works!</p>
+<mat-sidenav-container fullscreen>
+  <mat-sidenav class="side-nav" #sidenav>
+    <mat-nav-list (click)="sidenav.close()" disableRipple>
+      <a mat-list-item routerLink="/oficios" routerLinkActive="active">
+        <span>Oficios</span>
+      </a>
+
+      <a mat-list-item routerLink="/oficios/folio" routerLinkActive="active">
+        <span>Reportes</span>
+      </a>
+
+      <mat-divider class="divider"></mat-divider>
+
+      <mat-list-item>
+        <mat-icon matListItemIcon>logout</mat-icon>
+        <span matListItemTitle>Cerrar sesión</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button mat-icon-button (click)="sidenav.open()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <span>{{toolbarTitle}}</span>
+
+      <span class="spacer"></span>
+
+      <ng-container *ngIf="toolbarIconButton">
+        <button mat-icon-button>
+          <mat-icon>{{toolbarIconButton}}</mat-icon>
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="toolbarButton">
+        <button mat-flat-button>
+          <mat-icon *ngIf="toolbarButton.icon">{{toolbarButton.icon}}</mat-icon>
+          <span>{{toolbarButton.text}}</span>
+        </button>
+      </ng-container>
+    </mat-toolbar>
+
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
