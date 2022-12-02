@@ -1,13 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HomePage } from './home.page';
 import { RouterModule, Routes } from '@angular/router';
-import { DocumentListTemplate } from './templates/document-list/document-list.template';
-import { DocumentDetailTemplate } from './templates/document-detail/document-detail.template';
-import { DocumentEditTemplate } from './templates/document-edit/document-edit.template';
-import { LatestReportDetailTemplate } from './templates/latest-report-detail/latest-report-detail.template';
-import { PreviousReportListTemplate } from './templates/previous-report-list/previous-report-list.template';
-import { AssistantListTemplate } from './templates/assistant-list/assistant-list.template';
-import { AssistantCreateEditTemplate } from './templates/assistant-create-edit/assistant-create-edit.template';
 
 const routes: Routes = [
   {
@@ -16,42 +9,73 @@ const routes: Routes = [
     children: [
       {
         path: 'oficios',
-        component: DocumentListTemplate,
+        loadChildren: () =>
+          import(
+            './templates/document-list/document-list-template.module'
+          ).then((m) => m.DocumentListTemplateModule)
       },
       {
         path: 'oficio/folio',
-        component: DocumentDetailTemplate,
+        loadChildren: () =>
+          import(
+            './templates/document-detail/document-detail-template.module'
+          ).then((m) => m.DocumentDetailTemplateModule),
       },
       {
         path: 'oficio/folio/editar',
-        component: DocumentEditTemplate,
+        loadChildren: () =>
+          import(
+            './templates/document-edit/document-edit-template.module'
+          ).then((m) => m.DocumentEditTemplateModule),
       },
       {
         path: 'reportes',
-        component: LatestReportDetailTemplate,
+        loadChildren: () =>
+          import(
+            './templates/latest-report-detail/latest-report-detail-template.module'
+          ).then((m) => m.LatestReportDetailTemplateModule),
       },
       {
         path: 'reportes-anteriores',
-        component: PreviousReportListTemplate,
+        loadChildren: () =>
+          import(
+            './templates/previous-report-list/previous-report-list-template.module'
+          ).then((m) => m.PreviousReportListTemplateModule),
       },
       {
         path: 'asistentes',
-        component: AssistantListTemplate,
+        loadChildren: () =>
+          import(
+            './templates/assistant-list/assistant-list-template.module'
+          ).then((m) => m.AssistantListTemplateModule),
       },
       {
         path: 'crear-asistente',
-        component: AssistantCreateEditTemplate,
+        loadChildren: () =>
+          import(
+            './templates/assistant-create-edit/assistant-create-edit-template.module'
+          ).then((m) => m.AssistantCreateEditTemplateModule),
       },
       {
         path: 'asistente/id/editar',
-        component: AssistantCreateEditTemplate,
-      }
+        loadChildren: () =>
+          import(
+            './templates/assistant-create-edit/assistant-create-edit-template.module'
+          ).then((m) => m.AssistantCreateEditTemplateModule),
+      },
+      {
+        path: '',
+        redirectTo: 'oficios',
+        pathMatch: 'full',
+      },
     ],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    RouterModule.forChild(routes),
+  ],
   exports: [RouterModule],
 })
 export class HomeRoutingModule {}
