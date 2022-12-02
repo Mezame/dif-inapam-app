@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.sass']
+  selector: 'app-home-page',
+  template: `<router-outlet></router-outlet>`,
 })
-export class HomePage {
-
-}
+export class HomePage {}
