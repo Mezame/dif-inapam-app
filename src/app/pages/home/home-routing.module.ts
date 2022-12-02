@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HomePage } from './home.page';
 import { RouterModule, Routes } from '@angular/router';
-import { DocumentListTemplate } from './templates/document-list/document-list.template';
 
 const routes: Routes = [
   {
@@ -10,7 +9,10 @@ const routes: Routes = [
     children: [
       {
         path: 'oficios',
-        component: DocumentListTemplate
+        loadChildren: () =>
+          import(
+            './templates/document-list/document-list-template.module'
+          ).then((m) => m.DocumentListTemplateModule),
       },
       {
         path: 'oficio/folio',
