@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SelectivePreloadingStrategyService } from './shared/selective-preloading-strategy.service';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () =>
       import('./pages/login/login-page.module').then((m) => m.LoginPageModule),
+    data: { preload: true },
   },
   {
     path: 'page-not-found',
@@ -29,6 +31,7 @@ const routes: Routes = [
       scrollPositionRestoration: 'enabled',
       malformedUriErrorHandler: (_error, UrlSerializer, _url) =>
         UrlSerializer.parse('page-not-found'),
+      preloadingStrategy: SelectivePreloadingStrategyService,
     }),
   ],
   exports: [RouterModule],
