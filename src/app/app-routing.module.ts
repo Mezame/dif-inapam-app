@@ -7,12 +7,12 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./pages/home/home-page.module').then((m) => m.HomePageModule),
+    data: { preload: true },
   },
   {
     path: 'login',
     loadChildren: () =>
       import('./pages/login/login-page.module').then((m) => m.LoginPageModule),
-    data: { preload: true },
   },
   {
     path: 'page-not-found',
