@@ -4,15 +4,15 @@ import { SelectivePreloadingStrategyService } from './shared/selective-preloadin
 
 const routes: Routes = [
   {
+    path: 'login',
+    loadChildren: () =>
+      import('./pages/login/login-page.module').then((m) => m.LoginPageModule),
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./pages/home/home-page.module').then((m) => m.HomePageModule),
     data: { preload: true },
-  },
-  {
-    path: 'login',
-    loadChildren: () =>
-      import('./pages/login/login-page.module').then((m) => m.LoginPageModule),
   },
   {
     path: 'page-not-found',
