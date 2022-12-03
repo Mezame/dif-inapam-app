@@ -11,56 +11,56 @@ const routes: Routes = [
         path: 'oficios',
         loadChildren: () =>
           import(
-            './templates/document-list/document-list.module'
+            './pages/document-list/document-list.module'
           ).then((m) => m.DocumentListModule),
       },
       {
         path: 'oficio/folio',
         loadChildren: () =>
           import(
-            './templates/document-detail/document-detail.module'
+            './pages/document-detail/document-detail.module'
           ).then((m) => m.DocumentDetailModule),
       },
       {
         path: 'oficio/folio/editar',
         loadChildren: () =>
           import(
-            './templates/document-edit/document-edit.module'
+            './pages/document-edit/document-edit.module'
           ).then((m) => m.DocumentEditModule),
       },
       {
         path: 'reportes',
         loadChildren: () =>
           import(
-            './templates/latest-report-detail/latest-report-detail.module'
+            './pages/latest-report-detail/latest-report-detail.module'
           ).then((m) => m.LatestReportDetailModule),
       },
       {
         path: 'reportes-anteriores',
         loadChildren: () =>
           import(
-            './templates/previous-report-list/previous-report-list.module'
+            './pages/previous-report-list/previous-report-list.module'
           ).then((m) => m.PreviousReportListModule),
       },
       {
         path: 'asistentes',
         loadChildren: () =>
           import(
-            './templates/assistant-list/assistant-list.module'
+            './pages/assistant-list/assistant-list.module'
           ).then((m) => m.AssistantListModule),
       },
       {
         path: 'crear-asistente',
         loadChildren: () =>
           import(
-            './templates/assistant-create-edit/assistant-create-edit.module'
+            './pages/assistant-create-edit/assistant-create-edit.module'
           ).then((m) => m.AssistantCreateEditModule),
       },
       {
         path: 'asistente/id/editar',
         loadChildren: () =>
           import(
-            './templates/assistant-create-edit/assistant-create-edit.module'
+            './pages/assistant-create-edit/assistant-create-edit.module'
           ).then((m) => m.AssistantCreateEditModule),
       },
       {
