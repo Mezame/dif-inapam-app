@@ -15,7 +15,7 @@ const routes: Routes = [
           ).then((m) => m.DocumentListModule),
       },
       {
-        path: 'oficio/folio',
+        path: 'oficio/:cardCode',
         loadChildren: () =>
           import(
             './pages/document-detail/document-detail.module'
