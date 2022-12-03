@@ -5,11 +5,11 @@ export interface Document {
   fathersLastname: string;
   mothersLastname: string;
   name: string;
-  sex: 'H' | 'M';
+  sex: 'Hombre' | 'Mujer';
   birthdate: string;
   birthplace: string;
   curp: string;
-  maritalStatus: 'C' | 'S';
+  maritalStatus: 'Casado' | 'Soltero';
   metadata?: {
     id?: number;
     timestamp?: string;
