@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LatestReportDetailTemplate } from './latest-report-detail.template';
+import { LatestReportDetailComponent } from './latest-report-detail.component';
 
 describe('LatestReportDetailTemplate', () => {
-  let component: LatestReportDetailTemplate;
-  let fixture: ComponentFixture<LatestReportDetailTemplate>;
+  let component: LatestReportDetailComponent;
+  let fixture: ComponentFixture<LatestReportDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LatestReportDetailTemplate ]
+      declarations: [ LatestReportDetailComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LatestReportDetailTemplate);
+    fixture = TestBed.createComponent(LatestReportDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

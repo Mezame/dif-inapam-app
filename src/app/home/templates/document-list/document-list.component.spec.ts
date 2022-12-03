@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DocumentDetailTemplate } from './document-detail.template';
+import { DocumentListComponent } from './document-list.component';
 
-describe('DocumentDetailTemplate', () => {
-  let component: DocumentDetailTemplate;
-  let fixture: ComponentFixture<DocumentDetailTemplate>;
+describe('DocumentListTemplate', () => {
+  let component: DocumentListComponent;
+  let fixture: ComponentFixture<DocumentListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DocumentDetailTemplate ]
+      declarations: [ DocumentListComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DocumentDetailTemplate);
+    fixture = TestBed.createComponent(DocumentListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

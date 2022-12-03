@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PreviousReportListTemplate } from './previous-report-list.template';
+import { PreviousReportListComponent} from './previous-report-list.component';
 
 describe('PreviousReportListTemplate', () => {
-  let component: PreviousReportListTemplate;
-  let fixture: ComponentFixture<PreviousReportListTemplate>;
+  let component: PreviousReportListComponent;
+  let fixture: ComponentFixture<PreviousReportListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PreviousReportListTemplate ]
+      declarations: [ PreviousReportListComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PreviousReportListTemplate);
+    fixture = TestBed.createComponent(PreviousReportListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

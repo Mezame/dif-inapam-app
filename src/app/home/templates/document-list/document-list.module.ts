@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { DocumentListTemplate } from './document-list.template';
+import { DocumentListComponent } from './document-list.component';
 import { PrimaryLayoutModule } from '../../layouts/primary/primary-layout.module';
 import { DocumentListTableModule } from '@features/documents/document-list-table/document-list-table.module';
 
-const routes: Routes = [{ path: '', component: DocumentListTemplate }];
+const routes: Routes = [{ path: '', component: DocumentListComponent }];
 
 @NgModule({
-  declarations: [DocumentListTemplate],
+  declarations: [DocumentListComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     PrimaryLayoutModule,
     DocumentListTableModule,
   ],
-  exports: [DocumentListTemplate],
+  exports: [DocumentListComponent],
 })
-export class DocumentListTemplateModule {}
+export class DocumentListModule {}

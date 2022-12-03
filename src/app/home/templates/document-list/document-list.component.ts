@@ -5,11 +5,11 @@ import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-document-list',
-  templateUrl: './document-list.template.html',
-  styleUrls: ['./document-list.template.sass'],
+  templateUrl: './document-list.component.html',
+  styleUrls: ['./document-list.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DocumentListTemplate {
+export class DocumentListComponent {
   documents$: Observable<Document[]> = of(documentsMock);
 
 }

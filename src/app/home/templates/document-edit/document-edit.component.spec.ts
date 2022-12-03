@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssistantListTemplate } from './assistant-list.template';
+import { DocumentEditComponent } from './document-edit.component';
 
-describe('AssistantListTemplate', () => {
-  let component: AssistantListTemplate;
-  let fixture: ComponentFixture<AssistantListTemplate>;
+describe('DocumentEditComponent', () => {
+  let component: DocumentEditComponent;
+  let fixture: ComponentFixture<DocumentEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AssistantListTemplate ]
+      declarations: [ DocumentEditComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AssistantListTemplate);
+    fixture = TestBed.createComponent(DocumentEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
