@@ -7,8 +7,8 @@ interface ToolbarButton {
 
 @Component({
   selector: 'app-primary-layout',
-  templateUrl: './primary.layout.html',
-  styleUrls: ['./primary.layout.sass']
+  templateUrl: './primary-layout.component.html',
+  styleUrls: ['./primary-layout.component.sass']
 })
 export class PrimaryLayoutComponent {
   @Input('toolbar-title') toolbarTitle!: string;
