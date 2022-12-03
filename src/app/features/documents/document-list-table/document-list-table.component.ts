@@ -1,7 +1,12 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Document } from '../document.interface';
-import { documentsMock } from '../mocks/document.mock';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 
@@ -9,9 +14,9 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
   selector: 'app-document-list-table',
   templateUrl: './document-list-table.component.html',
   styleUrls: ['./document-list-table.component.sass'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentListTableComponent implements AfterViewInit {
-  documents$: Observable<Document[]> = of(documentsMock);
   displayedColumns: string[] = [
     'cardCode',
     'name',
@@ -19,6 +24,8 @@ export class DocumentListTableComponent implements AfterViewInit {
     'operationCode',
     'options',
   ];
+
+  @Input('data') documents$!: Observable<Document[]>;
 
   @ViewChild(MatTable)
   table!: MatTable<Document>;
