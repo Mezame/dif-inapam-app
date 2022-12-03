@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./pages/home/home-page.module').then((m) => m.HomePageModule),
+      import('./home/home.module').then((m) => m.HomeModule),
     data: { preload: true },
   },
   {
