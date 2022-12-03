@@ -1,4 +1,4 @@
-interface Document {
+export interface Document {
   creationDate: string;
   operationCode: 'NUEVO REG' | 'REPOSICION' | 'CANJE';
   cardCode: string;
