@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { PrimaryLayout } from './primary.layout';
+import { PrimaryLayoutComponent } from './primary-layout.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,7 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
-  declarations: [PrimaryLayout],
+  declarations: [PrimaryLayoutComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -22,6 +22,6 @@ import { MatDividerModule } from '@angular/material/divider';
     MatListModule,
     MatDividerModule,
   ],
-  exports: [PrimaryLayout],
+  exports: [PrimaryLayoutComponent],
 })
 export class PrimaryLayoutModule {}

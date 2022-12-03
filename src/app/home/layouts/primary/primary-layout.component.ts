@@ -10,7 +10,7 @@ interface ToolbarButton {
   templateUrl: './primary.layout.html',
   styleUrls: ['./primary.layout.sass']
 })
-export class PrimaryLayout {
+export class PrimaryLayoutComponent {
   @Input('toolbar-title') toolbarTitle!: string;
 
   @Input('toolbar-icon-button') toolbarIconButton?: string;
