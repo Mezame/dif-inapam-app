@@ -17,8 +17,8 @@ const routes: Routes = [
   {
     path: 'page-not-found',
     loadChildren: () =>
-      import('./pages/page-not-found/page-not-found-page.module').then(
-        (m) => m.PageNotFoundPageModule
+      import('./page-not-found/page-not-found.module').then(
+        (m) => m.PageNotFoundModule
       ),
   },
   //{ path: '', redirectTo: '', pathMatch: 'full' },
