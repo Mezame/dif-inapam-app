@@ -2,7 +2,7 @@ import { Document } from '../document.interface';
 
 export const documentsMock: Document[] = [
   {
-    creationDate: '28/11/2022',
+    createDate: '28/11/2022',
     operationCode: 'REPOSICION',
     cardCode: 'P00 0000565',
     fathersLastname: 'Montoya',
@@ -18,7 +18,7 @@ export const documentsMock: Document[] = [
     },
   },
   {
-    creationDate: '30/11/2022',
+    createDate: '30/11/2022',
     operationCode: 'NUEVO REG',
     cardCode: 'P00 0000566',
     fathersLastname: 'Naranjo',
@@ -34,7 +34,7 @@ export const documentsMock: Document[] = [
     },
   },
   {
-    creationDate: '1/12/2022',
+    createDate: '1/12/2022',
     operationCode: 'NUEVO REG',
     cardCode: 'P00 0000567',
     fathersLastname: 'Escalante',
