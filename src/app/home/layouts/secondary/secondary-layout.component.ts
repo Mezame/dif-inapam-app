@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './secondary.layout.html',
   styleUrls: ['./secondary.layout.sass']
 })
-export class SecondaryLayout {
+export class SecondaryLayoutComponent {
 
 }

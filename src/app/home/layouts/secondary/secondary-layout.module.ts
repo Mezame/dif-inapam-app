@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { SecondaryLayout } from './secondary.layout';
+import { SecondaryLayoutComponent } from './secondary-layout.component';
 
 @NgModule({
-  declarations: [SecondaryLayout],
+  declarations: [SecondaryLayoutComponent],
   imports: [],
-  exports: [SecondaryLayout]
+  exports: [SecondaryLayoutComponent]
 })
 export class SecondaryLayoutModule {}
