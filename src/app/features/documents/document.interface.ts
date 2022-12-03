@@ -1,5 +1,5 @@
 export interface Document {
-  creationDate: string;
+  createDate: string;
   operationCode: 'NUEVO REG' | 'REPOSICION' | 'CANJE';
   cardCode: string;
   fathersLastname: string;
