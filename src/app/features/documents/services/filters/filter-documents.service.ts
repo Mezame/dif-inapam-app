@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { MonthNumber } from '@shared/monthNumber.type';
-import { Document } from '../document.interface';
+import { Document } from '@features/documents/document.interface';
 
 @Injectable()
 export class FilterDocumentsService {

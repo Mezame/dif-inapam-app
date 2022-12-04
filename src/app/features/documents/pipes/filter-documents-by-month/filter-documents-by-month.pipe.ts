@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Document } from '@features/documents/document.interface';
 import { MonthNumber } from '@shared/monthNumber.type';
-import { FilterDocumentsService } from '@features/documents/services/filter-documents.service';
+import { FilterDocumentsService } from '@features/documents/services/filters/filter-documents.service';
 
 @Pipe({
   name: 'filterDocumentsByMonth',
