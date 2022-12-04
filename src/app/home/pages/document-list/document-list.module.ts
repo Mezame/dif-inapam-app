@@ -6,6 +6,7 @@ import { PrimaryLayoutModule } from '../../layouts/primary/primary-layout.module
 import { DocumentListTableModule } from '@features/documents/document-list-table/document-list-table.module';
 import { FilterDocumentsByMonthModule } from '@features/documents/pipes/filter-documents-by-month/filter-documents-by-month.module';
 import { SortDocumentsByDateModule } from '@features/documents/pipes/sort-documents-by-date/sort-documents-by-date.module';
+import { MatSelectModule } from '@angular/material/select';
 
 const routes: Routes = [{ path: '', component: DocumentListComponent }];
 
@@ -17,7 +18,8 @@ const routes: Routes = [{ path: '', component: DocumentListComponent }];
     PrimaryLayoutModule,
     DocumentListTableModule,
     FilterDocumentsByMonthModule,
-    SortDocumentsByDateModule
+    SortDocumentsByDateModule,
+    MatSelectModule,
   ],
   exports: [DocumentListComponent],
 })

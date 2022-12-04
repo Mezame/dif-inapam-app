@@ -1,9 +1,34 @@
 <app-primary-layout toolbar-title="Oficios de solicitud de tarjeta">
   <div class="content">
-    <span>Oficios del último mes</span>
-    <app-document-list-table [data]="documents$ | filterDocumentsByMonth: 11 | sortDocumentsByDate: 'asc'"></app-document-list-table>
+    <div class="select-group">
+      <div class="select-content month">
+        <mat-form-field appearance="outline">
+          <mat-select [(value)]="selectedMonth" ariaLabel="mes">
+            <mat-option
+              *ngFor="let month of monthsOptions"
+              [value]="month.value"
+            >
+              {{ month.viewValue | titlecase }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-    <span>Oficios de octubre</span>
-    <app-document-list-table [data]="documents$ | filterDocumentsByMonth: 10 | sortDocumentsByDate: 'asc'"></app-document-list-table>
+      <div class="select-content year">
+        <mat-form-field appearance="outline">
+          <mat-select value="2022" ariaLabel="año" disabled>
+            <mat-option value="2022"> 2022 </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <app-document-list-table
+      [data]="
+        documents$
+          | filterDocumentsByMonth : selectedMonth
+          | sortDocumentsByDate : 'asc'
+      "
+    ></app-document-list-table>
   </div>
 </app-primary-layout>
