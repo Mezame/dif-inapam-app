@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DocumentListComponent } from './document-list.component';
 import { PrimaryLayoutModule } from '../../layouts/primary/primary-layout.module';
 import { DocumentListTableModule } from '@features/documents/document-list-table/document-list-table.module';
+import { FilterDocumentsByMonthModule } from '@features/documents/pipes/filter-documents-by-month/filter-documents-by-month.module';
 
 const routes: Routes = [{ path: '', component: DocumentListComponent }];
 
@@ -14,6 +15,7 @@ const routes: Routes = [{ path: '', component: DocumentListComponent }];
     RouterModule.forChild(routes),
     PrimaryLayoutModule,
     DocumentListTableModule,
+    FilterDocumentsByMonthModule,
   ],
   exports: [DocumentListComponent],
 })
