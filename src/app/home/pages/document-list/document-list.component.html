@@ -1,9 +1,9 @@
 <app-primary-layout toolbar-title="Oficios de solicitud de tarjeta">
   <div class="content">
     <span>Oficios del último mes</span>
-    <app-document-list-table [data]="documents$ | filterDocumentsByMonth: 11"></app-document-list-table>
+    <app-document-list-table [data]="documents$ | filterDocumentsByMonth: 11 | sortDocumentsByDate: 'asc'"></app-document-list-table>
 
     <span>Oficios de octubre</span>
-    <app-document-list-table [data]="documents$ | filterDocumentsByMonth: 10"></app-document-list-table>
+    <app-document-list-table [data]="documents$ | filterDocumentsByMonth: 10 | sortDocumentsByDate: 'asc'"></app-document-list-table>
   </div>
 </app-primary-layout>
