@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
 @Component({
   selector: 'app-document-list',
   templateUrl: './document-list.component.html',
-  styleUrls: ['./document-list.component.sass'],
+  styleUrls: ['./document-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentListComponent {

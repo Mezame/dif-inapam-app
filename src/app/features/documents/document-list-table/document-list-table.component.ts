@@ -13,7 +13,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-document-list-table',
   templateUrl: './document-list-table.component.html',
-  styleUrls: ['./document-list-table.component.sass'],
+  styleUrls: ['./document-list-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentListTableComponent implements AfterViewInit {
