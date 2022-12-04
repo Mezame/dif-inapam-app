@@ -34,10 +34,12 @@ export class DocumentListTableComponent implements AfterViewInit {
   paginator!: MatPaginator;
 
   ngAfterViewInit(): void {
+    /*
     const dataSource = new MatTableDataSource<Document>(
       this.table.dataSource as Document[]
     );
     dataSource.paginator = this.paginator;
     this.table.dataSource = dataSource;
+    */
   }
 }
