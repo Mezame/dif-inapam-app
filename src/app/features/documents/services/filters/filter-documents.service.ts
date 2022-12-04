@@ -16,7 +16,7 @@ export class FilterDocumentsService {
         documents.filter((document) => {
           const createDate = new Date(document.createDate);
 
-          return createDate.getMonth() + 1 == monthNumber;
+          return createDate.getMonth() + 1 == parseInt(monthNumber);
         })
       )
     );
