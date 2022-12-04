@@ -50,3 +50,8 @@ $dia-theme: mat.define-light-theme(
 .mat-toolbar {
   background-color: #fafafa;
 }
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  gap: 16px;
+  padding: 0 16px;
+}
