@@ -1,1 +1,22 @@
-<p>secondary works!</p>
+<mat-toolbar>
+  <a mat-icon-button routerLink="/oficios">
+    <mat-icon>arrow_back</mat-icon>
+  </a>
+
+  <h1>{{ toolbarTitle }}</h1>
+
+  <span class="spacer"></span>
+
+  <ng-container *ngIf="toolbarIconButton">
+    <button mat-icon-button>
+      <mat-icon>{{ toolbarIconButton }}</mat-icon>
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="toolbarButton">
+    <button mat-flat-button>
+      <mat-icon *ngIf="toolbarButton.icon">{{ toolbarButton.icon }}</mat-icon>
+      <span>{{ toolbarButton.text }}</span>
+    </button>
+  </ng-container>
+</mat-toolbar>
