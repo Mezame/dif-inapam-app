@@ -1,9 +1,5 @@
 import { Component, Input } from '@angular/core';
-
-interface ToolbarButton {
-  text: string;
-  icon?: string;
-}
+import { ToolbarButton } from '../toolbar-button.interface';
 
 @Component({
   selector: 'app-primary-layout',

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ToolbarButton } from '../toolbar-button.interface';
 
 @Component({
   selector: 'app-secondary-layout',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./secondary-layout.component.scss']
 })
 export class SecondaryLayoutComponent {
+  @Input('toolbar-title') toolbarTitle!: string;
+
+  @Input('toolbar-icon-button') toolbarIconButton?: string;
+
+  @Input('toolbar-button') toolbarButton?: ToolbarButton;
 
 }
