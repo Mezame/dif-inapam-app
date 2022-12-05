@@ -45,7 +45,18 @@ $dia-theme: mat.define-light-theme(
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($dia-theme);
+@include mat.core-theme($dia-theme);
+@include mat.sidenav-theme($dia-theme);
+@include mat.list-theme($dia-theme);
+@include mat.divider-theme($dia-theme);
+@include mat.toolbar-theme($dia-theme);
+@include mat.icon-button-theme($dia-theme);
+@include mat.button-theme($dia-theme);
+@include mat.icon-theme($dia-theme);
+@include mat.menu-theme($dia-theme);
+@include mat.form-field-theme($dia-theme);
+@include mat.select-theme($dia-theme);
+@include mat.table-theme($dia-theme);
 
 .mat-toolbar {
   background-color: #fafafa;
