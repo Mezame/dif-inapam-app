@@ -4,7 +4,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/3/2022, 6:25:38 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000533',
+    cardCode: 'P00-0000533',
     fathersLastname: 'Esteban',
     mothersLastname: 'Vazquez',
     name: 'Fletcher',
@@ -17,7 +17,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/12/2022, 8:16:37 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000534',
+    cardCode: 'P00-0000534',
     fathersLastname: 'Arias',
     mothersLastname: 'Lorenzo',
     name: 'Ursula',
@@ -30,7 +30,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/12/2022, 12:44:23 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000535',
+    cardCode: 'P00-0000535',
     fathersLastname: 'Saez',
     mothersLastname: 'Perez',
     name: 'Rhona',
@@ -43,7 +43,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/14/2022, 1:00:24 AM',
     operationCode: 'CANJE',
-    cardCode: 'P00 0000536',
+    cardCode: 'P00-0000536',
     fathersLastname: 'Sanchez',
     mothersLastname: 'Guerrero',
     name: 'Ruth',
@@ -56,7 +56,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/14/2022, 11:37:56 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000537',
+    cardCode: 'P00-0000537',
     fathersLastname: 'Marin',
     mothersLastname: 'Romero',
     name: 'Kermit',
@@ -69,7 +69,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/16/2022, 4:24:01 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000538',
+    cardCode: 'P00-0000538',
     fathersLastname: 'Cruz',
     mothersLastname: 'Fernandez',
     name: 'Demetrius',
@@ -82,7 +82,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/16/2022, 6:32:12 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000539',
+    cardCode: 'P00-0000539',
     fathersLastname: 'Molina',
     mothersLastname: 'Rodriguez',
     name: 'Quintessa',
@@ -95,7 +95,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/16/2022, 8:58:30 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000540',
+    cardCode: 'P00-0000540',
     fathersLastname: 'Alonso',
     mothersLastname: 'Bravo',
     name: 'Dolan',
@@ -108,7 +108,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/16/2022, 9:28:02 PM',
     operationCode: 'CANJE',
-    cardCode: 'P00 0000541',
+    cardCode: 'P00-0000541',
     fathersLastname: 'Casado',
     mothersLastname: 'Morales',
     name: 'Alika',
@@ -121,7 +121,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/17/2022, 10:31:17 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000542',
+    cardCode: 'P00-0000542',
     fathersLastname: 'Muñoz',
     mothersLastname: 'Alvarez',
     name: 'Melanie',
@@ -134,7 +134,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/21/2022, 12:01:44 AM',
     operationCode: 'CANJE',
-    cardCode: 'P00 0000543',
+    cardCode: 'P00-0000543',
     fathersLastname: 'Gonzalez',
     mothersLastname: 'Gallego',
     name: 'Driscoll',
@@ -147,7 +147,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/21/2022, 4:38:27 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000544',
+    cardCode: 'P00-0000544',
     fathersLastname: 'Marquez',
     mothersLastname: 'Mora',
     name: 'Vanna',
@@ -160,7 +160,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/21/2022, 5:34:09 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000545',
+    cardCode: 'P00-0000545',
     fathersLastname: 'Marin',
     mothersLastname: 'Rubio',
     name: 'Uriel',
@@ -173,7 +173,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/21/2022, 10:44:06 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000546',
+    cardCode: 'P00-0000546',
     fathersLastname: 'Romero',
     mothersLastname: 'Carmona',
     name: 'Mannix',
@@ -186,7 +186,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/22/2022, 11:41:36 AM',
     operationCode: 'REPOSICION',
-    cardCode: 'P00 0000547',
+    cardCode: 'P00-0000547',
     fathersLastname: 'Gimenez',
     mothersLastname: 'Gimenez',
     name: 'Ignatius',
@@ -199,7 +199,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/24/2022, 2:17:55 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000548',
+    cardCode: 'P00-0000548',
     fathersLastname: 'Vega',
     mothersLastname: 'Ramos',
     name: 'Emerson',
@@ -212,7 +212,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/29/2022, 9:29:17 AM',
     operationCode: 'CANJE',
-    cardCode: 'P00 0000549',
+    cardCode: 'P00-0000549',
     fathersLastname: 'Bravo',
     mothersLastname: 'Fuentes',
     name: 'Kuame',
@@ -225,7 +225,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/30/2022, 9:47:42 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000550',
+    cardCode: 'P00-0000550',
     fathersLastname: 'Prieto',
     mothersLastname: 'Leon',
     name: 'Elmo',
@@ -238,7 +238,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/4/2022, 1:46:52 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000551',
+    cardCode: 'P00-0000551',
     fathersLastname: 'Perez',
     mothersLastname: 'Herrera',
     name: 'Mari',
@@ -251,7 +251,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/7/2022, 11:06:08 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000552',
+    cardCode: 'P00-0000552',
     fathersLastname: 'Izquierdo',
     mothersLastname: 'Leon',
     name: 'Benedict',
@@ -264,7 +264,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/8/2022, 2:48:27 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000553',
+    cardCode: 'P00-0000553',
     fathersLastname: 'Fernandez',
     mothersLastname: 'Marquez',
     name: 'Iola',
@@ -277,7 +277,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/9/2022, 2:45:49 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000554',
+    cardCode: 'P00-0000554',
     fathersLastname: 'Vega',
     mothersLastname: 'Hidalgo',
     name: 'Ramona',
@@ -290,7 +290,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/9/2022, 7:50:58 PM',
     operationCode: 'CANJE',
-    cardCode: 'P00 0000555',
+    cardCode: 'P00-0000555',
     fathersLastname: 'Aguilar',
     mothersLastname: 'Santana',
     name: 'Aristotle',
@@ -303,7 +303,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/9/2022, 11:19:26 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000556',
+    cardCode: 'P00-0000556',
     fathersLastname: 'Pardo',
     mothersLastname: 'Prieto',
     name: 'Amity',
@@ -316,7 +316,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/14/2022, 7:48:38 AM',
     operationCode: 'REPOSICION',
-    cardCode: 'P00 0000557',
+    cardCode: 'P00-0000557',
     fathersLastname: 'Cruz',
     mothersLastname: 'Gomez',
     name: 'Jonah',
@@ -329,7 +329,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/16/2022, 9:36:36 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000558',
+    cardCode: 'P00-0000558',
     fathersLastname: 'Perez',
     mothersLastname: 'Leon',
     name: 'Abraham',
@@ -342,7 +342,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/18/2022, 3:21:25 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000559',
+    cardCode: 'P00-0000559',
     fathersLastname: 'Reyes',
     mothersLastname: 'Casado',
     name: 'Wynne',
@@ -355,7 +355,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/18/2022, 7:09:41 PM',
     operationCode: 'REPOSICION',
-    cardCode: 'P00 0000560',
+    cardCode: 'P00-0000560',
     fathersLastname: 'Soto',
     mothersLastname: 'Cortes',
     name: 'Amir',
@@ -368,7 +368,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/20/2022, 11:44:12 AM',
     operationCode: 'REPOSICION',
-    cardCode: 'P00 0000561',
+    cardCode: 'P00-0000561',
     fathersLastname: 'Perez',
     mothersLastname: 'Saez',
     name: 'Megan',
@@ -381,7 +381,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/20/2022, 8:43:01 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000562',
+    cardCode: 'P00-0000562',
     fathersLastname: 'Crespo',
     mothersLastname: 'Pardo',
     name: 'Colton',
@@ -394,7 +394,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/24/2022, 10:51:05 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000563',
+    cardCode: 'P00-0000563',
     fathersLastname: 'Blanco',
     mothersLastname: 'Rodriguez',
     name: 'Shea',
@@ -407,7 +407,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/27/2022, 5:06:12 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00 0000564',
+    cardCode: 'P00-0000564',
     fathersLastname: 'Reyes',
     mothersLastname: 'Muñoz',
     name: 'Justin',
@@ -420,7 +420,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/29/2022, 11:33:04 PM',
     operationCode: 'CANJE',
-    cardCode: 'P00 0000565',
+    cardCode: 'P00-0000565',
     fathersLastname: 'Guerrero',
     mothersLastname: 'Guerrero',
     name: 'Melvin',
