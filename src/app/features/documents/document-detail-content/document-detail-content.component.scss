@@ -1,0 +1,68 @@
+$content-width: 704px;
+$gap-width: 24px;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-width;
+  width: $content-width;
+}
+
+.row,
+.column {
+  display: flex;
+  gap: $gap-width;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.col-1 {
+  width: $content-width;
+}
+.col-2 {
+  width: calc(($content-width - ($gap-width)) / 2);
+}
+.col-3 {
+  width: calc(($content-width - ($gap-width * 2)) / 3);
+}
+.col-4 {
+  width: calc(($content-width - ($gap-width * 3)) / 4);
+}
+.col-5 {
+  width: calc(($content-width - ($gap-width * 4)) / 5);
+}
+.col-6 {
+  width: calc(($content-width - ($gap-width * 5)) / 6);
+}
+.col-7 {
+  width: calc(($content-width - ($gap-width * 6)) / 7);
+}
+.col-8 {
+  width: calc(($content-width - ($gap-width * 7)) / 8);
+}
+.col-9 {
+  width: calc(($content-width - ($gap-width * 8)) / 9);
+}
+.col-10 {
+  width: calc(($content-width - ($gap-width * 9)) / 10);
+}
+.col-11 {
+  width: calc(($content-width - ($gap-width * 10)) / 11);
+}
+.col-12 {
+  width: calc(($content-width - ($gap-width * 11)) / 12);
+}
+
+.col-group {
+  row-gap: 8px;
+}
+
+.row-group {
+  column-gap: 8px;
+}
