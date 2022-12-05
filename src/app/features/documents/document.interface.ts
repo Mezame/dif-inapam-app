@@ -10,6 +10,7 @@ export interface Document {
   birthplace: string;
   curp: string;
   maritalStatus: 'Casado' | 'Soltero';
+  imageUrl?: string;
   metadata?: {
     id?: number;
     timestamp?: string;
