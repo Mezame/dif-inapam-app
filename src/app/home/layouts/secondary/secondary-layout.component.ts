@@ -4,7 +4,7 @@ import { ToolbarButton } from '../toolbar-button.interface';
 @Component({
   selector: 'app-secondary-layout',
   templateUrl: './secondary-layout.component.html',
-  styleUrls: ['./secondary-layout.component.scss']
+  styleUrls: ['./secondary-layout.component.scss'],
 })
 export class SecondaryLayoutComponent {
   @Input('toolbar-title') toolbarTitle!: string;
@@ -12,5 +12,4 @@ export class SecondaryLayoutComponent {
   @Input('toolbar-icon-button') toolbarIconButton?: string;
 
   @Input('toolbar-button') toolbarButton?: ToolbarButton;
-
 }
