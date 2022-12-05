@@ -431,3 +431,18 @@ export const documentsMock: Document[] = [
     maritalStatus: 'Casado',
   },
 ];
+
+export const documentMock = getDocumentByCardCode();
+
+function getDocumentByCardCode(
+  cardCode: string = 'P00-0000564',
+  documents: Document[] = documentsMock
+) {
+  let document: Document;
+
+  document = documents.find((document) =>
+    document.cardCode.includes(cardCode)
+  ) as Document;
+
+  return document;
+}
