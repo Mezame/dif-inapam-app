@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Document } from '@features/documents/document.interface';
 import { documentsMock } from '@features/documents/mocks/document.mock';
 import {
@@ -15,15 +15,11 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./document-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DocumentListComponent implements OnInit {
+export class DocumentListComponent {
   documents$: Observable<Document[]> = of(documentsMock);
   monthsOptions = getSelectOptions(
     getMonthsNumbers(this.documents$),
     getMonthsWords(this.documents$)
   ).reverse();
   selectedMonth = this.monthsOptions[0].value as MonthNumber;
-
-  ngOnInit(): void {
-    console.log(this.selectedMonth);
-  }
 }
