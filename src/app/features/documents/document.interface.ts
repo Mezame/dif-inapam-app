@@ -2,6 +2,9 @@ export interface Document {
   createDate: string;
   operationCode: 'NUEVO REG' | 'REPOSICION' | 'CANJE';
   cardCode: string;
+  branchOffice: string;
+  reviewDocument: string;
+  makeCard: string;
   fathersLastname: string;
   mothersLastname: string;
   name: string;
