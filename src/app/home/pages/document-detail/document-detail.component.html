@@ -1,1 +1,8 @@
-<p>document-detail works!</p>
+<app-secondary-layout
+  toolbar-icon-button="more_vert"
+  [toolbar-menu]="true"
+  [data]="{ cardCode$ }"
+  (actionEvent)="getDocumentAction($event)"
+>
+  <app-document-detail-content [data]="document$"></app-document-detail-content>
+</app-secondary-layout>
