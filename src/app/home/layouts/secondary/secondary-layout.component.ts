@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ToolbarButton } from '../toolbar-button.interface';
 
@@ -17,4 +17,13 @@ export class SecondaryLayoutComponent {
   @Input('toolbar-menu') toolbarMenu?: boolean;
 
   @Input('data') data?: { cardCode$?: Observable<string> };
+
+  @Output() actionEvent = new EventEmitter<{
+    action: string;
+    data: string;
+  }>();
+
+  deleteDocumentAction(cardCode: string, action = 'deleteDocument') {
+    this.actionEvent.emit({ action, data: cardCode });
+  }
 }
