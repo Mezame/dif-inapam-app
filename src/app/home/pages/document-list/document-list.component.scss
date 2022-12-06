@@ -1,3 +1,9 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .select-group {
   display: flex;
   flex-direction: row;
