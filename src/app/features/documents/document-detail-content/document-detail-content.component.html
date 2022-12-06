@@ -1,107 +1,114 @@
-<span class="mat-small">Datos de tarjeta</span>
+<ng-container *ngIf="document$ | async as document">
+  <span class="mat-small">Datos de tarjeta</span>
 
-<div class="row">
-  <div class="column col-3 col-group">
-    <span class="mat-subtitle-2">Fecha de elaboración</span>
+  <div class="row">
+    <div class="column col-3 col-group">
+      <span class="mat-subtitle-2">Fecha de elaboración</span>
 
-    <span>27 de noviembre de 2022</span>
-  </div>
-
-  <div class="column col-3 col-group">
-    <span class="mat-subtitle-2">Folio</span>
-
-    <span>P00-0000564</span>
-  </div>
-
-  <div class="column col-3 col-group">
-    <span class="mat-subtitle-2">Fecha de elaboración</span>
-
-    <span>NUEVO REG</span>
-  </div>
-</div>
-
-<div class="row">
-  <div class="column col-3 col-group">
-    <span class="mat-subtitle-2">Módulo</span>
-
-    <span>VER-TUXPAN</span>
-  </div>
-
-  <div class="column col-3 col-group">
-    <span class="mat-subtitle-2">Revisó documentos</span>
-
-    <span>Valeria B. Alarcón</span>
-  </div>
-
-  <div class="column col-3 col-group">
-    <span class="mat-subtitle-2">Elaboró tarjeta</span>
-
-    <span>Valeria B. Alarcón</span>
-  </div>
-</div>
-
-<span class="mat-small">Datos del solicitante</span>
-
-<div class="row">
-  <div class="column">
-    <div class="row">
-      <div class="column col-3 col-group">
-        <span class="mat-subtitle-2">Apellido paterno</span>
-
-        <span>Reyes</span>
-      </div>
-
-      <div class="column col-3 col-group">
-        <span class="mat-subtitle-2">Apellido materno</span>
-
-        <span>Muñoz</span>
-      </div>
+      <span>{{ document.createDate | localDate }}</span>
     </div>
 
-    <div class="row">
-      <div class="column col-3 col-group">
-        <span class="mat-subtitle-2">Nombre</span>
+    <div class="column col-3 col-group">
+      <span class="mat-subtitle-2">Folio</span>
 
-        <span>Dustin</span>
-      </div>
-
-      <div class="column col-3 col-group">
-        <span class="mat-subtitle-2">Sexo</span>
-
-        <span>Hombre</span>
-      </div>
+      <span>{{ document.cardCode }}</span>
     </div>
 
-    <div class="row">
-      <div class="column col-3 col-group">
-        <span class="mat-subtitle-2">Fecha de nacimiento</span>
+    <div class="column col-3 col-group">
+      <span class="mat-subtitle-2">Fecha de elaboración</span>
 
-        <span>13 de noviembre de 1957</span>
-      </div>
-
-      <div class="column col-3 col-group">
-        <span class="mat-subtitle-2">Entidad de nacimiento</span>
-
-        <span>Veracruz</span>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="column col-3 col-group">
-        <span class="mat-subtitle-2">CURP</span>
-
-        <span>NAVM111357ABCDEF00</span>
-      </div>
-
-      <div class="column col-3 col-group">
-        <span class="mat-subtitle-2">Estado civil</span>
-
-        <span>Soltero</span>
-      </div>
+      <span>{{ document.operationCode }}</span>
     </div>
   </div>
 
-  <div class="column col-3">
-    <img src="assets/no-user-image.svg" width="109" height="131" />
+  <div class="row">
+    <div class="column col-3 col-group">
+      <span class="mat-subtitle-2">Módulo</span>
+
+      <span>{{ document.branchOffice }}</span>
+    </div>
+
+    <div class="column col-3 col-group">
+      <span class="mat-subtitle-2">Revisó documentos</span>
+
+      <span>{{ document.reviewDocument }}</span>
+    </div>
+
+    <div class="column col-3 col-group">
+      <span class="mat-subtitle-2">Elaboró tarjeta</span>
+
+      <span>{{ document.makeCard }}</span>
+    </div>
   </div>
-</div>
+
+  <span class="mat-small">Datos del solicitante</span>
+
+  <div class="row">
+    <div class="column">
+      <div class="row">
+        <div class="column col-3 col-group">
+          <span class="mat-subtitle-2">Apellido paterno</span>
+
+          <span>{{ document.fathersLastname }}</span>
+        </div>
+
+        <div class="column col-3 col-group">
+          <span class="mat-subtitle-2">Apellido materno</span>
+
+          <span>{{ document.mothersLastname }}</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column col-3 col-group">
+          <span class="mat-subtitle-2">Nombre</span>
+
+          <span>{{ document.name }}</span>
+        </div>
+
+        <div class="column col-3 col-group">
+          <span class="mat-subtitle-2">Sexo</span>
+
+          <span>{{ document.sex }}</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column col-3 col-group">
+          <span class="mat-subtitle-2">Fecha de nacimiento</span>
+
+          <span>{{ document.birthdate | localDate }}</span>
+        </div>
+
+        <div class="column col-3 col-group">
+          <span class="mat-subtitle-2">Entidad de nacimiento</span>
+
+          <span>{{ document.birthplace }}</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column col-3 col-group">
+          <span class="mat-subtitle-2">CURP</span>
+
+          <span>{{ document.curp }}</span>
+        </div>
+
+        <div class="column col-3 col-group">
+          <span class="mat-subtitle-2">Estado civil</span>
+
+          <span>{{ document.maritalStatus }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="column col-3">
+        <ng-container *ngIf="!document.imageUrl; else hasImageUrl">
+            <img src="assets/no-user-image.svg" width="109" height="131" />
+        </ng-container>
+        <ng-template #hasImageUrl>
+            <img [src]="document.imageUrl" width="109" height="131" />
+        </ng-template>
+    </div>
+  </div>
+</ng-container>
