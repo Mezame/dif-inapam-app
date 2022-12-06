@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ToolbarButton } from '../toolbar-button.interface';
 
 @Component({
@@ -7,9 +8,13 @@ import { ToolbarButton } from '../toolbar-button.interface';
   styleUrls: ['./secondary-layout.component.scss'],
 })
 export class SecondaryLayoutComponent {
-  @Input('toolbar-title') toolbarTitle!: string;
+  @Input('toolbar-title') toolbarTitle?: string;
 
   @Input('toolbar-icon-button') toolbarIconButton?: string;
 
   @Input('toolbar-button') toolbarButton?: ToolbarButton;
+
+  @Input('toolbar-menu') toolbarMenu?: boolean;
+
+  @Input('data') data?: { cardCode$?: Observable<string> };
 }

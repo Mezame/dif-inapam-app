@@ -22,7 +22,7 @@ const routes: Routes = [
           ).then((m) => m.DocumentDetailModule),
       },
       {
-        path: 'oficio/folio/editar',
+        path: 'oficio/:cardCode/editar',
         loadChildren: () =>
           import(
             './pages/document-edit/document-edit.module'

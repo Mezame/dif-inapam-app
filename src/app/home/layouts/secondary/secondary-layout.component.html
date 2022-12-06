@@ -3,14 +3,29 @@
     <mat-icon>arrow_back</mat-icon>
   </a>
 
-  <span>{{ toolbarTitle }}</span>
+  <span *ngIf="toolbarTitle">{{ toolbarTitle }}</span>
 
-  <span class="spacer"></span>
+  <ng-container *ngIf="data?.cardCode$ | async as cardCode">
+    <span>{{ "Oficio " + cardCode }}</span>
 
-  <ng-container *ngIf="toolbarIconButton">
-    <button mat-icon-button>
-      <mat-icon>{{ toolbarIconButton }}</mat-icon>
-    </button>
+    <span class="spacer"></span>
+
+    <ng-container *ngIf="toolbarIconButton && toolbarMenu">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>{{ toolbarIconButton }}</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item [routerLink]="['/oficio', cardCode, 'editar']">
+          <mat-icon>edit</mat-icon>
+          <span>Editar oficio</span>
+        </a>
+
+        <button mat-menu-item>
+          <mat-icon>delete</mat-icon>
+          <span>Eliminar oficio</span>
+        </button>
+      </mat-menu>
+    </ng-container>
   </ng-container>
 
   <ng-container *ngIf="toolbarButton">
