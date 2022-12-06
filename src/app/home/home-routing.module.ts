@@ -22,11 +22,18 @@ const routes: Routes = [
           ).then((m) => m.DocumentDetailModule),
       },
       {
+        path: 'crear-oficio',
+        loadChildren: () =>
+          import(
+            './pages/document-create-edit/document-create-edit.module'
+          ).then((m) => m.DocumentCreateEditModule),
+      },
+      {
         path: 'oficio/:cardCode/editar',
         loadChildren: () =>
           import(
-            './pages/document-edit/document-edit.module'
-          ).then((m) => m.DocumentEditModule),
+            './pages/document-create-edit/document-create-edit.module'
+          ).then((m) => m.DocumentCreateEditModule),
       },
       {
         path: 'reportes',
