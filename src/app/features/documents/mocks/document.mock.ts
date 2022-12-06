@@ -533,9 +533,9 @@ export const documentsMock: Document[] = [
   },
 ];
 
-export const documentMock = getDocumentByCardCode();
+export const documentMock = getDocumentByCardCodeServiceMock();
 
-function getDocumentByCardCode(
+export function getDocumentByCardCodeServiceMock(
   cardCode: string = 'P00-0000564',
   documents: Document[] = documentsMock
 ) {
