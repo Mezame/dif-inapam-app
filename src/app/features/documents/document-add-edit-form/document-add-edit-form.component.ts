@@ -127,10 +127,14 @@ export class DocumentAddEditFormComponent {
 
     this.documentForm.reset();
 
-    this.createDocumentAction(documentFormValue);
+    this.emitAddDocumentAction(documentFormValue);
   }
 
-  createDocumentAction(data: {}, action = 'createDocument') {
+  emitAddDocumentAction(data: {}, action = 'addDocument') {
+    this.actionEvent.emit({ action, data });
+  }
+
+  emitEditDocumentAction(data: {}, action = 'editDocument') {
     this.actionEvent.emit({ action, data });
   }
 }
