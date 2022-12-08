@@ -15,18 +15,18 @@ const routes: Routes = [
           ).then((m) => m.DocumentListModule),
       },
       {
+        path: 'oficios/crear-oficio',
+        loadChildren: () =>
+          import(
+            './pages/document-create-edit/document-create-edit.module'
+          ).then((m) => m.DocumentCreateEditModule),
+      },
+      {
         path: 'oficio/:cardCode',
         loadChildren: () =>
           import(
             './pages/document-detail/document-detail.module'
           ).then((m) => m.DocumentDetailModule),
-      },
-      {
-        path: 'crear-oficio',
-        loadChildren: () =>
-          import(
-            './pages/document-create-edit/document-create-edit.module'
-          ).then((m) => m.DocumentCreateEditModule),
       },
       {
         path: 'oficio/:cardCode/editar',
