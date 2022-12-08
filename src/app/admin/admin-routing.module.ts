@@ -25,8 +25,8 @@ const routes: Routes = [
         path: 'oficios/:cardCode/editar',
         loadChildren: () =>
           import(
-            './pages/document-edit/document-edit.module'
-          ).then((m) => m.DocumentEditModule),
+            '@shared/pages/document-create-edit/document-create-edit.module'
+          ).then((m) => m.DocumentCreateEditModule),
       },
       {
         path: 'asistentes',
