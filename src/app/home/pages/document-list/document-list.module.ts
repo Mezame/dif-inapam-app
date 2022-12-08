@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DocumentListComponent } from './document-list.component';
-import { PrimaryLayoutModule } from '../../layouts/primary/primary-layout.module';
+import { PrimaryLayoutModule } from '../../../shared/layouts/primary/primary-layout.module';
 import { DocumentListTableModule } from '@features/documents/document-list-table/document-list-table.module';
 import { FilterDocumentsByMonthPipeModule } from '@features/documents/pipes/filter-documents-by-month/filter-documents-by-month.module';
 import { SortDocumentsByDatePipeModule } from '@features/documents/pipes/sort-documents-by-date/sort-documents-by-date.module';
