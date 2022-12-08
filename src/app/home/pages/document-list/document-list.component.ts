@@ -4,7 +4,7 @@ import { documentsMock } from '@features/documents/mocks/document.mock';
 import {
   getMonthsNumbers,
   getMonthsWords,
-} from '@features/documents/utils/getCreateDateMonths';
+} from '@features/documents/utils/get-create-date-months';
 import { getSelectOptions } from '@shared/get-select-options';
 import { MonthNumber } from '@shared/month-number.type';
 import { Observable, of } from 'rxjs';
