@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-document-create-edit',
-  templateUrl: './document-create-edit.component.html',
-  styleUrls: ['./document-create-edit.component.scss'],
+  selector: 'app-document-add',
+  templateUrl: './document-add.component.html',
+  styleUrls: ['./document-add.component.scss'],
 })
-export class DocumentCreateEditComponent {
+export class DocumentAddComponent {
   getDocumentAction(event: { action: string; data: {} }) {
     if (event.action == 'createDocument')
       console.log('Create document', event.data);
