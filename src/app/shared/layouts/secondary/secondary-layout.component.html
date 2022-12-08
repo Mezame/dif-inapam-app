@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <a mat-icon-button aria-label="Navega a lista de oficios" routerLink="/oficios">
+  <a mat-icon-button aria-label="Navega a lista de oficios" routerLink="../">
     <mat-icon>arrow_back</mat-icon>
   </a>
 
@@ -15,7 +15,7 @@
         <mat-icon>{{ toolbarIconButton }}</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <a mat-menu-item [routerLink]="['/oficio', cardCode, 'editar']">
+        <a mat-menu-item [routerLink]="['/admin/oficios', cardCode, 'editar']">
           <mat-icon>edit</mat-icon>
           <span>Editar oficio</span>
         </a>

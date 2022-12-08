@@ -11,7 +11,12 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
-    data: { preload: true },
+    data: { preload: false },
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then((m) => m.AdminModule),
+    data: { preload: false },
   },
   {
     path: 'page-not-found',
