@@ -7,4 +7,4 @@ import { SortDocumentsByDatePipe } from './sort-documents-by-date.pipe';
   exports: [SortDocumentsByDatePipe],
   providers: [SortDocumentsService],
 })
-export class SortDocumentsByDateModule {}
+export class SortDocumentsByDatePipeModule {}

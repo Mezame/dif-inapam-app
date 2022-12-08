@@ -7,4 +7,4 @@ import { FilterDocumentsByMonthPipe } from './filter-documents-by-month.pipe';
   exports: [FilterDocumentsByMonthPipe],
   providers: [FilterDocumentsService]
 })
-export class FilterDocumentsByMonthModule {}
+export class FilterDocumentsByMonthPipeModule {}
