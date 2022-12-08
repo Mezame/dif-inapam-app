@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Document } from '@features/documents/document.interface';
-import { MonthNumber } from '@shared/monthNumber.type';
+import { MonthNumber } from '@shared/month-number.type';
 import { FilterDocumentsService } from '@features/documents/services/filters/filter-documents.service';
 
 @Pipe({

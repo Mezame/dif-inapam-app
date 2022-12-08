@@ -5,8 +5,8 @@ import {
   getMonthsNumbers,
   getMonthsWords,
 } from '@features/documents/utils/getCreateDateMonths';
-import { getSelectOptions } from '@shared/getSelectOptions';
-import { MonthNumber } from '@shared/monthNumber.type';
+import { getSelectOptions } from '@shared/get-select-options';
+import { MonthNumber } from '@shared/month-number.type';
 import { Observable, of } from 'rxjs';
 
 @Component({
