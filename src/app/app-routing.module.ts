@@ -9,7 +9,7 @@ const routes: Routes = [
       import('./login/login.module').then((m) => m.LoginModule),
   },
   {
-    path: '',
+    path: 'home',
     loadChildren: () =>
       import('./home/home.module').then((m) => m.HomeModule),
     data: { preload: true },
@@ -21,7 +21,7 @@ const routes: Routes = [
         (m) => m.PageNotFoundModule
       ),
   },
-  //{ path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'page-not-found' },
 ];
 
