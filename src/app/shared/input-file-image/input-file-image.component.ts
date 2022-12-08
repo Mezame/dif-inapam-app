@@ -34,17 +34,17 @@ export class InputFileImageComponent implements ControlValueAccessor {
 
   constructor(private sanitizer: DomSanitizer) {}
 
-  writeValue(obj: any): void {}
+  writeValue(obj: any) {}
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: any) {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: any) {
     this.onTouched = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState?(isDisabled: boolean) {
     this.disabled = isDisabled;
   }
 
