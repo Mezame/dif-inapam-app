@@ -1,0 +1,13 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.only-button {
+  gap: 4px;
+}
+
+.error {
+  color: var(--mdc-theme-error, #f44336);
+}

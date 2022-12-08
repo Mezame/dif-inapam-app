@@ -1,1 +1,48 @@
-<p>input-file-image works!</p>
+<ng-container *ngIf="fileUrl">
+  <div class="column">
+    <img [src]="fileUrl" width="109" height="131" alt="Foto de adulto mayor" />
+
+    <div>
+      <button
+        mat-stroked-button
+        color="primary"
+        type="button"
+        (click)="removeImage()"
+      >
+        <span>Quitar foto</span>
+      </button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!fileUrl">
+  <div class="column only-button">
+    <input hidden type="file" (change)="onInputFile(inputFile)" #inputFile />
+
+    <div>
+      <button
+        mat-stroked-button
+        color="primary"
+        type="button"
+        [disabled]="disabled"
+        (click)="onClick(inputFile)"
+      >
+        <mat-icon>upload</mat-icon>
+        <span>Subir foto</span>
+      </button>
+    </div>
+
+    <ng-container *ngIf="!validationError; else errorMessage">
+      <span *ngIf="hint" class="mat-small">{{ hint }}</span>
+    </ng-container>
+    <ng-template #errorMessage>
+      <span *ngIf="validationError!.imageType" class="mat-small error"
+        >La foto debe ser jpg o png.</span
+      >
+
+      <span *ngIf="validationError!.imageSize" class="mat-small error"
+        >La foto debe ser menor que 1MB.</span
+      >
+    </ng-template>
+  </div>
+</ng-container>
