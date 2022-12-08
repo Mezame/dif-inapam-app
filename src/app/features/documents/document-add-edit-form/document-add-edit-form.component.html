@@ -1,0 +1,295 @@
+<form [formGroup]="documentForm" (ngSubmit)="onSubmit()">
+  <span class="mat-small">Datos de tarjeta</span>
+
+  <div class="row w-3-col">
+    <div class="column">
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Fecha de elaboración</mat-label>
+        <input
+          matInput
+          [matDatepicker]="createDatePicker"
+          placeholder="1/12/2022"
+          formControlName="createDate"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="createDatePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker touchUi #createDatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="column">
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Folio</mat-label>
+        <input matInput placeholder="P000000000" formControlName="cardCode" />
+
+        <mat-error *ngIf="cardCodeCtrl.errors?.['required']">{{
+          defaultErrorMessage.required
+        }}</mat-error>
+
+        <mat-error
+          class="errors-container"
+          *ngIf="
+            cardCodeCtrl.errors
+              | singleError
+                : ['pattern', 'minlength', 'maxlength'] as cardCodeError
+          "
+        >
+          <mat-error *ngIf="cardCodeError.minlength">{{
+          'Mínimo ' + cardCodeCtrl.errors?.['minlength'].requiredLength + ' caracteres.'
+          }}</mat-error>
+
+          <mat-error *ngIf="cardCodeError.maxlength">{{
+          'Máximo ' + cardCodeCtrl.errors?.['maxlength'].requiredLength + ' caracteres.'
+          }}</mat-error>
+
+          <mat-error *ngIf="cardCodeError.pattern">{{
+            defaultErrorMessage.alphanumeric
+          }}</mat-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="column">
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Clave de movimiento</mat-label>
+        <mat-select placeholder="Seleccionar" formControlName="operationCode">
+          <mat-option
+            *ngFor="let operationCode of operationCodesOptions"
+            [value]="operationCode"
+          >
+            {{ operationCode }}
+          </mat-option>
+        </mat-select>
+
+        <mat-error *ngIf="operationCodeCtrl.errors?.['required']">{{
+          defaultErrorMessage.required
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row w-3-col">
+    <div class="column">
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Módulo</mat-label>
+        <input
+          matInput
+          placeholder="VER-TUXPAN"
+          formControlName="branchOffice"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="column">
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Revisó documentos</mat-label>
+        <input
+          matInput
+          placeholder="Nombre del encargado"
+          formControlName="reviewDocument"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="column">
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Elaboró tarjeta</mat-label>
+        <input
+          matInput
+          placeholder="Nombre del encargado"
+          formControlName="makeCard"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <span class="mat-small">Datos del solicitante</span>
+
+  <div class="row">
+    <div class="column">
+      <div class="row w-3-col">
+        <div class="column">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Apellido paterno</mat-label>
+            <input
+              matInput
+              placeholder="Apellido paterno"
+              formControlName="fathersLastname"
+            />
+
+            <mat-error *ngIf="fathersLastnameCtrl.errors?.['required']">{{
+              defaultErrorMessage.required
+            }}</mat-error>
+
+            <mat-error *ngIf="fathersLastnameCtrl.errors?.['pattern']">{{
+              defaultErrorMessage.onlyLetters
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="column">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Apellido materno</mat-label>
+            <input
+              matInput
+              placeholder="Apellido materno"
+              formControlName="mothersLastname"
+            />
+
+            <mat-error *ngIf="mothersLastnameCtrl.errors?.['required']">{{
+              defaultErrorMessage.required
+            }}</mat-error>
+
+            <mat-error *ngIf="mothersLastnameCtrl.errors?.['pattern']">{{
+              defaultErrorMessage.onlyLetters
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row w-3-col">
+        <div class="column">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre" formControlName="name" />
+
+            <mat-error *ngIf="nameCtrl.errors?.['required']">{{
+              defaultErrorMessage.required
+            }}</mat-error>
+
+            <mat-error *ngIf="nameCtrl.errors?.['pattern']">{{
+              defaultErrorMessage.onlyLetters
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="column">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Sexo</mat-label>
+            <mat-select placeholder="Seleccionar" formControlName="sex">
+              <mat-option value="Hombre"> Hombre </mat-option>
+              <mat-option value="Mujer"> Mujer </mat-option>
+            </mat-select>
+
+            <mat-error *ngIf="sexCtrl.errors?.['required']">{{
+              defaultErrorMessage.required
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row w-3-col">
+        <div class="column">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input
+              matInput
+              [matDatepicker]="birthdatePicker"
+              placeholder="1/12/2022"
+              formControlName="birthdate"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="birthdatePicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker touchUi #birthdatePicker></mat-datepicker>
+
+            <mat-error *ngIf="birthdateCtrl.errors?.['required']">{{
+              defaultErrorMessage.required
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="column">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Entidad de nacimiento</mat-label>
+            <mat-select placeholder="Seleccionar" formControlName="birthplace">
+              <mat-option *ngFor="let state of statesOptions" [value]="state">
+                {{ state }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row w-3-col">
+        <div class="column">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>CURP</mat-label>
+            <input
+              matInput
+              placeholder="ABCD0000000ABCDEF00"
+              formControlName="curp"
+            />
+
+            <mat-error *ngIf="curpCtrl.errors?.['required']">{{
+              defaultErrorMessage.required
+            }}</mat-error>
+
+            <mat-error
+              class="errors-container"
+              *ngIf="
+                curpCtrl.errors
+                  | singleError
+                    : ['pattern', 'minlength', 'maxlength'] as curpError
+              "
+            >
+              <mat-error *ngIf="curpError.minlength">{{
+              'Mínimo ' + curpCtrl.errors?.['minlength'].requiredLength + ' caracteres.'
+              }}</mat-error>
+
+              <mat-error *ngIf="curpError.maxlength">{{
+              'Máximo ' + curpCtrl.errors?.['maxlength'].requiredLength + ' caracteres.'
+              }}</mat-error>
+
+              <mat-error *ngIf="curpError.pattern">{{
+                defaultErrorMessage.alphanumeric
+              }}</mat-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="column">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Estado civil</mat-label>
+            <mat-select
+              placeholder="Seleccionar"
+              formControlName="maritalStatus"
+            >
+              <mat-option value="Soltero"> Soltero </mat-option>
+              <mat-option value="Casado"> Casado </mat-option>
+            </mat-select>
+
+            <mat-error *ngIf="maritalStatusCtrl.errors?.['required']">{{
+              defaultErrorMessage.required
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="column w-3-col">
+      <app-input-file-image
+        hint="La foto no es obligatoria."
+        formControlName="imageBlob"
+      ></app-input-file-image>
+    </div>
+  </div>
+
+  <div class="row w-3-col">
+    <a mat-button color="primary" routerLink="/oficios">
+      <span>Cancelar</span>
+    </a>
+
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="documentForm.valid"
+    >
+      <span>Crear oficio</span>
+    </button>
+  </div>
+</form>

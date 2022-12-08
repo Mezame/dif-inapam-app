@@ -1,0 +1,15 @@
+@use "src/responsive-layout" as grid;
+
+:host {
+  --content-width: 704px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.errors-container {
+  display: flex;
+}
