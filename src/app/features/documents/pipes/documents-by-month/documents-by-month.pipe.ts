@@ -5,9 +5,9 @@ import { MonthNumber } from '@shared/monthNumber.type';
 import { FilterDocumentsService } from '@features/documents/services/filters/filter-documents.service';
 
 @Pipe({
-  name: 'filterDocumentsByMonth',
+  name: 'documentsByMonth',
 })
-export class FilterDocumentsByMonthPipe implements PipeTransform {
+export class DocumentsByMonthPipe implements PipeTransform {
   constructor(private filterDocumentsService: FilterDocumentsService) {}
 
   transform(

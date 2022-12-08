@@ -32,7 +32,7 @@
   <app-document-list-table
     [data]="
       documents$
-        | filterDocumentsByMonth : selectedMonth
+        | documentsByMonth : selectedMonth
         | sortDocumentsByDate : 'asc'
     "
   ></app-document-list-table>
