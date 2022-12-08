@@ -10,23 +10,24 @@ const routes: Routes = [
       {
         path: 'oficios',
         loadChildren: () =>
-          import(
-            './pages/document-list/document-list.module'
-          ).then((m) => m.DocumentListModule),
+          import('./pages/document-list/document-list.module').then(
+            (m) => m.DocumentListModule
+          ),
       },
       {
         path: 'oficios/crear-oficio',
         loadChildren: () =>
           import(
-            '@shared/pages/document-create-edit/document-create-edit.module'
-          ).then((m) => m.DocumentCreateEditModule),
+            '@shared/pages/document-add/document-add.module'
+          ).then((m) => m.DocumentAddModule),
+        data: { action: 'create' },
       },
       {
         path: 'oficios/:cardCode',
         loadChildren: () =>
-          import(
-            './pages/document-detail/document-detail.module'
-          ).then((m) => m.DocumentDetailModule),
+          import('./pages/document-detail/document-detail.module').then(
+            (m) => m.DocumentDetailModule
+          ),
       },
       {
         path: '',
@@ -38,9 +39,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes),
-  ],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class HomeRoutingModule {}
