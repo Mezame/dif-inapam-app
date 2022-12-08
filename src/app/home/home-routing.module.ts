@@ -18,21 +18,21 @@ const routes: Routes = [
         path: 'oficios/crear-oficio',
         loadChildren: () =>
           import(
-            './pages/document-create-edit/document-create-edit.module'
+            '@shared/pages/document-create-edit/document-create-edit.module'
           ).then((m) => m.DocumentCreateEditModule),
       },
       {
-        path: 'oficio/:cardCode',
+        path: 'oficios/:cardCode',
         loadChildren: () =>
           import(
             './pages/document-detail/document-detail.module'
           ).then((m) => m.DocumentDetailModule),
       },
       {
-        path: 'oficio/:cardCode/editar',
+        path: 'oficios/:cardCode/editar',
         loadChildren: () =>
           import(
-            './pages/document-create-edit/document-create-edit.module'
+            '@shared/pages/document-create-edit/document-create-edit.module'
           ).then((m) => m.DocumentCreateEditModule),
       },
       {
