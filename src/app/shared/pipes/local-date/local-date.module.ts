@@ -5,4 +5,4 @@ import { LocalDatePipe } from './local-date.pipe';
   declarations: [LocalDatePipe],
   exports: [LocalDatePipe],
 })
-export class LocalDateModule {}
+export class LocalDatePipeModule {}
