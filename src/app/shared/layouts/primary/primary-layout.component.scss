@@ -1,3 +1,5 @@
+@use "../shared";
+
 .side-nav {
   width: 360px;
 }
@@ -9,14 +11,4 @@
 
 .divider {
   margin: 0px 16px;
-}
-
-.spacer {
-  flex: 1 1 auto;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  padding: 24px 32px 48px;
 }
