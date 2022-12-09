@@ -5,7 +5,6 @@ import { AssistantListComponent } from './assistant-list.component';
 
 const routes: Routes = [{ path: '', component: AssistantListComponent }];
 
-
 @NgModule({
   declarations: [AssistantListComponent],
   imports: [CommonModule, RouterModule.forChild(routes)],
