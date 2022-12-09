@@ -1,5 +1,5 @@
 <mat-sidenav-container fullscreen>
-  <mat-sidenav class="side-nav" #sidenav>
+  <mat-sidenav class="side-nav" role="navigation" #sidenav>
     <mat-nav-list (click)="sidenav.close()" disableRipple>
       <a mat-list-item routerLink="/oficios" routerLinkActive="active">
         <span>Oficios</span>
@@ -18,7 +18,7 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content>
+  <mat-sidenav-content role="main">
     <mat-toolbar>
       <button
         mat-icon-button
