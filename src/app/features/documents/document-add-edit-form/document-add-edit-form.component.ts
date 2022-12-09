@@ -11,8 +11,8 @@ import { Observable, of } from 'rxjs';
 import { documentsMock } from '../mocks/document.mock';
 import { getOperationCodes } from '../utils/getOperationCodes';
 import { DocumentFormValue } from './document-form-value.interface';
-import { mexicanFederalStates } from '@shared/mexican-federal-states';
-import { defaultErrorMessage } from '@shared/default-error-message';
+import { mexicanFederalStates } from '@shared/utils/mexican-federal-states';
+import { defaultErrorMessage } from '@shared/utils/default-error-message';
 import {
   documentDefaultFormValue,
   setDefaultDocumentFormValue,

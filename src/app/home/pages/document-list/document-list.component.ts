@@ -5,7 +5,7 @@ import {
   getMonthsNumbers,
   getMonthsWords,
 } from '@features/documents/utils/get-create-date-months';
-import { getSelectOptions } from '@shared/get-select-options';
+import { getSelectOptions } from '@shared/utils/get-select-options';
 import { MonthNumber } from '@shared/types/month-number.type';
 import { Observable, of } from 'rxjs';
 
