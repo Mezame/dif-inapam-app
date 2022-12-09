@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Document } from '@features/documents/document.interface';
-import { documentsMock } from '@features/documents/mocks/document.mock';
+import { documentsMock } from '@shared/mocks/document.mock';
 import {
   getMonthsNumbers,
   getMonthsWords,

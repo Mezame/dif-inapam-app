@@ -1,4 +1,4 @@
-import { Document } from '../document.interface';
+import { Document } from '../../features/documents/document.interface';
 
 export const documentsMock: Document[] = [
   {
