@@ -1,3 +1,5 @@
+@use "dia-theme";
+
 html,
 body {
   height: 100%;
@@ -7,4 +9,30 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: #fafafa;
+}
+
+/* Material components */
+.mat-toolbar {
+  background-color: #fafafa;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  gap: 16px;
+  padding: 0 16px;
+}
+
+.mat-mdc-button.mat-mdc-button-base,
+.mat-mdc-raised-button.mat-mdc-button-base,
+.mat-mdc-unelevated-button.mat-mdc-button-base,
+.mat-mdc-outlined-button.mat-mdc-button-base {
+  height: 40px;
+  border-radius: 100px;
+}
+
+.mat-mdc-unelevated-button > .mat-icon,
+.mat-mdc-raised-button > .mat-icon,
+.mat-mdc-outlined-button > .mat-icon {
+  margin-left: 0 !important;
+  width: auto;
 }
