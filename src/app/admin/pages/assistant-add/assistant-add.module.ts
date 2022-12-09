@@ -8,6 +8,5 @@ const routes: Routes = [{ path: '', component: AssistantAddComponent }];
 @NgModule({
   declarations: [AssistantAddComponent],
   imports: [CommonModule],
-  exports: [AssistantAddComponent],
 })
 export class AssistantAddModule {}
