@@ -2,16 +2,22 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Input,
+  OnInit,
   Output,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { documentsMock } from '../mocks/document.mock';
 import { getOperationCodes } from '../utils/getOperationCodes';
 import { DocumentFormValue } from './document-form-value.interface';
 import { mexicanFederalStates } from '@shared/mexican-federal-states';
 import { defaultErrorMessage } from '@shared/default-error-message';
-import { documentDefaultFormValue, setDefaultDocumentFormValue } from './document-default-form-value';
+import {
+  documentDefaultFormValue,
+  setDefaultDocumentFormValue,
+} from './document-default-form-value';
+import { Document } from '../document.interface';
 
 @Component({
   selector: 'app-document-add-edit-form',
@@ -19,7 +25,7 @@ import { documentDefaultFormValue, setDefaultDocumentFormValue } from './documen
   styleUrls: ['./document-add-edit-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DocumentAddEditFormComponent {
+export class DocumentAddEditFormComponent implements OnInit {
   operationCodesOptions = getOperationCodes(of(documentsMock));
 
   statesOptions = mexicanFederalStates;
@@ -51,15 +57,15 @@ export class DocumentAddEditFormComponent {
     makeCard: { value: this.defaultFormValue.makeCard, disabled: true },
     fathersLastname: [
       '',
-      [Validators.required, Validators.pattern('[a-zA-ZáéíóúÁÉÍÓÚ]*')],
+      [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')],
     ],
     mothersLastname: [
       '',
-      [Validators.required, Validators.pattern('[a-zA-ZáéíóúÁÉÍÓÚ]*')],
+      [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')],
     ],
     name: [
       '',
-      [Validators.required, Validators.pattern('[a-zA-ZáéíóúÁÉÍÓÚ ]*')],
+      [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*')],
     ],
     sex: ['', Validators.required],
     birthdate: [null, Validators.required],
@@ -68,14 +74,18 @@ export class DocumentAddEditFormComponent {
       '',
       [
         Validators.required,
-        Validators.minLength(18),
-        Validators.maxLength(18),
+        Validators.minLength(20),
+        Validators.maxLength(20),
         Validators.pattern('[a-zA-Z0-9]*'),
       ],
     ],
     maritalStatus: ['', Validators.required],
-    imageBlob: null,
+    imageObj: { url: null, blob: null },
   });
+
+  @Input('data') document!: Document;
+
+  @Input() action!: string;
 
   @Output() actionEvent = new EventEmitter<{
     action: string;
@@ -120,14 +130,53 @@ export class DocumentAddEditFormComponent {
     return this.documentForm.controls['maritalStatus'];
   }
 
+  ngOnInit() {
+    if (this.action == 'editDocument') {
+      this.documentForm.patchValue({
+        cardCode: this.document.cardCode.replace('-', ''),
+        operationCode: this.document.operationCode,
+        fathersLastname: this.document.fathersLastname,
+        mothersLastname: this.document.mothersLastname,
+        name: this.document.name,
+        sex: this.document.sex,
+        birthdate: new Date(this.document.birthdate) as any,
+        birthplace: this.document.birthplace,
+        curp: this.document.curp,
+        maritalStatus: this.document.maritalStatus,
+        imageObj: { url: this.document.imageUrl as any, blob: null },
+      });
+
+      this.documentForm.setControl(
+        'createDate',
+        this.fb.control(new Date(this.document.createDate), Validators.required)
+      );
+
+      this.documentForm.setControl(
+        'reviewDocument',
+        this.fb.control(this.document.reviewDocument, Validators.required)
+      );
+
+      this.documentForm.setControl(
+        'makeCard',
+        this.fb.control(this.document.makeCard, Validators.required)
+      );
+    }
+  }
+
   onSubmit() {
     let documentFormValue: Partial<DocumentFormValue>;
 
-    documentFormValue = setDefaultDocumentFormValue(this.documentForm.value);
+    if (this.action == 'addDocument') {
+      documentFormValue = setDefaultDocumentFormValue(this.documentForm.value);
 
-    this.documentForm.reset();
+      this.emitAddDocumentAction(documentFormValue);
+    }
 
-    this.emitAddDocumentAction(documentFormValue);
+    if (this.action == 'editDocument') {
+      documentFormValue = this.documentForm.value;
+
+      this.emitEditDocumentAction(documentFormValue);
+    }
   }
 
   emitAddDocumentAction(data: {}, action = 'addDocument') {
