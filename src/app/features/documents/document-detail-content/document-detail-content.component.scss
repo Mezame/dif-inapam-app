@@ -1,7 +1,7 @@
-@use "src/styles/responsive-layout";
+@use "src/styles/responsive-layout" with (
+  $content-width: 704px
+);
 
 :host {
-  --content-width: 704px;
-
-  @extend %host
+  @extend %host;
 }

@@ -1,9 +1,7 @@
-$content-width: var(--content-width);
-$gap-width: 24px;
+$content-width: 100% !default;
+$gap-width: 24px !default;
 
 %host {
-  --content-width: 100%;
-
   display: flex;
   flex-direction: column;
   gap: $gap-width;

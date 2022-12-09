@@ -1,13 +1,9 @@
-@use "src/styles/responsive-layout";
-
-:host {
-  --content-width: 704px;
-}
+@use "src/styles/responsive-layout" with (
+  $content-width: 704px
+);
 
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  @extend %host;
 }
 
 .errors-container {
