@@ -1,12 +1,16 @@
 <mat-sidenav-container fullscreen>
   <mat-sidenav class="side-nav" role="navigation" #sidenav>
     <mat-nav-list (click)="sidenav.close()" disableRipple>
-      <a mat-list-item routerLink="/oficios" routerLinkActive="active">
+      <a mat-list-item routerLink="/home/oficios" routerLinkActive="active">
         <span>Oficios</span>
       </a>
 
-      <a mat-list-item routerLink="/reportes" routerLinkActive="active">
+      <a mat-list-item routerLink="/admin/reportes" routerLinkActive="active">
         <span>Reportes</span>
+      </a>
+
+      <a mat-list-item routerLink="/admin/asistentes" routerLinkActive="active">
+        <span>Asistentes</span>
       </a>
 
       <mat-divider class="divider"></mat-divider>
