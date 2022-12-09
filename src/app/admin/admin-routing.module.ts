@@ -38,16 +38,16 @@ const routes: Routes = [
       {
         path: 'asistentes/crear-asistente',
         loadChildren: () =>
-          import(
-            './pages/assistant-create-edit/assistant-create-edit.module'
-          ).then((m) => m.AssistantCreateEditModule),
+          import('./pages/assistant-add/assistant-add.module').then(
+            (m) => m.AssistantAddModule
+          ),
       },
       {
         path: 'asistentes/:id/editar',
         loadChildren: () =>
-          import(
-            './pages/assistant-create-edit/assistant-create-edit.module'
-          ).then((m) => m.AssistantCreateEditModule),
+          import('./pages/assistant-edit/assistant-edit.module').then(
+            (m) => m.AssistantEditModule
+          ),
       },
       {
         path: '',
