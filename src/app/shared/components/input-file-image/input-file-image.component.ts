@@ -26,7 +26,7 @@ export class InputFileImageComponent implements ControlValueAccessor {
 
   validationError: { imageType?: boolean; imageSize?: boolean } | null = null;
 
-  onChange = (file: File) => {};
+  onChange = ({}) => {};
 
   onTouched = () => {};
 
@@ -34,7 +34,11 @@ export class InputFileImageComponent implements ControlValueAccessor {
 
   constructor(private sanitizer: DomSanitizer) {}
 
-  writeValue(obj: any) {}
+  writeValue(obj: any) {
+    if (obj && obj.url) {
+      this.fileUrl = this.sanitizer.bypassSecurityTrustUrl(obj.url);
+    }
+  }
 
   registerOnChange(fn: any) {
     this.onChange = fn;
@@ -64,13 +68,13 @@ export class InputFileImageComponent implements ControlValueAccessor {
 
       this.displayImage(this.file);
 
-      this.onChange(this.file);
+      this.onChange({ blob: this.file });
     } else {
       this.fileUrl = undefined;
 
       this.file = undefined;
 
-      this.onChange(this.file!);
+      this.onChange({ blob: null });
     }
   }
 
