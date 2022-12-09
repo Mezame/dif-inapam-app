@@ -29,6 +29,5 @@ const routes: Routes = [{ path: '', component: DocumentListComponent }];
     MatButtonModule,
     MatIconModule,
   ],
-  exports: [DocumentListComponent],
 })
 export class DocumentListModule {}
