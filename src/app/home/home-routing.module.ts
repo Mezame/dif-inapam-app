@@ -17,10 +17,9 @@ const routes: Routes = [
       {
         path: 'oficios/crear-oficio',
         loadChildren: () =>
-          import(
-            '@shared/pages/document-add/document-add.module'
-          ).then((m) => m.DocumentAddModule),
-        data: { action: 'create' },
+          import('@shared/pages/document-add/document-add.module').then(
+            (m) => m.DocumentAddModule
+          ),
       },
       {
         path: 'oficios/:cardCode',
