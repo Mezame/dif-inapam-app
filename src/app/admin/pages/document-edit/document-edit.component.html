@@ -1,1 +1,9 @@
-<p>document-edit works!</p>
+<app-secondary-layout toolbar-title="Nuevo oficio">
+  <ng-container *ngIf="document$ | async as document">
+    <app-document-add-edit-form
+      [data]="document"
+      action="editDocument"
+      (actionEvent)="getDocumentAction($event)"
+    ></app-document-add-edit-form>
+  </ng-container>
+</app-secondary-layout>
