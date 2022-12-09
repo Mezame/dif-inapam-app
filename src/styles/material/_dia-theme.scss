@@ -1,29 +1,24 @@
 @use "@angular/material" as mat;
-@use "dia-color-palettes";
+@use "dia-palette" as dia;
+@use "components-override";
 
 @include mat.core();
 
-$dia-primary: mat.define-palette(dia-color-palettes.$dia-primary-palette);
+$dia-primary: mat.define-palette(dia.$dia-primary-palette);
 $dia-accent: mat.define-palette(
-  dia-color-palettes.$dia-terciary-palette,
+  dia.$dia-terciary-palette,
   A200,
   A100,
   A400
 );
-$dia-error: mat.define-palette(dia-color-palettes.$dia-error-palette);
-$dia-success: mat.define-palette(dia-color-palettes.$dia-success-palette);
-$dia-warning: mat.define-palette(dia-color-palettes.$dia-warning-palette);
-$dia-info: mat.define-palette(dia-color-palettes.$dia-info-palette);
+$dia-error: mat.define-palette(dia.$dia-error-palette);
 
 $dia-theme: mat.define-light-theme(
   (
     color: (
       primary: $dia-primary,
       accent: $dia-accent,
-      error: $dia-error,
-      success: $dia-success,
-      warning: $dia-warning,
-      info: $dia-info,
+      warn: $dia-error,
     ),
     typography: mat.define-typography-config(),
     density: 0,
