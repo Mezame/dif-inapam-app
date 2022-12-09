@@ -496,7 +496,7 @@ export const documentsMock: Document[] = [
     birthplace: 'Veracruz',
     curp: 'BDVH3830456FYJWJG900',
     maritalStatus: 'Casado',
-    imageUrl: 'assets/elder-female.jpg'
+    imageUrl: 'http://localhost:4200/assets/elder-female.jpg'
   },
   {
     createDate: '11/27/2022, 5:06:12 AM',
@@ -513,7 +513,7 @@ export const documentsMock: Document[] = [
     birthplace: 'Veracruz',
     curp: 'WGXQ3473954YTVCGN400',
     maritalStatus: 'Soltero',
-    imageUrl: 'assets/elder-male.jpg'
+    imageUrl: 'http://localhost:4200/assets/elder-male.jpg'
   },
   {
     createDate: '11/29/2022, 11:33:04 PM',
