@@ -9,7 +9,7 @@ import {
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { documentsMock } from '../mocks/document.mock';
-import { getOperationCodes } from '../utils/getOperationCodes';
+import { getOperationCodes } from '../utils/get-operation-codes';
 import { DocumentFormValue } from './document-form-value.interface';
 import { mexicanFederalStates } from '@shared/utils/mexican-federal-states';
 import { defaultErrorMessage } from '@shared/utils/default-error-message';
