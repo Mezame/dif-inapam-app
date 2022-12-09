@@ -13,5 +13,5 @@ export interface DocumentFormValue {
   birthplace: string | null;
   curp: string | null;
   maritalStatus: string | null;
-  imageBlob: File | null;
+  imageObj: { url: string | null; blob: File | null } | null;
 }
