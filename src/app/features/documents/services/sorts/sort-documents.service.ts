@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Document } from '@features/documents/document.interface';
-import { Order } from '@shared/order.type';
+import { Order } from '@shared/types/order.type';
 
 @Injectable()
 export class SortDocumentsService {
