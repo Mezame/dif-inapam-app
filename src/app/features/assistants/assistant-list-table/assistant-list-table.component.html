@@ -1,1 +1,34 @@
-<p>assistant-list-table works!</p>
+<ng-container *ngIf="assistants$ | async as assistants">
+  <table mat-table [dataSource]="assistants">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let assistant">
+        {{ assistant.name }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Correo electrónico</th>
+      <td mat-cell *matCellDef="let assistant">
+        {{ assistant.email }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let assistant">
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="Eliminar oficio"
+          (click)="deleteAssistantAction(assistant.metadata.id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let assistant; columns: displayedColumns"></tr>
+  </table>
+</ng-container>
