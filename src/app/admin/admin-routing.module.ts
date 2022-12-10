@@ -11,8 +11,8 @@ const routes: Routes = [
         path: 'reporte-mensual',
         loadChildren: () =>
           import(
-            './pages/latest-report-detail/latest-report-detail.module'
-          ).then((m) => m.LatestReportDetailModule),
+            './pages/report-dashboard/report-dashboard.module'
+          ).then((m) => m.ReportDashboardModule),
       },
       {
         path: 'reportes/reportes-anteriores',
