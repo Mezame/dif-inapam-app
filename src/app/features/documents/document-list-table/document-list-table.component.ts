@@ -17,7 +17,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentListTableComponent implements AfterViewInit {
-  displayedColumns: string[] = [
+  displayedColumns = [
     'cardCode',
     'name',
     'createDate',
