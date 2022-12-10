@@ -1,0 +1,15 @@
+@use "src/styles/global-variables" as global;
+
+table {
+  height: 100%;
+  background-color: global.$background-color;
+}
+
+table tr th {
+  background-color: global.$background-color;
+  border: none;
+}
+
+table td {
+  background-color: #ffffff;
+}
