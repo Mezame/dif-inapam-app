@@ -1,3 +1,5 @@
+@use "src/styles/global-variables" as global;
+
 .column {
   display: flex;
   flex-direction: column;
@@ -9,5 +11,5 @@
 }
 
 .error {
-  color: var(--mdc-theme-error, #f44336);
+  color: global.$semantic-color-error;
 }
