@@ -1,1 +1,15 @@
-<p>assistant-list works!</p>
+<app-primary-layout toolbar-title="Asistentes">
+  <div class="column">
+    <div>
+      <a mat-stroked-button color="primary" routerLink="crear-asistente">
+        <mat-icon>add</mat-icon>
+        <span>Nuevo asistente</span>
+      </a>
+    </div>
+
+    <app-assistant-list-table
+      [data]="assistants$"
+      (action)="getAssistantAction($event)"
+    ></app-assistant-list-table>
+  </div>
+</app-primary-layout>
