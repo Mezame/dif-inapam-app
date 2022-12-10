@@ -1,1 +1,5 @@
-<p>assistant-add works!</p>
+<app-secondary-layout toolbar-title="Nuevo asistente">
+  <app-assistant-add-form
+    (actionEvent)="getAssistantAction($event)"
+  ></app-assistant-add-form>
+</app-secondary-layout>
