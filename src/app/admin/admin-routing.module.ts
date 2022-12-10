@@ -8,7 +8,7 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       {
-        path: 'reportes',
+        path: 'reporte-mensual',
         loadChildren: () =>
           import(
             './pages/latest-report-detail/latest-report-detail.module'
