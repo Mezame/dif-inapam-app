@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-assistant-add',
   templateUrl: './assistant-add.component.html',
   styleUrls: ['./assistant-add.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssistantAddComponent {
   getAssistantAction(event: { action: string; data: {} }) {
