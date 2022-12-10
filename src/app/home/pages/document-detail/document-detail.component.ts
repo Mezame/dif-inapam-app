@@ -11,18 +11,16 @@ import { ActivatedRoute } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentDetailComponent {
-  cardCode$!: Observable<string>;
   document$!: Observable<Document>;
 
   constructor(private route: ActivatedRoute) {
-    this.cardCode$ = route.params.pipe(map((params) => params['cardCode']));
+    const cardCode = route.snapshot.params['cardCode'];
 
-    this.cardCode$.subscribe(
-      (c) => (this.document$ = of(getDocumentByCardCodeServiceMock(c)))
-    );
+    this.document$ = of(getDocumentByCardCodeServiceMock(cardCode));
   }
 
   getDocumentAction(event: { action: string; data: string }) {
-    if (event.action == 'deleteDocument') console.log('Delete document', event.data);
+    if (event.action == 'deleteDocument')
+      console.log('Delete document', event.data);
   }
 }

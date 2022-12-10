@@ -1,11 +1,11 @@
 <mat-toolbar>
-  <a mat-icon-button aria-label="Navega a lista de oficios" routerLink="/home/oficios">
+  <a mat-icon-button aria-label="Navega a una página superior" [routerLink]="parentPagePath">
     <mat-icon>arrow_back</mat-icon>
   </a>
 
   <span *ngIf="toolbarTitle">{{ toolbarTitle }}</span>
 
-  <ng-container *ngIf="data?.cardCode$ | async as cardCode">
+  <ng-container *ngIf="cardCode">
     <span>{{ "Oficio " + cardCode }}</span>
 
     <span class="spacer"></span>
