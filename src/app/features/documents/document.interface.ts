@@ -16,6 +16,6 @@ export interface Document {
   imageUrl?: string;
   metadata?: {
     id?: number;
-    timestamp?: string;
+    createDate?: string;
   };
 }
