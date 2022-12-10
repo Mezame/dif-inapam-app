@@ -1,0 +1,49 @@
+<form [formGroup]="assistantForm" (ngSubmit)="onSubmit()">
+  <div class="row w-2-col">
+    <div class="column">
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Nombre" formControlName="name" />
+
+        <mat-error *ngIf="nameCtrl.errors?.['required']">{{
+          defaultErrorMessage.required
+        }}</mat-error>
+
+        <mat-error *ngIf="nameCtrl.errors?.['pattern']">{{
+          defaultErrorMessage.onlyLetters
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row w-2-col">
+    <div class="column">
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Correo electrónico</mat-label>
+        <input
+          matInput
+          placeholder="asistente@correo.com"
+          formControlName="email"
+        />
+
+        <mat-error *ngIf="emailCtrl.errors?.['required']">{{
+          defaultErrorMessage.required
+        }}</mat-error>
+
+        <mat-error *ngIf="emailCtrl.errors?.['email']">{{
+          defaultErrorMessage.invalidEmail
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <a mat-button color="primary" routerLink="/admin/asistentes">
+      <span>Cancelar</span>
+    </a>
+
+    <button mat-flat-button color="primary" type="submit" [disabled]="!assistantForm.valid">
+      <span>Agregar asistente</span>
+    </button>
+  </div>
+</form>

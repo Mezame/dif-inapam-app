@@ -1,0 +1,7 @@
+@use "src/styles/responsive-layout" with (
+  $content-width: 704px
+);
+
+form {
+  @extend %host;
+}
