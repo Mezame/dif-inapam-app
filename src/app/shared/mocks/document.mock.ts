@@ -4,7 +4,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/3/2022, 6:25:38 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000533',
+    cardCode: 'P000000533',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -20,7 +20,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/12/2022, 8:16:37 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000534',
+    cardCode: 'P000000534',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -36,7 +36,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/12/2022, 12:44:23 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000535',
+    cardCode: 'P000000535',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -52,7 +52,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/14/2022, 1:00:24 AM',
     operationCode: 'CANJE',
-    cardCode: 'P00-0000536',
+    cardCode: 'P000000536',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -68,7 +68,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/14/2022, 11:37:56 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000537',
+    cardCode: 'P000000537',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -84,7 +84,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/16/2022, 4:24:01 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000538',
+    cardCode: 'P000000538',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -100,7 +100,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/16/2022, 6:32:12 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000539',
+    cardCode: 'P000000539',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -116,7 +116,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/16/2022, 8:58:30 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000540',
+    cardCode: 'P000000540',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -132,7 +132,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/16/2022, 9:28:02 PM',
     operationCode: 'CANJE',
-    cardCode: 'P00-0000541',
+    cardCode: 'P000000541',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -148,7 +148,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/17/2022, 10:31:17 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000542',
+    cardCode: 'P000000542',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -164,7 +164,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/21/2022, 12:01:44 AM',
     operationCode: 'CANJE',
-    cardCode: 'P00-0000543',
+    cardCode: 'P000000543',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -180,7 +180,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/21/2022, 4:38:27 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000544',
+    cardCode: 'P000000544',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -196,7 +196,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/21/2022, 5:34:09 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000545',
+    cardCode: 'P000000545',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -212,7 +212,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/21/2022, 10:44:06 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000546',
+    cardCode: 'P000000546',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -228,7 +228,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/22/2022, 11:41:36 AM',
     operationCode: 'REPOSICION',
-    cardCode: 'P00-0000547',
+    cardCode: 'P000000547',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -244,7 +244,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/24/2022, 2:17:55 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000548',
+    cardCode: 'P000000548',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -260,7 +260,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/29/2022, 9:29:17 AM',
     operationCode: 'CANJE',
-    cardCode: 'P00-0000549',
+    cardCode: 'P000000549',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -276,7 +276,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '10/30/2022, 9:47:42 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000550',
+    cardCode: 'P000000550',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -292,7 +292,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/4/2022, 1:46:52 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000551',
+    cardCode: 'P000000551',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -308,7 +308,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/7/2022, 11:06:08 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000552',
+    cardCode: 'P000000552',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -324,7 +324,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/8/2022, 2:48:27 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000553',
+    cardCode: 'P000000553',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -340,7 +340,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/9/2022, 2:45:49 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000554',
+    cardCode: 'P000000554',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -356,7 +356,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/9/2022, 7:50:58 PM',
     operationCode: 'CANJE',
-    cardCode: 'P00-0000555',
+    cardCode: 'P000000555',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -372,7 +372,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/9/2022, 11:19:26 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000556',
+    cardCode: 'P000000556',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -388,7 +388,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/14/2022, 7:48:38 AM',
     operationCode: 'REPOSICION',
-    cardCode: 'P00-0000557',
+    cardCode: 'P000000557',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -404,7 +404,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/16/2022, 9:36:36 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000558',
+    cardCode: 'P000000558',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -420,7 +420,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/18/2022, 3:21:25 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000559',
+    cardCode: 'P000000559',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -436,7 +436,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/18/2022, 7:09:41 PM',
     operationCode: 'REPOSICION',
-    cardCode: 'P00-0000560',
+    cardCode: 'P000000560',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -452,7 +452,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/20/2022, 11:44:12 AM',
     operationCode: 'REPOSICION',
-    cardCode: 'P00-0000561',
+    cardCode: 'P000000561',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -468,7 +468,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/20/2022, 8:43:01 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000562',
+    cardCode: 'P000000562',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -484,7 +484,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/24/2022, 10:51:05 PM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000563',
+    cardCode: 'P000000563',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -501,7 +501,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/27/2022, 5:06:12 AM',
     operationCode: 'NUEVO REG',
-    cardCode: 'P00-0000564',
+    cardCode: 'P000000564',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -518,7 +518,7 @@ export const documentsMock: Document[] = [
   {
     createDate: '11/29/2022, 11:33:04 PM',
     operationCode: 'CANJE',
-    cardCode: 'P00-0000565',
+    cardCode: 'P000000565',
     branchOffice: 'VER-TUXPAN',
     reviewDocument: 'Valeria B. Alarcón',
     makeCard: 'Valeria B. Alarcón',
@@ -536,7 +536,7 @@ export const documentsMock: Document[] = [
 export const documentMock = getDocumentByCardCodeServiceMock();
 
 export function getDocumentByCardCodeServiceMock(
-  cardCode: string = 'P00-0000564',
+  cardCode: string = 'P000000564',
   documents: Document[] = documentsMock
 ) {
   let document: Document;
