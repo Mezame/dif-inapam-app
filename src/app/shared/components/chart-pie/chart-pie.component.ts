@@ -23,7 +23,7 @@ export class ChartPieComponent implements OnInit {
         show: false,
       },
       legend: {
-        bottom: 0,
+        bottom: 16,
         left: 'center',
       },
       color: ['#763c4b', '#ac828e'],
