@@ -18,8 +18,8 @@ const routes: Routes = [
         path: 'reportes/reportes-anteriores',
         loadChildren: () =>
           import(
-            './pages/previous-report-list/previous-report-list.module'
-          ).then((m) => m.PreviousReportListModule),
+            './pages/report-list/report-list.module'
+          ).then((m) => m.ReportListModule),
       },
       {
         path: 'oficios/:cardCode/editar',
