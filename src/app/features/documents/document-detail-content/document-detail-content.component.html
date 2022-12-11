@@ -103,12 +103,22 @@
     </div>
 
     <div class="column w-3-col">
-        <ng-container *ngIf="!document.imageUrl; else hasImageUrl">
-            <img src="assets/no-user-image.svg" width="109" height="131" alt="Imagen predeterminada de usuario" />
-        </ng-container>
-        <ng-template #hasImageUrl>
-            <img [src]="document.imageUrl" width="109" height="131" alt="Foto de adulto mayor" />
-        </ng-template>
+      <ng-container *ngIf="!document.imageUrl; else hasImageUrl">
+        <img
+          src="assets/no-user-image.svg"
+          width="109"
+          height="131"
+          alt="Imagen predeterminada de usuario"
+        />
+      </ng-container>
+      <ng-template #hasImageUrl>
+        <img
+          [src]="document.imageUrl"
+          width="109"
+          height="131"
+          alt="Foto de adulto mayor"
+        />
+      </ng-template>
     </div>
   </div>
 </ng-container>
