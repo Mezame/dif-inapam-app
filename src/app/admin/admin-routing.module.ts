@@ -15,7 +15,7 @@ const routes: Routes = [
           ).then((m) => m.ReportDashboardModule),
       },
       {
-        path: 'reportes/reportes-anteriores',
+        path: 'reportes',
         loadChildren: () =>
           import(
             './pages/report-list/report-list.module'
