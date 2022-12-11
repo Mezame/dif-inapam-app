@@ -5,8 +5,6 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { ToolbarButton } from '../toolbar-button.interface';
 
 @Component({
@@ -16,12 +14,6 @@ import { ToolbarButton } from '../toolbar-button.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SecondaryLayoutComponent {
-  cardCode!: string;
-
-  constructor(route: ActivatedRoute) {
-    this.cardCode = route.snapshot.params['cardCode'];
-  }
-
   @Input('toolbar-title') toolbarTitle?: string;
 
   @Input('toolbar-icon-button') toolbarIconButton?: string;
@@ -31,7 +23,7 @@ export class SecondaryLayoutComponent {
   @Input('toolbar-menu') toolbarMenu?: boolean;
 
   @Input('toolbar-back-link') toolbarBackLink?: string | any[];
-
+  /*
   @Output() actionEvent = new EventEmitter<{
     action: string;
     data: string;
@@ -44,4 +36,5 @@ export class SecondaryLayoutComponent {
   cancelCardAction(cardCode: string, action = 'cancelCard') {
     this.actionEvent.emit({ action, data: cardCode });
   }
+  */
 }
