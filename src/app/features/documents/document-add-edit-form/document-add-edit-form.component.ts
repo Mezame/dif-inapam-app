@@ -74,8 +74,8 @@ export class DocumentAddEditFormComponent implements OnInit {
       '',
       [
         Validators.required,
-        Validators.minLength(20),
-        Validators.maxLength(20),
+        Validators.minLength(18),
+        Validators.maxLength(18),
         Validators.pattern('[a-zA-Z0-9]*'),
       ],
     ],
