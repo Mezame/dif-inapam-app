@@ -1,5 +1,9 @@
 <mat-toolbar>
-  <a mat-icon-button aria-label="Navega a una página superior" [routerLink]="parentPagePath">
+  <a
+    mat-icon-button
+    aria-label="Navega a una página superior"
+    [routerLink]="toolbarBackLink"
+  >
     <mat-icon>arrow_back</mat-icon>
   </a>
 
@@ -11,7 +15,11 @@
     <span class="spacer"></span>
 
     <ng-container *ngIf="toolbarIconButton && toolbarMenu">
-      <button mat-icon-button aria-label="Abre menu con opciones de oficio" [matMenuTriggerFor]="menu">
+      <button
+        mat-icon-button
+        aria-label="Abre menu con opciones de oficio"
+        [matMenuTriggerFor]="menu"
+      >
         <mat-icon>{{ toolbarIconButton }}</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
@@ -23,6 +31,11 @@
         <button mat-menu-item (click)="deleteDocumentAction(cardCode)">
           <mat-icon>delete</mat-icon>
           <span>Eliminar oficio</span>
+        </button>
+
+        <button mat-menu-item (click)="cancelCardAction(cardCode)">
+          <mat-icon>cancel</mat-icon>
+          <span>Cancelar tarjeta</span>
         </button>
       </mat-menu>
     </ng-container>

@@ -16,21 +16,10 @@ import { ToolbarButton } from '../toolbar-button.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SecondaryLayoutComponent {
-  parentPagePath!: string;
   cardCode!: string;
 
   constructor(route: ActivatedRoute) {
-    const routeClone = route as any;
-    const parentPage = routeClone.snapshot._urlSegment.segments[1].path;
-
     this.cardCode = route.snapshot.params['cardCode'];
-
-    if (parentPage == 'oficios') this.parentPagePath = '/home/oficios';
-
-    if (parentPage == 'reporte-mensual')
-      this.parentPagePath = '/admin/reporte-mensual';
-
-    if (parentPage == 'asistentes') this.parentPagePath = '/admin/asistentes';
   }
 
   @Input('toolbar-title') toolbarTitle?: string;
@@ -41,12 +30,18 @@ export class SecondaryLayoutComponent {
 
   @Input('toolbar-menu') toolbarMenu?: boolean;
 
+  @Input('toolbar-back-link') toolbarBackLink?: string | any[];
+
   @Output() actionEvent = new EventEmitter<{
     action: string;
     data: string;
   }>();
 
   deleteDocumentAction(cardCode: string, action = 'deleteDocument') {
+    this.actionEvent.emit({ action, data: cardCode });
+  }
+
+  cancelCardAction(cardCode: string, action = 'cancelCard') {
     this.actionEvent.emit({ action, data: cardCode });
   }
 }
