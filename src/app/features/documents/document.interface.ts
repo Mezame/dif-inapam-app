@@ -13,6 +13,7 @@ export interface Document {
   birthplace: string;
   curp: string;
   maritalStatus: 'Casado' | 'Soltero';
+  cancelCard?: boolean;
   imageUrl?: string;
   metadata?: {
     id?: number;
