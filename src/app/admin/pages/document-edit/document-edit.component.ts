@@ -10,15 +10,16 @@ import { map, Observable, of } from 'rxjs';
   styleUrls: ['./document-edit.component.scss'],
 })
 export class DocumentEditComponent implements OnInit {
+  cardCode!: string;
   document$!: Observable<Document>;
 
   constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    const cardCode: string = this.route.snapshot.params['cardCode'];
+    this.cardCode = this.route.snapshot.params['cardCode'];
 
-    this.document$ = of(getDocumentByCardCodeServiceMock(cardCode));
+    this.document$ = of(getDocumentByCardCodeServiceMock(this.cardCode));
   }
 
   getDocumentAction(event: { action: string; data: {} }) {

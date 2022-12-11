@@ -1,4 +1,4 @@
-<app-secondary-layout>
+<app-secondary-layout [toolbar-back-link]="'/home/oficios/' + cardCode">
   <ng-container *ngIf="document$ | async as document">
     <app-document-add-edit-form
       [data]="document"
