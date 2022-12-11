@@ -284,7 +284,8 @@
     </a>
 
     <button mat-flat-button color="primary" type="submit" [disabled]="false">
-      <span>Crear oficio</span>
+      <span *ngIf="action == 'addDocument'">Crear oficio</span>
+      <span *ngIf="action == 'editDocument'">Editar oficio</span>
     </button>
   </div>
 </form>
