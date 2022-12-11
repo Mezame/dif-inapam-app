@@ -14,7 +14,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '12/25/1962, 4:51:09 AM',
     birthplace: 'Veracruz',
-    curp: 'XBRX7596231DTPBHI700',
+    curp: 'XBRX759623DTPBHI00',
     maritalStatus: 'Casado',
   },
   {
@@ -30,7 +30,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '01/27/1964, 11:11:21 PM',
     birthplace: 'Veracruz',
-    curp: 'YEIC2449131SFWIYP500',
+    curp: 'YEIC244913SFWIYP00',
     maritalStatus: 'Casado',
   },
   {
@@ -46,7 +46,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '02/17/1964, 6:43:40 AM',
     birthplace: 'Veracruz',
-    curp: 'QMTN5413740DOVILC800',
+    curp: 'QMTN541374DOVILC00',
     maritalStatus: 'Casado',
   },
   {
@@ -62,7 +62,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '08/9/1961, 10:31:53 AM',
     birthplace: 'Veracruz',
-    curp: 'STTV8632066OVLUGD100',
+    curp: 'STTV8632066VLUGD00',
     maritalStatus: 'Soltero',
   },
   {
@@ -78,7 +78,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '09/29/1962, 12:51:53 AM',
     birthplace: 'Veracruz',
-    curp: 'BQMH4673673FDSIEV400',
+    curp: 'BQMH467367FDSIEV00',
     maritalStatus: 'Soltero',
   },
   {
@@ -94,7 +94,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '11/18/1964, 8:34:34 AM',
     birthplace: 'Veracruz',
-    curp: 'JHXT7147085XOHHIR900',
+    curp: 'JHXT714708XOHHIR00',
     maritalStatus: 'Casado',
   },
   {
@@ -110,7 +110,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '02/22/1962, 8:00:08 PM',
     birthplace: 'Veracruz',
-    curp: 'TFYO8432153GOCHYV300',
+    curp: 'TFYO843215GOCHYV00',
     maritalStatus: 'Soltero',
   },
   {
@@ -126,7 +126,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '06/29/1961, 3:21:23 AM',
     birthplace: 'Veracruz',
-    curp: 'YSJV2854858XYXQTR300',
+    curp: 'YSJV285485XYXQTR00',
     maritalStatus: 'Casado',
   },
   {
@@ -142,7 +142,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '03/25/1963, 7:13:51 PM',
     birthplace: 'Veracruz',
-    curp: 'XJOJ7755865YXKOFT200',
+    curp: 'XJOJ775586YXKOFT00',
     maritalStatus: 'Soltero',
   },
   {
@@ -158,7 +158,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '08/18/1965, 2:47:42 AM',
     birthplace: 'Veracruz',
-    curp: 'GMEI4246248FVVVBV500',
+    curp: 'GMEI424624FVVVBV00',
     maritalStatus: 'Casado',
   },
   {
@@ -174,7 +174,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '07/22/1963, 3:26:18 AM',
     birthplace: 'Veracruz',
-    curp: 'DULA6839531UBOPJS300',
+    curp: 'DULA683953UBOPJS00',
     maritalStatus: 'Soltero',
   },
   {
@@ -190,7 +190,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '06/22/1962, 8:08:47 AM',
     birthplace: 'Veracruz',
-    curp: 'EKDC5853483IMGWDO700',
+    curp: 'EKDC585348IMGWDO00',
     maritalStatus: 'Casado',
   },
   {
@@ -206,7 +206,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '08/29/1963, 6:48:36 PM',
     birthplace: 'Veracruz',
-    curp: 'BZHY0154846SWQUQN400',
+    curp: 'BZHY015484SWQUQN00',
     maritalStatus: 'Soltero',
   },
   {
@@ -222,7 +222,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '07/9/1963, 11:55:04 PM',
     birthplace: 'Veracruz',
-    curp: 'QFCQ3416301VBJNDQ400',
+    curp: 'QFCQ341630VBJNDQ00',
     maritalStatus: 'Casado',
   },
   {
@@ -238,7 +238,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '07/9/1962, 2:03:39 AM',
     birthplace: 'Veracruz',
-    curp: 'VAVM3412415BZVLQS000',
+    curp: 'VAVM341241BZVLQ000',
     maritalStatus: 'Casado',
   },
   {
@@ -254,7 +254,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '10/18/1963, 2:35:46 AM',
     birthplace: 'Veracruz',
-    curp: 'HQVZ8350896JHTETV800',
+    curp: 'HQVZ835089JHTETV00',
     maritalStatus: 'Soltero',
   },
   {
@@ -270,7 +270,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '09/22/1965, 5:50:55 PM',
     birthplace: 'Veracruz',
-    curp: 'HNQG9368703IMBDPL200',
+    curp: 'HNQG936870IMBDPL00',
     maritalStatus: 'Casado',
   },
   {
@@ -286,7 +286,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '03/30/1963, 9:38:32 AM',
     birthplace: 'Veracruz',
-    curp: 'MVNK5665423RUXBFN800',
+    curp: 'MVNK566542RUXBFN00',
     maritalStatus: 'Casado',
   },
   {
@@ -302,7 +302,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '10/2/1961, 6:59:27 PM',
     birthplace: 'Veracruz',
-    curp: 'OLQV2413478CHBNFQ300',
+    curp: 'OLQV241347CHBNFQ00',
     maritalStatus: 'Soltero',
   },
   {
@@ -318,7 +318,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '10/15/1962, 10:45:24 AM',
     birthplace: 'Veracruz',
-    curp: 'OLBL0658853XLVEQX500',
+    curp: 'OLBL065885XLVEQX00',
     maritalStatus: 'Casado',
   },
   {
@@ -334,7 +334,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '11/22/1961, 4:42:59 AM',
     birthplace: 'Veracruz',
-    curp: 'UHEV6553115GZMXJJ800',
+    curp: 'UHEV655311GZMXJJ00',
     maritalStatus: 'Soltero',
   },
   {
@@ -350,7 +350,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '10/31/1965, 4:16:41 PM',
     birthplace: 'Veracruz',
-    curp: 'WUVJ3028423THBYVQ300',
+    curp: 'WUVJ302842THBYVQ00',
     maritalStatus: 'Casado',
   },
   {
@@ -366,7 +366,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '04/12/1961, 10:17:35 PM',
     birthplace: 'Veracruz',
-    curp: 'ZCBD5609706ZECEQE000',
+    curp: 'ZCBD560970ZECEQE00',
     maritalStatus: 'Soltero',
   },
   {
@@ -382,7 +382,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '11/27/1965, 12:47:28 PM',
     birthplace: 'Veracruz',
-    curp: 'KBWL7372146BCVRLJ400',
+    curp: 'KBWL737214BCVRLJ00',
     maritalStatus: 'Casado',
   },
   {
@@ -398,7 +398,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '05/8/1962, 11:20:13 AM',
     birthplace: 'Veracruz',
-    curp: 'OQDO2756372LQXQCU600',
+    curp: 'OQDO275637LQXQCU00',
     maritalStatus: 'Casado',
   },
   {
@@ -414,7 +414,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '12/14/1964, 5:21:53 PM',
     birthplace: 'Veracruz',
-    curp: 'RPMU3764223XHHFSZ300',
+    curp: 'RPMU376422XHHFSZ00',
     maritalStatus: 'Casado',
   },
   {
@@ -430,7 +430,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '09/20/1962, 5:04:11 PM',
     birthplace: 'Veracruz',
-    curp: 'DPXT4346212AWTMDX300',
+    curp: 'DPXT434621AWTMDX00',
     maritalStatus: 'Casado',
   },
   {
@@ -446,7 +446,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '07/29/1961, 1:44:31 AM',
     birthplace: 'Veracruz',
-    curp: 'PAZQ1286906QYXPMV300',
+    curp: 'PAZQ128690QYXPMV00',
     maritalStatus: 'Casado',
   },
   {
@@ -462,7 +462,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '09/3/1965, 8:45:11 PM',
     birthplace: 'Veracruz',
-    curp: 'KEOR3538272OOQHKX700',
+    curp: 'KEOR353827OOQHKX00',
     maritalStatus: 'Soltero',
   },
   {
@@ -478,7 +478,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '10/28/1961, 4:18:26 AM',
     birthplace: 'Veracruz',
-    curp: 'GVIX7627548VOWOCJ100',
+    curp: 'GVIX762754VOWOCJ00',
     maritalStatus: 'Casado',
   },
   {
@@ -494,7 +494,7 @@ export const documentsMock: Document[] = [
     sex: 'Mujer',
     birthdate: '12/6/1962, 1:39:54 PM',
     birthplace: 'Veracruz',
-    curp: 'BDVH3830456FYJWJG900',
+    curp: 'BDVH383045FYJWJG00',
     maritalStatus: 'Casado',
     imageUrl: 'http://localhost:4200/assets/elder-female.jpg'
   },
@@ -511,7 +511,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '02/6/1964, 1:31:22 PM',
     birthplace: 'Veracruz',
-    curp: 'WGXQ3473954YTVCGN400',
+    curp: 'WGXQ347395YTVCGN00',
     maritalStatus: 'Soltero',
     imageUrl: 'http://localhost:4200/assets/elder-male.jpg'
   },
@@ -528,7 +528,7 @@ export const documentsMock: Document[] = [
     sex: 'Hombre',
     birthdate: '10/20/1964, 7:45:47 PM',
     birthplace: 'Veracruz',
-    curp: 'MSMH4938365IJDXWI100',
+    curp: 'MSMH493836IJDXWI00',
     maritalStatus: 'Casado',
   },
 ];
