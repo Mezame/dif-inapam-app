@@ -35,6 +35,7 @@ mat-toolbar {
   [mat-flat-button] > mat-icon,
   [mat-stroked-button] > mat-icon {
     margin-left: 0 !important;
+    font-size: 16px !important;
   }
 
   [mat-button],
