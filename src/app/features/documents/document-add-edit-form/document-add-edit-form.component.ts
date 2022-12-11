@@ -133,7 +133,7 @@ export class DocumentAddEditFormComponent implements OnInit {
   ngOnInit() {
     if (this.action == 'editDocument') {
       this.documentForm.patchValue({
-        cardCode: this.document.cardCode.replace('-', ''),
+        cardCode: this.document.cardCode,
         operationCode: this.document.operationCode,
         fathersLastname: this.document.fathersLastname,
         mothersLastname: this.document.mothersLastname,
