@@ -1,8 +1,38 @@
 <app-secondary-layout
-toolbar-back-link="/home/oficios"
-  toolbar-icon-button="more_vert"
-  [toolbar-menu]="true"
-  (actionEvent)="getDocumentAction($event)"
+  [toolbar-title]="'Oficio ' + cardCode"
+  toolbar-back-link="/home/oficios"
 >
+  <div class="button-group">
+    <a
+      mat-stroked-button
+      color="primary"
+      type="button"
+      [routerLink]="['/admin/oficios', cardCode, 'editar']"
+    >
+      <mat-icon>edit</mat-icon>
+      <span>Editar oficio</span>
+    </a>
+
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      (click)="deleteDocument()"
+    >
+      <mat-icon>delete</mat-icon>
+      <span>Eliminar oficio</span>
+    </button>
+
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      (click)="cancelCard()"
+    >
+      <mat-icon>cancel</mat-icon>
+      <span>Cancelar tarjeta</span>
+    </button>
+  </div>
+
   <app-document-detail-content [data]="document$"></app-document-detail-content>
 </app-secondary-layout>
