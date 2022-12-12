@@ -4,7 +4,7 @@ import { documentsMock } from '@shared/mocks/document.mock';
 import {
   getMonthsNumbers,
   getMonthsWords,
-} from '@features/documents/utils/get-create-date-months';
+} from '@features/documents/utils/get-create-date';
 import { getSelectOptions } from '@shared/utils/get-select-options';
 import { MonthNumber } from '@shared/types/month-number.type';
 import { Observable, of } from 'rxjs';
@@ -18,8 +18,8 @@ import { Observable, of } from 'rxjs';
 export class DocumentListComponent {
   documents$: Observable<Document[]> = of(documentsMock);
   monthsOptions = getSelectOptions(
-    getMonthsNumbers(this.documents$),
-    getMonthsWords(this.documents$)
+    getMonthsNumbers(this.documents$, '2022'),
+    getMonthsWords(this.documents$, '2022')
   ).reverse();
   selectedMonth = this.monthsOptions[0].value as MonthNumber;
 }
