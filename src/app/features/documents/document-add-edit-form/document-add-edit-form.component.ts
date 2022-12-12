@@ -9,7 +9,7 @@ import {
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { documentsMock } from '@shared/mocks/document.mock';
-import { getOperationCodes } from '../utils/get-operation-codes';
+import { getOperationCode } from '../utils/get-operation-code';
 import { DocumentFormValue } from './document-form-value.interface';
 import { mexicanFederalStates } from '@shared/utils/mexican-federal-states';
 import { defaultErrorMessage } from '@shared/utils/default-error-message';
@@ -26,7 +26,7 @@ import { Document } from '../document.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentAddEditFormComponent implements OnInit {
-  operationCodesOptions = getOperationCodes(of(documentsMock));
+  operationCodesOptions = getOperationCode(of(documentsMock));
 
   statesOptions = mexicanFederalStates;
 

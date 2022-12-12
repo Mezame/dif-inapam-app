@@ -1,7 +1,7 @@
 import { Observable, tap } from 'rxjs';
 import { Document } from '@features/documents/document.interface';
 
-export function getOperationCodes(documents: Observable<Document[]>): string[] {
+export function getOperationCode(documents: Observable<Document[]>): string[] {
   let operationCodes: string[] = [];
 
   documents
