@@ -10,16 +10,23 @@ const routes: Routes = [
       {
         path: 'reporte-mensual',
         loadChildren: () =>
-          import(
-            './pages/report-dashboard/report-dashboard.module'
-          ).then((m) => m.ReportDashboardModule),
+          import('./pages/report-dashboard/report-dashboard.module').then(
+            (m) => m.ReportDashboardModule
+          ),
       },
       {
         path: 'reportes',
         loadChildren: () =>
-          import(
-            './pages/report-list/report-list.module'
-          ).then((m) => m.ReportListModule),
+          import('./pages/report-list/report-list.module').then(
+            (m) => m.ReportListModule
+          ),
+      },
+      {
+        path: 'reportes/:id',
+        loadChildren: () =>
+          import('./pages/report-detail/report-detail.module').then(
+            (m) => m.ReportDetailModule
+          ),
       },
       {
         path: 'oficios/:cardCode/editar',
