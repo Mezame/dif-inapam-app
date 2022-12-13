@@ -30,6 +30,14 @@ export function getReports(): Report[] {
           replacement: 0,
           change: 0,
           cancel: 0,
+          getTotal: () => {
+            return (
+              defaultReport.cardsStats.newRecord +
+              defaultReport.cardsStats.replacement +
+              defaultReport.cardsStats.change +
+              defaultReport.cardsStats.cancel
+            );
+          },
         },
         cardCodesRange: ['', ''],
         sexStats: { male: 0, female: 0 },
