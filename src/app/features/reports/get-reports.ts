@@ -78,6 +78,16 @@ export function getReports(): Report[] {
   return reports;
 }
 
+export function getReportById(reports: Report[], id: string): Report {
+  let report: Report;
+
+  reports.forEach((r) => {
+    if (r.metadata?.id == id) report = r;
+  });
+
+  return report!;
+}
+
 export function getLatestReport() {
   let latestReport: Report;
 
