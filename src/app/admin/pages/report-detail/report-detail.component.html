@@ -1,1 +1,19 @@
-<p>report-detail works!</p>
+<app-secondary-layout
+  toolbar-title="Reporte mensual de oficios"
+  toolbar-back-link="/admin/reportes"
+>
+  <div *ngIf="report$ | async as report" class="content">
+    <span class="mat-small"
+      >Reporte de {{ report.date | date : "MMMM, y" }}</span
+    >
+
+    <div>
+      <button mat-flat-button color="primary">
+        <mat-icon>download</mat-icon>
+        <span>Generar reporte</span>
+      </button>
+    </div>
+
+    <app-report-detail-content [data]="report"></app-report-detail-content>
+  </div>
+</app-secondary-layout>

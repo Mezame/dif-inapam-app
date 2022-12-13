@@ -6,6 +6,9 @@ import { ReportDetailComponent } from './report-detail.component';
 import { SecondaryLayoutModule } from '@shared/layouts/secondary/secondary-layout.module';
 import { ReportDetailContentModule } from '@features/reports/report-detail-content/report-detail-content.module';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 const routes: Routes = [{ path: '', component: ReportDetailComponent }];
 
 @NgModule({
@@ -15,6 +18,8 @@ const routes: Routes = [{ path: '', component: ReportDetailComponent }];
     RouterModule.forChild(routes),
     SecondaryLayoutModule,
     ReportDetailContentModule,
+    MatButtonModule,
+    MatIconModule,
   ],
 })
 export class ReportDetailModule {}

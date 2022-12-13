@@ -1,1 +1,23 @@
-<p>report-dashboard works!</p>
+<app-primary-layout toolbar-title="Reporte mensual de oficios">
+  <div *ngIf="report$ | async as report" class="content">
+    <span class="mat-small"
+      >Reporte del último mes: {{ report.date | date : "MMM, y" }}</span
+    >
+
+    <div>
+      <button mat-flat-button color="primary">
+        <mat-icon>download</mat-icon>
+        <span>Generar reporte</span>
+      </button>
+    </div>
+
+    <app-report-detail-content [data]="report"></app-report-detail-content>
+
+    <div>
+      <a mat-stroked-button color="primary" routerLink="/admin/reportes">
+        <mat-icon>read_more</mat-icon>
+        <span>Lista de reportes</span>
+      </a>
+    </div>
+  </div>
+</app-primary-layout>
