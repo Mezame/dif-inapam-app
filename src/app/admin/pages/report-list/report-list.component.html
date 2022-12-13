@@ -1,1 +1,6 @@
-<p>report-list works!</p>
+<app-secondary-layout
+  toolbar-title="Reportes mensuales de oficios"
+  toolbar-back-link="/admin/reporte-mensual"
+>
+  <app-report-list-table [data]="reports$"></app-report-list-table>
+</app-secondary-layout>

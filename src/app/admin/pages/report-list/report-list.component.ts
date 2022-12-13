@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { getReports, sortReportsByDate } from '@features/reports/get-reports';
+import { Report } from '@features/reports/report.interface';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-report-list',
@@ -7,5 +10,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReportListComponent {
-
+  reports$: Observable<Report[]> = of(sortReportsByDate(getReports(), 'asc'));
 }
