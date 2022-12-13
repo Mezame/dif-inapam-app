@@ -1,10 +1,18 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
+import { PieSeriesOption } from 'echarts/charts';
+import {
+  LegendComponentOption,
+  TooltipComponentOption,
+} from 'echarts/components';
+
+type ECOption = echarts.ComposeOption<
+  PieSeriesOption | TooltipComponentOption | LegendComponentOption
+>;
 
 @Component({
   selector: 'app-chart-pie',
@@ -15,7 +23,7 @@ import {
 export class ChartPieComponent implements OnInit {
   @Input() data!: { value: number; name: string }[];
 
-  options!: any;
+  options!: ECOption;
 
   ngOnInit(): void {
     this.options = {
