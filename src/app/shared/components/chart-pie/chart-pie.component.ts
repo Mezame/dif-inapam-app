@@ -1,14 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   Input,
   OnInit,
 } from '@angular/core';
-import { PieSeriesOption } from 'echarts/charts';
+
+import * as echarts from 'echarts/core';
+import { PieChart, PieSeriesOption } from 'echarts/charts';
 import {
-  LegendComponentOption,
+  TooltipComponent,
   TooltipComponentOption,
+  LegendComponent,
+  LegendComponentOption,
 } from 'echarts/components';
+import { SVGRenderer } from 'echarts/renderers';
 
 type ECOption = echarts.ComposeOption<
   PieSeriesOption | TooltipComponentOption | LegendComponentOption
@@ -21,11 +27,16 @@ type ECOption = echarts.ComposeOption<
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartPieComponent implements OnInit {
-  @Input() data!: { value: number; name: string }[];
-
   options!: ECOption;
 
+  @Input() data!: { value: number; name: string }[];
+
+  constructor(private el: ElementRef) {}
+
   ngOnInit(): void {
+    const divEl: HTMLDivElement = this.el.nativeElement.firstChild;
+    let pieChart: echarts.ECharts;
+
     this.options = {
       tooltip: {
         show: false,
@@ -44,7 +55,7 @@ export class ChartPieComponent implements OnInit {
           left: 0,
           right: 0,
           itemStyle: {
-            borderWidth: 1,
+            borderWidth: 0,
             borderColor: '#fafafa',
           },
           label: {
@@ -69,5 +80,12 @@ export class ChartPieComponent implements OnInit {
         },
       ],
     };
+
+    //echarts.registerTheme('custom-theme', echartsCustomTheme);
+    echarts.use([TooltipComponent, LegendComponent, PieChart, SVGRenderer]);
+
+    pieChart = echarts.init(divEl);
+
+    pieChart.setOption(this.options);
   }
 }
