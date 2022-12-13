@@ -11,12 +11,34 @@ export class FilterDocumentsService {
     documents: Observable<Document[]>,
     monthNumber: MonthNumber
   ): Observable<Document[]> {
+    if (typeof monthNumber == 'string')
+      monthNumber = parseInt(monthNumber) as MonthNumber;
+
     this.filteredDocuments$ = documents.pipe(
       map((documents) =>
         documents.filter((document) => {
           const createDate = new Date(document.createDate);
 
-          return createDate.getMonth() + 1 == parseInt(monthNumber);
+          return createDate.getMonth() + 1 == monthNumber;
+        })
+      )
+    );
+
+    return this.filteredDocuments$;
+  }
+
+  filterDocumentsByYear(
+    documents: Observable<Document[]>,
+    year: string | number
+  ): Observable<Document[]> {
+    if (typeof year == 'string') year = parseInt(year);
+
+    this.filteredDocuments$ = documents.pipe(
+      map((documents) =>
+        documents.filter((document) => {
+          const createDate = new Date(document.createDate);
+
+          return createDate.getFullYear() == year;
         })
       )
     );
