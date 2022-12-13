@@ -1,0 +1,27 @@
+@use "src/styles/responsive-layout" with (
+  $content-width: 704px
+);
+
+:host {
+  @extend %host;
+}
+
+.center {
+  text-align: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.row,
+.column {
+  width: 100%;
+}
+
+.chart-container {
+  align-self: center;
+  margin-top: -20px;
+  width: 180px;
+  height: 260px;
+}

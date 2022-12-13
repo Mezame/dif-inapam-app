@@ -1,1 +1,58 @@
-<p>report-detail-content works!</p>
+<div class="row">
+  <div class="column">
+    <div class="row justify-center">
+      <div class="column col-group">
+        <span class="mat-subtitle-2 center">Total de tarjetas</span>
+        <span class="mat-headline-4 center">{{
+          report.cardsStats.newRecord +
+            report.cardsStats.replacement +
+            report.cardsStats.change +
+            report.cardsStats.cancel
+        }}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column col-group">
+        <span class="mat-subtitle-2">Nuevo registro</span>
+        <span class="mat-headline-6">{{ report.cardsStats.newRecord }}</span>
+      </div>
+      <div class="column col-group">
+        <span class="mat-subtitle-2">Reposición</span>
+        <span class="mat-headline-6">{{ report.cardsStats.replacement }}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column col-group">
+        <span class="mat-subtitle-2">Canje</span>
+        <span class="mat-headline-6">{{ report.cardsStats.change }}</span>
+      </div>
+      <div class="column col-group">
+        <span class="mat-subtitle-2">Canceladas</span>
+        <span class="mat-headline-6">{{ report.cardsStats.cancel }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="chartData" class="column">
+    <div class="chart-container">
+      <app-chart-pie [data]="chartData"></app-chart-pie>
+    </div>
+  </div>
+
+  <div class="column col-group">
+    <span class="mat-subtitle-2">Folios</span>
+    <span class="mat-body"
+      >{{ report.cardCodesRange[0].slice(0, 7)
+      }}<span class="mat-subtitle-2">{{
+        report.cardCodesRange[0].slice(7)
+      }}</span></span
+    >
+    <span class="mat-body">...</span>
+    <span class="mat-body"
+      >{{ report.cardCodesRange[1].slice(0, 7)
+      }}<span class="mat-subtitle-2">{{
+        report.cardCodesRange[1].slice(7)
+      }}</span></span
+    >
+  </div>
+</div>
