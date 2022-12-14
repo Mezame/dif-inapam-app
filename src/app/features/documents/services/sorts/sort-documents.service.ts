@@ -6,7 +6,7 @@ import { Order } from '@shared/types/order.type';
 @Injectable()
 export class SortDocumentsService {
   private orderedDocuments$!: Observable<Document[]>;
-  orderFn!: (a: Document, b: Document) => number;
+  private orderFn!: (a: Document, b: Document) => number;
 
   sortDocumentsByCreateDate(documents: Observable<Document[]>, order: Order) {
     if (order == 'asc') {
