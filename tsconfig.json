@@ -23,6 +23,9 @@
       "ES2022",
       "dom"
     ],
+    "types": [
+      "@angular/localize"
+    ],
     "paths": {
       "@features/*": ["./src/app/features/*"],
       "@shared/*": ["./src/app/shared/*"],
