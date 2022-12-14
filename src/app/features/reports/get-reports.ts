@@ -4,27 +4,30 @@ import {
 } from '@features/documents/utils/get-create-date';
 import { documentsMock } from '@shared/mocks/document.mock';
 import { Order } from '@shared/types/order.type';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Report } from './report.interface';
+import { Document } from '@features/documents/document.interface';
 
-export function getReports(): Report[] {
+const reports = getReports(of(documentsMock));
+
+export function getReports(documents: Observable<Document[]>): Report[] {
   let reports: Report[] = [];
   let counter = 0;
 
-  const documentsYears = getYears(of(documentsMock));
+  const documentsYears = getYears(documents);
 
   documentsYears.forEach((docYear) => {
-    const documentsMonthsNumbers = getMonthsNumbers(of(documentsMock), docYear);
+    const documentsMonthsNumbers = getMonthsNumbers(documents, docYear);
 
     documentsMonthsNumbers.forEach((docMonthNum) => {
+      const date = new Date(parseInt(docYear), parseInt(docMonthNum) - 1, 15);
+      const id = `${date.toLocaleDateString('es-MX', {
+        month: 'short',
+      })}-${docYear}`;
       counter++;
 
       const defaultReport = {
-        date: new Date(
-          parseInt(docYear),
-          parseInt(docMonthNum) - 1,
-          15
-        ).toLocaleString(),
+        date: date.toLocaleString(),
         cardsStats: {
           newRecord: 0,
           replacement: 0,
@@ -42,7 +45,7 @@ export function getReports(): Report[] {
         cardCodesRange: ['', ''],
         sexStats: { male: 0, female: 0 },
         metadata: {
-          id: docYear + docMonthNum + counter.toString(),
+          id: id,
         },
       };
 
@@ -86,12 +89,10 @@ export function getReports(): Report[] {
   return reports;
 }
 
-export function getReportById(reports: Report[], id: string): Report {
+export function getReportById(id: string, reports: Report[]): Report {
   let report: Report;
 
-  reports.forEach((r) => {
-    if (r.metadata?.id == id) report = r;
-  });
+  report = reports.find((r) => r.metadata!.id == id) as Report;
 
   return report!;
 }
@@ -99,7 +100,7 @@ export function getReportById(reports: Report[], id: string): Report {
 export function getLatestReport() {
   let latestReport: Report;
 
-  latestReport = sortReportsByDate(getReports(), 'asc')[0];
+  latestReport = sortReportsByDate(reports, 'asc')[0];
 
   return latestReport;
 }
