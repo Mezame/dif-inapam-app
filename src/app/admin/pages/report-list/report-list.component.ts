@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { getReports, sortReportsByDate } from '@features/reports/get-reports';
 import { Report } from '@features/reports/report.interface';
+import { documentsMock } from '@shared/mocks/document.mock';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -10,5 +11,7 @@ import { Observable, of } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReportListComponent {
-  reports$: Observable<Report[]> = of(sortReportsByDate(getReports(), 'asc'));
+  reports$: Observable<Report[]> = of(
+    sortReportsByDate(getReports(of(documentsMock)), 'asc')
+  );
 }
