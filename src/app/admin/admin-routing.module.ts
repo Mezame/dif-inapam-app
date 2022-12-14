@@ -8,7 +8,7 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       {
-        path: 'reporte-mensual',
+        path: 'panel-reportes',
         loadChildren: () =>
           import('./pages/report-dashboard/report-dashboard.module').then(
             (m) => m.ReportDashboardModule
@@ -58,7 +58,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'reportes',
+        redirectTo: 'panel-reportes',
         pathMatch: 'full',
       },
     ],
