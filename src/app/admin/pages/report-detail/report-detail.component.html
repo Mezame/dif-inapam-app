@@ -7,11 +7,27 @@
       >Reporte de {{ report.date | date : "MMMM, y" }}</span
     >
 
-    <div>
-      <button mat-flat-button color="primary">
+    <div class="button-group">
+      <a
+        mat-flat-button
+        color="primary"
+        (click)="onClick(monthlyReport, { report })"
+        #monthlyReport
+      >
         <mat-icon>download</mat-icon>
-        <span>Generar reporte</span>
-      </button>
+        <span>Reporte mensual</span>
+      </a>
+
+      <a
+        *ngIf="documents$ | async as documents"
+        mat-flat-button
+        color="primary"
+        (click)="onClick(documentsReport, { report, documents })"
+        #documentsReport
+      >
+        <mat-icon>download</mat-icon>
+        <span>Reporte de oficios</span>
+      </a>
     </div>
 
     <app-report-detail-content [data]="report"></app-report-detail-content>

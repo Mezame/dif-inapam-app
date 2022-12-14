@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReportDetailComponent } from './report-detail.component';
 import { SecondaryLayoutModule } from '@shared/layouts/secondary/secondary-layout.module';
 import { ReportDetailContentModule } from '@features/reports/report-detail-content/report-detail-content.module';
+import { SortDocumentsService } from '@features/documents/services/sorts/sort-documents.service';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,5 +22,6 @@ const routes: Routes = [{ path: '', component: ReportDetailComponent }];
     MatButtonModule,
     MatIconModule,
   ],
+  providers: [SortDocumentsService],
 })
 export class ReportDetailModule {}
