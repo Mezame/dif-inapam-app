@@ -20,6 +20,7 @@ export class DocumentListComponent {
   monthsOptions = getSelectOptions(
     getMonthsNumbers(this.documents$, '2022'),
     getMonthsWords(this.documents$, '2022')
-  ).reverse();
-  selectedMonth = this.monthsOptions[0].value as MonthNumber;
+  );
+  selectedMonth = this.monthsOptions[this.monthsOptions.length - 1]
+    .value as MonthNumber;
 }
