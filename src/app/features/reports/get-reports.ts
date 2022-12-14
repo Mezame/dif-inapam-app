@@ -100,7 +100,7 @@ export function getReportById(id: string, reports: Report[]): Report {
 export function getLatestReport() {
   let latestReport: Report;
 
-  latestReport = sortReportsByDate(reports, 'asc')[0];
+  latestReport = sortReportsByDate(reports, 'des')[0];
 
   return latestReport;
 }
