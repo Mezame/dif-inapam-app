@@ -7,4 +7,4 @@ import { FilterDocumentsByYearPipe } from './filter-documents-by-year.pipe';
   exports: [FilterDocumentsByYearPipe],
   providers: [FilterDocumentsService],
 })
-export class FilterDocumentsByYearModule {}
+export class FilterDocumentsByYearPipeModule {}
