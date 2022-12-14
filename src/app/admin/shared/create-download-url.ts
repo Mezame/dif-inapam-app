@@ -24,7 +24,7 @@ export function createDownloadUrl(
 
   if (anchor.href) return;
 
-  if (anchor.text.includes('Reporte mensual')) {
+  if (!data.documents) {
     fileName = `reporte-${reportLocaleMonth}-${reportYear}`;
 
     dataSource = {
@@ -55,7 +55,7 @@ export function createDownloadUrl(
     };
   }
 
-  if (anchor.text.includes('Reporte de oficios')) {
+  if (data.documents) {
     fileName = `reporte-oficios-${reportLocaleMonth}-${reportYear}`;
 
     dataSource = {
