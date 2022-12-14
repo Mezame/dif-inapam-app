@@ -1,23 +1,50 @@
-<app-primary-layout toolbar-title="Reporte mensual de oficios">
+<app-primary-layout toolbar-title="Panel de reportes">
   <div *ngIf="report$ | async as report" class="content">
     <span class="mat-small"
-      >Reporte del último mes: {{ report.date | date : "MMM, y" }}</span
+      >Reporte mensual: {{ report.date | date : "MMMM, y" }}</span
     >
 
-    <div>
-      <button mat-flat-button color="primary">
+    <div class="button-group">
+      <a
+        mat-flat-button
+        color="primary"
+        (click)="onClick(monthlyReport, { report })"
+        #monthlyReport
+      >
         <mat-icon>download</mat-icon>
-        <span>Generar reporte</span>
-      </button>
+        <span>Descargar reporte</span>
+      </a>
+
+      <a mat-stroked-button color="primary" routerLink="/admin/reportes">
+        <mat-icon>read_more</mat-icon>
+        <span>Ir a lista de reportes</span>
+      </a>
     </div>
 
     <app-report-detail-content [data]="report"></app-report-detail-content>
 
-    <div>
-      <a mat-stroked-button color="primary" routerLink="/admin/reportes">
+    <span class="mat-small"
+      >Reporte de oficios: {{ report.date | date : "MMMM, y" }}</span
+    >
+
+    <div class="button-group">
+      <a
+        *ngIf="documents$ | async as documents"
+        mat-flat-button
+        color="primary"
+        (click)="onClick(documentsReport, { report, documents })"
+        #documentsReport
+      >
+        <mat-icon>download</mat-icon>
+        <span>Descargar reporte</span>
+      </a>
+
+      <a mat-stroked-button color="primary" routerLink="/home/oficios">
         <mat-icon>read_more</mat-icon>
-        <span>Lista de reportes</span>
+        <span>Ir a lista de oficios</span>
       </a>
     </div>
+
+    <app-document-list-table [data]="documents$! | sortDocumentsByDate : 'asc'"></app-document-list-table>
   </div>
 </app-primary-layout>
