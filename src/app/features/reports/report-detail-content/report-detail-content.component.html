@@ -4,10 +4,7 @@
       <div class="column col-group">
         <span class="mat-subtitle-2 center">Total de tarjetas</span>
         <span class="mat-headline-4 center">{{
-          report.cardsStats.newRecord +
-            report.cardsStats.replacement +
-            report.cardsStats.change +
-            report.cardsStats.cancel
+          report.cardsStats.getTotal()
         }}</span>
       </div>
     </div>

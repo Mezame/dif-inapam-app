@@ -10,12 +10,7 @@
     <ng-container matColumnDef="cardsCount">
       <th mat-header-cell *matHeaderCellDef>Total</th>
       <td mat-cell *matCellDef="let report">
-        {{
-          report.cardsStats.newRecord +
-            report.cardsStats.replacement +
-            report.cardsStats.change +
-            report.cardsStats.cancel
-        }}
+        {{ report.cardsStats.getTotal() }}
       </td>
     </ng-container>
 
