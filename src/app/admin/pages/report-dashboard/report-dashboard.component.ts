@@ -10,7 +10,7 @@ import { Report } from '@features/reports/report.interface';
 import { Document } from '@features/documents/document.interface';
 import { SortDocumentsService } from '@features/documents/services/sorts/sort-documents.service';
 import { getLatestReport } from '@features/reports/get-reports';
-import { documentsMock } from '@shared/mocks/document.mock';
+import { documentsMock } from '@mocks/document.mock';
 import { map, Observable, of, switchMap } from 'rxjs';
 import { createDownloadUrl } from '../../shared/create-download-url';
 
@@ -21,7 +21,7 @@ import { createDownloadUrl } from '../../shared/create-download-url';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReportDashboardComponent implements OnInit {
-  report$: Observable<Report> = of(getLatestReport());
+  report$!: Observable<Report>;
   documents$?: Observable<Document[]>;
   objectUrl: string | null = null;
 
@@ -37,6 +37,8 @@ export class ReportDashboardComponent implements OnInit {
         of(documentsMock),
         'des'
       );
+
+    this.report$ = of(getLatestReport());
 
     this.documents$ = this.report$.pipe(
       switchMap((report) => {
