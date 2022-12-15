@@ -23,28 +23,32 @@
 
     <app-report-detail-content [data]="report"></app-report-detail-content>
 
-    <span class="mat-small"
-      >Reporte de oficios: {{ report.date | date : "MMMM, y" }}</span
-    >
-
-    <div class="button-group">
-      <a
-        *ngIf="documents$ | async as documents"
-        mat-flat-button
-        color="primary"
-        (click)="onClick(documentsReport, { report, documents })"
-        #documentsReport
+    <ng-container *ngIf="documents$ | async as documents">
+      <span class="mat-small"
+        >Reporte de oficios: {{ report.date | date : "MMMM, y" }}</span
       >
-        <mat-icon>download</mat-icon>
-        <span>Descargar reporte</span>
-      </a>
 
-      <a mat-stroked-button color="primary" routerLink="/home/oficios">
-        <mat-icon>read_more</mat-icon>
-        <span>Ir a lista de oficios</span>
-      </a>
-    </div>
+      <div class="button-group">
+        <a
+          mat-flat-button
+          color="primary"
+          (click)="onClick(documentsReport, { report, documents })"
+          #documentsReport
+        >
+          <mat-icon>download</mat-icon>
+          <span>Descargar reporte</span>
+        </a>
 
-    <app-document-list-table [data]="documents$! | sortDocumentsByDate : 'asc'"></app-document-list-table>
+        <a mat-stroked-button color="primary" routerLink="/home/oficios">
+          <mat-icon>read_more</mat-icon>
+          <span>Ir a lista de oficios</span>
+        </a>
+      </div>
+
+      <app-document-list-table
+        [ngClass]="{ 'fixed-height': documents.length > 4 }"
+        [data]="documents$! | sortDocumentsByDate : 'asc'"
+      ></app-document-list-table>
+    </ng-container>
   </div>
 </app-primary-layout>
