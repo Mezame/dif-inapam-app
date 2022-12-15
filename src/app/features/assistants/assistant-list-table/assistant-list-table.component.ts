@@ -3,6 +3,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
 } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -14,8 +15,8 @@ import { Assistant } from '../assistant.interface';
   styleUrls: ['./assistant-list-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AssistantListTableComponent {
-  displayedColumns = ['name', 'email', 'options'];
+export class AssistantListTableComponent implements OnInit {
+  displayedColumns!: string[];
 
   @Input('data') assistants$!: Observable<Assistant[]>;
 
@@ -23,6 +24,10 @@ export class AssistantListTableComponent {
     action: string;
     data: string;
   }>();
+
+  ngOnInit(): void {
+    this.displayedColumns = ['name', 'email', 'options'];
+  }
 
   deleteAssistantAction(id: string, action = 'deleteAssistant') {
     this.actionEvent.emit({ action, data: id });
