@@ -1,5 +1,5 @@
 <app-primary-layout toolbar-title="Asistentes">
-  <div class="column">
+  <div *ngIf="assistants$" class="column">
     <div>
       <a mat-stroked-button color="primary" routerLink="crear-asistente">
         <mat-icon>add</mat-icon>
