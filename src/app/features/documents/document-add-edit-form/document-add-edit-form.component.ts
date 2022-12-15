@@ -26,13 +26,13 @@ import { Document } from '../document.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentAddEditFormComponent implements OnInit {
-  operationCodesOptions = getOperationCode(of(documentsMock));
+  operationCodesOptions = getOperationCode(of(documentsMock)) as string[];
 
-  statesOptions = mexicanFederalStates;
+  statesOptions = mexicanFederalStates as string[];
 
-  defaultFormValue = documentDefaultFormValue;
+  defaultFormValue = documentDefaultFormValue as any;
 
-  defaultErrorMessage = defaultErrorMessage;
+  defaultErrorMessage = defaultErrorMessage as any;
 
   documentForm = this.fb.group({
     createDate: [{ value: this.defaultFormValue.createDate, disabled: true }],
