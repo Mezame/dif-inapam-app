@@ -22,6 +22,7 @@ import { ActivatedRoute } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReportDetailComponent implements OnInit {
+  reportId!: string;
   report$!: Observable<Report>;
   documents$?: Observable<Document[]>;
   objectUrl: string | null = null;
@@ -32,11 +33,7 @@ export class ReportDetailComponent implements OnInit {
     private renderer: Renderer2,
     private ref: ChangeDetectorRef
   ) {
-    const id = this.route.snapshot.params['id'] as string;
-
-    this.report$ = of(getReportById(id, getReports(of(documentsMock))));
-
-    console.log();
+    this.reportId = this.route.snapshot.params['id'];
   }
 
   ngOnInit(): void {
@@ -46,23 +43,35 @@ export class ReportDetailComponent implements OnInit {
         'des'
       );
 
-    this.documents$ = this.report$.pipe(
-      switchMap((report) => {
-        const reportYear = new Date(report.date).getFullYear();
-        const reportMonth = new Date(report.date).getMonth();
+    if (this.reportId) {
+      this.report$ = of(
+        getReportById(this.reportId, getReports(of(documentsMock)))
+      );
+    }
 
-        return sortedDocuments$.pipe(
-          map((documents) => {
-            return documents.filter((document) => {
-              const documentYear = new Date(document.createDate).getFullYear();
-              const documentMonth = new Date(document.createDate).getMonth();
+    if (this.report$ && sortedDocuments$) {
+      this.documents$ = this.report$.pipe(
+        switchMap((report) => {
+          const reportYear = new Date(report.date).getFullYear();
+          const reportMonth = new Date(report.date).getMonth();
 
-              return documentYear == reportYear && documentMonth == reportMonth;
-            });
-          })
-        );
-      })
-    );
+          return sortedDocuments$.pipe(
+            map((documents) => {
+              return documents.filter((document) => {
+                const documentYear = new Date(
+                  document.createDate
+                ).getFullYear();
+                const documentMonth = new Date(document.createDate).getMonth();
+
+                return (
+                  documentYear == reportYear && documentMonth == reportMonth
+                );
+              });
+            })
+          );
+        })
+      );
+    }
   }
 
   onClick(el: MatAnchor, data: { report: Report; documents?: Document[] }) {
