@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { getDocumentByCardCodeServiceMock } from '@mocks/document.mock';
 import { Document } from '@features/documents/document.interface';
 import { map, Observable, of } from 'rxjs';
@@ -10,14 +10,17 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./document-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DocumentDetailComponent {
+export class DocumentDetailComponent implements OnInit {
   cardCode!: string;
   document$!: Observable<Document>;
 
   constructor(private route: ActivatedRoute) {
-    this.cardCode = route.snapshot.params['cardCode'];
-
-    this.document$ = of(getDocumentByCardCodeServiceMock(this.cardCode));
+    this.cardCode = this.route.snapshot.params['cardCode'];
+  }
+  ngOnInit(): void {
+    if (this.cardCode) {
+      this.document$ = of(getDocumentByCardCodeServiceMock(this.cardCode));
+    }
   }
 
   deleteDocument() {
@@ -27,11 +30,4 @@ export class DocumentDetailComponent {
   cancelCard() {
     console.log('Cancel card', this.cardCode);
   }
-  /*
-  getDocumentAction(event: { action: string; data: string }) {
-    if (event.action == 'deleteDocument')
-      console.log('Delete document', event.data);
-
-    if (event.action == 'cancelCard') console.log('Cancel card', event.data);
-  }*/
 }

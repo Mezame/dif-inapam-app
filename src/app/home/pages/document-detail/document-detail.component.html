@@ -2,7 +2,7 @@
   [toolbar-title]="'Oficio ' + cardCode"
   toolbar-back-link="/home/oficios"
 >
-  <div class="button-group">
+  <div *ngIf="cardCode" class="button-group">
     <a
       mat-stroked-button
       color="primary"
@@ -34,5 +34,5 @@
     </button>
   </div>
 
-  <app-document-detail-content [data]="document$"></app-document-detail-content>
+  <app-document-detail-content *ngIf="document$" [data]="document$"></app-document-detail-content>
 </app-secondary-layout>
