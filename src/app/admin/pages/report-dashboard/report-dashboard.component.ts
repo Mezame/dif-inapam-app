@@ -40,23 +40,30 @@ export class ReportDashboardComponent implements OnInit {
 
     this.report$ = of(getLatestReport());
 
-    this.documents$ = this.report$.pipe(
-      switchMap((report) => {
-        const reportYear = new Date(report.date).getFullYear();
-        const reportMonth = new Date(report.date).getMonth();
+    if (this.report$ && sortedDocuments$) {
+      this.documents$ = this.report$.pipe(
+        switchMap((report) => {
+          const reportYear = new Date(report.date).getFullYear();
+          const reportMonth = new Date(report.date).getMonth();
 
-        return sortedDocuments$.pipe(
-          map((documents) => {
-            return documents.filter((document) => {
-              const documentYear = new Date(document.createDate).getFullYear();
-              const documentMonth = new Date(document.createDate).getMonth();
+          return sortedDocuments$.pipe(
+            map((documents) => {
+              return documents.filter((document) => {
+                const documentYear = new Date(
+                  document.createDate
+                ).getFullYear();
 
-              return documentYear == reportYear && documentMonth == reportMonth;
-            });
-          })
-        );
-      })
-    );
+                const documentMonth = new Date(document.createDate).getMonth();
+
+                return (
+                  documentYear == reportYear && documentMonth == reportMonth
+                );
+              });
+            })
+          );
+        })
+      );
+    }
   }
 
   onClick(el: MatAnchor, data: { report: Report; documents?: Document[] }) {
