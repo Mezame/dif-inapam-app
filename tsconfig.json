@@ -24,6 +24,7 @@
       "dom"
     ],
     "types": [
+      "jasmine",
       "@angular/localize"
     ],
     "paths": {
