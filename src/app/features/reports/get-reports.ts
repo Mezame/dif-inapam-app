@@ -4,19 +4,18 @@ import {
 } from '@features/documents/utils/get-create-date';
 import { documentsMock } from '@mocks/document.mock';
 import { Order } from '@shared/types/order.type';
-import { Observable, of } from 'rxjs';
+import { last, Observable, of, tap } from 'rxjs';
 import { Report } from './report.interface';
 import { Document } from '@features/documents/document.interface';
 
-const reports = getReports(of(documentsMock));
-
-export function getReports(documents: Observable<Document[]>): Report[] {
+export function getReports(documents$: Observable<Document[]>): Report[] {
   let reports: Report[] = [];
+  let documents: Document[] = [];
 
-  const documentsYears = getYears(documents);
+  const documentsYears = getYears(documents$);
 
   documentsYears.forEach((docYear) => {
-    const documentsMonthsNumbers = getMonthsNumbers(documents, docYear);
+    const documentsMonthsNumbers = getMonthsNumbers(documents$, docYear);
 
     documentsMonthsNumbers.forEach((docMonthNum) => {
       const date = new Date(parseInt(docYear), parseInt(docMonthNum) - 1, 15);
@@ -50,12 +49,22 @@ export function getReports(documents: Observable<Document[]>): Report[] {
     });
   });
 
+  documents$
+    .pipe(
+      tap((d) => {
+        documents = d;
+      })
+    )
+    .subscribe();
+
+  documents.sort((a, b) => Date.parse(a.createDate) - Date.parse(b.createDate));
+
   reports.forEach((report) => {
     const date = new Date(report.date);
     const reportMonth = date.getMonth();
     const reportYear = date.getFullYear();
 
-    documentsMock.forEach((document) => {
+    documents.forEach((document) => {
       const date = new Date(document.createDate);
       const documentMonth = date.getMonth();
       const documentYear = date.getFullYear();
@@ -97,7 +106,7 @@ export function getReportById(id: string, reports: Report[]): Report {
 export function getLatestReport() {
   let latestReport: Report;
 
-  latestReport = sortReportsByDate(reports, 'asc')[0];
+  latestReport = sortReportsByDate(getReports(of(documentsMock)), 'asc')[0];
 
   return latestReport;
 }
