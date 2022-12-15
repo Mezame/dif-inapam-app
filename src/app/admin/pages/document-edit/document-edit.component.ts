@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { getDocumentByCardCodeServiceMock } from '@shared/mocks/document.mock';
+import { getDocumentByCardCodeServiceMock } from '@mocks/document.mock';
 import { Document } from '@features/documents/document.interface';
 import { map, Observable, of } from 'rxjs';
 

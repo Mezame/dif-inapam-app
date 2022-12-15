@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { getDocumentByCardCodeServiceMock } from '@shared/mocks/document.mock';
+import { getDocumentByCardCodeServiceMock } from '@mocks/document.mock';
 import { Document } from '@features/documents/document.interface';
 import { map, Observable, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';

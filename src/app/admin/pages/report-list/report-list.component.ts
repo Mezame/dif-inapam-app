@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { getReports, sortReportsByDate } from '@features/reports/get-reports';
 import { Report } from '@features/reports/report.interface';
-import { documentsMock } from '@shared/mocks/document.mock';
+import { documentsMock } from '@mocks/document.mock';
 import { Observable, of } from 'rxjs';
 
 @Component({

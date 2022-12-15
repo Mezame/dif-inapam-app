@@ -10,7 +10,7 @@ import { Report } from '@features/reports/report.interface';
 import { Document } from '@features/documents/document.interface';
 import { SortDocumentsService } from '@features/documents/services/sorts/sort-documents.service';
 import { getReportById, getReports } from '@features/reports/get-reports';
-import { documentsMock } from '@shared/mocks/document.mock';
+import { documentsMock } from '@mocks/document.mock';
 import { map, Observable, of, switchMap } from 'rxjs';
 import { createDownloadUrl } from '../../shared/create-download-url';
 import { ActivatedRoute } from '@angular/router';

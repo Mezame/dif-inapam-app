@@ -7,8 +7,8 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
-import { documentsMock } from '@shared/mocks/document.mock';
+import { of } from 'rxjs';
+import { documentsMock } from '@mocks/document.mock';
 import { getOperationCode } from '../utils/get-operation-code';
 import { DocumentFormValue } from './document-form-value.interface';
 import { mexicanFederalStates } from '@shared/utils/mexican-federal-states';

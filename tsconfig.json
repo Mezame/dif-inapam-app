@@ -30,6 +30,7 @@
     "paths": {
       "@features/*": ["./src/app/features/*"],
       "@shared/*": ["./src/app/shared/*"],
+      "@mocks/*": ["./src/app/mocks/*"],
     }
   },
   "angularCompilerOptions": {

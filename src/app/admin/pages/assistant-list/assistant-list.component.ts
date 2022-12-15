@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Assistant } from '@features/assistants/assistant.interface';
-import { assistantsMock } from '@shared/mocks/assistant.mock';
+import { assistantsMock } from '@mocks/assistant.mock';
 
 @Component({
   selector: 'app-assistant-list',

@@ -2,7 +2,7 @@ import {
   getYears,
   getMonthsNumbers,
 } from '@features/documents/utils/get-create-date';
-import { documentsMock } from '@shared/mocks/document.mock';
+import { documentsMock } from '@mocks/document.mock';
 import { Order } from '@shared/types/order.type';
 import { Observable, of } from 'rxjs';
 import { Report } from './report.interface';
@@ -12,7 +12,6 @@ const reports = getReports(of(documentsMock));
 
 export function getReports(documents: Observable<Document[]>): Report[] {
   let reports: Report[] = [];
-  let counter = 0;
 
   const documentsYears = getYears(documents);
 
@@ -24,7 +23,6 @@ export function getReports(documents: Observable<Document[]>): Report[] {
       const id = `${date.toLocaleDateString('es-MX', {
         month: 'short',
       })}-${docYear}`;
-      counter++;
 
       const defaultReport = {
         date: date.toLocaleString(),
@@ -100,7 +98,7 @@ export function getReportById(id: string, reports: Report[]): Report {
 export function getLatestReport() {
   let latestReport: Report;
 
-  latestReport = sortReportsByDate(reports, 'des')[0];
+  latestReport = sortReportsByDate(reports, 'asc')[0];
 
   return latestReport;
 }
