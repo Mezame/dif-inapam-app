@@ -34,7 +34,7 @@ export class ChartPieComponent implements OnInit {
   constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
-    const divEl: HTMLDivElement = this.el.nativeElement.firstChild;
+    const divEl = this.el.nativeElement.firstChild as HTMLDivElement;
     let pieChart: echarts.ECharts;
 
     this.options = {
