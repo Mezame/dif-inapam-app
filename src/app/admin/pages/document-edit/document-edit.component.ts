@@ -14,11 +14,10 @@ export class DocumentEditComponent implements OnInit {
   document$!: Observable<Document>;
 
   constructor(private route: ActivatedRoute) {
+    this.cardCode = this.route.snapshot.params['cardCode'];
   }
 
   ngOnInit(): void {
-    this.cardCode = this.route.snapshot.params['cardCode'];
-
     this.document$ = of(getDocumentByCardCodeServiceMock(this.cardCode));
   }
 
