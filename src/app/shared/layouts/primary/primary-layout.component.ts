@@ -9,8 +9,9 @@ import { ToolbarButton } from '../toolbar-button.interface';
 })
 export class PrimaryLayoutComponent {
   @Input('toolbar-title') toolbarTitle?: string;
-
+/*
   @Input('toolbar-icon-button') toolbarIconButton?: string;
 
   @Input('toolbar-button') toolbarButton?: ToolbarButton;
+  */
 }
