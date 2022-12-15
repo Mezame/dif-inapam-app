@@ -50,13 +50,6 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'asistentes/:id/editar',
-        loadChildren: () =>
-          import('./pages/assistant-edit/assistant-edit.module').then(
-            (m) => m.AssistantEditModule
-          ),
-      },
-      {
         path: '',
         redirectTo: 'panel-reportes',
         pathMatch: 'full',
