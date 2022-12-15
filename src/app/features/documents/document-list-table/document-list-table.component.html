@@ -2,7 +2,10 @@
   <table mat-table [dataSource]="documents">
     <ng-container matColumnDef="cardCode">
       <th mat-header-cell *matHeaderCellDef>Folio</th>
-      <td mat-cell *matCellDef="let document">{{ document.cardCode }}</td>
+      <td mat-cell *matCellDef="let document">
+        {{ document.cardCode.slice(0, 7)
+        }}<span class="mat-subtitle-2">{{ document.cardCode.slice(7) }}</span>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
