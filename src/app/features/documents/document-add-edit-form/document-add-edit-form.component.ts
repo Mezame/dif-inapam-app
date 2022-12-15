@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { documentsMock } from '@mocks/document.mock';
 import { getOperationCode } from '../utils/get-operation-code';
@@ -26,62 +26,15 @@ import { Document } from '../document.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentAddEditFormComponent implements OnInit {
-  operationCodesOptions = getOperationCode(of(documentsMock)) as string[];
+  operationCodesOptions!: string[];
 
-  statesOptions = mexicanFederalStates as string[];
+  statesOptions!: string[];
 
-  defaultFormValue = documentDefaultFormValue as any;
+  defaultFormValue: any;
 
-  defaultErrorMessage = defaultErrorMessage as any;
+  defaultErrorMessage: any;
 
-  documentForm = this.fb.group({
-    createDate: [{ value: this.defaultFormValue.createDate, disabled: true }],
-    cardCode: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(10),
-        Validators.pattern('[a-zA-Z0-9]*'),
-      ],
-    ],
-    operationCode: ['', Validators.required],
-    branchOffice: {
-      value: this.defaultFormValue.branchOffice,
-      disabled: true,
-    },
-    reviewDocument: {
-      value: this.defaultFormValue.reviewDocument,
-      disabled: true,
-    },
-    makeCard: { value: this.defaultFormValue.makeCard, disabled: true },
-    fathersLastname: [
-      '',
-      [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')],
-    ],
-    mothersLastname: [
-      '',
-      [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')],
-    ],
-    name: [
-      '',
-      [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*')],
-    ],
-    sex: ['', Validators.required],
-    birthdate: [null, Validators.required],
-    birthplace: ['Veracruz', Validators.required],
-    curp: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(18),
-        Validators.maxLength(18),
-        Validators.pattern('[a-zA-Z0-9]*'),
-      ],
-    ],
-    maritalStatus: ['', Validators.required],
-    imageObj: { url: null, blob: null },
-  });
+  documentForm!: FormGroup<any>;
 
   @Input('data') document!: Document;
 
@@ -131,6 +84,63 @@ export class DocumentAddEditFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.operationCodesOptions = getOperationCode(of(documentsMock));
+
+    this.statesOptions = mexicanFederalStates;
+
+    this.defaultErrorMessage = defaultErrorMessage;
+
+    this.defaultFormValue = documentDefaultFormValue;
+
+    this.documentForm = this.fb.group({
+      createDate: [{ value: this.defaultFormValue.createDate, disabled: true }],
+      cardCode: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+          Validators.pattern('[a-zA-Z0-9]*'),
+        ],
+      ],
+      operationCode: ['', Validators.required],
+      branchOffice: {
+        value: this.defaultFormValue.branchOffice,
+        disabled: true,
+      },
+      reviewDocument: {
+        value: this.defaultFormValue.reviewDocument,
+        disabled: true,
+      },
+      makeCard: { value: this.defaultFormValue.makeCard, disabled: true },
+      fathersLastname: [
+        '',
+        [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')],
+      ],
+      mothersLastname: [
+        '',
+        [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')],
+      ],
+      name: [
+        '',
+        [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*')],
+      ],
+      sex: ['', Validators.required],
+      birthdate: [null, Validators.required],
+      birthplace: ['Veracruz', Validators.required],
+      curp: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(18),
+          Validators.maxLength(18),
+          Validators.pattern('[a-zA-Z0-9]*'),
+        ],
+      ],
+      maritalStatus: ['', Validators.required],
+      imageObj: { url: null, blob: null },
+    });
+
     if (this.action == 'editDocument') {
       this.documentForm.patchValue({
         cardCode: this.document.cardCode,
