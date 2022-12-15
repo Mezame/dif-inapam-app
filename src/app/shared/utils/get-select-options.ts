@@ -1,8 +1,13 @@
+export interface SelectOptions {
+  value: string;
+  viewValue: string;
+}
+
 export function getSelectOptions(values: string[], viewValues: string[]) {
-  const selectOptions: { value: string; viewValue: string }[] = [];
+  const selectOptions: SelectOptions[] = [];
 
   values.forEach((value, i) => {
-    selectOptions.push({ value: value, viewValue: viewValues[i] });
+    selectOptions.push({ value, viewValue: viewValues[i] });
   });
 
   return selectOptions;
