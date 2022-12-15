@@ -288,6 +288,7 @@ export const documentsMock: Document[] = [
     birthplace: 'Veracruz',
     curp: 'MVNK566542RUXBFN00',
     maritalStatus: 'Casado',
+    cancelCard: true
   },
   {
     createDate: '11/4/2022, 1:46:52 AM',
