@@ -1,5 +1,14 @@
 <app-primary-layout toolbar-title="Oficios de solicitud de tarjeta">
-  <div class="column">
+  <div
+    *ngIf="
+      documents$!
+        | filterDocumentsByYear : selectedYear
+        | filterDocumentsByMonth : selectedMonth
+        | sortDocumentsByDate : 'asc'
+        | async as documents
+    "
+    class="column"
+  >
     <div class="row">
       <a mat-stroked-button color="primary" routerLink="crear-oficio">
         <mat-icon>add</mat-icon>
@@ -41,9 +50,9 @@
     </div>
 
     <app-document-list-table
-      *ngIf="documents$"
+      [ngClass]="{ 'fixed-height': documents.length > 11 }"
       [data]="
-        documents$
+        documents$!
           | filterDocumentsByYear : selectedYear
           | filterDocumentsByMonth : selectedMonth
           | sortDocumentsByDate : 'asc'
