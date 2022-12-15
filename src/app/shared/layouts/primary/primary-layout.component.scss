@@ -7,3 +7,11 @@
 .divider {
   margin: 0px 16px;
 }
+
+.active-link {
+  background: rgba(0, 0, 0, 0.12);
+
+  span {
+    color: #894c5d;
+  }
+}
