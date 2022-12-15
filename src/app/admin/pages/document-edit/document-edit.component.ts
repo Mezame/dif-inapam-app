@@ -19,7 +19,9 @@ export class DocumentEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.document$ = of(getDocumentByCardCodeServiceMock(this.cardCode));
+    if (this.cardCode) {
+      this.document$ = of(getDocumentByCardCodeServiceMock(this.cardCode));
+    }
   }
 
   getDocumentAction(event: { action: string; data: {} }) {
