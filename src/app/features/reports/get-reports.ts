@@ -21,7 +21,7 @@ export function getReports(documents: Observable<Document[]>): Report[] {
     documentsMonthsNumbers.forEach((docMonthNum) => {
       const date = new Date(parseInt(docYear), parseInt(docMonthNum) - 1, 15);
       const id = `${date.toLocaleDateString('es-MX', {
-        month: 'short',
+        month: 'long',
       })}-${docYear}`;
 
       const defaultReport = {
@@ -35,8 +35,7 @@ export function getReports(documents: Observable<Document[]>): Report[] {
             return (
               defaultReport.cardsStats.newRecord +
               defaultReport.cardsStats.replacement +
-              defaultReport.cardsStats.change +
-              defaultReport.cardsStats.cancel
+              defaultReport.cardsStats.change
             );
           },
         },
