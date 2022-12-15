@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-document-add',
   templateUrl: './document-add.component.html',
   styleUrls: ['./document-add.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentAddComponent {
   getDocumentAction(event: { action: string; data: {} }) {
