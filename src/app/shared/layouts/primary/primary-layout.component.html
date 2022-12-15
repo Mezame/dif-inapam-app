@@ -32,7 +32,7 @@
         <mat-icon>menu</mat-icon>
       </button>
 
-      <span>{{ toolbarTitle }}</span>
+      <span *ngIf="toolbarTitle">{{ toolbarTitle }}</span>
 
       <span class="spacer"></span>
 

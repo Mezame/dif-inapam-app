@@ -8,7 +8,7 @@ import { ToolbarButton } from '../toolbar-button.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrimaryLayoutComponent {
-  @Input('toolbar-title') toolbarTitle!: string;
+  @Input('toolbar-title') toolbarTitle?: string;
 
   @Input('toolbar-icon-button') toolbarIconButton?: string;
 
