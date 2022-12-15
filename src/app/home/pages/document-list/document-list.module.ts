@@ -6,6 +6,7 @@ import { DocumentListComponent } from './document-list.component';
 import { PrimaryLayoutModule } from '../../../shared/layouts/primary/primary-layout.module';
 import { DocumentListTableModule } from '@features/documents/document-list-table/document-list-table.module';
 import { FilterDocumentsByMonthPipeModule } from '@features/documents/pipes/filter-documents-by-month/filter-documents-by-month.module';
+import { FilterDocumentsByYearPipeModule } from '@features/documents/pipes/filter-documents-by-year/filter-documents-by-year.module';
 import { SortDocumentsByDatePipeModule } from '@features/documents/pipes/sort-documents-by-date/sort-documents-by-date.module';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,6 +24,7 @@ const routes: Routes = [{ path: '', component: DocumentListComponent }];
     PrimaryLayoutModule,
     DocumentListTableModule,
     FilterDocumentsByMonthPipeModule,
+    FilterDocumentsByYearPipeModule,
     SortDocumentsByDatePipeModule,
     MatFormFieldModule,
     MatSelectModule,

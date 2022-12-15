@@ -6,10 +6,14 @@
         <span>Nuevo oficio</span>
       </a>
 
-      <div class="select-group">
+      <div class="select-group" *ngIf="monthsOptions">
         <div class="select-content month">
           <mat-form-field appearance="outline">
-            <mat-select [(value)]="selectedMonth" ariaLabel="Filtrar por mes">
+            <mat-select
+              [(value)]="selectedMonth"
+              [disabled]="monthsOptions.length == 1"
+              ariaLabel="Filtrar por mes"
+            >
               <mat-option
                 *ngFor="let month of monthsOptions"
                 [value]="month.value"
@@ -20,10 +24,16 @@
           </mat-form-field>
         </div>
 
-        <div class="select-content year">
+        <div class="select-content year" *ngIf="yearsOptions">
           <mat-form-field appearance="outline">
-            <mat-select value="2022" ariaLabel="Filtrar por año" disabled>
-              <mat-option value="2022"> 2022 </mat-option>
+            <mat-select
+              [(value)]="selectedYear"
+              [disabled]="monthsOptions.length == 1"
+              ariaLabel="Filtrar por año"
+            >
+              <mat-option *ngFor="let year of yearsOptions" [value]="year">
+                {{ year }}
+              </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -31,8 +41,10 @@
     </div>
 
     <app-document-list-table
+      *ngIf="documents$"
       [data]="
         documents$
+          | filterDocumentsByYear : selectedYear
           | filterDocumentsByMonth : selectedMonth
           | sortDocumentsByDate : 'asc'
       "
