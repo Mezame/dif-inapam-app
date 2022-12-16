@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -16,30 +17,18 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./document-list-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DocumentListTableComponent implements AfterViewInit {
-  displayedColumns = [
-    'cardCode',
-    'name',
-    'createDate',
-    'operationCode',
-    'options',
-  ];
+export class DocumentListTableComponent implements OnInit {
+  displayedColumns!: string[];
 
   @Input('data') documents$!: Observable<Document[]>;
 
-  @ViewChild(MatTable)
-  table!: MatTable<Document>;
-
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-
-  ngAfterViewInit(): void {
-    /*
-    const dataSource = new MatTableDataSource<Document>(
-      this.table.dataSource as Document[]
-    );
-    dataSource.paginator = this.paginator;
-    this.table.dataSource = dataSource;
-    */
+  ngOnInit(): void {
+    this.displayedColumns = [
+      'cardCode',
+      'name',
+      'createDate',
+      'operationCode',
+      'options',
+    ];
   }
 }
