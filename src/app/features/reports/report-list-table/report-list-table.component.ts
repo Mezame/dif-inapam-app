@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Report } from '../report.interface';
 
@@ -8,13 +13,12 @@ import { Report } from '../report.interface';
   styleUrls: ['./report-list-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReportListTableComponent {
-  displayedColumns = [
-    'date',
-    'cardsCount',
-    'cardCodesRange',
-    'options',
-  ];
+export class ReportListTableComponent implements OnInit {
+  displayedColumns!: string[];
 
   @Input('data') reports$!: Observable<Report[]>;
+
+  ngOnInit(): void {
+    this.displayedColumns = ['date', 'cardsCount', 'cardCodesRange', 'options'];
+  }
 }
