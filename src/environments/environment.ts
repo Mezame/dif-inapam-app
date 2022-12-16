@@ -8,5 +8,6 @@ export const environment = {
     authDomain: 'dif-inapam-app.firebaseapp.com',
     messagingSenderId: '227451757890',
   },
+  useEmulators: true,
   production: false,
 };
