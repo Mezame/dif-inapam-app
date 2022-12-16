@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "dif-inapam-app": {
+      "hosting": {
+        "dif-inapam-app": [
+          "dif-inapam-app"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "dif-inapam-app"
+  }
+}
