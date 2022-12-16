@@ -19,7 +19,7 @@ import { DocumentFormValue } from './document-form-value.interface';
 import { mexicanFederalStates } from '@shared/utils/mexican-federal-states';
 import { defaultErrorMessage } from '@shared/utils/default-error-message';
 import {
-  dateToString,
+  formatDocumentFormValue,
   documentDefaultFormValue,
   setDefaultDocumentFormValue,
 } from './document-default-form-value';
@@ -201,7 +201,7 @@ export class DocumentAddEditFormComponent implements OnInit {
     if (this.action == 'addDocument') {
       documentFormValue = setDefaultDocumentFormValue(this.documentForm.value);
 
-      documentFormValue = dateToString(documentFormValue);
+      documentFormValue = formatDocumentFormValue(documentFormValue);
 
       this.emitAddDocumentAction(documentFormValue);
     }
@@ -209,7 +209,7 @@ export class DocumentAddEditFormComponent implements OnInit {
     if (this.action == 'editDocument') {
       documentFormValue = this.documentForm.value;
 
-      documentFormValue = dateToString(documentFormValue);
+      documentFormValue = formatDocumentFormValue(documentFormValue);
 
       this.emitEditDocumentAction(documentFormValue);
     }
@@ -222,6 +222,4 @@ export class DocumentAddEditFormComponent implements OnInit {
   emitEditDocumentAction(data: {}, action = 'editDocument') {
     this.actionEvent.emit({ action, data });
   }
-
-  
 }
