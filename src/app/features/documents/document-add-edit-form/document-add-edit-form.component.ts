@@ -6,7 +6,12 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { of } from 'rxjs';
 import { documentsMock } from '@mocks/document.mock';
 import { getOperationCode } from '../utils/get-operation-code';
@@ -14,6 +19,7 @@ import { DocumentFormValue } from './document-form-value.interface';
 import { mexicanFederalStates } from '@shared/utils/mexican-federal-states';
 import { defaultErrorMessage } from '@shared/utils/default-error-message';
 import {
+  dateToString,
   documentDefaultFormValue,
   setDefaultDocumentFormValue,
 } from './document-default-form-value';
@@ -34,7 +40,23 @@ export class DocumentAddEditFormComponent implements OnInit {
 
   defaultErrorMessage: any;
 
-  documentForm!: FormGroup<any>;
+  documentForm!: FormGroup<{
+    createDate: FormControl<Date | string | null>;
+    cardCode: FormControl<string | null>;
+    operationCode: FormControl<string | null>;
+    branchOffice: FormControl<string | null>;
+    reviewDocument: FormControl<string | null>;
+    makeCard: FormControl<string | null>;
+    fathersLastname: FormControl<string | null>;
+    mothersLastname: FormControl<string | null>;
+    name: FormControl<string | null>;
+    sex: FormControl<string | null>;
+    birthdate: FormControl<Date | string | null>;
+    birthplace: FormControl<string | null>;
+    curp: FormControl<string | null>;
+    maritalStatus: FormControl<string | null>;
+    imageObj: FormControl<{ url: string | null; blob: File | null } | null>;
+  }>;
 
   @Input('data') document!: Document;
 
@@ -139,7 +161,7 @@ export class DocumentAddEditFormComponent implements OnInit {
       ],
       maritalStatus: ['', Validators.required],
       imageObj: { url: null, blob: null },
-    });
+    }) as FormGroup;
 
     if (this.action == 'editDocument') {
       this.documentForm.patchValue({
@@ -149,11 +171,11 @@ export class DocumentAddEditFormComponent implements OnInit {
         mothersLastname: this.document.mothersLastname,
         name: this.document.name,
         sex: this.document.sex,
-        birthdate: new Date(this.document.birthdate) as any,
+        birthdate: new Date(this.document.birthdate),
         birthplace: this.document.birthplace,
         curp: this.document.curp,
         maritalStatus: this.document.maritalStatus,
-        imageObj: { url: this.document.imageUrl as any, blob: null },
+        imageObj: { url: this.document.imageUrl ?? null, blob: null },
       });
 
       this.documentForm.setControl(
@@ -179,11 +201,15 @@ export class DocumentAddEditFormComponent implements OnInit {
     if (this.action == 'addDocument') {
       documentFormValue = setDefaultDocumentFormValue(this.documentForm.value);
 
+      documentFormValue = dateToString(documentFormValue);
+
       this.emitAddDocumentAction(documentFormValue);
     }
 
     if (this.action == 'editDocument') {
       documentFormValue = this.documentForm.value;
+
+      documentFormValue = dateToString(documentFormValue);
 
       this.emitEditDocumentAction(documentFormValue);
     }
@@ -196,4 +222,6 @@ export class DocumentAddEditFormComponent implements OnInit {
   emitEditDocumentAction(data: {}, action = 'editDocument') {
     this.actionEvent.emit({ action, data });
   }
+
+  
 }

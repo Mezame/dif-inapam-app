@@ -1,5 +1,5 @@
 export interface DocumentFormValue {
-  createDate: Date | null;
+  createDate: Date | string | null;
   cardCode: string | null;
   operationCode: string | null;
   branchOffice: string | null;
@@ -9,7 +9,7 @@ export interface DocumentFormValue {
   mothersLastname: string | null;
   name: string | null;
   sex: string | null;
-  birthdate: Date | null;
+  birthdate: Date | string | null;
   birthplace: string | null;
   curp: string | null;
   maritalStatus: string | null;
