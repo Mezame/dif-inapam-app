@@ -5,7 +5,12 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { defaultErrorMessage } from '@shared/utils/default-error-message';
 
 interface AssistantFormValue {
@@ -22,7 +27,10 @@ interface AssistantFormValue {
 export class AssistantAddFormComponent implements OnInit {
   defaultErrorMessage: any;
 
-  assistantForm!: FormGroup<any>;
+  assistantForm!: FormGroup<{
+    name: FormControl<string | null>;
+    email: FormControl<string | null>;
+  }>;
 
   @Output() actionEvent = new EventEmitter<{
     action: string;
