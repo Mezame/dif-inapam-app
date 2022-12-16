@@ -5,7 +5,7 @@
     <div class="column col-group">
       <span class="mat-subtitle-2">Fecha de elaboración</span>
 
-      <span>{{ document.createDate | localDate }}</span>
+      <span>{{ document.createDate | date: 'longDate' }}</span>
     </div>
 
     <div class="column col-group">
@@ -77,7 +77,7 @@
         <div class="column col-group">
           <span class="mat-subtitle-2">Fecha de nacimiento</span>
 
-          <span>{{ document.birthdate | localDate }}</span>
+          <span>{{ document.birthdate | date: 'longDate' }}</span>
         </div>
 
         <div class="column col-group">
