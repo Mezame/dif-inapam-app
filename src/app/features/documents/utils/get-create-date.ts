@@ -1,14 +1,13 @@
 import { Observable, tap } from 'rxjs';
 import { Document } from '@features/documents/document.interface';
-import { number } from 'echarts/core';
 
 export function getMonthsNumbers(
-  documents: Observable<Document[]>,
+  documents$: Observable<Document[]>,
   year: string
 ): string[] {
   let monthsNumbers: string[] = [];
 
-  documents
+  documents$
     .pipe(
       tap((documents) => {
         documents.forEach((document) => {
@@ -30,12 +29,12 @@ export function getMonthsNumbers(
 }
 
 export function getMonthsWords(
-  documents: Observable<Document[]>,
+  documents$: Observable<Document[]>,
   year: string
 ): string[] {
   let monthsWords: string[] = [];
 
-  documents
+  documents$
     .pipe(
       tap((documents) => {
         documents.sort(
@@ -60,10 +59,10 @@ export function getMonthsWords(
   return monthsWords;
 }
 
-export function getYears(documents: Observable<Document[]>): string[] {
+export function getYears(documents$: Observable<Document[]>): string[] {
   let years: string[] = [];
 
-  documents
+  documents$
     .pipe(
       tap((documents) => {
         documents.forEach((document) => {
