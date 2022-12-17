@@ -10,9 +10,11 @@ export class FilterDocumentsByYearPipe implements PipeTransform {
   constructor(private filterDocumentsService: FilterDocumentsService) {}
 
   transform(
-    documents: Observable<Document[]>,
+    documents$: Observable<Document[]>,
     year: string | number
   ): Observable<Document[]> {
-    return this.filterDocumentsService.filterDocumentsByYear(documents, year);
+    if (!documents$) return documents$;
+
+    return this.filterDocumentsService.filterDocumentsByYear(documents$, year);
   }
 }

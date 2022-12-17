@@ -11,11 +11,13 @@ export class SortDocumentsByDatePipe implements PipeTransform {
   constructor(private sortDocumentsService: SortDocumentsService) {}
 
   transform(
-    documents: Observable<Document[]>,
+    documents$: Observable<Document[]>,
     order: Order
   ): Observable<Document[]> {
+    if (!documents$) return documents$;
+
     return this.sortDocumentsService.sortDocumentsByCreateDate(
-      documents,
+      documents$,
       order
     );
   }
