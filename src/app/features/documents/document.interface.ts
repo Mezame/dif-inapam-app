@@ -16,7 +16,7 @@ export interface Document {
   cancelCard?: boolean;
   imageUrl?: string;
   metadata?: {
-    id?: number;
+    sortId?: number;
     createDate?: string;
   };
 }
