@@ -78,7 +78,7 @@ export function getReports(documents$: Observable<Document[]>): Report[] {
 
         if (document.operationCode == 'CANJE') report.cardsStats.change++;
 
-        if (document.cancelCard) report.cardsStats.cancel++;
+        if (document.isCardCanceled) report.cardsStats.cancel++;
 
         if (report.cardCodesRange[0] == '')
           report.cardCodesRange[0] = document.cardCode;
