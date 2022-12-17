@@ -13,7 +13,8 @@ export interface Document {
   birthplace: string;
   curp: string;
   maritalStatus: 'Casado' | 'Soltero';
-  cancelCard?: boolean;
+  isReviewed?: boolean;
+  isCardCanceled?: boolean;
   imageUrl?: string;
   metadata?: {
     sortId?: number;
