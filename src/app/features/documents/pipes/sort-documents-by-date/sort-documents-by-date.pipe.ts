@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Document } from '@features/documents/document.interface';
 import { SortDocumentsService } from '@features/documents/services/sorts/sort-documents.service';
 import { Order } from '@shared/types/order.type';
@@ -14,7 +14,7 @@ export class SortDocumentsByDatePipe implements PipeTransform {
     documents$: Observable<Document[]>,
     order: Order
   ): Observable<Document[]> {
-    if (!documents$) return documents$;
+    if (!documents$) return of([]);
 
     return this.sortDocumentsService.sortDocumentsByCreateDate(
       documents$,

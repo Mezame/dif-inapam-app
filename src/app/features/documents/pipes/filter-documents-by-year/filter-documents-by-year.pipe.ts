@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Document } from '@features/documents/document.interface';
 import { FilterDocumentsService } from '@features/documents/services/filters/filter-documents.service';
 
@@ -13,8 +13,8 @@ export class FilterDocumentsByYearPipe implements PipeTransform {
     documents$: Observable<Document[]>,
     year: string | number
   ): Observable<Document[]> {
-    if (!documents$) return documents$;
-
+    if (!documents$) return of([]);
+    
     return this.filterDocumentsService.filterDocumentsByYear(documents$, year);
   }
 }
