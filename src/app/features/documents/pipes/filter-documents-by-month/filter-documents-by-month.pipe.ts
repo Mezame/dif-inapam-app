@@ -12,13 +12,13 @@ export class FilterDocumentsByMonthPipe implements PipeTransform {
 
   transform(
     documents$: Observable<Document[]>,
-    monthNumber: MonthNumber
+    monthNumber: MonthNumber | string
   ): Observable<Document[]> {
     if (!documents$) return of([]);
 
     return this.filterDocumentsService.filterDocumentsByMonth(
       documents$,
-      monthNumber
+      monthNumber as MonthNumber
     );
   }
 }
