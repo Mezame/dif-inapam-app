@@ -5,6 +5,8 @@ export function getMonthsNumbers(
   documents$: Observable<Document[]>,
   year: string
 ): string[] {
+  if (!documents$) return [];
+
   let monthsNumbers: string[] = [];
 
   documents$
@@ -32,6 +34,8 @@ export function getMonthsWords(
   documents$: Observable<Document[]>,
   year: string
 ): string[] {
+  if (!documents$) return [];
+
   let monthsWords: string[] = [];
 
   documents$
@@ -60,6 +64,8 @@ export function getMonthsWords(
 }
 
 export function getYears(documents$: Observable<Document[]>): string[] {
+  //if (!documents$) return [];
+
   let years: string[] = [];
 
   documents$
