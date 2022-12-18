@@ -1,62 +1,93 @@
 <app-primary-layout toolbar-title="Oficios de solicitud de tarjeta">
-  <div
-    *ngIf="
-      documents$!
-        | filterDocumentsByYear : selectedYear
-        | filterDocumentsByMonth : selectedMonth
-        | sortDocumentsByDate : 'asc'
-        | async as documents
-    "
-    class="column"
-  >
-    <div class="row">
-      <a mat-stroked-button color="primary" routerLink="crear-oficio">
-        <mat-icon>add</mat-icon>
-        <span>Nuevo oficio</span>
-      </a>
+  <ng-container *ngIf="dateStore$ | async as dateStore">
+    <div class="column">
+      <div class="row">
+        <a mat-stroked-button color="primary" routerLink="crear-oficio">
+          <mat-icon>add</mat-icon>
+          <span>Nuevo oficio</span>
+        </a>
 
-      <div class="select-group" *ngIf="monthsOptions">
-        <div class="select-content month">
-          <mat-form-field appearance="outline">
-            <mat-select
-              [(value)]="selectedMonth"
-              [disabled]="monthsOptions.length == 1"
-              ariaLabel="Filtrar por mes"
-            >
-              <mat-option
-                *ngFor="let month of monthsOptions"
-                [value]="month.value"
+        <div class="select-group">
+          <div class="select-content month">
+            <mat-form-field appearance="outline">
+              <mat-select
+                [value]="
+                  selectedMonth
+                    ? selectedMonth
+                    : dateStore.months.numbers[
+                        dateStore.months.numbers.length - 1
+                      ]
+                "
+                [disabled]="dateStore.months.numbers.length == 1"
+                ariaLabel="Filtrar por mes"
+                (valueChange)="changeSelectedValue('selectedMonth', $event)"
               >
-                {{ month.viewValue | titlecase }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
+                <mat-option
+                  *ngFor="let month of dateStore.months.numbers; index as i"
+                  [value]="month"
+                >
+                  {{ dateStore.months.words[i] | titlecase }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
 
-        <div class="select-content year" *ngIf="yearsOptions">
-          <mat-form-field appearance="outline">
-            <mat-select
-              [(value)]="selectedYear"
-              [disabled]="monthsOptions.length == 1"
-              ariaLabel="Filtrar por año"
-            >
-              <mat-option *ngFor="let year of yearsOptions" [value]="year">
-                {{ year }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div class="select-content year">
+            <mat-form-field appearance="outline">
+              <mat-select
+                [value]="
+                  selectedYear
+                    ? selectedYear
+                    : dateStore.years[dateStore.years.length - 1]
+                "
+                [disabled]="dateStore.years.length == 1"
+                ariaLabel="Filtrar por año"
+                (valueChange)="changeSelectedValue('selectedYear', $event)"
+              >
+                <mat-option *ngFor="let year of dateStore.years" [value]="year">
+                  {{ year }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
       </div>
-    </div>
 
-    <app-document-list-table
-      [ngClass]="{ 'fixed-height': documents.length > 11 }"
-      [data]="
-        documents$!
-          | filterDocumentsByYear : selectedYear
-          | filterDocumentsByMonth : selectedMonth
-          | sortDocumentsByDate : 'asc'
-      "
-    ></app-document-list-table>
-  </div>
+      <ng-container
+        *ngIf="
+          documents$!
+            | filterDocumentsByYear
+              : (selectedYear
+                  ? selectedYear
+                  : dateStore.years[dateStore.years.length - 1])
+            | filterDocumentsByMonth
+              : (selectedMonth
+                  ? selectedMonth
+                  : dateStore.months.numbers[
+                      dateStore.months.numbers.length - 1
+                    ])
+            | sortDocumentsByDate : 'asc'
+            | async as documents
+        "
+      >
+        <app-document-list-table
+          [ngClass]="{ 'fixed-height': documents.length > 11 }"
+          [data]="
+            documents$!
+              | filterDocumentsByYear
+                : (selectedYear
+                    ? selectedYear
+                    : dateStore.years[dateStore.years.length - 1])
+              | filterDocumentsByMonth
+                : (selectedMonth
+                    ? selectedMonth
+                    : dateStore.months.numbers[
+                        dateStore.months.numbers.length - 1
+                      ])
+              | sortDocumentsByDate : 'asc'
+          "
+        ></app-document-list-table>
+      </ng-container>
+    </div>
+  </ng-container>
 </app-primary-layout>

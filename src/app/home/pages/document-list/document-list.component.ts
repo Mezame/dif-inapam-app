@@ -1,17 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { DateStore } from '@features/documents/date-store.interface';
 import { Document } from '@features/documents/document.interface';
-import { documentsMock } from '@mocks/document.mock';
-import {
-  getMonthsNumbers,
-  getMonthsWords,
-  getYears,
-} from '@features/documents/utils/get-create-date';
-import {
-  getSelectOptions,
-  SelectOptions,
-} from '@shared/utils/get-select-options';
+import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { MonthNumber } from '@shared/types/month-number.type';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-document-list',
@@ -20,29 +12,23 @@ import { Observable, of } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentListComponent implements OnInit {
-  documents$?: Observable<Document[]>;
-
-  yearsOptions!: string[];
-  monthsOptions!: SelectOptions[];
+  dateStore$!: Observable<DateStore>;
+  documents$!: Observable<Document[]>;
 
   selectedYear!: string;
   selectedMonth!: MonthNumber;
 
-  ngOnInit(): void {
-    this.documents$ = of(documentsMock);
+  constructor(private documentStoreService: DocumentStoreService) {}
 
-    if (this.documents$) {
-      this.yearsOptions = getYears(this.documents$);
+  ngOnInit() {
+    this.dateStore$ = this.documentStoreService.getDocumentUtilsDateStore();
 
-      this.selectedYear = this.yearsOptions[this.yearsOptions.length - 1];
+    this.documents$ = this.documentStoreService.getDocuments();
+  }
 
-      this.monthsOptions = getSelectOptions(
-        getMonthsNumbers(this.documents$, this.selectedYear),
-        getMonthsWords(this.documents$, this.selectedYear)
-      );
+  changeSelectedValue(selectRef: string, value: string): void {
+    if (selectRef == 'selectedYear') this.selectedYear = value;
 
-      this.selectedMonth = this.monthsOptions[this.monthsOptions.length - 1]
-        .value as MonthNumber;
-    }
+    if (selectRef == 'selectedMonth') this.selectedMonth = value as MonthNumber;
   }
 }
