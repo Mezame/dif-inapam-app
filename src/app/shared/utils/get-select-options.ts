@@ -1,10 +1,10 @@
 export interface SelectOptions {
-  value: string;
+  value: string | number;
   viewValue: string;
 }
 
 export function getSelectOptions(
-  values: string[],
+  values: string[] | number[],
   viewValues: string[]
 ): SelectOptions[] {
   if(values.length != viewValues.length) return [];
