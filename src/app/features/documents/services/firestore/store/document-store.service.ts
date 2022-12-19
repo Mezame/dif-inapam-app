@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DateStore } from '@features/documents/date-store.interface';
 import { Document } from '@features/documents/document.interface';
 import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
-import { GetDocumentsService } from '../firestore/get-documents.service';
+import { GetDocumentsService } from '../get-documents.service';
 
 @Injectable()
 export class DocumentStoreService {

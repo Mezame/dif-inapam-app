@@ -8,7 +8,7 @@ import { DocumentDetailContentModule } from '@features/documents/document-detail
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
+import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
 import { GetDocumentsService } from '@features/documents/services/firestore/get-documents.service';
 
 const routes: Routes = [{ path: '', component: DocumentDetailComponent }];

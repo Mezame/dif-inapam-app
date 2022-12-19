@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Document } from '@features/documents/document.interface';
-import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
+import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
 import { Observable } from 'rxjs';
 
 @Component({

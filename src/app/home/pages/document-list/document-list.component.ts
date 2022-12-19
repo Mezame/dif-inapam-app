@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DateStore } from '@features/documents/date-store.interface';
 import { Document } from '@features/documents/document.interface';
-import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
+import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
 import { MonthNumber } from '@shared/types/month-number.type';
 import { Observable } from 'rxjs';
 
