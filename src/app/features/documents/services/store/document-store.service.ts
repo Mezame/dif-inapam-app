@@ -1,16 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DateStore } from '@features/documents/date-store.interface';
 import { Document } from '@features/documents/document.interface';
-import {
-  BehaviorSubject,
-  catchError,
-  map,
-  Observable,
-  of,
-  skip,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { GetDocumentsService } from '../firestore/get-documents.service';
 
 @Injectable()
@@ -41,28 +32,45 @@ export class DocumentStoreService {
     return this.documents$;
   }
 
-  getDocumentByCardCode(cardCode: string) {
-    const document$ = this.documents$.pipe(
-      switchMap(async (documents) =>
-        documents.find((document) => document.cardCode == cardCode)
-      )
+  getDocumentByCardCode(cardCode: string): Observable<Document> {
+    const documents$ = this.getDocuments();
+
+    const document$ = documents$.pipe(
+      map((documents) => {
+        let document;
+
+        document = documents.find((d) => d.cardCode == cardCode) ?? {};
+
+        return document as Document;
+      })
     );
 
     return document$.pipe(
       tap((document) => {
         if (!document) throw new Error('could not get document');
       }),
-      catchError((error: any): Observable<Document | undefined> => {
-        console.log(
-          `DocumentStoreService: getDocumentByCardCode failed: ${error.message}`
-        );
-
-        return of(undefined);
-      })
+      catchError(
+        this.handleError<Document>(
+          'DocumentStoreService',
+          `getDocumentByCardCode w/ cardCode=${cardCode}`
+        )
+      )
     );
   }
 
   getDocumentUtilsDateStore(): Observable<DateStore> {
     return this.dateStore$;
+  }
+
+  private handleError<T>(
+    serviceName = '',
+    operation = 'operation',
+    result = {} as T
+  ) {
+    return (error: any): Observable<T> => {
+      console.log(`${serviceName}: ${operation} failed: ${error.message}`);
+
+      return of(result);
+    };
   }
 }
