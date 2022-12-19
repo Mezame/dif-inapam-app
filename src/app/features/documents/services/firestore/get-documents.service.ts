@@ -94,12 +94,12 @@ export class GetDocumentsService {
   private handleError<T>(
     serviceName = '',
     operation = 'operation',
-    result?: T
+    result = {} as T
   ) {
     return (error: any): Observable<T> => {
       console.log(`${serviceName}: ${operation} failed: ${error.message}`);
 
-      return of(result as T);
+      return of(result);
     };
   }
 }
