@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { getDocumentByCardCodeServiceMock } from '@mocks/document.mock';
-import { Document } from '@features/documents/document.interface';
-import { map, Observable, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Document } from '@features/documents/document.interface';
+import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-document-detail',
@@ -14,12 +14,17 @@ export class DocumentDetailComponent implements OnInit {
   cardCode!: string;
   document$!: Observable<Document>;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(
+    private route: ActivatedRoute,
+    private documentStoreService: DocumentStoreService
+  ) {
     this.cardCode = this.route.snapshot.params['cardCode'];
   }
   ngOnInit(): void {
     if (this.cardCode) {
-      this.document$ = of(getDocumentByCardCodeServiceMock(this.cardCode));
+      this.document$ = this.documentStoreService.getDocumentByCardCode(
+        this.cardCode
+      );
     }
   }
 

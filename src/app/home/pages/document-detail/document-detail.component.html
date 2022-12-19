@@ -2,37 +2,41 @@
   [toolbar-title]="'Oficio ' + cardCode"
   toolbar-back-link="/home/oficios"
 >
-  <div *ngIf="cardCode" class="button-group">
-    <a
-      mat-stroked-button
-      color="primary"
-      type="button"
-      [routerLink]="['/admin/oficios', cardCode, 'editar']"
-    >
-      <mat-icon>edit</mat-icon>
-      <span>Editar oficio</span>
-    </a>
+  <ng-container *ngIf="document$">
+    <div *ngIf="cardCode" class="button-group">
+      <a
+        mat-stroked-button
+        color="primary"
+        type="button"
+        [routerLink]="['/admin/oficios', cardCode, 'editar']"
+      >
+        <mat-icon>edit</mat-icon>
+        <span>Editar oficio</span>
+      </a>
 
-    <button
-      mat-flat-button
-      color="primary"
-      type="button"
-      (click)="deleteDocument()"
-    >
-      <mat-icon>delete</mat-icon>
-      <span>Eliminar oficio</span>
-    </button>
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        (click)="deleteDocument()"
+      >
+        <mat-icon>delete</mat-icon>
+        <span>Eliminar oficio</span>
+      </button>
 
-    <button
-      mat-flat-button
-      color="primary"
-      type="button"
-      (click)="cancelCard()"
-    >
-      <mat-icon>cancel</mat-icon>
-      <span>Cancelar tarjeta</span>
-    </button>
-  </div>
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        (click)="cancelCard()"
+      >
+        <mat-icon>cancel</mat-icon>
+        <span>Cancelar tarjeta</span>
+      </button>
+    </div>
 
-  <app-document-detail-content *ngIf="document$" [data]="document$"></app-document-detail-content>
+    <app-document-detail-content
+      [data]="document$"
+    ></app-document-detail-content>
+  </ng-container>
 </app-secondary-layout>
