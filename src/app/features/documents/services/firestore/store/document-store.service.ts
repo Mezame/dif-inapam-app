@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DateStore } from '@features/documents/date-store.interface';
 import { Document } from '@features/documents/document.interface';
-import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { GetDocumentsService } from '../get-documents.service';
 
 @Injectable()
@@ -16,19 +16,21 @@ export class DocumentStoreService {
     years: [],
   });
 
-  constructor(private getDocumentsService: GetDocumentsService) {
+  constructor(private getDocumentsService: GetDocumentsService) {}
+
+  loadDocuments() {
     this.getDocumentsService.getDocuments().subscribe((documents) => {
       this.documents$.next(documents);
     });
-
-    this.getDocumentsService
-      .getDocumentUtilsDateStore()
-      .subscribe((dateStore) => {
-        this.dateStore$.next(dateStore);
-      });
   }
 
   getDocuments(): Observable<Document[]> {
+    this.documents$.subscribe((documents) => {
+      if (documents.length < 1) {
+        this.loadDocuments();
+      }
+    });
+
     return this.documents$;
   }
 
@@ -37,40 +39,36 @@ export class DocumentStoreService {
 
     const document$ = documents$.pipe(
       map((documents) => {
-        let document;
-
-        document = documents.find((d) => d.cardCode == cardCode) ?? {};
+        const document = documents.find((d) => d.cardCode == cardCode) ?? {};
 
         return document as Document;
       })
     );
 
-    return document$.pipe(
-      tap((document) => {
-        if (!document) throw new Error('could not get document');
-      }),
-      catchError(
-        this.handleError<Document>(
-          'DocumentStoreService',
-          `getDocumentByCardCode w/ cardCode=${cardCode}`
-        )
-      )
-    );
+    return document$;
+  }
+
+  addDocument(document: Document) {
+    this.documents$.subscribe((documents) => {
+      documents = [...documents, document];
+    });
+  }
+
+  loadDocumentUtilsDateStore() {
+    this.getDocumentsService
+      .getDocumentUtilsDateStore()
+      .subscribe((dateStore) => {
+        this.dateStore$.next(dateStore);
+      });
   }
 
   getDocumentUtilsDateStore(): Observable<DateStore> {
+    this.dateStore$.subscribe((dateStore) => {
+      if (dateStore.years.length < 1) {
+        this.loadDocumentUtilsDateStore();
+      }
+    });
+
     return this.dateStore$;
-  }
-
-  private handleError<T>(
-    serviceName = '',
-    operation = 'operation',
-    result = {} as T
-  ) {
-    return (error: any): Observable<T> => {
-      console.log(`${serviceName}: ${operation} failed: ${error.message}`);
-
-      return of(result);
-    };
   }
 }
