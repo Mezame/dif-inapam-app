@@ -58,7 +58,7 @@ export class DocumentAddEditFormComponent implements OnInit {
     imageObj: FormControl<{ url: string | null; blob: File | null } | null>;
   }>;
 
-  @Input('data') document!: Document;
+  @Input('data') document: Document = {} as Document;
 
   @Input() action!: string;
 
@@ -163,7 +163,7 @@ export class DocumentAddEditFormComponent implements OnInit {
       imageObj: { url: null, blob: null },
     }) as FormGroup;
 
-    if (this.action == 'editDocument') {
+    if (this.action == 'editDocument' && this.document.cardCode) {
       this.documentForm.patchValue({
         cardCode: this.document.cardCode,
         operationCode: this.document.operationCode,

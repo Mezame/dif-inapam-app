@@ -3,7 +3,7 @@
   [toolbar-back-link]="'/home/oficios/' + cardCode"
 >
   <ng-container *ngIf="document$ | async as document">
-    <app-document-add-edit-form
+    <app-document-add-edit-form *ngIf="document.cardCode"
       [data]="document"
       action="editDocument"
       (actionEvent)="getDocumentAction($event)"
