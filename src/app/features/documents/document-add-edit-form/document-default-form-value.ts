@@ -37,14 +37,16 @@ function transformDateToString(
   if (
     documentFormValue.createDate &&
     typeof documentFormValue.createDate != 'string'
-  )
-    documentFormValue.createDate = documentFormValue.createDate?.toString();
+  ) {
+    documentFormValue.createDate = documentFormValue.createDate.toString();
+  }
 
   if (
-    documentFormValue.createDate &&
+    documentFormValue.birthdate &&
     typeof documentFormValue.birthdate != 'string'
-  )
-    documentFormValue.birthdate = documentFormValue.birthdate?.toString();
+  ) {
+    documentFormValue.birthdate = documentFormValue.birthdate.toString();
+  }
 
   return documentFormValue;
 }
@@ -57,11 +59,13 @@ function changeFileName(
     const cardCode = documentFormValue.cardCode;
     let newFileName: string;
 
-    if (file!.type == 'image/jpeg' || file!.type == 'image/jpg')
+    if (file!.type == 'image/jpeg' || file!.type == 'image/jpg') {
       newFileName = `${documentFormValue.cardCode}.jpg`;
+    }
 
-    if (file!.type == 'image/png')
+    if (file!.type == 'image/png') {
       newFileName = `${documentFormValue.cardCode}.png`;
+    }
 
     const changedFileName = new File([file!], newFileName!, {
       type: file!.type,
