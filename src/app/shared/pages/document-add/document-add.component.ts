@@ -22,10 +22,9 @@ export class DocumentAddComponent {
     if (event.action == 'addDocument') {
       const formData = { ...event.data } as Partial<DocumentFormValue>;
 
-      const document = this.cleanFormData(formData);
+      const document = this.cleanFormData(formData) as Document;
 
-      const imageBlob = (event.data as Partial<DocumentFormValue>).imageObj
-        ?.blob;
+      const imageBlob = formData.imageObj?.blob as File;
 
       if (imageBlob) {
         console.log('Upload image to server', imageBlob);
@@ -50,21 +49,21 @@ export class DocumentAddComponent {
   cleanFormData(formData: Partial<DocumentFormValue>): Document | undefined {
     if (!formData) return;
 
-    const document = formData;
+    const preDocument = { ...formData };
 
-    if (document.imageObj) {
-      delete document.imageObj;
+    if (preDocument.imageObj) {
+      delete preDocument.imageObj;
     }
 
-    for (const data in document) {
+    for (const data in preDocument) {
       if (
-        document[data as keyof Partial<DocumentFormValue>] == null ||
-        document[data as keyof Partial<DocumentFormValue>] == undefined
+        preDocument[data as keyof Partial<DocumentFormValue>] == null ||
+        preDocument[data as keyof Partial<DocumentFormValue>] == undefined
       ) {
-        delete document[data as keyof Partial<DocumentFormValue>];
+        delete preDocument[data as keyof Partial<DocumentFormValue>];
       }
     }
 
-    return document as Document;
+    return preDocument as Document;
   }
 }
