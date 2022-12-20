@@ -13,6 +13,7 @@ import { getLatestReport } from '@features/reports/get-reports';
 import { documentsMock } from '@mocks/document.mock';
 import { map, Observable, of, switchMap } from 'rxjs';
 import { createDownloadUrl } from '../../shared/create-download-url';
+import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
 
 @Component({
   selector: 'app-report-dashboard',
@@ -26,6 +27,7 @@ export class ReportDashboardComponent implements OnInit {
   objectUrl: string | null = null;
 
   constructor(
+    private documentStoreService: DocumentStoreService,
     private sortDocumentsService: SortDocumentsService,
     private renderer: Renderer2,
     private ref: ChangeDetectorRef
@@ -34,7 +36,7 @@ export class ReportDashboardComponent implements OnInit {
   ngOnInit(): void {
     const sortedDocuments$ =
       this.sortDocumentsService.sortDocumentsByCreateDate(
-        of(documentsMock),
+        this.documentStoreService.getDocuments(),
         'des'
       );
 

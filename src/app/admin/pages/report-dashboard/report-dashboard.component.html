@@ -33,6 +33,7 @@
           mat-flat-button
           color="primary"
           (click)="onClick(documentsReport, { report, documents })"
+          [disabled]="documents.length < 1"
           #documentsReport
         >
           <mat-icon>download</mat-icon>
