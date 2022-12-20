@@ -106,7 +106,7 @@ export class DocumentAddEditFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.operationCodesOptions = getOperationCode(of(documentsMock));
+    this.operationCodesOptions = ['NUEVO REG', 'CANJE', 'REPOSICION'];
 
     this.statesOptions = mexicanFederalStates;
 
