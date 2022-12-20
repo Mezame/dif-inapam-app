@@ -49,8 +49,6 @@ export class DocumentEditComponent implements OnInit {
       }
 
       if (document) {
-        console.log('Edit document', document);
-
         this.updateDocumentsService
           .updateDocument(this.cardCode, document)
           .subscribe((docRef) => {
