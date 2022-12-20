@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Document } from '@features/documents/document.interface';
 import { AddDocumentsService } from '@features/documents/services/firestore/add-documents.service';
 import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
@@ -12,7 +13,8 @@ import { DocumentStoreService } from '@features/documents/services/firestore/sto
 export class DocumentAddComponent {
   constructor(
     private addDocumentsService: AddDocumentsService,
-    private documentStoreService: DocumentStoreService
+    private documentStoreService: DocumentStoreService,
+    private router: Router
   ) {}
 
   getDocumentAction(event: { action: string; data: {} }) {
@@ -30,11 +32,15 @@ export class DocumentAddComponent {
       if (document) {
         console.log('Add document', document);
 
-        this.addDocumentsService.addDocument(document).subscribe((docRef) => {
-          if (docRef.id) {
-            this.documentStoreService.addDocument(document);
-          }
-        });
+        this.addDocumentsService
+          .setDocument(document.cardCode, document)
+          .subscribe((docRef) => {
+            if (docRef == document.cardCode) {
+              this.documentStoreService.addDocument(document);
+
+              this.router.navigate(['/home/oficios']);
+            }
+          });
       }
     }
   }
