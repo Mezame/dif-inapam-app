@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { getDocumentByCardCodeServiceMock } from '@mocks/document.mock';
 import { Document } from '@features/documents/document.interface';
 import { map, Observable, of } from 'rxjs';
 import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
+import { UpdateDocumentsService } from '@features/documents/services/firestore/update-documents.service';
+import { DocumentFormValue } from '@features/documents/document-add-edit-form/document-form-value.interface';
 
 @Component({
   selector: 'app-document-edit',
@@ -17,7 +19,9 @@ export class DocumentEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private documentStoreService: DocumentStoreService
+    private documentStoreService: DocumentStoreService,
+    private updateDocumentsService: UpdateDocumentsService,
+    private router: Router
   ) {
     this.cardCode = this.route.snapshot.params['cardCode'];
   }
@@ -31,9 +35,51 @@ export class DocumentEditComponent implements OnInit {
   }
 
   getDocumentAction(event: { action: string; data: {} }) {
-    if (event.action == 'editDocument')
-      console.log('Edit document', event.data);
+    if (event.action == 'editDocument') {
+      const formData = { ...event.data } as Partial<DocumentFormValue>;
 
+      const document = this.cleanFormData(formData) as Document;
+
+      const imageBlob = formData.imageObj?.blob as File;
+
+      let imageUrl: string;
+
+      if (imageBlob) {
+        console.log('Upload image to server', imageBlob);
+      }
+
+      if (document) {
+        console.log('Edit document', document);
+
+        this.updateDocumentsService
+          .updateDocument(this.cardCode, document)
+          .subscribe((docRef) => {
+            if (docRef == this.cardCode) {
+              this.router.navigate(['/home/oficios', this.cardCode]);
+            }
+          });
+      }
+    }
   }
 
+  cleanFormData(formData: Partial<DocumentFormValue>): Document | undefined {
+    if (!formData) return;
+
+    const preDocument = { ...formData };
+
+    if (preDocument.imageObj) {
+      delete preDocument.imageObj;
+    }
+
+    for (const data in preDocument) {
+      if (
+        preDocument[data as keyof Partial<DocumentFormValue>] == null ||
+        preDocument[data as keyof Partial<DocumentFormValue>] == undefined
+      ) {
+        delete preDocument[data as keyof Partial<DocumentFormValue>];
+      }
+    }
+
+    return preDocument as Document;
+  }
 }
