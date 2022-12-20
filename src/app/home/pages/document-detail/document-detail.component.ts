@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Document } from '@features/documents/document.interface';
+import { DeleteDocumentsService } from '@features/documents/services/firestore/delete-documents.service';
 import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
+import { UpdateDocumentsService } from '@features/documents/services/firestore/update-documents.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -16,7 +18,10 @@ export class DocumentDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private documentStoreService: DocumentStoreService
+    private documentStoreService: DocumentStoreService,
+    private updateDocumentsService: UpdateDocumentsService,
+    private deleteDocumentsService: DeleteDocumentsService,
+    private router: Router
   ) {
     this.cardCode = this.route.snapshot.params['cardCode'];
   }
@@ -29,10 +34,26 @@ export class DocumentDetailComponent implements OnInit {
   }
 
   deleteDocument() {
-    console.log('Delete document', this.cardCode);
+    if (confirm('¿Confirmas eliminar oficio?') == true) {
+      this.deleteDocumentsService
+        .deleteDocument(this.cardCode)
+        .subscribe((docRef) => {
+          if (docRef == this.cardCode) {
+            this.router.navigate(['/home/oficios']);
+          }
+        });
+    }
   }
 
   cancelCard() {
-    console.log('Cancel card', this.cardCode);
+    if (confirm('¿Confirmas cancelar tarjeta?') == true) {
+      this.updateDocumentsService
+        .updateDocument(this.cardCode, { isCardCanceled: true })
+        .subscribe((docRef) => {
+          if (docRef == this.cardCode) {
+            //do something
+          }
+        });
+    }
   }
 }

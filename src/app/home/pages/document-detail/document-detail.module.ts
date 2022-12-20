@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
 import { GetDocumentsService } from '@features/documents/services/firestore/get-documents.service';
+import { UpdateDocumentsService } from '@features/documents/services/firestore/update-documents.service';
+import { DeleteDocumentsService } from '@features/documents/services/firestore/delete-documents.service';
 
 const routes: Routes = [{ path: '', component: DocumentDetailComponent }];
 
@@ -23,6 +25,11 @@ const routes: Routes = [{ path: '', component: DocumentDetailComponent }];
     MatButtonModule,
     MatIconModule,
   ],
-  providers: [DocumentStoreService, GetDocumentsService],
+  providers: [
+    DocumentStoreService,
+    GetDocumentsService,
+    UpdateDocumentsService,
+    DeleteDocumentsService,
+  ],
 })
 export class DocumentDetailModule {}

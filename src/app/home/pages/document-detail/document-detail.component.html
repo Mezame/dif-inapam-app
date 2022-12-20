@@ -2,7 +2,7 @@
   [toolbar-title]="'Oficio ' + cardCode"
   toolbar-back-link="/home/oficios"
 >
-  <ng-container *ngIf="document$">
+  <ng-container *ngIf="document$ | async as document">
     <div *ngIf="cardCode" class="button-group">
       <a
         mat-stroked-button
@@ -25,6 +25,7 @@
       </button>
 
       <button
+        *ngIf="!document.isCardCanceled; else isCardCanceled"
         mat-flat-button
         color="primary"
         type="button"
@@ -33,6 +34,11 @@
         <mat-icon>cancel</mat-icon>
         <span>Cancelar tarjeta</span>
       </button>
+      <ng-template #isCardCanceled>
+        <button mat-flat-button color="primary" type="button" disabled>
+          <span>Tarjeta cancelada</span>
+        </button>
+      </ng-template>
     </div>
 
     <app-document-detail-content
