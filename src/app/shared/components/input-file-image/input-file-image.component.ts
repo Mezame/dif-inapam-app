@@ -18,7 +18,7 @@ import { imageTypeValidator } from './validators/file-type-validator';
   ],
 })
 export class InputFileImageComponent implements ControlValueAccessor {
-  file?: File;
+  file!: File | null;
 
   fileUrl?: SafeUrl;
 
@@ -72,7 +72,7 @@ export class InputFileImageComponent implements ControlValueAccessor {
     } else {
       this.fileUrl = undefined;
 
-      this.file = undefined;
+      this.file = null;
 
       this.onChange({ blob: null });
     }
@@ -93,7 +93,7 @@ export class InputFileImageComponent implements ControlValueAccessor {
   removeImage() {
     this.fileUrl = undefined;
 
-    this.file = undefined;
+    this.file = null;
 
     this.validationError = null;
 
