@@ -7,7 +7,10 @@ import { catchError, from, map, Observable, of, tap } from 'rxjs';
 export class UpdateDocumentsService {
   constructor(private firestore: Firestore) {}
 
-  updateDocument(id: string, document: Document): Observable<unknown> {
+  updateDocument(
+    id: string,
+    document: Document | Partial<Document>
+  ): Observable<unknown> {
     const docRef = doc(this.firestore, 'documents/' + id);
 
     const documentRef$ = from(updateDoc(docRef, { ...document }));
