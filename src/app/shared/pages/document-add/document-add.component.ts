@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DocumentFormValue } from '@features/documents/document-add-edit-form/document-form-value.interface';
 import { Document } from '@features/documents/document.interface';
 import { AddDocumentsService } from '@features/documents/services/firestore/add-documents.service';
 import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
@@ -19,11 +20,12 @@ export class DocumentAddComponent {
 
   getDocumentAction(event: { action: string; data: {} }) {
     if (event.action == 'addDocument') {
-      const formData = { ...event.data };
+      const formData = { ...event.data } as Partial<DocumentFormValue>;
 
       const document = this.cleanFormData(formData);
 
-      const imageBlob = (event.data as any).imageObj.blob as File;
+      const imageBlob = (event.data as Partial<DocumentFormValue>).imageObj
+        ?.blob;
 
       if (imageBlob) {
         console.log('Upload image to server', imageBlob);
