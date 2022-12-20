@@ -2,18 +2,20 @@ import { Injectable } from '@angular/core';
 import {
   addDoc,
   collection,
+  doc,
   DocumentData,
   DocumentReference,
   Firestore,
+  setDoc,
 } from '@angular/fire/firestore';
 import { Document } from '@features/documents/document.interface';
-import { catchError, from, Observable, of, tap } from 'rxjs';
+import { catchError, from, map, Observable, of, tap } from 'rxjs';
 
 @Injectable()
 export class AddDocumentsService {
   constructor(private firestore: Firestore) {}
 
-  addDocument(document: Document) {
+  addDocument(document: Document): Observable<DocumentReference<DocumentData>> {
     const documentsCollection = collection(this.firestore, 'documents');
 
     const documentRef$ = from(addDoc(documentsCollection, document));
@@ -27,6 +29,28 @@ export class AddDocumentsService {
           'AddDocumentsService',
           'addDocument'
         )
+      )
+    );
+  }
+
+  setDocument(id: string, document: Document): Observable<unknown> {
+    const docRef = doc(this.firestore, 'documents', id);
+
+    const documentRef$ = from(setDoc(docRef, document));
+
+    return documentRef$.pipe(
+      map((docRef) => {
+        if (docRef == undefined) {
+          return id;
+        } else {
+          throw new Error('could not set document');
+        }
+      }),
+      tap((_) => {
+        console.log(`setted document w/ id=${id}`);
+      }),
+      catchError(
+        this.handleError<unknown>('AddDocumentsService', 'setDocument')
       )
     );
   }
