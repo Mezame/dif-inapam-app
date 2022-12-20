@@ -47,16 +47,21 @@ export class DocumentAddComponent {
     }
   }
 
-  cleanFormData(formData: any): Document | undefined {
+  cleanFormData(formData: Partial<DocumentFormValue>): Document | undefined {
     if (!formData) return;
 
     const document = formData;
 
-    delete document.imageObj;
+    if (document.imageObj) {
+      delete document.imageObj;
+    }
 
     for (const data in document) {
-      if (document[data] == null || document[data] == undefined) {
-        delete document[data];
+      if (
+        document[data as keyof Partial<DocumentFormValue>] == null ||
+        document[data as keyof Partial<DocumentFormValue>] == undefined
+      ) {
+        delete document[data as keyof Partial<DocumentFormValue>];
       }
     }
 
