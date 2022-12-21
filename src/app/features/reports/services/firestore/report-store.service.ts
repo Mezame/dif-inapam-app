@@ -6,7 +6,7 @@ import {
   getYears,
 } from '@features/documents/utils/get-create-date';
 import { Report } from '@features/reports/report.interface';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { GetReportsService } from './get-reports.service';
 
 @Injectable()
@@ -29,5 +29,19 @@ export class ReportStoreService {
     });
 
     return this.reports$;
+  }
+
+  getReport(id: string): Observable<Report> {
+    const reports$ = this.getReports();
+
+    const report$ = reports$.pipe(
+      map((reports) => {
+        const report = reports.find((r) => r.metadata?.id == id) ?? {};
+
+        return report as Report;
+      })
+    );
+
+    return report$;
   }
 }
