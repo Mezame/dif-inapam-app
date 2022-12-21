@@ -14,19 +14,40 @@
                 [value]="
                   selectedMonth
                     ? selectedMonth
-                    : dateStore.months.numbers[
-                        dateStore.months.numbers.length - 1
+                    : dateStore.months[
+                        selectedYear ??
+                          dateStore.years[dateStore.years.length - 1]
+                      ]?.numbers[
+                        dateStore.months[
+                          selectedYear ??
+                            dateStore.years[dateStore.years.length - 1]
+                        ]?.numbers.length - 1
                       ]
                 "
-                [disabled]="dateStore.months.numbers.length == 1"
+                [disabled]="
+                  dateStore.months[
+                    selectedYear ?? dateStore.years[dateStore.years.length - 1]
+                  ]?.numbers.length == 1
+                "
                 ariaLabel="Filtrar por mes"
                 (valueChange)="changeSelectedValue('selectedMonth', $event)"
               >
                 <mat-option
-                  *ngFor="let month of dateStore.months.numbers; index as i"
+                  *ngFor="
+                    let month of dateStore.months[
+                      selectedYear ??
+                        dateStore.years[dateStore.years.length - 1]
+                    ]?.numbers;
+                    index as i
+                  "
                   [value]="month"
                 >
-                  {{ dateStore.months.words[i] | titlecase }}
+                  {{
+                    dateStore.months[
+                      selectedYear ??
+                        dateStore.years[dateStore.years.length - 1]
+                    ]?.words[i] | titlecase
+                  }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -63,8 +84,14 @@
             | filterDocumentsByMonth
               : (selectedMonth
                   ? selectedMonth
-                  : dateStore.months.numbers[
-                      dateStore.months.numbers.length - 1
+                  : dateStore.months[
+                      selectedYear ??
+                        dateStore.years[dateStore.years.length - 1]
+                    ]?.numbers[
+                      dateStore.months[
+                        selectedYear ??
+                          dateStore.years[dateStore.years.length - 1]
+                      ]?.numbers.length - 1
                     ])
             | sortDocumentsByDate : 'asc'
             | async as documents
@@ -81,8 +108,14 @@
               | filterDocumentsByMonth
                 : (selectedMonth
                     ? selectedMonth
-                    : dateStore.months.numbers[
-                        dateStore.months.numbers.length - 1
+                    : dateStore.months[
+                        selectedYear ??
+                          dateStore.years[dateStore.years.length - 1]
+                      ]?.numbers[
+                        dateStore.months[
+                          selectedYear ??
+                            dateStore.years[dateStore.years.length - 1]
+                        ]?.numbers.length - 1
                       ])
               | sortDocumentsByDate : 'asc'
           "

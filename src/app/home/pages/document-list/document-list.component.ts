@@ -12,11 +12,11 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentListComponent implements OnInit {
-  dateStore$!: Observable<DateStore>;
+  dateStore$!: Observable<DateStore | any>;
   documents$!: Observable<Document[]>;
 
-  selectedYear!: string;
-  selectedMonth!: MonthNumber;
+  selectedYear?: string;
+  selectedMonth?: MonthNumber;
 
   constructor(private documentStoreService: DocumentStoreService) {}
 
