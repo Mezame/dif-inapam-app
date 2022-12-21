@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Document } from '@features/documents/document.interface';
-import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
-import {
-  getMonthsNumbers,
-  getYears,
-} from '@features/documents/utils/get-create-date';
 import { Report } from '@features/reports/report.interface';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { GetReportsService } from './get-reports.service';
 
 @Injectable()
