@@ -19,7 +19,7 @@ export function getReports(documents$: Observable<Document[]>): Report[] {
 
     documentsMonthsNumbers.forEach((docMonthNum) => {
       const date = new Date(parseInt(docYear), parseInt(docMonthNum) - 1, 15);
-      const id = `${date.toLocaleDateString('es-MX', {
+      const id = `VER-TUXPAN-${date.toLocaleDateString('es-MX', {
         month: 'long',
       })}-${docYear}`;
 
