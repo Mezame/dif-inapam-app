@@ -10,8 +10,10 @@ export class DocumentStoreService {
 
   private dateStore$ = new BehaviorSubject<DateStore>({
     months: {
-      numbers: [],
-      words: [],
+      ['']: {
+        numbers: [],
+        words: [],
+      },
     },
     years: [],
   });
@@ -64,7 +66,7 @@ export class DocumentStoreService {
 
   getDocumentUtilsDateStore(): Observable<DateStore> {
     this.dateStore$.subscribe((dateStore) => {
-      if (dateStore.years.length < 1) {
+      if (dateStore.years?.length < 1) {
         this.loadDocumentUtilsDateStore();
       }
     });

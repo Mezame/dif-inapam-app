@@ -1,7 +1,6 @@
 export interface DateStore {
   months: {
-    numbers: string[];
-    words: string[]
-  }
+    [x: string]: { numbers: string[]; words: string[] };
+  };
   years: string[];
 }
