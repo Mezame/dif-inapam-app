@@ -6,15 +6,13 @@ import {
   Renderer2,
 } from '@angular/core';
 import { MatAnchor } from '@angular/material/button';
-import { Report } from '@features/reports/report.interface';
 import { Document } from '@features/documents/document.interface';
-import { SortDocumentsService } from '@features/documents/services/sorts/sort-documents.service';
-import { getLatestReport } from '@features/reports/get-reports';
-import { documentsMock } from '@mocks/document.mock';
-import { map, Observable, of, switchMap } from 'rxjs';
-import { createDownloadUrl } from '../../shared/create-download-url';
 import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
+import { SortDocumentsService } from '@features/documents/services/sorts/sort-documents.service';
+import { Report } from '@features/reports/report.interface';
 import { ReportStoreService } from '@features/reports/services/firestore/report-store.service';
+import { map, Observable, switchMap } from 'rxjs';
+import { createDownloadUrl } from '../../shared/create-download-url';
 
 @Component({
   selector: 'app-report-dashboard',
