@@ -9,6 +9,7 @@
         mat-flat-button
         color="primary"
         (click)="onClick(monthlyReport, { report })"
+        [disabled]="!report.cardsStats"
         #monthlyReport
       >
         <mat-icon>download</mat-icon>
@@ -21,7 +22,7 @@
       </a>
     </div>
 
-    <app-report-detail-content [data]="report"></app-report-detail-content>
+    <app-report-detail-content *ngIf="report.cardsStats" [data]="report"></app-report-detail-content>
 
     <ng-container *ngIf="documents$ | async as documents">
       <span class="mat-small"
@@ -33,7 +34,7 @@
           mat-flat-button
           color="primary"
           (click)="onClick(documentsReport, { report, documents })"
-          [disabled]="documents.length < 1"
+          [disabled]="!report.cardsStats"
           #documentsReport
         >
           <mat-icon>download</mat-icon>

@@ -44,7 +44,7 @@ export class ReportDashboardComponent implements OnInit {
       map((reports) => {
         reports.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 
-        return reports[0];
+        return reports[0] ?? {};
       })
     );
 
