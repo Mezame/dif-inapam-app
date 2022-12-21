@@ -1,10 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ReportListComponent } from './report-list.component';
-import { SecondaryLayoutModule } from '@shared/layouts/secondary/secondary-layout.module';
 import { ReportListTableModule } from '@features/reports/report-list-table/report-list-table.module';
+import { GetReportsService } from '@features/reports/services/firestore/get-reports.service';
+import { ReportStoreService } from '@features/reports/services/firestore/report-store.service';
+import { SecondaryLayoutModule } from '@shared/layouts/secondary/secondary-layout.module';
+import { ReportListComponent } from './report-list.component';
 
 const routes: Routes = [{ path: '', component: ReportListComponent }];
 
@@ -16,5 +18,6 @@ const routes: Routes = [{ path: '', component: ReportListComponent }];
     SecondaryLayoutModule,
     ReportListTableModule,
   ],
+  providers: [ReportStoreService, GetReportsService],
 })
 export class ReportListModule {}
