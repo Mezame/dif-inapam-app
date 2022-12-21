@@ -288,7 +288,7 @@ export const documentsMock: Document[] = [
     birthplace: 'Veracruz',
     curp: 'MVNK566542RUXBFN00',
     maritalStatus: 'Casado',
-    isCardCanceled: true
+    isCardCanceled: true,
   },
   {
     createDate: '11/4/2022, 1:46:52 AM',
@@ -497,7 +497,7 @@ export const documentsMock: Document[] = [
     birthplace: 'Veracruz',
     curp: 'BDVH383045FYJWJG00',
     maritalStatus: 'Casado',
-    imageUrl: 'http://localhost:4200/assets/elder-female.jpg'
+    imageUrl: 'http://localhost:4200/assets/elder-female.jpg',
   },
   {
     createDate: '11/27/2022, 5:06:12 AM',
@@ -514,7 +514,7 @@ export const documentsMock: Document[] = [
     birthplace: 'Veracruz',
     curp: 'WGXQ347395YTVCGN00',
     maritalStatus: 'Soltero',
-    imageUrl: 'http://localhost:4200/assets/elder-male.jpg'
+    imageUrl: 'http://localhost:4200/assets/elder-male.jpg',
   },
   {
     createDate: '11/29/2022, 11:33:04 PM',
@@ -579,4 +579,52 @@ export function getDocumentByCardCodeServiceMock(
   ) as Document;
 
   return document;
+}
+
+export function getDocumentsYears(documents: Document[] = documentsMock) {
+  let years: string[] = [];
+
+  documents.forEach((document) => {
+    const createDate = new Date(document.createDate);
+    const documentYear = createDate.getFullYear().toString();
+
+    if (!years.includes(documentYear)) {
+      years[years.length] = documentYear;
+    }
+  });
+
+  years.sort((a, b) => parseInt(a) - parseInt(b));
+
+  return years;
+}
+
+export function getDocumentsMonths(
+  documents: Document[] = documentsMock,
+  year: string
+) {
+  let months: { numbers: string[]; words: string[] } = {
+    numbers: [],
+    words: [],
+  };
+
+  documents.sort((a, b) => Date.parse(a.createDate) - Date.parse(b.createDate));
+
+  documents.forEach((document) => {
+    const createDate = new Date(document.createDate);
+    const documentMonthNumber = (createDate.getMonth() + 1).toString();
+    const documentMonthWord = createDate.toLocaleDateString('es-MX', {
+      month: 'long',
+    });
+    const documentYear = createDate.getFullYear().toString();
+
+    if (!months.numbers.includes(documentMonthNumber) && year == documentYear) {
+      months.numbers[months.numbers.length] = documentMonthNumber;
+    }
+
+    if (!months.words.includes(documentMonthWord) && year == documentYear) {
+      months.words[months.words.length] = documentMonthWord;
+    }
+  });
+
+  return months;
 }
