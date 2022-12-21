@@ -12,18 +12,15 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { of } from 'rxjs';
-import { documentsMock } from '@mocks/document.mock';
-import { getOperationCode } from '../utils/get-operation-code';
-import { DocumentFormValue } from './document-form-value.interface';
-import { mexicanFederalStates } from '@shared/utils/mexican-federal-states';
 import { defaultErrorMessage } from '@shared/utils/default-error-message';
+import { mexicanFederalStates } from '@shared/utils/mexican-federal-states';
+import { Document } from '../document.interface';
 import {
-  formatDocumentFormValue,
   documentDefaultFormValue,
+  formatDocumentFormValue,
   setDefaultDocumentFormValue,
 } from './document-default-form-value';
-import { Document } from '../document.interface';
+import { DocumentFormValue } from './document-form-value.interface';
 
 @Component({
   selector: 'app-document-add-edit-form',
@@ -58,7 +55,7 @@ export class DocumentAddEditFormComponent implements OnInit {
     imageObj: FormControl<{ url: string | null; blob: File | null } | null>;
   }>;
 
-  @Input('data') document: Document = {} as Document;
+  @Input('data') document!: Document;
 
   @Input() action!: string;
 
@@ -163,7 +160,7 @@ export class DocumentAddEditFormComponent implements OnInit {
       imageObj: { url: null, blob: null },
     }) as FormGroup;
 
-    if (this.action == 'editDocument' && this.document.cardCode) {
+    if (this.action == 'editDocument') {
       this.documentForm.patchValue({
         cardCode: this.document.cardCode,
         operationCode: this.document.operationCode,
