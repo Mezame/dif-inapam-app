@@ -35,7 +35,7 @@ export class ReportDetailComponent implements OnInit {
     private sortDocumentsService: SortDocumentsService,
     private reportStoreService: ReportStoreService,
     private renderer: Renderer2,
-    private ref: ChangeDetectorRef
+    private cDRef: ChangeDetectorRef
   ) {
     this.reportId = this.route.snapshot.params['id'];
   }
@@ -77,6 +77,6 @@ export class ReportDetailComponent implements OnInit {
   }
 
   onClick(el: MatAnchor, data: { report: Report; documents?: Document[] }) {
-    createDownloadUrl(el, data, this.objectUrl, this.renderer, this.ref);
+    createDownloadUrl(el, data, this.objectUrl, this.renderer, this.cDRef);
   }
 }
