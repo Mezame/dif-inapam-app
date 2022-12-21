@@ -30,7 +30,7 @@ export class ReportDashboardComponent implements OnInit {
     private sortDocumentsService: SortDocumentsService,
     private reportStoreService: ReportStoreService,
     private renderer: Renderer2,
-    private ref: ChangeDetectorRef
+    private cDRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -75,6 +75,6 @@ export class ReportDashboardComponent implements OnInit {
   }
 
   onClick(el: MatAnchor, data: { report: Report; documents?: Document[] }) {
-    createDownloadUrl(el, data, this.objectUrl, this.renderer, this.ref);
+    createDownloadUrl(el, data, this.objectUrl, this.renderer, this.cDRef);
   }
 }

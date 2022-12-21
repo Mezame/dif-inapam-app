@@ -9,7 +9,7 @@ export function createDownloadUrl(
   data: { report: Report; documents?: Document[] },
   objectUrl: string | null,
   renderer: Renderer2,
-  ref: ChangeDetectorRef
+  cDRef: ChangeDetectorRef
 ) {
   let dataSource: DataSourceCsv;
   let parsedData: string;
@@ -158,7 +158,7 @@ export function createDownloadUrl(
 
       renderer.setProperty(el, 'disabled', 'false');
 
-      ref.markForCheck();
+      cDRef.markForCheck();
     }, 2500);
   }
 }
