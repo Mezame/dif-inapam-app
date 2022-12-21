@@ -18,15 +18,17 @@ export class ReportDetailContentComponent implements OnInit {
   @Input('data') report!: Report;
 
   ngOnInit(): void {
-    this.chartData = [
-      {
-        value: this.report.sexStats.male,
-        name: 'Hombre',
-      },
-      {
-        value: this.report.sexStats.female,
-        name: 'Mujer',
-      },
-    ];
+    if (this.report.sexStats) {
+      this.chartData = [
+        {
+          value: this.report.sexStats.male,
+          name: 'Hombre',
+        },
+        {
+          value: this.report.sexStats.female,
+          name: 'Mujer',
+        },
+      ];
+    }
   }
 }
