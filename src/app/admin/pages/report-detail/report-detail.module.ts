@@ -1,14 +1,18 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ReportDetailComponent } from './report-detail.component';
-import { SecondaryLayoutModule } from '@shared/layouts/secondary/secondary-layout.module';
-import { ReportDetailContentModule } from '@features/reports/report-detail-content/report-detail-content.module';
 import { SortDocumentsService } from '@features/documents/services/sorts/sort-documents.service';
+import { ReportDetailContentModule } from '@features/reports/report-detail-content/report-detail-content.module';
+import { SecondaryLayoutModule } from '@shared/layouts/secondary/secondary-layout.module';
+import { ReportDetailComponent } from './report-detail.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { GetDocumentsService } from '@features/documents/services/firestore/get-documents.service';
+import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
+import { GetReportsService } from '@features/reports/services/firestore/get-reports.service';
+import { ReportStoreService } from '@features/reports/services/firestore/report-store.service';
 
 const routes: Routes = [{ path: '', component: ReportDetailComponent }];
 
@@ -22,6 +26,12 @@ const routes: Routes = [{ path: '', component: ReportDetailComponent }];
     MatButtonModule,
     MatIconModule,
   ],
-  providers: [SortDocumentsService],
+  providers: [
+    DocumentStoreService,
+    GetDocumentsService,
+    SortDocumentsService,
+    ReportStoreService,
+    GetReportsService,
+  ],
 })
 export class ReportDetailModule {}

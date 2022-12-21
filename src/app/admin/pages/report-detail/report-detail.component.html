@@ -12,6 +12,7 @@
         mat-flat-button
         color="primary"
         (click)="onClick(monthlyReport, { report })"
+        [disabled]="!report.cardsStats"
         #monthlyReport
       >
         <mat-icon>download</mat-icon>
@@ -23,6 +24,7 @@
         mat-flat-button
         color="primary"
         (click)="onClick(documentsReport, { report, documents })"
+        [disabled]="!report.cardsStats"
         #documentsReport
       >
         <mat-icon>download</mat-icon>
@@ -30,6 +32,6 @@
       </a>
     </div>
 
-    <app-report-detail-content [data]="report"></app-report-detail-content>
+    <app-report-detail-content *ngIf="report.cardsStats" [data]="report"></app-report-detail-content>
   </div>
 </app-secondary-layout>

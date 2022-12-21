@@ -14,6 +14,8 @@ import { documentsMock } from '@mocks/document.mock';
 import { map, Observable, of, switchMap } from 'rxjs';
 import { createDownloadUrl } from '../../shared/create-download-url';
 import { ActivatedRoute } from '@angular/router';
+import { ReportStoreService } from '@features/reports/services/firestore/report-store.service';
+import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
 
 @Component({
   selector: 'app-report-detail',
@@ -29,7 +31,9 @@ export class ReportDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private documentStoreService: DocumentStoreService,
     private sortDocumentsService: SortDocumentsService,
+    private reportStoreService: ReportStoreService,
     private renderer: Renderer2,
     private ref: ChangeDetectorRef
   ) {
@@ -39,14 +43,12 @@ export class ReportDetailComponent implements OnInit {
   ngOnInit(): void {
     const sortedDocuments$ =
       this.sortDocumentsService.sortDocumentsByCreateDate(
-        of(documentsMock),
+        this.documentStoreService.getDocuments(),
         'des'
       );
 
     if (this.reportId) {
-      this.report$ = of(
-        getReportById(this.reportId, getReports(of(documentsMock)))
-      );
+      this.report$ = this.reportStoreService.getReport(this.reportId);
     }
 
     if (this.report$ && sortedDocuments$) {
