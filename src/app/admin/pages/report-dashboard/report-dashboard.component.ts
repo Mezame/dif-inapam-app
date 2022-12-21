@@ -14,6 +14,7 @@ import { documentsMock } from '@mocks/document.mock';
 import { map, Observable, of, switchMap } from 'rxjs';
 import { createDownloadUrl } from '../../shared/create-download-url';
 import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
+import { ReportStoreService } from '@features/reports/services/firestore/report-store.service';
 
 @Component({
   selector: 'app-report-dashboard',
@@ -29,6 +30,7 @@ export class ReportDashboardComponent implements OnInit {
   constructor(
     private documentStoreService: DocumentStoreService,
     private sortDocumentsService: SortDocumentsService,
+    private reportStoreService: ReportStoreService,
     private renderer: Renderer2,
     private ref: ChangeDetectorRef
   ) {}
@@ -40,7 +42,13 @@ export class ReportDashboardComponent implements OnInit {
         'des'
       );
 
-    this.report$ = of(getLatestReport());
+    this.report$ = this.reportStoreService.getReports().pipe(
+      map((reports) => {
+        reports.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+
+        return reports[0];
+      })
+    );
 
     if (this.report$ && sortedDocuments$) {
       this.documents$ = this.report$.pipe(

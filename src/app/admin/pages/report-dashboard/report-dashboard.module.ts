@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { GetDocumentsService } from '@features/documents/services/firestore/get-documents.service';
 import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
+import { ReportStoreService } from '@features/reports/services/firestore/report-store.service';
+import { GetReportsService } from '@features/reports/services/firestore/get-reports.service';
 
 const routes: Routes = [{ path: '', component: ReportDashboardComponent }];
 
@@ -28,6 +30,12 @@ const routes: Routes = [{ path: '', component: ReportDashboardComponent }];
     MatButtonModule,
     MatIconModule,
   ],
-  providers: [DocumentStoreService, GetDocumentsService, SortDocumentsService],
+  providers: [
+    DocumentStoreService,
+    GetDocumentsService,
+    SortDocumentsService,
+    ReportStoreService,
+    GetReportsService,
+  ],
 })
 export class ReportDashboardModule {}
