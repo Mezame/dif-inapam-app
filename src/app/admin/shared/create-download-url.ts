@@ -27,7 +27,7 @@ export function createDownloadUrl(
     const reportYear = new Date(data.report.date).getFullYear().toString();
 
     if (!data.documents) {
-      fileName = `reporte-${reportLocaleMonth}-${reportYear}`;
+      fileName = `reporte-mensual-${reportLocaleMonth}-${reportYear}`;
 
       dataSource = {
         header: [
@@ -51,7 +51,11 @@ export function createDownloadUrl(
             data.report.cardsStats.change.toString(),
             data.report.cardsStats.replacement.toString(),
             data.report.cardsStats.cancel.toString(),
-            data.report.cardsStats.getTotal!().toString(),
+            (
+              data.report.cardsStats.newRecord +
+              data.report.cardsStats.change +
+              data.report.cardsStats.replacement
+            ).toString(),
           ],
         ],
       };
