@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Assistant } from '@features/assistants/assistant.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Assistant } from '../assistant.interface';
-import { GetAssistantsService } from './firestore/get-assistants.service';
+import { GetAssistantsService } from '../firestore/get-assistants.service';
 
 @Injectable()
 export class AssistantStoreService {
