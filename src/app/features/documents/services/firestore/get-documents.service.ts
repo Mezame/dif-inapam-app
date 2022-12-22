@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import {
-  Firestore,
-  collectionData,
   collection,
+  collectionData,
+  CollectionReference,
+  doc,
+  DocumentData,
+  Firestore,
+  getDoc,
+  getDocs,
   query,
   where,
-  getDocs,
-  CollectionReference,
-  DocumentData,
-  doc,
-  getDoc,
 } from '@angular/fire/firestore';
 import { DateStore } from '@features/documents/date-store.interface';
 import { Document } from '@features/documents/document.interface';
