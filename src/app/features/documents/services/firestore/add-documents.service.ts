@@ -9,7 +9,7 @@ import {
   setDoc,
 } from '@angular/fire/firestore';
 import { Document } from '@features/documents/document.interface';
-import { catchError, from, map, Observable, of, tap } from 'rxjs';
+import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
 
 @Injectable()
 export class AddDocumentsService {
@@ -21,6 +21,7 @@ export class AddDocumentsService {
     const documentRef$ = from(addDoc(documentsCollection, document));
 
     return documentRef$.pipe(
+      take(1),
       tap((docRef) => {
         console.log(`added document w/ id=${docRef.id}`);
       }),
@@ -38,14 +39,18 @@ export class AddDocumentsService {
 
     const documentRef$ = from(setDoc(docRef, document));
 
-    return documentRef$.pipe(
+    documentRef$.pipe(
       map((docRef) => {
         if (docRef == undefined) {
           return id;
         } else {
           throw new Error('could not set document');
         }
-      }),
+      })
+    );
+
+    return documentRef$.pipe(
+      take(1),
       tap((_) => {
         console.log(`setted document w/ id=${id}`);
       }),

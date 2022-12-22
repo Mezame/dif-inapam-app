@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import { Document } from '@features/documents/document.interface';
-import { catchError, from, map, Observable, of, tap } from 'rxjs';
+import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
 
 @Injectable()
 export class UpdateDocumentsService {
@@ -15,14 +15,18 @@ export class UpdateDocumentsService {
 
     const documentRef$ = from(updateDoc(docRef, { ...document }));
 
-    return documentRef$.pipe(
+    documentRef$.pipe(
       map((docRef) => {
         if (docRef == undefined) {
           return id;
         } else {
           throw new Error('could not update document');
         }
-      }),
+      })
+    );
+
+    return documentRef$.pipe(
+      take(1),
       tap((_) => {
         console.log(`updated document w/ id=${id}`);
       }),
