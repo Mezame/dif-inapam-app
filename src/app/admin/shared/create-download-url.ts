@@ -129,7 +129,7 @@ export function createDownloadUrl(
           maritalStatus,
         ] as string[];
 
-        dataSource.body.push(body);
+        dataSource.body = [...dataSource.body, body];
       });
     }
   }
