@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Report } from '@features/reports/report.interface';
 import { ReportStoreService } from '@features/reports/services/firestore/report-store.service';
-import { map, Observable } from 'rxjs';
+import { SortReportsService } from '@features/reports/services/sorts/sort-reports.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-report-list',
@@ -12,15 +13,15 @@ import { map, Observable } from 'rxjs';
 export class ReportListComponent implements OnInit {
   reports$!: Observable<Report[]>;
 
-  constructor(private reportStoreService: ReportStoreService) {}
+  constructor(
+    private reportStoreService: ReportStoreService,
+    private sortReportsService: SortReportsService
+  ) {}
 
   ngOnInit(): void {
-    this.reports$ = this.reportStoreService.getReports().pipe(
-      map((reports) => {
-        reports.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
-
-        return reports;
-      })
-    );;
+    this.reports$ = this.sortReportsService.sortReportsByDate(
+      this.reportStoreService.getReports(),
+      'asc'
+    );
   }
 }
