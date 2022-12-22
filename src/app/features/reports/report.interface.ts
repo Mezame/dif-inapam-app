@@ -5,7 +5,6 @@ export interface Report {
     replacement: number;
     change: number;
     cancel: number;
-    getTotal?: () => number;
   };
   cardCodesRange: string[];
   sexStats: { male: number; female: number };
