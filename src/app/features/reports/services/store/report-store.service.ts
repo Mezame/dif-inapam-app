@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Report } from '@features/reports/report.interface';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { GetReportsService } from './get-reports.service';
+import { GetReportsService } from '../firestore/get-reports.service';
 
 @Injectable()
 export class ReportStoreService {
