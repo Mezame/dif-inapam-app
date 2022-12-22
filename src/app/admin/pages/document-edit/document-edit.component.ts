@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { getDocumentByCardCodeServiceMock } from '@mocks/document.mock';
 import { Document } from '@features/documents/document.interface';
 import { map, Observable, of } from 'rxjs';
-import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
+import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { UpdateDocumentsService } from '@features/documents/services/firestore/update-documents.service';
 import { DocumentFormValue } from '@features/documents/document-add-edit-form/document-form-value.interface';
 
