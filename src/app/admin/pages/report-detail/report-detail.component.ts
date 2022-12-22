@@ -8,10 +8,10 @@ import {
 import { MatAnchor } from '@angular/material/button';
 import { ActivatedRoute } from '@angular/router';
 import { Document } from '@features/documents/document.interface';
-import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { SortDocumentsService } from '@features/documents/services/sorts/sort-documents.service';
+import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { Report } from '@features/reports/report.interface';
-import { ReportStoreService } from '@features/reports/services/firestore/report-store.service';
+import { ReportStoreService } from '@features/reports/services/store/report-store.service';
 import { map, Observable, switchMap } from 'rxjs';
 import { createDownloadUrl } from '../../shared/create-download-url';
 

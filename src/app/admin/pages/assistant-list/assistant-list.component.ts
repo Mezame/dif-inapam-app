@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Assistant } from '@features/assistants/assistant.interface';
-import { AssistantStoreService } from '@features/assistants/services/assistant-store.service';
-import { DeleteAssistantsService } from '@features/assistants/services/delete-assistants.service';
+import { DeleteAssistantsService } from '@features/assistants/services/firestore/delete-assistants.service';
+import { AssistantStoreService } from '@features/assistants/services/store/assistant-store.service';
 import { Observable } from 'rxjs';
 
 @Component({

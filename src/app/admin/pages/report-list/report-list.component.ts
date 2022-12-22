@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Report } from '@features/reports/report.interface';
-import { ReportStoreService } from '@features/reports/services/firestore/report-store.service';
 import { SortReportsService } from '@features/reports/services/sorts/sort-reports.service';
+import { ReportStoreService } from '@features/reports/services/store/report-store.service';
 import { Observable } from 'rxjs';
 
 @Component({

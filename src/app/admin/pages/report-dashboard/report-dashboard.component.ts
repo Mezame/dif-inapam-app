@@ -7,11 +7,11 @@ import {
 } from '@angular/core';
 import { MatAnchor } from '@angular/material/button';
 import { Document } from '@features/documents/document.interface';
-import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { SortDocumentsService } from '@features/documents/services/sorts/sort-documents.service';
+import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { Report } from '@features/reports/report.interface';
-import { ReportStoreService } from '@features/reports/services/firestore/report-store.service';
 import { SortReportsService } from '@features/reports/services/sorts/sort-reports.service';
+import { ReportStoreService } from '@features/reports/services/store/report-store.service';
 import { map, Observable, switchMap } from 'rxjs';
 import { createDownloadUrl } from '../../shared/create-download-url';
 
