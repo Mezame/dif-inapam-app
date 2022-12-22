@@ -11,6 +11,7 @@ import { DocumentStoreService } from '@features/documents/services/firestore/sto
 import { SortDocumentsService } from '@features/documents/services/sorts/sort-documents.service';
 import { Report } from '@features/reports/report.interface';
 import { ReportStoreService } from '@features/reports/services/firestore/report-store.service';
+import { SortReportsService } from '@features/reports/services/sorts/sort-reports.service';
 import { map, Observable, switchMap } from 'rxjs';
 import { createDownloadUrl } from '../../shared/create-download-url';
 
@@ -29,6 +30,7 @@ export class ReportDashboardComponent implements OnInit {
     private documentStoreService: DocumentStoreService,
     private sortDocumentsService: SortDocumentsService,
     private reportStoreService: ReportStoreService,
+    private sortReportsService: SortReportsService,
     private renderer: Renderer2,
     private cDRef: ChangeDetectorRef
   ) {}
@@ -40,13 +42,9 @@ export class ReportDashboardComponent implements OnInit {
         'des'
       );
 
-    this.report$ = this.reportStoreService.getReports().pipe(
-      map((reports) => {
-        reports.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
-
-        return reports[0] ?? {};
-      })
-    );
+    this.report$ = this.sortReportsService
+      .sortReportsByDate(this.reportStoreService.getReports(), 'asc')
+      .pipe(map((reports) => reports[0] ?? {}));
 
     if (this.report$ && sortedDocuments$) {
       this.documents$ = this.report$.pipe(
