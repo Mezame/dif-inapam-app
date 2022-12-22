@@ -4,9 +4,17 @@ export const assistantsMock: Assistant[] = [
   {
     name: 'Efrain Gómez Arriaga',
     email: 'asistente@gmail.com',
+    metadata: {
+      id: '',
+      timestamp: new Date()
+    }
   },
   {
     name: 'Camila Pérez Montalvo',
     email: 'asistente2@gmail.com',
+    metadata: {
+      id: '',
+      timestamp: new Date()
+    }
   },
 ];
