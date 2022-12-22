@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
 import { Document } from '@features/documents/document.interface';
 import { Order } from '@shared/types/order.type';
+import { map, Observable } from 'rxjs';
 
 @Injectable()
 export class SortDocumentsService {
   private orderedDocuments$!: Observable<Document[]>;
   private orderFn!: (a: Document, b: Document) => number;
 
-  sortDocumentsByCreateDate(documents: Observable<Document[]>, order: Order) {
+  sortDocumentsByCreateDate(
+    documents: Observable<Document[]>,
+    order: Order
+  ): Observable<Document[]> {
     if (order == 'asc') {
       this.orderFn = (a, b) => {
         return Date.parse(b.createDate) - Date.parse(a.createDate);
