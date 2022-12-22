@@ -47,5 +47,4 @@ Thumbs.db
 .runtimeconfig.json
 
 # Mocks
-mocks
-mocks/assistant.mock.ts
+/mocks
