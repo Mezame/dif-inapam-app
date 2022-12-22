@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { DateStore } from '@features/documents/date-store.interface';
 import { Document } from '@features/documents/document.interface';
 import { BehaviorSubject, map, Observable } from 'rxjs';
+import { AdminModule } from 'src/app/admin/admin.module';
 import { GetDocumentsService } from '../get-documents.service';
 
 @Injectable()
