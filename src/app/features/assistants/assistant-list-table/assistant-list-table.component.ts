@@ -22,14 +22,14 @@ export class AssistantListTableComponent implements OnInit {
 
   @Output('action') actionEvent = new EventEmitter<{
     action: string;
-    data: string;
+    data: {};
   }>();
 
   ngOnInit(): void {
     this.displayedColumns = ['name', 'email', 'options'];
   }
 
-  deleteAssistantAction(id: string, action = 'deleteAssistant') {
-    this.actionEvent.emit({ action, data: id });
+  deleteAssistantAction(data: {}, action = 'deleteAssistant') {
+    this.actionEvent.emit({ action, data });
   }
 }
