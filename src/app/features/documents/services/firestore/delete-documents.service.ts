@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { deleteDoc, doc, Firestore } from '@angular/fire/firestore';
-import { catchError, from, map, Observable, of, tap } from 'rxjs';
+import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
 
 @Injectable()
 export class DeleteDocumentsService {
@@ -11,14 +11,18 @@ export class DeleteDocumentsService {
 
     const documentRef$ = from(deleteDoc(docRef));
 
-    return documentRef$.pipe(
+    documentRef$.pipe(
       map((docRef) => {
         if (docRef == undefined) {
           return id;
         } else {
           throw new Error('could not delete document');
         }
-      }),
+      })
+    );
+
+    return documentRef$.pipe(
+      take(1),
       tap((_) => {
         console.log(`deleted document w/ id=${id}`);
       }),
