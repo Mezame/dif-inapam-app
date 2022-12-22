@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DocumentAddEditFormModule } from '@features/documents/document-add-edit-form/document-add-edit-form.module';
 import { AddDocumentsService } from '@features/documents/services/firestore/add-documents.service';
 import { GetDocumentsService } from '@features/documents/services/firestore/get-documents.service';
-import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
+import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { SecondaryLayoutModule } from '@shared/layouts/secondary/secondary-layout.module';
 import { DocumentAddComponent } from './document-add.component';
 
