@@ -12,11 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { defaultErrorMessage } from '@shared/utils/default-error-message';
-
-interface AssistantFormValue {
-  name: string;
-  email: string;
-}
+import { AssistantFormValue } from './assistant-form-value.interface';
 
 @Component({
   selector: 'app-assistant-add-form',
