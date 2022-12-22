@@ -12,7 +12,7 @@ import { ReportDashboardComponent } from './report-dashboard.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { GetDocumentsService } from '@features/documents/services/firestore/get-documents.service';
-import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
+import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { GetReportsService } from '@features/reports/services/firestore/get-reports.service';
 import { ReportStoreService } from '@features/reports/services/firestore/report-store.service';
 import { SortReportsService } from '@features/reports/services/sorts/sort-reports.service';
