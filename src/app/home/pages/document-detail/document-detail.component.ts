@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Document } from '@features/documents/document.interface';
 import { DeleteDocumentsService } from '@features/documents/services/firestore/delete-documents.service';
-import { DocumentStoreService } from '@features/documents/services/firestore/store/document-store.service';
+import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { UpdateDocumentsService } from '@features/documents/services/firestore/update-documents.service';
 import { Observable } from 'rxjs';
 
