@@ -8,11 +8,8 @@ import {
 } from '@angular/fire/firestore';
 import { Report } from '@features/reports/report.interface';
 import { catchError, Observable, of } from 'rxjs';
-import { AdminModule } from 'src/app/admin/admin.module';
 
-@Injectable({
-  providedIn: AdminModule,
-})
+@Injectable()
 export class GetReportsService {
   private reportsCollectionRef = collection(
     this.firestore,
