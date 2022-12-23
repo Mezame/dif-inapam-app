@@ -54,11 +54,13 @@ export class DocumentEditComponent implements OnInit {
 
       const imageUrl = formData.imageObj?.url as string;
 
+      const filename = this.cardCode as string;
+
       if (hasImage && !imageUrl && !imageBlob) {
         this.deleteFilesService
-          .deleteFile(document.cardCode)
+          .deleteFile(filename)
           .subscribe((deleteResult) => {
-            if(deleteResult == true) {
+            if (deleteResult == true) {
               document.imageUrl = null;
             }
 
@@ -67,8 +69,6 @@ export class DocumentEditComponent implements OnInit {
       }
 
       if (imageBlob) {
-        const filename = document.cardCode as string;
-
         this.uploadFilesService
           .uploadFromBlob(imageBlob, filename)
           .subscribe((downloadUrl) => {
@@ -80,7 +80,7 @@ export class DocumentEditComponent implements OnInit {
           });
       }
 
-      if(!hasImage && !imageBlob) {
+      if (!hasImage && !imageBlob) {
         this.editDocument(document);
       }
     }
