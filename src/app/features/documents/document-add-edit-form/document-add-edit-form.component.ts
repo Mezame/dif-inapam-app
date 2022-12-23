@@ -173,7 +173,7 @@ export class DocumentAddEditFormComponent implements OnInit {
 
     if (this.action == 'editDocument') {
       this.documentForm.patchValue({
-        cardCode: this.document.cardCode,
+        //cardCode: this.document.cardCode,
         operationCode: this.document.operationCode,
         fathersLastname: this.document.fathersLastname,
         mothersLastname: this.document.mothersLastname,
@@ -189,6 +189,11 @@ export class DocumentAddEditFormComponent implements OnInit {
       this.documentForm.setControl(
         'createDate',
         this.fb.control(new Date(this.document.createDate), Validators.required)
+      );
+
+      this.documentForm.setControl(
+        'cardCode',
+        this.fb.control({value: this.document.cardCode, disabled: true})
       );
 
       this.documentForm.setControl(
