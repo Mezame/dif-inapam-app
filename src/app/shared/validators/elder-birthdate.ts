@@ -5,7 +5,10 @@ export function elderBirthdateValidator(): ValidatorFn {
     if (!control.value) return null;
 
     const error = { isNotElder: true } as ValidationErrors;
-    const birthdate = control.value as Date;
+    const birthdate =
+      typeof control.value == 'string'
+        ? new Date(control.value)
+        : (control.value as Date);
     const currentDate = new Date();
 
     const isElder = currentDate.getFullYear() - birthdate.getFullYear() > 65;
