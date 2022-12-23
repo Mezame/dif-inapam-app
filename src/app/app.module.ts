@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { LayoutsModule } from '@shared/layouts/layouts.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LayoutsModule } from '@shared/layouts/layouts.module';
 
 import { environment } from '../environments/environment';
 
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { connectAuthEmulator, getAuth, provideAuth } from '@angular/fire/auth';
 import {
   connectFirestoreEmulator,
   getFirestore,
@@ -16,7 +17,6 @@ import {
 } from '@angular/fire/firestore';
 import {
   connectFunctionsEmulator,
-  FunctionsModule,
   getFunctions,
   provideFunctions,
 } from '@angular/fire/functions';
@@ -25,7 +25,6 @@ import {
   getStorage,
   provideStorage,
 } from '@angular/fire/storage';
-import { provideAuth, connectAuthEmulator, getAuth } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [AppComponent],
