@@ -13,8 +13,6 @@ export function elderBirthdateValidator(): ValidatorFn {
 
     const isElder = currentDate.getFullYear() - birthdate.getFullYear() > 65;
 
-    console.log(isElder);
-
     return !isElder ? error : null;
   };
 }
