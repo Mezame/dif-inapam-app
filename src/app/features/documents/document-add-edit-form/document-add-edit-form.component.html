@@ -11,6 +11,9 @@
           placeholder="1/12/2022"
           formControlName="createDate"
         />
+        <mat-hint [ngClass]="{ 'hint-disabled': createDateCtrl.disabled }"
+          >dia/mes/año</mat-hint
+        >
         <mat-datepicker-toggle
           matIconSuffix
           [for]="createDatePicker"
@@ -190,6 +193,7 @@
               placeholder="1/12/2022"
               formControlName="birthdate"
             />
+            <mat-hint>dia/mes/año</mat-hint>
             <mat-datepicker-toggle
               matIconSuffix
               [for]="birthdatePicker"
@@ -200,7 +204,9 @@
               defaultErrorMessage.required
             }}</mat-error>
 
-            <mat-error *ngIf="birthdateCtrl.errors?.['isNotElder']">Debe tener al menos 65 años.</mat-error>
+            <mat-error *ngIf="birthdateCtrl.errors?.['isNotElder']"
+              >Debe tener al menos 65 años.</mat-error
+            >
           </mat-form-field>
         </div>
 
@@ -289,9 +295,7 @@
       mat-flat-button
       color="primary"
       type="submit"
-      [disabled]="
-        !documentForm.valid || !documentForm.dirty
-      "
+      [disabled]="!documentForm.valid || !documentForm.dirty"
     >
       <span *ngIf="action == 'addDocument'">Crear oficio</span>
       <span *ngIf="action == 'editDocument'">Editar oficio</span>

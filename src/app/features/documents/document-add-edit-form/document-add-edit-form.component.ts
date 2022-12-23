@@ -67,6 +67,10 @@ export class DocumentAddEditFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
+  get createDateCtrl() {
+    return this.documentForm.controls['createDate'];
+  }
+
   get cardCodeCtrl() {
     return this.documentForm.controls['cardCode'];
   }
@@ -146,7 +150,13 @@ export class DocumentAddEditFormComponent implements OnInit {
         [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*')],
       ],
       sex: ['', Validators.required],
-      birthdate: [null, [Validators.required, elderBirthdateValidator()]],
+      birthdate: [
+        null,
+        {
+          validators: [Validators.required, elderBirthdateValidator()],
+          updateOn: 'blur',
+        },
+      ],
       birthplace: ['Veracruz', Validators.required],
       curp: [
         '',
