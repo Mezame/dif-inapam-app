@@ -199,6 +199,8 @@
             <mat-error *ngIf="birthdateCtrl.errors?.['required']">{{
               defaultErrorMessage.required
             }}</mat-error>
+
+            <mat-error *ngIf="birthdateCtrl.errors?.['isNotElder']">Debe tener al menos 65 años.</mat-error>
           </mat-form-field>
         </div>
 

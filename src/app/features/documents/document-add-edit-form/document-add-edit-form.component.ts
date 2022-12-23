@@ -14,6 +14,7 @@ import {
 } from '@angular/forms';
 import { defaultErrorMessage } from '@shared/utils/default-error-message';
 import { mexicanFederalStates } from '@shared/utils/mexican-federal-states';
+import { elderBirthdateValidator } from '@shared/validators/elder-birthdate';
 import { Document } from '../document.interface';
 import {
   documentDefaultFormValue,
@@ -145,7 +146,7 @@ export class DocumentAddEditFormComponent implements OnInit {
         [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*')],
       ],
       sex: ['', Validators.required],
-      birthdate: [null, Validators.required],
+      birthdate: [null, [Validators.required, elderBirthdateValidator()]],
       birthplace: ['Veracruz', Validators.required],
       curp: [
         '',
