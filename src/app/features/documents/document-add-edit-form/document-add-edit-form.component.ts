@@ -14,7 +14,7 @@ import {
 } from '@angular/forms';
 import { defaultErrorMessage } from '@shared/utils/default-error-message';
 import { mexicanFederalStates } from '@shared/utils/mexican-federal-states';
-import { elderBirthdateValidator } from '@shared/validators/elder-birthdate';
+import { elderBirthdateValidator } from '@shared/validators/elder-birthdate.validator';
 import { Document } from '../document.interface';
 import {
   documentDefaultFormValue,
