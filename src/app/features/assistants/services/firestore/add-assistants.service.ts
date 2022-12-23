@@ -41,7 +41,7 @@ export class AddAssistantsService {
     );
   }
 
-  setAssistant(assistant: Assistant, id?: string) {
+  setAssistant(assistant: Assistant, id?: string): Observable<string> {
     let assistantRef$: Observable<any>;
     let assistantId: string;
 
@@ -49,9 +49,7 @@ export class AddAssistantsService {
       assistantId = id;
       const docRef = doc(this.firestore, 'assistants', assistantId);
 
-      assistantRef$ = from(setDoc(docRef, assistant));
-
-      assistantRef$.pipe(
+      assistantRef$ = from(setDoc(docRef, assistant)).pipe(
         map((docRef) => {
           if (docRef == undefined) {
             return assistantId;
@@ -88,7 +86,9 @@ export class AddAssistantsService {
       tap((_) => {
         console.log(`setted assistant w/ id=${assistantId}`);
       }),
-      catchError(this.handleError('AddAssistantsService', 'setAssistant'))
+      catchError(
+        this.handleError<string>('AddAssistantsService', 'setAssistant')
+      )
     );
   }
 
