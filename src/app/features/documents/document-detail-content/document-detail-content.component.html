@@ -117,6 +117,8 @@
           width="109"
           height="131"
           alt="Foto de adulto mayor"
+          (error)="hasImage.src = 'assets/no-user-image.svg'"
+          #hasImage
         />
       </ng-template>
     </div>
