@@ -37,9 +37,7 @@ export class AddDocumentsService {
   setDocument(id: string, document: Document): Observable<unknown> {
     const docRef = doc(this.firestore, 'documents', id);
 
-    const documentRef$ = from(setDoc(docRef, document));
-
-    documentRef$.pipe(
+    const documentRef$ = from(setDoc(docRef, document)).pipe(
       map((docRef) => {
         if (docRef == undefined) {
           return id;

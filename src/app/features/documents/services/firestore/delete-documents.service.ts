@@ -9,9 +9,7 @@ export class DeleteDocumentsService {
   deleteDocument(id: string): Observable<unknown> {
     const docRef = doc(this.firestore, 'documents/' + id);
 
-    const documentRef$ = from(deleteDoc(docRef));
-
-    documentRef$.pipe(
+    const documentRef$ = from(deleteDoc(docRef)).pipe(
       map((docRef) => {
         if (docRef == undefined) {
           return id;

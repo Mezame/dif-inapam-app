@@ -9,9 +9,7 @@ export class DeleteAssistantsService {
   deleteAssistant(id: string): Observable<unknown> {
     const docRef = doc(this.firestore, 'assistants/' + id);
 
-    const assistantRef$ = from(deleteDoc(docRef));
-
-    assistantRef$.pipe(
+    const assistantRef$ = from(deleteDoc(docRef)).pipe(
       map((docRef) => {
         if (docRef == undefined) {
           return id;
