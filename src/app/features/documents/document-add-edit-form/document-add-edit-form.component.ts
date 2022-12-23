@@ -61,7 +61,7 @@ export class DocumentAddEditFormComponent implements OnInit {
 
   @Output() actionEvent = new EventEmitter<{
     action: string;
-    data: {};
+    data: any;
   }>();
 
   constructor(private fb: FormBuilder) {}
@@ -204,11 +204,17 @@ export class DocumentAddEditFormComponent implements OnInit {
     }
 
     if (this.action == 'editDocument') {
+      let hasImage = false;
+
       documentFormValue = this.documentForm.value;
 
       documentFormValue = formatDocumentFormValue(documentFormValue);
 
-      this.emitEditDocumentAction(documentFormValue);
+      if (this.document.imageUrl) {
+        hasImage = true;
+      }
+
+      this.emitEditDocumentAction({ documentFormValue, hasImage });
     }
   }
 

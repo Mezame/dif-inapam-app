@@ -15,7 +15,7 @@ export interface Document {
   maritalStatus: 'Casado' | 'Soltero';
   isReviewed?: boolean;
   isCardCanceled?: boolean;
-  imageUrl?: string;
+  imageUrl?: string | null;
   metadata?: {
     sortId?: number;
     createDate?: string;
