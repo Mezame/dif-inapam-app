@@ -6,13 +6,13 @@ import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
 export class DeleteDocumentsService {
   constructor(private firestore: Firestore) {}
 
-  deleteDocument(id: string): Observable<string> {
+  deleteDocument(id: string): Observable<boolean> {
     const docRef = doc(this.firestore, 'documents/' + id);
 
     const documentRef$ = from(deleteDoc(docRef)).pipe(
       map((docRef) => {
         if (docRef == undefined) {
-          return id;
+          return true;
         } else {
           throw new Error('could not delete document');
         }
@@ -25,7 +25,7 @@ export class DeleteDocumentsService {
         console.log(`deleted document w/ id=${id}`);
       }),
       catchError(
-        this.handleError<string>('DeleteDocumentsService', 'deleteDocument')
+        this.handleError<boolean>('DeleteDocumentsService', 'deleteDocument')
       )
     );
   }

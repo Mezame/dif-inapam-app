@@ -38,7 +38,7 @@ export class DocumentDetailComponent implements OnInit {
       this.deleteDocumentsService
         .deleteDocument(this.cardCode)
         .subscribe((docRef) => {
-          if (docRef == this.cardCode) {
+          if (docRef === true) {
             this.router.navigate(['/home/oficios']);
           }
         });
