@@ -18,7 +18,7 @@
         mat-flat-button
         color="primary"
         type="button"
-        (click)="deleteDocument()"
+        (click)="deleteDocument(document)"
       >
         <mat-icon>delete</mat-icon>
         <span>Eliminar oficio</span>
@@ -29,7 +29,7 @@
         mat-flat-button
         color="primary"
         type="button"
-        (click)="cancelCard()"
+        (click)="cancelCard(document.cardCode)"
       >
         <mat-icon>cancel</mat-icon>
         <span>Cancelar tarjeta</span>

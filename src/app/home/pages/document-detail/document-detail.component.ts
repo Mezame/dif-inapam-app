@@ -5,6 +5,7 @@ import { DeleteDocumentsService } from '@features/documents/services/firestore/d
 import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { UpdateDocumentsService } from '@features/documents/services/firestore/update-documents.service';
 import { Observable } from 'rxjs';
+import { DeleteFilesService } from '@shared/services/firebase-storage/delete-files.service';
 
 @Component({
   selector: 'app-document-detail',
@@ -21,6 +22,7 @@ export class DocumentDetailComponent implements OnInit {
     private documentStoreService: DocumentStoreService,
     private updateDocumentsService: UpdateDocumentsService,
     private deleteDocumentsService: DeleteDocumentsService,
+    private deleteFilesService: DeleteFilesService,
     private router: Router
   ) {
     this.cardCode = this.route.snapshot.params['cardCode'];
@@ -33,10 +35,14 @@ export class DocumentDetailComponent implements OnInit {
     }
   }
 
-  deleteDocument() {
+  deleteDocument(document: Document) {
     if (confirm('¿Confirmas eliminar oficio?') == true) {
+      if (document.imageUrl) {
+        this.deleteFilesService.deleteFile(document.cardCode).subscribe();
+      }
+
       this.deleteDocumentsService
-        .deleteDocument(this.cardCode)
+        .deleteDocument(document.cardCode)
         .subscribe((docRef) => {
           if (docRef === true) {
             this.router.navigate(['/home/oficios']);
@@ -45,10 +51,10 @@ export class DocumentDetailComponent implements OnInit {
     }
   }
 
-  cancelCard() {
+  cancelCard(id: string) {
     if (confirm('¿Confirmas cancelar tarjeta?') == true) {
       this.updateDocumentsService
-        .updateDocument(this.cardCode, { isCardCanceled: true })
+        .updateDocument(id, { isCardCanceled: true })
         .subscribe((docRef) => {
           if (docRef == this.cardCode) {
             //do something
