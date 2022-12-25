@@ -7,7 +7,7 @@
           <span>Nuevo oficio</span>
         </a>
 
-        <div class="select-group">
+        <div *ngIf="dateStore.years?.length" class="select-group">
           <div class="select-content month">
             <mat-form-field appearance="outline">
               <mat-select
@@ -16,18 +16,18 @@
                     ? selectedMonth
                     : dateStore.months[
                         selectedYear ??
-                          dateStore.years[dateStore.years.length - 1]
+                          dateStore.years[dateStore.years?.length - 1]
                       ]?.numbers[
                         dateStore.months[
                           selectedYear ??
-                            dateStore.years[dateStore.years.length - 1]
-                        ]?.numbers.length - 1
+                            dateStore.years[dateStore.years?.length - 1]
+                        ]?.numbers?.length - 1
                       ]
                 "
                 [disabled]="
                   dateStore.months[
-                    selectedYear ?? dateStore.years[dateStore.years.length - 1]
-                  ]?.numbers.length == 1
+                    selectedYear ?? dateStore.years[dateStore.years?.length - 1]
+                  ]?.numbers?.length == 1
                 "
                 ariaLabel="Filtrar por mes"
                 (valueChange)="changeSelectedValue('selectedMonth', $event)"
@@ -36,7 +36,7 @@
                   *ngFor="
                     let month of dateStore.months[
                       selectedYear ??
-                        dateStore.years[dateStore.years.length - 1]
+                        dateStore.years[dateStore.years?.length - 1]
                     ]?.numbers;
                     index as i
                   "
@@ -45,7 +45,7 @@
                   {{
                     dateStore.months[
                       selectedYear ??
-                        dateStore.years[dateStore.years.length - 1]
+                        dateStore.years[dateStore.years?.length - 1]
                     ]?.words[i] | titlecase
                   }}
                 </mat-option>
@@ -59,9 +59,9 @@
                 [value]="
                   selectedYear
                     ? selectedYear
-                    : dateStore.years[dateStore.years.length - 1]
+                    : dateStore.years[dateStore.years?.length - 1]
                 "
-                [disabled]="dateStore.years.length == 1"
+                [disabled]="dateStore.years?.length == 1"
                 ariaLabel="Filtrar por año"
                 (valueChange)="changeSelectedValue('selectedYear', $event)"
               >
@@ -74,52 +74,54 @@
         </div>
       </div>
 
-      <ng-container
-        *ngIf="
-          documents$!
-            | filterDocumentsByYear
-              : (selectedYear
-                  ? selectedYear
-                  : dateStore.years[dateStore.years.length - 1])
-            | filterDocumentsByMonth
-              : (selectedMonth
-                  ? selectedMonth
-                  : dateStore.months[
-                      selectedYear ??
-                        dateStore.years[dateStore.years.length - 1]
-                    ]?.numbers[
-                      dateStore.months[
-                        selectedYear ??
-                          dateStore.years[dateStore.years.length - 1]
-                      ]?.numbers.length - 1
-                    ])
-            | sortDocumentsByDate : 'asc'
-            | async as documents
-        "
-      >
-        <app-document-list-table
-          [ngClass]="{ 'fixed-height': documents.length > 11 }"
-          [data]="
+      <ng-container *ngIf="dateStore.years?.length">
+        <ng-container
+          *ngIf="
             documents$!
               | filterDocumentsByYear
                 : (selectedYear
                     ? selectedYear
-                    : dateStore.years[dateStore.years.length - 1])
+                    : dateStore.years[dateStore.years?.length - 1])
               | filterDocumentsByMonth
                 : (selectedMonth
                     ? selectedMonth
                     : dateStore.months[
                         selectedYear ??
-                          dateStore.years[dateStore.years.length - 1]
+                          dateStore.years[dateStore.years?.length - 1]
                       ]?.numbers[
                         dateStore.months[
                           selectedYear ??
-                            dateStore.years[dateStore.years.length - 1]
-                        ]?.numbers.length - 1
+                            dateStore.years[dateStore.years?.length - 1]
+                        ]?.numbers?.length - 1
                       ])
               | sortDocumentsByDate : 'asc'
+              | async as documents
           "
-        ></app-document-list-table>
+        >
+          <app-document-list-table
+            [ngClass]="{ 'fixed-height': documents.length > 11 }"
+            [data]="
+              documents$!
+                | filterDocumentsByYear
+                  : (selectedYear
+                      ? selectedYear
+                      : dateStore.years[dateStore.years?.length - 1])
+                | filterDocumentsByMonth
+                  : (selectedMonth
+                      ? selectedMonth
+                      : dateStore.months[
+                          selectedYear ??
+                            dateStore.years[dateStore.years?.length - 1]
+                        ]?.numbers[
+                          dateStore.months[
+                            selectedYear ??
+                              dateStore.years[dateStore.years?.length - 1]
+                          ]?.numbers?.length - 1
+                        ])
+                | sortDocumentsByDate : 'asc'
+            "
+          ></app-document-list-table>
+        </ng-container>
       </ng-container>
     </div>
   </ng-container>
