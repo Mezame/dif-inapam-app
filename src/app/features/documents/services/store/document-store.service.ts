@@ -22,7 +22,7 @@ export class DocumentStoreService {
 
   loadDocuments() {
     this.getDocumentsService.getDocuments().subscribe((documents) => {
-      if (documents?.length > 1) {
+      if (documents?.length > 0) {
         this.documents$.next(documents);
       }
     });
@@ -62,7 +62,7 @@ export class DocumentStoreService {
     this.getDocumentsService
       .getDocumentUtilsDateStore()
       .subscribe((dateStore) => {
-        if (dateStore.years?.length > 1) {
+        if (dateStore.years?.length > 0) {
           this.dateStore$.next(dateStore);
         }
       });

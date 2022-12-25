@@ -11,7 +11,7 @@ export class ReportStoreService {
 
   loadReports() {
     this.getReportsService.getReports().subscribe((reports) => {
-      if (reports?.length > 1) {
+      if (reports?.length > 0) {
         this.reports$.next(reports);
       }
     });

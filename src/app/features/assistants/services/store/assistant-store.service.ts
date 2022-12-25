@@ -11,7 +11,7 @@ export class AssistantStoreService {
 
   loadAssistants() {
     this.getAssistantsService.getAssistants().subscribe((assistants) => {
-      if (assistants?.length > 1) {
+      if (assistants?.length > 0) {
         this.assistants$.next(assistants);
       }
     });
