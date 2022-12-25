@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Report } from '@features/reports/report.interface';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, take } from 'rxjs';
 import { GetReportsService } from '../firestore/get-reports.service';
 
 @Injectable()
@@ -11,12 +11,14 @@ export class ReportStoreService {
 
   loadReports() {
     this.getReportsService.getReports().subscribe((reports) => {
-      this.reports$.next(reports);
+      if (reports?.length > 1) {
+        this.reports$.next(reports);
+      }
     });
   }
 
   getReports(): Observable<Report[]> {
-    this.reports$.subscribe((reports) => {
+    this.reports$.pipe(take(2)).subscribe((reports) => {
       if (reports.length < 1) {
         this.loadReports();
       }
