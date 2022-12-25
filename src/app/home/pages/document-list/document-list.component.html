@@ -7,7 +7,7 @@
           <span>Nuevo oficio</span>
         </a>
 
-        <div *ngIf="dateStore.years?.length" class="select-group">
+        <div *ngIf="dateStore.years?.length > 0" class="select-group">
           <div class="select-content month">
             <mat-form-field appearance="outline">
               <mat-select
@@ -74,7 +74,7 @@
         </div>
       </div>
 
-      <ng-container *ngIf="dateStore.years?.length">
+      <ng-container *ngIf="dateStore.years?.length > 0">
         <ng-container
           *ngIf="
             documents$!
