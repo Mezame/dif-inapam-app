@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DateStore } from '@features/documents/date-store.interface';
 import { Document } from '@features/documents/document.interface';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, take } from 'rxjs';
 import { GetDocumentsService } from '../firestore/get-documents.service';
 
 @Injectable()
@@ -22,13 +22,15 @@ export class DocumentStoreService {
 
   loadDocuments() {
     this.getDocumentsService.getDocuments().subscribe((documents) => {
-      this.documents$.next(documents);
+      if (documents?.length > 1) {
+        this.documents$.next(documents);
+      }
     });
   }
 
   getDocuments(): Observable<Document[]> {
-    this.documents$.subscribe((documents) => {
-      if (documents.length < 1) {
+    this.documents$.pipe(take(2)).subscribe((documents) => {
+      if (documents?.length < 1) {
         this.loadDocuments();
       }
     });
@@ -60,12 +62,14 @@ export class DocumentStoreService {
     this.getDocumentsService
       .getDocumentUtilsDateStore()
       .subscribe((dateStore) => {
-        this.dateStore$.next(dateStore);
+        if (dateStore.years?.length > 1) {
+          this.dateStore$.next(dateStore);
+        }
       });
   }
 
   getDocumentUtilsDateStore(): Observable<DateStore> {
-    this.dateStore$.subscribe((dateStore) => {
+    this.dateStore$.pipe(take(2)).subscribe((dateStore) => {
       if (dateStore.years?.length < 1) {
         this.loadDocumentUtilsDateStore();
       }

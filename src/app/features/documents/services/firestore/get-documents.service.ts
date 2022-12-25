@@ -13,7 +13,7 @@ import {
 } from '@angular/fire/firestore';
 import { DateStore } from '@features/documents/date-store.interface';
 import { Document } from '@features/documents/document.interface';
-import { catchError, from, map, Observable, of, tap } from 'rxjs';
+import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
 
 @Injectable()
 export class GetDocumentsService {
@@ -79,6 +79,7 @@ export class GetDocumentsService {
     );
 
     return dateStore$.pipe(
+      take(1),
       tap((dateStore) => {
         if (!dateStore) throw new Error('could not get dateStore');
       }),
