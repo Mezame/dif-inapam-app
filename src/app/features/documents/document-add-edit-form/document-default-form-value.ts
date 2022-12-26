@@ -1,7 +1,7 @@
 import { DocumentFormValue } from './document-form-value.interface';
 
 export const documentDefaultFormValue = {
-  createDate: new Date(Date.now()),
+  createDate: new Date(),
   branchOffice: 'VER-TUXPAN',
   reviewDocument: 'Valeria B. Alarcón',
   makeCard: 'Valeria B. Alarcón',
