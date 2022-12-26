@@ -24,7 +24,7 @@ export interface Document {
 
 export interface DateStore {
   months: {
-    [key: string]: { numbers: string[]; words: string[] };
+    [x: string]: { numbers: string[]; words: string[] };
   };
   years: string[];
 }
@@ -75,4 +75,40 @@ export function getDocumentsMonths(
   });
 
   return months;
+}
+
+export function getDateStoreYears(documents: Document[]): DateStore['years'] {
+  const dateStoreYears = getDocumentsYears(documents) as DateStore['years'];
+
+  return dateStoreYears;
+}
+
+export function getDateStoreMonths(documents: Document[]): DateStore['months'] {
+  let dateStoreMonths = {} as DateStore['months'];
+  const documentsYears = getDocumentsYears(documents);
+
+  documentsYears.forEach((docYear) => {
+    const documentsMonths = getDocumentsMonths(documents, docYear);
+
+    dateStoreMonths = {
+      ...dateStoreMonths,
+      [docYear]: {
+        numbers: documentsMonths.numbers,
+        words: documentsMonths.words,
+      },
+    };
+  });
+
+  return dateStoreMonths;
+}
+
+export function getDateStore(documents: Document[]): DateStore {
+  const dateStoreYears = getDocumentsYears(documents) as DateStore['years'];
+  const dateStoreMonths = getDateStoreMonths(documents) as DateStore['months'];
+  const dateStore = {
+    months: dateStoreMonths,
+    years: dateStoreYears,
+  } as DateStore;
+
+  return dateStore;
 }

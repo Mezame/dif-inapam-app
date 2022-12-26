@@ -13,3 +13,18 @@ export interface Report {
     timestamp?: string;
   };
 }
+
+export const defaultReport = {
+  date: '',
+  cardsStats: {
+    newRecord: 0,
+    replacement: 0,
+    change: 0,
+    cancel: 0,
+  },
+  cardCodesRange: ['', ''],
+  sexStats: { male: 0, female: 0 },
+  metadata: {
+    id: '',
+  },
+} as Report;
