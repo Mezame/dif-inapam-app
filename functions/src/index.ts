@@ -1,20 +1,35 @@
 import * as functions from 'firebase-functions';
-import { onCreateDocumentsSetDateStore } from './firestore/triggers/on-create-documents-set-date-store';
-import { onCreateDocumentsSetReports } from './firestore/triggers/on-create-documents-set-reports';
+import { onCreateDocumentSetDateStore } from './firestore/triggers/on-create-document-set-date-store';
+import { onCreateDocumentSetUpdateReport } from './firestore/triggers/on-create-document-set-update-report';
+import { onUpdateDocumentUpdateReport } from './firestore/triggers/on-update-document-update-report';
 
-let onCreateDocuments: [PromiseSettledResult<void>, PromiseSettledResult<void>];
+let onCreateDocument: PromiseSettledResult<void>[];
+let onUpdateDocument: PromiseSettledResult<void>[];
 
 export const helloWorld = functions.https.onRequest((_request, response) => {
   functions.logger.info('Hello logs!', { structuredData: true });
   response.send('Hello from Firebase!');
 });
 
-exports.functions = functions.firestore
+exports.onCreateDocument = functions.firestore
   .document('documents/{id}')
   .onCreate(async (snapshot, context) => {
-    onCreateDocuments =
+    onCreateDocument =
       (await Promise.allSettled([
-        await onCreateDocumentsSetDateStore(snapshot, context),
-        await onCreateDocumentsSetReports(snapshot, context),
-      ])) || onCreateDocuments;
+        await onCreateDocumentSetDateStore(snapshot, context),
+        await onCreateDocumentSetUpdateReport(snapshot, context),
+      ])) || onCreateDocument;
+
+    return;
+  });
+
+exports.onUpdateDocument = functions.firestore
+  .document('documents/{id}')
+  .onUpdate(async (change, context) => {
+    onUpdateDocument =
+      (await Promise.allSettled([
+        await onUpdateDocumentUpdateReport(change, context),
+      ])) || onUpdateDocument;
+
+    return;
   });
