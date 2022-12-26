@@ -9,7 +9,11 @@ export async function setDateStore(dateStore: DateStore) {
     await docRef.set(dateStore);
 
     functions.logger.info('set dateStore successfully');
+
+    return;
   } catch (error) {
     functions.logger.info('could not set dateStore');
+
+    return;
   }
 }
