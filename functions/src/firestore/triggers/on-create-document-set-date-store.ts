@@ -3,7 +3,7 @@ import { setDateStore } from '../database/set-date-store';
 import { DateStore, Document, getDateStore } from '../../utils/document-utils';
 import { getDocuments } from '../database/get-documents';
 
-export async function onCreateDocumentsSetDateStore(
+export async function onCreateDocumentSetDateStore(
   snapshot: functions.firestore.QueryDocumentSnapshot,
   _context: functions.EventContext<{
     id: string;
@@ -38,20 +38,21 @@ export async function onCreateDocumentsSetDateStore(
       };
 
       await setDateStore(dateStore);
+    } else {
+      const dateStore = getDateStore(oldDocuments) as DateStore;
 
-      return;
+      if (
+        dateStore.months[documentYear].numbers.includes(documentMonthNumber)
+      ) {
+        functions.logger.info(
+          'document month and year already exist in dateStore'
+        );
+
+        return;
+      }
+
+      await setDateStore(dateStore);
     }
-    const dateStore = getDateStore(oldDocuments) as DateStore;
-
-    if (dateStore.months[documentYear].numbers.includes(documentMonthNumber)) {
-      functions.logger.info(
-        'document month and year already exist in dateStore'
-      );
-      
-      return;
-    }
-
-    await setDateStore(dateStore);
 
     return;
   } catch (error) {
