@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase-admin/app';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 import * as functions from 'firebase-functions';
-import { DateStore } from './date-store';
+import { DateStore } from '../../utils/document-utils';
+import { setDateStore } from '../database/set-date-store';
 
 const app = initializeApp();
 const firestore = getFirestore(app);
@@ -35,7 +36,7 @@ export default async (
       years: [documentYear],
     };
 
-    setDateStore(dateStore, docRef);
+    await setDateStore(dateStore);
   } else {
     let dateStoreYear!: string;
     let dateStoreMonth!: { number: string; word: string };
@@ -96,18 +97,5 @@ async function updateDateStoreFields(
     }
   } catch (error) {
     functions.logger.info('could not update dateStore');
-  }
-}
-
-async function setDateStore(
-  dateStore: DateStore,
-  docRef: FirebaseFirestore.DocumentReference<FirebaseFirestore.DocumentData>
-) {
-  try {
-    await docRef.set(dateStore);
-
-    functions.logger.info('set dateStore successfully');
-  } catch (error) {
-    functions.logger.info('could not set dateStore');
   }
 }
