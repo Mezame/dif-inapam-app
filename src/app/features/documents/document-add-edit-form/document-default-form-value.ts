@@ -1,7 +1,6 @@
 import { DocumentFormValue } from './document-form-value.interface';
 
 export const documentDefaultFormValue = {
-  createDate: new Date(),
   branchOffice: 'VER-TUXPAN',
   reviewDocument: 'Valeria B. Alarcón',
   makeCard: 'Valeria B. Alarcón',
@@ -10,7 +9,7 @@ export const documentDefaultFormValue = {
 export function setDefaultDocumentFormValue(
   documentFormValue: Partial<DocumentFormValue>
 ): Partial<DocumentFormValue> {
-  documentFormValue.createDate = documentDefaultFormValue.createDate;
+  documentFormValue.createDate = new Date().toString();
 
   documentFormValue.branchOffice = documentDefaultFormValue.branchOffice;
 
@@ -60,11 +59,11 @@ function changeFileName(
     let newFileName: string;
 
     if (file!.type == 'image/jpeg' || file!.type == 'image/jpg') {
-      newFileName = `${documentFormValue.cardCode}.jpg`;
+      newFileName = `${cardCode}.jpg`;
     }
 
     if (file!.type == 'image/png') {
-      newFileName = `${documentFormValue.cardCode}.png`;
+      newFileName = `${cardCode}.png`;
     }
 
     const changedFileName = new File([file!], newFileName!, {

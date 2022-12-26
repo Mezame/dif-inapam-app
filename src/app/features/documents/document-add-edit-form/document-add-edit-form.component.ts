@@ -117,7 +117,7 @@ export class DocumentAddEditFormComponent implements OnInit {
     this.defaultFormValue = documentDefaultFormValue;
 
     this.documentForm = this.fb.group({
-      createDate: [{ value: this.defaultFormValue.createDate, disabled: true }],
+      createDate: [{ value: new Date(), disabled: true }],
       cardCode: [
         '',
         [
