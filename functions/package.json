@@ -2,13 +2,14 @@
   "name": "functions",
   "scripts": {
     "build": "npm run lint && tsc",
-    "build:watch": "tsc --watch",
+    "build:watch": "npm run lint && tsc --watch",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "clean": "@powershell -Command rm lib -r"
   },
   "engines": {
     "node": "16"
