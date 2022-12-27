@@ -70,10 +70,6 @@ export async function onCreateDocumentSetUpdateReport(
         report.cardsStats.cancel++;
       }
 
-      if (report.cardCodesRange[0] == '') {
-        report.cardCodesRange[0] = document.cardCode;
-      }
-
       report.cardCodesRange[1] = document.cardCode;
 
       if (document.sex == 'Hombre') {
