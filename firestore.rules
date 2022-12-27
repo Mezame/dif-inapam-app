@@ -1,9 +1,57 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if
-          request.time < timestamp.date(2023, 1, 8);
+
+    function isValidDocument() {
+      return 
+      request.resource.data.createDate is string &&
+      request.resource.data.createDate.size() > 0 &&
+      request.resource.data.operationCode is string &&
+      request.resource.data.operationCode.matches('^NUEVO REG$|^CANJE$|^REPOSICION$') &&
+      request.resource.data.cardCode is string &&
+      request.resource.data.cardCode.size() == 10 &&
+      request.resource.data.cardCode.matches('[a-zA-Z0-9]*') &&
+      request.resource.data.branchOffice is string &&
+      request.resource.data.branchOffice.size() > 0 &&
+      request.resource.data.reviewDocument is string &&
+      request.resource.data.reviewDocument.size() > 0 &&
+      request.resource.data.makeCard is string &&
+      request.resource.data.makeCard.size() > 0 &&
+      request.resource.data.fathersLastname is string &&
+      request.resource.data.fathersLastname.size() > 0 &&
+      request.resource.data.fathersLastname.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*') &&
+      request.resource.data.mothersLastname is string &&
+      request.resource.data.mothersLastname.size() > 0 &&
+      request.resource.data.mothersLastname.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*') &&
+      request.resource.data.name is string &&
+      request.resource.data.name.size() > 0 &&
+      request.resource.data.name.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*') &&
+      request.resource.data.sex is string &&
+      request.resource.data.sex.matches('^Hombre$|^Mujer$') &&
+      request.resource.data.birthdate is string &&
+      request.resource.data.birthdate.size() > 0 &&
+      request.resource.data.birthplace is string &&
+      request.resource.data.birthplace.size() > 0 &&
+      request.resource.data.curp is string &&
+      request.resource.data.curp.size() == 18 &&
+      request.resource.data.curp.matches('[a-zA-Z0-9]*') &&
+      request.resource.data.maritalStatus is string &&
+      request.resource.data.maritalStatus.matches('^Soltero$|^Casado$');
+    }
+ 
+    match /documents/{id} {
+      allow read: if true;
+      allow create, update: if isValidDocument();
+    }
+
+    match /documentUtils/dateStore {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /reports/{id} {
+      allow read: if true;
+      allow write: if false;
     }
   }
 }
