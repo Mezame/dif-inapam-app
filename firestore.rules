@@ -2,46 +2,57 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    function isValidDocument() {
+    function isValidDocument(document) {
       return 
-      request.resource.data.createDate is string &&
-      request.resource.data.createDate.size() > 0 &&
-      request.resource.data.operationCode is string &&
-      request.resource.data.operationCode.matches('^NUEVO REG$|^CANJE$|^REPOSICION$') &&
-      request.resource.data.cardCode is string &&
-      request.resource.data.cardCode.size() == 10 &&
-      request.resource.data.cardCode.matches('[a-zA-Z0-9]*') &&
-      request.resource.data.branchOffice is string &&
-      request.resource.data.branchOffice.size() > 0 &&
-      request.resource.data.reviewDocument is string &&
-      request.resource.data.reviewDocument.size() > 0 &&
-      request.resource.data.makeCard is string &&
-      request.resource.data.makeCard.size() > 0 &&
-      request.resource.data.fathersLastname is string &&
-      request.resource.data.fathersLastname.size() > 0 &&
-      request.resource.data.fathersLastname.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*') &&
-      request.resource.data.mothersLastname is string &&
-      request.resource.data.mothersLastname.size() > 0 &&
-      request.resource.data.mothersLastname.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*') &&
-      request.resource.data.name is string &&
-      request.resource.data.name.size() > 0 &&
-      request.resource.data.name.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*') &&
-      request.resource.data.sex is string &&
-      request.resource.data.sex.matches('^Hombre$|^Mujer$') &&
-      request.resource.data.birthdate is string &&
-      request.resource.data.birthdate.size() > 0 &&
-      request.resource.data.birthplace is string &&
-      request.resource.data.birthplace.size() > 0 &&
-      request.resource.data.curp is string &&
-      request.resource.data.curp.size() == 18 &&
-      request.resource.data.curp.matches('[a-zA-Z0-9]*') &&
-      request.resource.data.maritalStatus is string &&
-      request.resource.data.maritalStatus.matches('^Soltero$|^Casado$');
+      document.createDate is string &&
+      document.createDate.size() > 0 &&
+      document.operationCode is string &&
+      document.operationCode.matches('^NUEVO REG$|^CANJE$|^REPOSICION$') &&
+      document.cardCode is string &&
+      document.cardCode.size() == 10 &&
+      document.cardCode.matches('[a-zA-Z0-9]*') &&
+      document.branchOffice is string &&
+      document.branchOffice.size() > 0 &&
+      document.reviewDocument is string &&
+      document.reviewDocument.size() > 0 &&
+      document.makeCard is string &&
+      document.makeCard.size() > 0 &&
+      document.fathersLastname is string &&
+      document.fathersLastname.size() > 0 &&
+      document.fathersLastname.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*') &&
+      document.mothersLastname is string &&
+      document.mothersLastname.size() > 0 &&
+      document.mothersLastname.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*') &&
+      document.name is string &&
+      document.name.size() > 0 &&
+      document.name.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*') &&
+      document.sex is string &&
+      document.sex.matches('^Hombre$|^Mujer$') &&
+      document.birthdate is string &&
+      document.birthdate.size() > 0 &&
+      document.birthplace is string &&
+      document.birthplace.size() > 0 &&
+      document.curp is string &&
+      document.curp.size() == 18 &&
+      document.curp.matches('[a-zA-Z0-9]*') &&
+      document.maritalStatus is string &&
+      document.maritalStatus.matches('^Soltero$|^Casado$');
+    }
+
+    function isValidAssistant(assistant) {
+      return 
+      assistant.name is string &&
+      assistant.name.size() > 0 &&
+      assistant.name.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*') &&
+      assistant.email is string &&
+      assistant.email.size() > 0 &&
+      assistant.email.matches('[a-zA-Z0-9_.+-]+^@$[a-zA-Z0-9-]+^.$[a-zA-Z0-9-.]+');
     }
  
     match /documents/{id} {
       allow read: if true;
-      allow create, update: if isValidDocument();
+      allow create, update: if isValidDocument(request.resource.data);
+      allow delete: if true;
     }
 
     match /documentUtils/dateStore {
@@ -52,6 +63,13 @@ service cloud.firestore {
     match /reports/{id} {
       allow read: if true;
       allow write: if false;
+    }
+
+    match /assistants/{id} {
+      allow read: if true;
+      allow create: if isValidAssistant(request.resource.data);
+      allow update: if false;
+      allow delete: if true;
     }
   }
 }
