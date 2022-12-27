@@ -46,7 +46,7 @@ service cloud.firestore {
       assistant.name.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*') &&
       assistant.email is string &&
       assistant.email.size() > 0 &&
-      assistant.email.matches('[a-zA-Z0-9_.+-]+^@$[a-zA-Z0-9-]+^.$[a-zA-Z0-9-.]+');
+      assistant.email.matches('[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+.[a-zA-Z]*');
     }
  
     match /documents/{id} {
