@@ -1,9 +1,17 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    match /{allPaths=**} {
-      allow read, write: if
-          request.time < timestamp.date(2023, 1, 15);
+
+    function isValidImage(image) {
+      return 
+      image.size < 2 * 1024 * 1024 &&
+      image.contentType.matches('^image/jpeg$|^image/png$');
+    }
+
+    match /documents/{filename} {
+      allow read: if true;
+      allow create, update: if isValidImage(request.resource);
+      allow delete: if true;
     }
   }
 }
