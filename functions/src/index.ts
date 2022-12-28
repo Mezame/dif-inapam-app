@@ -1,4 +1,5 @@
 import * as functions from 'firebase-functions';
+import { onCreateAssistantCreateUser } from './firestore/triggers/on-create-assistant-create-user';
 import { onCreateDocumentSetDateStore } from './firestore/triggers/on-create-document-set-date-store';
 import { onCreateDocumentSetUpdateReport } from './firestore/triggers/on-create-document-set-update-report';
 import { onDeleteDocumentUpdateReport } from './firestore/triggers/on-delete-document-update-report';
@@ -7,6 +8,7 @@ import { onUpdateDocumentUpdateReport } from './firestore/triggers/on-update-doc
 let onCreateDocument: PromiseSettledResult<void>[];
 let onUpdateDocument: PromiseSettledResult<void>[];
 let onDeleteDocument: PromiseSettledResult<void>[];
+let onCreateAssistant: PromiseSettledResult<void>[];
 
 export const helloWorld = functions.https.onRequest((_request, response) => {
   functions.logger.info('Hello logs!', { structuredData: true });
@@ -43,6 +45,17 @@ exports.onDeleteDocument = functions.firestore
       (await Promise.allSettled([
         await onDeleteDocumentUpdateReport(snapshot, context),
       ])) || onDeleteDocument;
+
+    return;
+  });
+
+exports.onCreateAssistant = functions.firestore
+  .document('assistants/{id}')
+  .onCreate(async (snapshot, context) => {
+    onCreateAssistant =
+      (await Promise.allSettled([
+        await onCreateAssistantCreateUser(snapshot, context),
+      ])) || onCreateAssistant;
 
     return;
   });
