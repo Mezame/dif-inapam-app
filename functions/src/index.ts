@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import { onCreateAssistantCreateUser } from './firestore/triggers/on-create-assistant-create-user';
 import { onCreateDocumentSetDateStore } from './firestore/triggers/on-create-document-set-date-store';
 import { onCreateDocumentSetUpdateReport } from './firestore/triggers/on-create-document-set-update-report';
+import { onDeleteAssistantDeleteUser } from './firestore/triggers/on-delete-assistant-delete-user';
 import { onDeleteDocumentUpdateReport } from './firestore/triggers/on-delete-document-update-report';
 import { onUpdateDocumentUpdateReport } from './firestore/triggers/on-update-document-update-report';
 
@@ -9,6 +10,7 @@ let onCreateDocument: PromiseSettledResult<void>[];
 let onUpdateDocument: PromiseSettledResult<void>[];
 let onDeleteDocument: PromiseSettledResult<void>[];
 let onCreateAssistant: PromiseSettledResult<void>[];
+let onDeleteAssistant: PromiseSettledResult<void>[];
 
 export const helloWorld = functions.https.onRequest((_request, response) => {
   functions.logger.info('Hello logs!', { structuredData: true });
@@ -56,6 +58,17 @@ exports.onCreateAssistant = functions.firestore
       (await Promise.allSettled([
         await onCreateAssistantCreateUser(snapshot, context),
       ])) || onCreateAssistant;
+
+    return;
+  });
+
+exports.onDeleteAssistant = functions.firestore
+  .document('assistants/{id}')
+  .onDelete(async (snapshot, context) => {
+    onDeleteAssistant =
+      (await Promise.allSettled([
+        await onDeleteAssistantDeleteUser(snapshot, context),
+      ])) || onDeleteAssistant;
 
     return;
   });
