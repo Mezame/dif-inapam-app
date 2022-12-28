@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Assistant } from '@features/assistants/assistant.interface';
-import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
+import { BehaviorSubject, Observable, take } from 'rxjs';
 import { GetAssistantsService } from '../firestore/get-assistants.service';
 
 @Injectable()
