@@ -28,7 +28,9 @@ export class AssistantListComponent implements OnInit {
 
       const id = assistant.metadata.id;
 
-      this.deleteAssistantsService.deleteAssistant(id).subscribe();
+      if (confirm('¿Confirmas eliminar asistente?') == true) {
+        this.deleteAssistantsService.deleteAssistant(id).subscribe();
+      }
     }
   }
 }
