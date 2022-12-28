@@ -1,5 +1,5 @@
 <app-primary-layout toolbar-title="Asistentes">
-  <div *ngIf="assistants$" class="column">
+  <div *ngIf="assistants$ | async as assistants" class="column">
     <div>
       <a mat-stroked-button color="primary" routerLink="crear-asistente">
         <mat-icon>add</mat-icon>
@@ -7,7 +7,7 @@
       </a>
     </div>
 
-    <app-assistant-list-table
+    <app-assistant-list-table *ngIf="assistants.length > 0"
       [data]="assistants$"
       (action)="getAssistantAction($event)"
     ></app-assistant-list-table>
