@@ -15,6 +15,7 @@ export async function onCreateAssistantCreateUser(
     const password = generateWeakPassword();
 
     const user = await auth.createUser({
+      uid: assistant.metadata.id,
       email: assistant.email,
       password,
     });
