@@ -23,7 +23,7 @@ export class AssistantAddComponent {
       const assistant = formData as Assistant;
 
       this.addAssistantsService.setAssistant(assistant).subscribe((docRef) => {
-        if (docRef) {
+        if (docRef == true) {
           this.router.navigate(['/admin/asistentes']);
         }
       });
