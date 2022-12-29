@@ -71,5 +71,9 @@ service cloud.firestore {
       allow update: if false;
       allow delete: if true;
     }
+
+    match /users/{id} {
+      allow read, write: if false;
+    }
   }
 }
