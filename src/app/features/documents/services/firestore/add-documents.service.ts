@@ -50,7 +50,7 @@ export class AddDocumentsService {
     return documentRef$.pipe(
       take(1),
       tap((_) => {
-        console.log(`setted document w/ id=${id}`);
+        console.log(`set document w/ id=${id}`);
       }),
       catchError(
         this.handleError<unknown>('AddDocumentsService', 'setDocument')

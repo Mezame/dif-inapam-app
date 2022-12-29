@@ -84,7 +84,7 @@ export class AddAssistantsService {
     return assistantRes$.pipe(
       take(1),
       tap((_) => {
-        console.log(`setted assistant w/ id=${assistantId}`);
+        console.log(`set assistant w/ id=${assistantId}`);
       }),
       catchError(
         this.handleError<boolean>('AddAssistantsService', 'setAssistant')
