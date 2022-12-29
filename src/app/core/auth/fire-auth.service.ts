@@ -16,7 +16,7 @@ import {
   tap,
 } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class FireAuthService {
   isLoggedIn$: Observable<boolean>;
 
