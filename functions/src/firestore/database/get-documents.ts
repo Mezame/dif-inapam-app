@@ -15,7 +15,7 @@ export async function getDocuments(): Promise<Document[]> {
     }
 
     if (documents) {
-      functions.logger.info('get documents successfuly');
+      functions.logger.info('got documents successfuly');
 
       return documents;
     } else {

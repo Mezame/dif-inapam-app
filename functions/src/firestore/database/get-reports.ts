@@ -11,7 +11,7 @@ export async function getReport(id: string): Promise<Report | undefined> {
     const report = docSnap.data() as Report;
 
     if(report){
-    functions.logger.info('get report successfully');
+    functions.logger.info('got report successfully');
     } else {
       functions.logger.info('report does not exist');
     }

@@ -10,7 +10,7 @@ export async function updateReport(report: Report) {
     const res = await docRef.update({...report});
 
     if (res) {
-      functions.logger.info('update report successfully');
+      functions.logger.info('updated report successfully');
     }
 
     return;
