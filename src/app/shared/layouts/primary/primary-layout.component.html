@@ -2,6 +2,7 @@
   <mat-sidenav class="side-nav" role="navigation" #sidenav>
     <mat-nav-list (click)="sidenav.close()" disableRipple>
       <a
+        *ngIf="isAdmin$ | async"
         mat-list-item
         routerLink="/admin/panel-reportes"
         routerLinkActive="active-link"
@@ -20,6 +21,7 @@
       </a>
 
       <a
+        *ngIf="isAdmin$ | async"
         mat-list-item
         routerLink="/admin/asistentes"
         routerLinkActive="active-link"
