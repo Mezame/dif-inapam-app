@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
+import {
+  AuthGuard,
+  hasCustomClaim,
+  redirectUnauthorizedTo,
+} from '@angular/fire/auth-guard';
 
 const routes: Routes = [
   {
@@ -26,6 +31,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/document-detail/document-detail.module').then(
             (m) => m.DocumentDetailModule
+          ),
+      },
+      {
+        path: 'mi-cuenta',
+        loadChildren: () =>
+          import('./pages/user-edit/user-edit.module').then(
+            (m) => m.UserEditModule
           ),
       },
       {

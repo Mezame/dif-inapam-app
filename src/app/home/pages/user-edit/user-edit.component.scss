@@ -1,0 +1,16 @@
+@use "src/styles/responsive-layout" with (
+  $content-width: 704px
+);
+
+form {
+  @extend %host;
+  gap: 16px;
+}
+
+.email {
+  padding-bottom: 20px;
+}
+
+.password-hint {
+  margin-left: 16px;
+}

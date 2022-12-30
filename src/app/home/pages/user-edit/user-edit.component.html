@@ -1,0 +1,59 @@
+<app-primary-layout toolbar-title="Mi cuenta">
+  <ng-container *ngIf="user$ | async as user">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="row w-2-col email">
+        <div class="column col-group">
+          <span class="mat-subtitle-2">Correo electrónico</span>
+
+          <span>{{ user.email }}</span>
+        </div>
+      </div>
+
+      <div class="row w-2-col">
+        <div class="column col-group">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Contraseña</mat-label>
+            <input type="password" matInput placeholder="••••••••" formControlName="password" />
+
+            <mat-error *ngIf="passwordCtrl.errors?.['required']"
+              >Debes ingresar una contraseña.</mat-error
+            >
+
+            <mat-error *ngIf="passwordCtrl.errors?.['pattern']"
+              >Debes ingresar una contraseña más segura.</mat-error
+            >
+          </mat-form-field>
+
+          <div *ngIf="passwordCtrl.errors?.['pattern']">
+            <span class="mat-small password-hint"
+              >Debe tener al menos una letra minúscula.</span
+            ><br />
+            <span class="mat-small password-hint"
+              >Debe tener al menos una letra mayúsula.</span
+            ><br />
+            <span class="mat-small password-hint"
+              >Debe tener al menos un número.</span
+            ><br />
+            <span class="mat-small password-hint"
+              >Debe tener al menos un caracter: #?!@$%^&*-.</span
+            ><br />
+            <span class="mat-small password-hint"
+              >Debe tener al menos 6 caracteres.</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="!userForm.valid"
+        >
+          <span>Cambiar contraseña</span>
+        </button>
+      </div>
+    </form>
+  </ng-container>
+</app-primary-layout>
