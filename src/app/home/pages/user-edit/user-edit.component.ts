@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { FireAuthService } from '@core/auth/fire-auth.service';
+import { User } from '@core/auth/user.interface';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -15,10 +16,11 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserEditComponent implements OnInit {
+  user$: Observable<User | null>;
+
   userForm!: FormGroup<{
     password: FormControl<string | null>;
   }>;
-  user$: Observable<any>;
 
   constructor(
     private fb: FormBuilder,

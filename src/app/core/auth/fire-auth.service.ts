@@ -16,10 +16,11 @@ import {
   take,
   tap,
 } from 'rxjs';
+import { User } from './user.interface';
 
 @Injectable({ providedIn: 'root' })
 export class FireAuthService {
-  user$: Observable<{ username: string | null; email: string | null } | null>;
+  user$: Observable<User | null>;
 
   isLoggedIn$: Observable<boolean>;
 
@@ -32,7 +33,7 @@ export class FireAuthService {
   constructor(private fireAuth: Auth) {
     this.user$ = authState(this.fireAuth).pipe(
       map((user) => {
-        return user ? { username: user.displayName, email: user.email } : null;
+        return !!user ? { username: user.displayName!, email: user.email! } : null;
       })
     );
 
@@ -42,7 +43,7 @@ export class FireAuthService {
 
     this.isAdmin$ = authState(this.fireAuth).pipe(
       switchMap(async (user) => {
-        console.log(user);
+        //console.log(user);
         const idTokenResult = await user?.getIdTokenResult();
 
         return idTokenResult?.claims['role'] == 'admin' ? true : false;
@@ -52,7 +53,7 @@ export class FireAuthService {
     //this.isEmailVerified$ = authState(this.fireAuth).pipe(map((user) => !!user?.emailVerified));
   }
 
-  signIn(email: string, password: string): Observable<any> {
+  signIn(email: string, password: string): Observable<User> {
     const userCredential$ = from(
       signInWithEmailAndPassword(this.fireAuth, email, password)
     ).pipe(
@@ -64,7 +65,7 @@ export class FireAuthService {
             //emailVerified: userCredential.user.emailVerified,
           };
 
-          return user;
+          return user as User;
         } else {
           throw new Error('could not signed in');
         }
@@ -78,7 +79,7 @@ export class FireAuthService {
           console.log(`signed in user w/ email=${user.email}`);
         }
       }),
-      catchError(this.handleError<any>('FireAuthService', 'signIn'))
+      catchError(this.handleError<User>('FireAuthService', 'signIn'))
     );
   }
 
