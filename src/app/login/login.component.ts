@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-login',
-  template: '<app-custom-login></app-custom-login>',
+  template: '<router-outlet></router-outlet>',
 })
 export class LoginComponent {}
