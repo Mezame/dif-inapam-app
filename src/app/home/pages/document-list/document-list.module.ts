@@ -14,9 +14,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { GetDocumentsService } from '@features/documents/services/firestore/get-documents.service';
-import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
-
 const routes: Routes = [{ path: '', component: DocumentListComponent }];
 
 @NgModule({
@@ -34,6 +31,5 @@ const routes: Routes = [{ path: '', component: DocumentListComponent }];
     MatButtonModule,
     MatIconModule,
   ],
-  providers: [GetDocumentsService, DocumentStoreService]
 })
 export class DocumentListModule {}
