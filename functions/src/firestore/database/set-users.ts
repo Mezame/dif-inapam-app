@@ -3,7 +3,7 @@ import { firestore } from '../../init';
 
 export async function setUser(id: string, user = {}) {
   try {
-    const docRef = firestore.doc(`user/${id}`);
+    const docRef = firestore.doc(`users/${id}`);
 
     const res = await docRef.set(user);
 
