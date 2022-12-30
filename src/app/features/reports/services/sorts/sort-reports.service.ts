@@ -3,7 +3,9 @@ import { Report } from '@features/reports/report.interface';
 import { Order } from '@shared/types/order.type';
 import { map, Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any',
+})
 export class SortReportsService {
   private orderedReports$!: Observable<Report[]>;
   private orderFn!: (a: Report, b: Report) => number;

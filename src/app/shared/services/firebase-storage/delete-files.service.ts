@@ -3,7 +3,7 @@ import { deleteObject, ref, Storage } from '@angular/fire/storage';
 import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'any',
 })
 export class DeleteFilesService {
   constructor(private fireStorage: Storage) {}

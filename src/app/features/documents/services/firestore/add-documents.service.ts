@@ -11,7 +11,9 @@ import {
 import { Document } from '@features/documents/document.interface';
 import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any',
+})
 export class AddDocumentsService {
   constructor(private firestore: Firestore) {}
 

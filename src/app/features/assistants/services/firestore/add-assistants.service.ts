@@ -13,7 +13,9 @@ import {
 import { Assistant } from '@features/assistants/assistant.interface';
 import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any',
+})
 export class AddAssistantsService {
   assistantsCollection = collection(
     this.firestore,

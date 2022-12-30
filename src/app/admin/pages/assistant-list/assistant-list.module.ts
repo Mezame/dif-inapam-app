@@ -8,9 +8,6 @@ import { AssistantListComponent } from './assistant-list.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { DeleteAssistantsService } from '@features/assistants/services/firestore/delete-assistants.service';
-import { GetAssistantsService } from '@features/assistants/services/firestore/get-assistants.service';
-import { AssistantStoreService } from '@features/assistants/services/store/assistant-store.service';
 
 const routes: Routes = [{ path: '', component: AssistantListComponent }];
 
@@ -23,11 +20,6 @@ const routes: Routes = [{ path: '', component: AssistantListComponent }];
     AssistantListTableModule,
     MatButtonModule,
     MatIconModule,
-  ],
-  providers: [
-    AssistantStoreService,
-    GetAssistantsService,
-    DeleteAssistantsService,
   ],
 })
 export class AssistantListModule {}

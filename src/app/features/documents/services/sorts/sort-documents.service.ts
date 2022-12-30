@@ -3,7 +3,9 @@ import { Document } from '@features/documents/document.interface';
 import { Order } from '@shared/types/order.type';
 import { map, Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any',
+})
 export class SortDocumentsService {
   private orderedDocuments$!: Observable<Document[]>;
   private orderFn!: (a: Document, b: Document) => number;

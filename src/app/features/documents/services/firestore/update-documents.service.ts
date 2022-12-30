@@ -3,7 +3,9 @@ import { doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import { Document } from '@features/documents/document.interface';
 import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any',
+})
 export class UpdateDocumentsService {
   constructor(private firestore: Firestore) {}
 

@@ -3,7 +3,9 @@ import { Assistant } from '@features/assistants/assistant.interface';
 import { BehaviorSubject, Observable, take } from 'rxjs';
 import { GetAssistantsService } from '../firestore/get-assistants.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any',
+})
 export class AssistantStoreService {
   private assistants$ = new BehaviorSubject<Assistant[]>([]);
 

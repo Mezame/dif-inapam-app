@@ -8,7 +8,7 @@ import {
 import { catchError, from, Observable, of, switchMap, take, tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'any',
 })
 export class UploadFilesService {
   constructor(private fireStorage: Storage) {}

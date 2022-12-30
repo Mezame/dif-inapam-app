@@ -15,7 +15,9 @@ import { DateStore } from '@features/documents/date-store.interface';
 import { Document } from '@features/documents/document.interface';
 import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any',
+})
 export class GetDocumentsService {
   private documentsCollectionRef = collection(
     this.firestore,

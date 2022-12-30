@@ -4,7 +4,9 @@ import { Document } from '@features/documents/document.interface';
 import { BehaviorSubject, map, Observable, take } from 'rxjs';
 import { GetDocumentsService } from '../firestore/get-documents.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any',
+})
 export class DocumentStoreService {
   private documents$ = new BehaviorSubject<Document[]>([]);
 

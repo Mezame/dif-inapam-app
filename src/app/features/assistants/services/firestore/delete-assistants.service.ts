@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { deleteDoc, doc, Firestore } from '@angular/fire/firestore';
 import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any',
+})
 export class DeleteAssistantsService {
   constructor(private firestore: Firestore) {}
 

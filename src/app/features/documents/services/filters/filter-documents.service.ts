@@ -3,7 +3,9 @@ import { map, Observable } from 'rxjs';
 import { MonthNumber } from '@shared/types/month-number.type';
 import { Document } from '@features/documents/document.interface';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any',
+})
 export class FilterDocumentsService {
   private filteredDocuments$!: Observable<Document[]>;
 

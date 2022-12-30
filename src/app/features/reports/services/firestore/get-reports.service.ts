@@ -9,7 +9,9 @@ import {
 import { Report } from '@features/reports/report.interface';
 import { catchError, Observable, of } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any',
+})
 export class GetReportsService {
   private reportsCollectionRef = collection(
     this.firestore,
