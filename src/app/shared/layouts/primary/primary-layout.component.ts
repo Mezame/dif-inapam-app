@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FireAuthService } from '@core/auth/fire-auth.service';
+import { Observable } from 'rxjs';
 import { ToolbarButton } from '../toolbar-button.interface';
 
 @Component({
@@ -9,7 +10,7 @@ import { ToolbarButton } from '../toolbar-button.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrimaryLayoutComponent {
-  isAdmin$ = this.fireAuthService.isAdmin$;
+  isAdmin$: Observable<boolean>;
 
   @Input('toolbar-title') toolbarTitle?: string;
   /*
@@ -17,5 +18,7 @@ export class PrimaryLayoutComponent {
 
   @Input('toolbar-button') toolbarButton?: ToolbarButton;
   */
-  constructor(private fireAuthService: FireAuthService) {}
+  constructor(private fireAuthService: FireAuthService) {
+    this.isAdmin$ = this.fireAuthService.isAdmin$;
+  }
 }
