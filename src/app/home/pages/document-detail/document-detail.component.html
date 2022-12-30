@@ -3,7 +3,7 @@
   toolbar-back-link="/home/oficios"
 >
   <ng-container *ngIf="document$ | async as document">
-    <div *ngIf="cardCode" class="button-group">
+    <div *ngIf="cardCode && (isAdmin$ | async)" class="button-group">
       <a
         mat-stroked-button
         color="primary"

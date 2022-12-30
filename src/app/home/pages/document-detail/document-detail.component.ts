@@ -6,6 +6,7 @@ import { DocumentStoreService } from '@features/documents/services/store/documen
 import { UpdateDocumentsService } from '@features/documents/services/firestore/update-documents.service';
 import { Observable } from 'rxjs';
 import { DeleteFilesService } from '@shared/services/firebase-storage/delete-files.service';
+import { FireAuthService } from '@core/auth/fire-auth.service';
 
 @Component({
   selector: 'app-document-detail',
@@ -16,9 +17,11 @@ import { DeleteFilesService } from '@shared/services/firebase-storage/delete-fil
 export class DocumentDetailComponent implements OnInit {
   cardCode!: string;
   document$!: Observable<Document>;
+  isAdmin$: Observable<boolean>;
 
   constructor(
     private route: ActivatedRoute,
+    private fireAuthService: FireAuthService,
     private documentStoreService: DocumentStoreService,
     private updateDocumentsService: UpdateDocumentsService,
     private deleteDocumentsService: DeleteDocumentsService,
@@ -26,6 +29,8 @@ export class DocumentDetailComponent implements OnInit {
     private router: Router
   ) {
     this.cardCode = this.route.snapshot.params['cardCode'];
+
+    this.isAdmin$ = this.fireAuthService.isAdmin$;
   }
   ngOnInit(): void {
     if (this.cardCode) {
