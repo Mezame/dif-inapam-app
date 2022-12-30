@@ -32,6 +32,7 @@ export class GetDocumentsService {
     ) as Observable<Document[]>;
 
     return documents$.pipe(
+      take(1),
       catchError(
         this.handleError<Document[]>('GetDocumentService', 'getDocuments', [])
       )

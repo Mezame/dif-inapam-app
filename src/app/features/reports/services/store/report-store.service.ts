@@ -4,7 +4,7 @@ import { BehaviorSubject, map, Observable, take } from 'rxjs';
 import { GetReportsService } from '../firestore/get-reports.service';
 
 @Injectable({
-  providedIn: 'any',
+  providedIn: 'root',
 })
 export class ReportStoreService {
   private reports$ = new BehaviorSubject<Report[]>([]);

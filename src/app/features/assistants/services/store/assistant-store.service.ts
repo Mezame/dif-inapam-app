@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, take } from 'rxjs';
 import { GetAssistantsService } from '../firestore/get-assistants.service';
 
 @Injectable({
-  providedIn: 'any',
+  providedIn: 'root',
 })
 export class AssistantStoreService {
   private assistants$ = new BehaviorSubject<Assistant[]>([]);

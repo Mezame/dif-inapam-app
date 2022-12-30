@@ -7,7 +7,7 @@ import {
   Firestore,
 } from '@angular/fire/firestore';
 import { Assistant } from '@features/assistants/assistant.interface';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'any',
@@ -26,6 +26,7 @@ export class GetAssistantsService {
     ) as Observable<Assistant[]>;
 
     return assistant$.pipe(
+      take(1),
       catchError(
         this.handleError<Assistant[]>(
           'GetAssistantsService',
