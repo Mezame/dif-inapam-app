@@ -4,6 +4,7 @@ import {
   authState,
   signInWithEmailAndPassword,
   signOut,
+  updatePassword,
 } from '@angular/fire/auth';
 import {
   catchError,
@@ -18,38 +19,54 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class FireAuthService {
+  user$: Observable<{ username: string | null; email: string | null } | null>;
+
   isLoggedIn$: Observable<boolean>;
 
   isLoggedOut$: Observable<boolean>;
 
   isAdmin$: Observable<boolean>;
 
+  //isEmailVerified$: Observable<boolean>;
+
   constructor(private fireAuth: Auth) {
+    this.user$ = authState(this.fireAuth).pipe(
+      map((user) => {
+        return user ? { username: user.displayName, email: user.email } : null;
+      })
+    );
+
     this.isLoggedIn$ = authState(this.fireAuth).pipe(map((user) => !!user));
 
     this.isLoggedOut$ = this.isLoggedIn$.pipe(map((loggedIn) => !loggedIn));
 
     this.isAdmin$ = authState(this.fireAuth).pipe(
       switchMap(async (user) => {
+        console.log(user);
         const idTokenResult = await user?.getIdTokenResult();
 
         return idTokenResult?.claims['role'] == 'admin' ? true : false;
       })
     );
+
+    //this.isEmailVerified$ = authState(this.fireAuth).pipe(map((user) => !!user?.emailVerified));
   }
 
-  login(email: string, password: string): Observable<any> {
+  signIn(email: string, password: string): Observable<any> {
     const userCredential$ = from(
       signInWithEmailAndPassword(this.fireAuth, email, password)
     ).pipe(
       map((userCredential) => {
         if (userCredential) {
-          return {
+          const user = {
             username: userCredential.user.displayName,
             email: userCredential.user.email,
+            emailVerified: userCredential.user.emailVerified,
           };
+
+          return user;
         } else {
-          throw new Error('could not login');
+          throw new Error('could not signed in');
         }
       })
     );
@@ -58,20 +75,20 @@ export class FireAuthService {
       take(1),
       tap((user) => {
         if (user) {
-          console.log(`logged in user w/ email=${user.email}`);
+          console.log(`signed in user w/ email=${user.email}`);
         }
       }),
-      catchError(this.handleError<any>('FireAuthService', 'login'))
+      catchError(this.handleError<any>('FireAuthService', 'signIn'))
     );
   }
 
-  logout(): Observable<boolean> {
+  signOut(): Observable<boolean> {
     const res$ = from(signOut(this.fireAuth)).pipe(
       map((res) => {
         if (res == undefined) {
           return true;
         } else {
-          throw new Error('could not logout');
+          throw new Error('could not signed out');
         }
       })
     );
@@ -79,9 +96,34 @@ export class FireAuthService {
     return res$.pipe(
       take(1),
       tap((_) => {
-        console.log(`logged out successfully`);
+        console.log(`signed out successfully`);
       }),
-      catchError(this.handleError<boolean>('FireAuthService', 'logout'))
+      catchError(this.handleError<boolean>('FireAuthService', 'signOut'))
+    );
+  }
+
+  updatePassword(password: string): Observable<boolean> {
+    const currentUser = this.fireAuth.currentUser;
+    let res$: Observable<boolean> = of(false);
+
+    if (currentUser) {
+      res$ = from(updatePassword(currentUser, password)).pipe(
+        map((res) => {
+          if (res == undefined) {
+            return true;
+          } else {
+            throw new Error('could not update password');
+          }
+        })
+      );
+    }
+
+    return res$.pipe(
+      take(1),
+      tap((_) => {
+        console.log(`updated password successfully`);
+      }),
+      catchError(this.handleError<boolean>('FireAuthService', 'updatePassword'))
     );
   }
 
