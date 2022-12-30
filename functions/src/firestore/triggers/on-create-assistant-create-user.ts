@@ -1,7 +1,6 @@
 import * as functions from 'firebase-functions';
 import { auth } from '../../init';
 import { Assistant } from '../../utils/assistant-utils';
-import { generateWeakPassword } from '../../utils/utils';
 import { setUser } from '../database/set-users';
 
 export async function onCreateAssistantCreateUser(
@@ -12,7 +11,7 @@ export async function onCreateAssistantCreateUser(
 ) {
   try {
     const assistant = snapshot.data() as Assistant;
-    const password = generateWeakPassword();
+    const password = 'difinapam';
 
     const user = await auth.createUser({
       uid: assistant.metadata.id,
