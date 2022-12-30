@@ -61,7 +61,7 @@ export class FireAuthService {
           const user = {
             username: userCredential.user.displayName,
             email: userCredential.user.email,
-            emailVerified: userCredential.user.emailVerified,
+            //emailVerified: userCredential.user.emailVerified,
           };
 
           return user;
