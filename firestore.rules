@@ -2,74 +2,89 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    function isAdmin() {
+      return isAuthorized() && 'role' in request.auth.token &&
+        request.auth.token.role == 'admin';
+    }
+
+    function isAuthorized() {
+      return isAuthenticated() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid));
+     }
+
+    function isAuthenticated() {
+      return request.auth.uid != null;
+    }
+
     function isDocumentValid(document) {
       return 
-      document.createDate is string &&
-      document.createDate.size() > 0 &&
-      document.operationCode is string &&
-      document.operationCode.matches('^NUEVO REG$|^CANJE$|^REPOSICION$') &&
-      document.cardCode is string &&
-      document.cardCode.size() == 10 &&
-      document.cardCode.matches('[a-zA-Z0-9]*') &&
-      document.branchOffice is string &&
-      document.branchOffice.size() > 0 &&
-      document.reviewDocument is string &&
-      document.reviewDocument.size() > 0 &&
-      document.makeCard is string &&
-      document.makeCard.size() > 0 &&
-      document.fathersLastname is string &&
-      document.fathersLastname.size() > 0 &&
-      document.fathersLastname.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*') &&
-      document.mothersLastname is string &&
-      document.mothersLastname.size() > 0 &&
-      document.mothersLastname.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*') &&
-      document.name is string &&
-      document.name.size() > 0 &&
-      document.name.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*') &&
-      document.sex is string &&
-      document.sex.matches('^Hombre$|^Mujer$') &&
-      document.birthdate is string &&
-      document.birthdate.size() > 0 &&
-      document.birthplace is string &&
-      document.birthplace.size() > 0 &&
-      document.curp is string &&
-      document.curp.size() == 18 &&
-      document.curp.matches('[a-zA-Z0-9]*') &&
-      document.maritalStatus is string &&
-      document.maritalStatus.matches('^Soltero$|^Casado$');
+        document.createDate is string &&
+        document.createDate.size() > 0 &&
+        document.operationCode is string &&
+        document.operationCode.matches('^NUEVO REG$|^CANJE$|^REPOSICION$') &&
+        document.cardCode is string &&
+        document.cardCode.size() == 10 &&
+        document.cardCode.matches('[a-zA-Z0-9]*') &&
+        document.branchOffice is string &&
+        document.branchOffice.size() > 0 &&
+        document.reviewDocument is string &&
+        document.reviewDocument.size() > 0 &&
+        document.makeCard is string &&
+        document.makeCard.size() > 0 &&
+        document.fathersLastname is string &&
+        document.fathersLastname.size() > 0 &&
+        document.fathersLastname.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*') &&
+        document.mothersLastname is string &&
+        document.mothersLastname.size() > 0 &&
+        document.mothersLastname.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ]*') &&
+        document.name is string &&
+        document.name.size() > 0 &&
+        document.name.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*') &&
+        document.sex is string &&
+        document.sex.matches('^Hombre$|^Mujer$') &&
+        document.birthdate is string &&
+        document.birthdate.size() > 0 &&
+        document.birthplace is string &&
+        document.birthplace.size() > 0 &&
+        document.curp is string &&
+        document.curp.size() == 18 &&
+        document.curp.matches('[a-zA-Z0-9]*') &&
+        document.maritalStatus is string &&
+        document.maritalStatus.matches('^Soltero$|^Casado$');
     }
 
     function isAssistantValid(assistant) {
       return 
-      assistant.name is string &&
-      assistant.name.size() > 0 &&
-      assistant.name.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*') &&
-      assistant.email is string &&
-      assistant.email.size() > 0 &&
-      assistant.email.matches('[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+.[a-zA-Z]*');
+        assistant.name is string &&
+        assistant.name.size() > 0 &&
+        assistant.name.matches('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*') &&
+        assistant.email is string &&
+        assistant.email.size() > 0 &&
+        assistant.email.matches('[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+.[a-zA-Z]*');
     }
  
     match /documents/{id} {
-      allow read: if true;
-      allow create, update: if isDocumentValid(request.resource.data);
-      allow delete: if true;
+      allow read: if isAuthorized();
+      allow create: if isAuthorized() && isDocumentValid(request.resource.data);
+      allow update: if isAdmin() && isDocumentValid(request.resource.data);
+      allow delete: if isAdmin();
     }
 
     match /documentUtils/dateStore {
-      allow read: if true;
+      allow read: if isAuthorized();
       allow write: if false;
     }
 
     match /reports/{id} {
-      allow read: if true;
+      allow read: if isAdmin();
       allow write: if false;
     }
 
     match /assistants/{id} {
-      allow read: if true;
-      allow create: if isAssistantValid(request.resource.data);
+      allow read: if isAdmin();
+      allow create: if isAdmin() && isAssistantValid(request.resource.data);
       allow update: if false;
-      allow delete: if true;
+      allow delete: if isAdmin();
     }
 
     match /users/{id} {
