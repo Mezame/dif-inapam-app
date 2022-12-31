@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DocumentDetailResolverService } from '@features/documents/services/resolvers/document-detail-resolver.service';
+import { ReportDetailResolverService } from '@features/reports/services/resolvers/report-detail-resolver.service';
 import { AdminComponent } from './admin.component';
 
 const routes: Routes = [
@@ -28,6 +29,9 @@ const routes: Routes = [
           import('./pages/report-detail/report-detail.module').then(
             (m) => m.ReportDetailModule
           ),
+          resolve: {
+            report: ReportDetailResolverService,
+          },
       },
       {
         path: 'oficios/:cardCode/editar',

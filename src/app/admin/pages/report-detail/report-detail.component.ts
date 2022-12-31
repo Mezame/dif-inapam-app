@@ -11,7 +11,6 @@ import { Document } from '@features/documents/document.interface';
 import { SortDocumentsService } from '@features/documents/services/sorts/sort-documents.service';
 import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { Report } from '@features/reports/report.interface';
-import { ReportStoreService } from '@features/reports/services/store/report-store.service';
 import { map, Observable, switchMap } from 'rxjs';
 import { createDownloadUrl } from '../../shared/create-download-url';
 
@@ -22,8 +21,8 @@ import { createDownloadUrl } from '../../shared/create-download-url';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReportDetailComponent implements OnInit {
-  reportId!: string;
-  report$!: Observable<Report>;
+  reportId: string;
+  report$: Observable<Report>;
   documents$?: Observable<Document[]>;
   objectUrl: string | null = null;
 
@@ -31,11 +30,12 @@ export class ReportDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private documentStoreService: DocumentStoreService,
     private sortDocumentsService: SortDocumentsService,
-    private reportStoreService: ReportStoreService,
     private renderer: Renderer2,
     private cDRef: ChangeDetectorRef
   ) {
     this.reportId = this.route.snapshot.params['id'];
+
+    this.report$ = this.route.data.pipe(map((data) => data['report']));
   }
 
   ngOnInit(): void {
@@ -44,10 +44,6 @@ export class ReportDetailComponent implements OnInit {
         this.documentStoreService.getDocuments(),
         'des'
       );
-
-    if (this.reportId) {
-      this.report$ = this.reportStoreService.getReport(this.reportId);
-    }
 
     if (this.report$ && sortedDocuments$) {
       this.documents$ = this.report$.pipe(
