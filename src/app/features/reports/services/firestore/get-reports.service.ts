@@ -7,7 +7,7 @@ import {
   Firestore,
 } from '@angular/fire/firestore';
 import { Report } from '@features/reports/report.interface';
-import { catchError, Observable, of, take } from 'rxjs';
+import { catchError, Observable, of, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'any',
@@ -27,6 +27,11 @@ export class GetReportsService {
 
     return reports$.pipe(
       take(1),
+      tap(reports =>{
+        if(reports) {
+          console.log('got reports');
+        }
+      }),
       catchError(
         this.handleError<Report[]>('GetReportsService', 'getReports', [])
       )
