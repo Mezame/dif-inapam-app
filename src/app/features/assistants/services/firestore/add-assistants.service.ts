@@ -52,8 +52,8 @@ export class AddAssistantsService {
       const docRef = doc(this.firestore, 'assistants', assistantId);
 
       assistantRes$ = from(setDoc(docRef, assistant)).pipe(
-        map((docRef) => {
-          if (docRef == undefined) {
+        map((res) => {
+          if (res == undefined) {
             return true;
           } else {
             throw new Error('could not set assistant');
@@ -73,8 +73,8 @@ export class AddAssistantsService {
           },
         })
       ).pipe(
-        map((docRef) => {
-          if (docRef == undefined) {
+        map((res) => {
+          if (res == undefined) {
             return true;
           } else {
             throw new Error('could not set assistant');

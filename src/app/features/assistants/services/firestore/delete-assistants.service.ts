@@ -11,9 +11,9 @@ export class DeleteAssistantsService {
   deleteAssistant(id: string): Observable<boolean> {
     const docRef = doc(this.firestore, 'assistants/' + id);
 
-    const assistantRef$ = from(deleteDoc(docRef)).pipe(
-      map((docRef) => {
-        if (docRef == undefined) {
+    const assistantRes$ = from(deleteDoc(docRef)).pipe(
+      map((res) => {
+        if (res == undefined) {
           return true;
         } else {
           throw new Error('could not delete assistant');
@@ -21,7 +21,7 @@ export class DeleteAssistantsService {
       })
     );
 
-    return assistantRef$.pipe(
+    return assistantRes$.pipe(
       take(1),
       tap((_) => {
         console.log(`deleted assistant w/ id=${id}`);

@@ -36,26 +36,26 @@ export class AddDocumentsService {
     );
   }
 
-  setDocument(id: string, document: Document): Observable<unknown> {
+  setDocument(id: string, document: Document): Observable<boolean> {
     const docRef = doc(this.firestore, 'documents', id);
 
-    const documentRef$ = from(setDoc(docRef, document)).pipe(
-      map((docRef) => {
-        if (docRef == undefined) {
-          return id;
+    const res$ = from(setDoc(docRef, document)).pipe(
+      map((res) => {
+        if (res == undefined) {
+          return true;
         } else {
           throw new Error('could not set document');
         }
       })
     );
 
-    return documentRef$.pipe(
+    return res$.pipe(
       take(1),
       tap((_) => {
         console.log(`set document w/ id=${id}`);
       }),
       catchError(
-        this.handleError<unknown>('AddDocumentsService', 'setDocument')
+        this.handleError<boolean>('AddDocumentsService', 'setDocument')
       )
     );
   }

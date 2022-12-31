@@ -11,9 +11,9 @@ export class DeleteDocumentsService {
   deleteDocument(id: string): Observable<boolean> {
     const docRef = doc(this.firestore, 'documents/' + id);
 
-    const documentRef$ = from(deleteDoc(docRef)).pipe(
-      map((docRef) => {
-        if (docRef == undefined) {
+    const documentRes$ = from(deleteDoc(docRef)).pipe(
+      map((res) => {
+        if (res == undefined) {
           return true;
         } else {
           throw new Error('could not delete document');
@@ -21,7 +21,7 @@ export class DeleteDocumentsService {
       })
     );
 
-    return documentRef$.pipe(
+    return documentRes$.pipe(
       take(1),
       tap((_) => {
         console.log(`deleted document w/ id=${id}`);

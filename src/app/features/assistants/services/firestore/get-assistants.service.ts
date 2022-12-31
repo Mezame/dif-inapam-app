@@ -7,7 +7,7 @@ import {
   Firestore,
 } from '@angular/fire/firestore';
 import { Assistant } from '@features/assistants/assistant.interface';
-import { catchError, Observable, of, take } from 'rxjs';
+import { catchError, Observable, of, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'any',
@@ -21,12 +21,17 @@ export class GetAssistantsService {
   constructor(private firestore: Firestore) {}
 
   getAssistants(): Observable<Assistant[]> {
-    const assistant$ = collectionData(
+    const assistants$ = collectionData(
       this.assistantsCollectionRef
     ) as Observable<Assistant[]>;
 
-    return assistant$.pipe(
+    return assistants$.pipe(
       take(1),
+      tap((assistants) => {
+        if (assistants) {
+          console.log('got assistants');
+        }
+      }),
       catchError(
         this.handleError<Assistant[]>(
           'GetAssistantsService',
