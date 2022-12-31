@@ -28,8 +28,10 @@ export class GetAssistantsService {
     return assistants$.pipe(
       take(1),
       tap((assistants) => {
-        if (assistants) {
+        if (assistants.length > 0) {
           console.log('got assistants');
+        } else {
+          console.log('there were no assistants')
         }
       }),
       catchError(

@@ -25,7 +25,7 @@ export class AddAssistantsService {
   constructor(private firestore: Firestore) {}
 
   addAssistant(
-    assistant: Assistant
+    assistant: Assistant | Partial<Assistant>
   ): Observable<DocumentReference<DocumentData>> {
     const assistantRef$ = from(addDoc(this.assistantsCollection, assistant));
 
@@ -43,8 +43,8 @@ export class AddAssistantsService {
     );
   }
 
-  setAssistant(assistant: Assistant, id?: string): Observable<boolean> {
-    let assistantRes$: Observable<boolean>;
+  setAssistant(assistant: Assistant | Partial<Assistant>, id?: string): Observable<any> {
+    let assistantRes$: Observable<any>;
     let assistantId: string;
 
     if (id) {
@@ -62,20 +62,22 @@ export class AddAssistantsService {
       );
     } else {
       const docRef = doc(this.assistantsCollection);
+
       assistantId = docRef.id;
 
-      assistantRes$ = from(
-        setDoc(docRef, {
-          ...assistant,
-          metadata: {
-            id: assistantId,
-            timestamp: serverTimestamp(),
-          },
-        })
-      ).pipe(
+      const newAssistant = {
+        ...assistant,
+        metadata: {
+          id: assistantId,
+          timestamp: serverTimestamp(),
+        },
+      };
+
+      assistantRes$ = from(setDoc(docRef, newAssistant)).pipe(
         map((res) => {
           if (res == undefined) {
-            return true;
+            const ref = newAssistant.metadata;
+            return ref;
           } else {
             throw new Error('could not set assistant');
           }
@@ -88,9 +90,7 @@ export class AddAssistantsService {
       tap((_) => {
         console.log(`set assistant w/ id=${assistantId}`);
       }),
-      catchError(
-        this.handleError<boolean>('AddAssistantsService', 'setAssistant')
-      )
+      catchError(this.handleError<any>('AddAssistantsService', 'setAssistant'))
     );
   }
 
