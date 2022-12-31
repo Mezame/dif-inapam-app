@@ -7,36 +7,45 @@ import { GetAssistantsService } from '../firestore/get-assistants.service';
   providedIn: 'root',
 })
 export class AssistantStoreService {
-  private assistants$ = new BehaviorSubject<Assistant[]>([]);
+  private readonly assistants$ = new BehaviorSubject<Assistant[]>([]);
 
   constructor(private getAssistantsService: GetAssistantsService) {}
 
   loadAssistants() {
     this.getAssistantsService.getAssistants().subscribe((assistants) => {
-      if (assistants?.length > 0) {
-        this.assistants$.next(assistants);
-      }
+      this.assistants$.next(assistants);
     });
   }
 
   getAssistants(): Observable<Assistant[]> {
-    const done = false;
-    this.assistants$.pipe(take(2)).subscribe((assistants) => {
-      if (assistants.length < 1) {
-        this.loadAssistants();
-      }
-    });
+    const assistants = this.assistants$.getValue();
+
+    if (assistants.length < 1) {
+      this.loadAssistants();
+    }
 
     return this.assistants$;
   }
 
-  deleteAssistant(id: string) {
-    const assistants$ = this.getAssistants();
+  addDocument(assistant: Assistant) {
+    const assistants = this.assistants$.getValue() as ReadonlyArray<Assistant>;
 
-    assistants$.pipe(take(1)).subscribe((assistants) => {
-      if (assistants.length == 1 && assistants[0].metadata.id == id) {
-        this.assistants$.next([]);
-      }
-    });
+    const newAssistants = [...assistants, assistant];
+
+    this.assistants$.next(newAssistants);
+  }
+
+  deleteAssistant(id: string) {
+    const assistants = this.assistants$.getValue() as ReadonlyArray<Assistant>;
+
+    const index = assistants.findIndex(
+      (assistant) => assistant.metadata.id == id
+    );
+
+    let newAssistants = [...assistants];
+
+    newAssistants.splice(index, 1);
+
+    this.assistants$.next(newAssistants);
   }
 }
