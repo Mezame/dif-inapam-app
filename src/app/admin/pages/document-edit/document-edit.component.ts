@@ -6,7 +6,7 @@ import { UpdateDocumentsService } from '@features/documents/services/firestore/u
 import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { DeleteFilesService } from '@shared/services/firebase-storage/delete-files.service';
 import { UploadFilesService } from '@shared/services/firebase-storage/upload-files.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-document-edit',
@@ -15,8 +15,8 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentEditComponent implements OnInit {
-  cardCode!: string;
-  document$!: Observable<Document>;
+  cardCode: string;
+  document$: Observable<Document>;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,15 +27,11 @@ export class DocumentEditComponent implements OnInit {
     private router: Router
   ) {
     this.cardCode = this.route.snapshot.params['cardCode'];
+
+    this.document$ = this.route.data.pipe(map((data) => data['document']));
   }
 
-  ngOnInit(): void {
-    if (this.cardCode) {
-      this.document$ = this.documentStoreService.getDocumentByCardCode(
-        this.cardCode
-      );
-    }
-  }
+  ngOnInit(): void {}
 
   getDocumentAction(event: {
     action: string;
@@ -48,7 +44,7 @@ export class DocumentEditComponent implements OnInit {
 
       const hasImage = event.data.hasImage as boolean;
 
-      const document = this.cleanFormData(formData) as Document;
+      const document = this.cleanFormData(formData) as Partial<Document>;
 
       const imageBlob = formData.imageObj?.blob as File;
 
@@ -72,7 +68,7 @@ export class DocumentEditComponent implements OnInit {
         this.uploadFilesService
           .uploadFromBlob(imageBlob, filename)
           .subscribe((downloadUrl) => {
-            if (typeof downloadUrl == 'string') {
+            if (downloadUrl && typeof downloadUrl == 'string') {
               document.imageUrl = downloadUrl;
             }
 
@@ -86,14 +82,17 @@ export class DocumentEditComponent implements OnInit {
     }
   }
 
-  editDocument(document: Document) {
+  editDocument(document: Partial<Document>) {
+    const cardCode = this.cardCode;
+
     if (document) {
       this.updateDocumentsService
-        .updateDocument(this.cardCode, document)
-        .subscribe((docRef) => {
-          console.log(docRef);
-          if (typeof docRef == 'string') {
-            this.router.navigate(['/home/oficios', this.cardCode]);
+        .updateDocument(cardCode, document)
+        .subscribe((res) => {
+          if (res == true) {
+            this.documentStoreService.updateDocument(cardCode, document);
+
+            this.router.navigate(['/home/oficios', cardCode]);
           }
         });
     }
