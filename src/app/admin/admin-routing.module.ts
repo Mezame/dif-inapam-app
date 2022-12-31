@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DocumentDetailResolverService } from '@features/documents/services/resolvers/document-detail-resolver.service';
 import { AdminComponent } from './admin.component';
 
 const routes: Routes = [
@@ -34,6 +35,9 @@ const routes: Routes = [
           import('./pages/document-edit/document-edit.module').then(
             (m) => m.DocumentEditModule
           ),
+          resolve: {
+            document: DocumentDetailResolverService,
+          },
       },
       {
         path: 'asistentes',
