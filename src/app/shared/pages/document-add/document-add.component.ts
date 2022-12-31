@@ -48,8 +48,8 @@ export class DocumentAddComponent {
     if (document) {
       this.addDocumentsService
         .setDocument(document.cardCode, document)
-        .subscribe((docRef) => {
-          if (docRef == document.cardCode) {
+        .subscribe((res) => {
+          if (res == true) {
             this.documentStoreService.addDocument(document);
 
             this.router.navigate(['/home/oficios']);
