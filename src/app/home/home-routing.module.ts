@@ -6,6 +6,7 @@ import {
   hasCustomClaim,
   redirectUnauthorizedTo,
 } from '@angular/fire/auth-guard';
+import { DocumentDetailResolverService } from '@features/documents/services/resolvers/document-detail-resolver.service';
 
 const routes: Routes = [
   {
@@ -32,6 +33,9 @@ const routes: Routes = [
           import('./pages/document-detail/document-detail.module').then(
             (m) => m.DocumentDetailModule
           ),
+        resolve: {
+          document: DocumentDetailResolverService,
+        },
       },
       {
         path: 'mi-cuenta',
