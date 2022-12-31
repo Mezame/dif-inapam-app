@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DateStore } from '@features/documents/date-store.interface';
 import { Document } from '@features/documents/document.interface';
-import { BehaviorSubject, from, map, Observable, of, take } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { GetDocumentsService } from '../firestore/get-documents.service';
 
 @Injectable({
@@ -63,9 +63,7 @@ export class DocumentStoreService {
   updateDocument(cardCode: string, document: Partial<Document>) {
     const documents = this.documents$.getValue() as ReadonlyArray<Document>;
 
-    const index = documents.findIndex(
-      (doc) => doc.cardCode == cardCode
-    );
+    const index = documents.findIndex((doc) => doc.cardCode == cardCode);
 
     const newDocument = { ...documents[index], ...document };
 
