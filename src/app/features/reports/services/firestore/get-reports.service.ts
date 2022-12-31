@@ -28,8 +28,10 @@ export class GetReportsService {
     return reports$.pipe(
       take(1),
       tap(reports =>{
-        if(reports) {
+        if(reports.length > 0) {
           console.log('got reports');
+        } else {
+          console.log('there were no reports')
         }
       }),
       catchError(

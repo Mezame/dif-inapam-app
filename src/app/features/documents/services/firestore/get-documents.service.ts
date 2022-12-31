@@ -34,8 +34,10 @@ export class GetDocumentsService {
     return documents$.pipe(
       take(1),
       tap((documents) => {
-        if (documents) {
+        if (documents.length > 0) {
           console.log('got documents');
+        } else {
+          console.log('there were no documents')
         }
       }),
       catchError(
