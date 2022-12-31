@@ -63,6 +63,7 @@ export class GetDocumentsService {
     );
 
     return document$.pipe(
+      take(1),
       tap((document) => {
         if (!document) throw new Error(`could not get document w/ cardCode=${cardCode}`);
 
