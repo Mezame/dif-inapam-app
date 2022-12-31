@@ -1,9 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
+  Component, Input
 } from '@angular/core';
 import { ToolbarButton } from '../toolbar-button.interface';
 
