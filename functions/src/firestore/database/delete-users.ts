@@ -3,7 +3,7 @@ import { firestore } from '../../init';
 
 export async function deleteUser(id: string) {
   try {
-    const docRef = firestore.doc(`user/${id}`);
+    const docRef = firestore.doc(`users/${id}`);
 
     const res = await docRef.delete();
 
