@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ReportListTableModule } from '@features/reports/report-list-table/report-list-table.module';
-import { SecondaryLayoutModule } from '@shared/layouts/secondary/secondary-layout.module';
+import { PrimaryLayoutModule } from '@shared/layouts/primary/primary-layout.module';
 import { ReportListComponent } from './report-list.component';
 
 const routes: Routes = [{ path: '', component: ReportListComponent }];
@@ -13,7 +13,7 @@ const routes: Routes = [{ path: '', component: ReportListComponent }];
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SecondaryLayoutModule,
+    PrimaryLayoutModule,
     ReportListTableModule,
   ],
 })
