@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { DateStore } from '@features/documents/date-store.interface';
 import { Document } from '@features/documents/document.interface';
-import { BehaviorSubject, map, Observable, take } from 'rxjs';
+import { BehaviorSubject, from, map, Observable, of, take } from 'rxjs';
 import { GetDocumentsService } from '../firestore/get-documents.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DocumentStoreService {
-  private documents$ = new BehaviorSubject<Document[]>([]);
+  private readonly documents$ = new BehaviorSubject<Document[]>([]);
 
-  private dateStore$ = new BehaviorSubject<DateStore>({
+  private readonly dateStore$ = new BehaviorSubject<DateStore>({
     months: {
       ['']: {
         numbers: [],
@@ -24,30 +24,28 @@ export class DocumentStoreService {
 
   loadDocuments() {
     this.getDocumentsService.getDocuments().subscribe((documents) => {
-      if (documents?.length > 0) {
-        this.documents$.next(documents);
-      }
+      this.documents$.next(documents);
     });
   }
 
   getDocuments(): Observable<Document[]> {
-    this.documents$.pipe(take(2)).subscribe((documents) => {
-      if (documents?.length < 1) {
-        this.loadDocuments();
-      }
-    });
+    const documents = this.documents$.getValue();
+
+    if (documents?.length < 1) {
+      this.loadDocuments();
+    }
 
     return this.documents$;
   }
 
   getDocumentByCardCode(cardCode: string): Observable<Document> {
-    const documents$ = this.getDocuments();
-
-    const document$ = documents$.pipe(
+    const document$ = this.getDocuments().pipe(
       map((documents) => {
-        const document = documents.find((d) => d.cardCode == cardCode) ?? {};
+        const document = documents.find(
+          (d) => d.cardCode == cardCode ?? {}
+        ) as Document;
 
-        return document as Document;
+        return document;
       })
     );
 
@@ -55,27 +53,57 @@ export class DocumentStoreService {
   }
 
   addDocument(document: Document) {
-    this.documents$.subscribe((documents) => {
-      documents = [...documents, document];
-    });
+    const documents = this.documents$.getValue() as ReadonlyArray<Document>;
+
+    const newDocuments = [...documents, document];
+
+    this.documents$.next(newDocuments);
+  }
+
+  updateDocument(cardCode: string, document: Partial<Document>) {
+    const documents = this.documents$.getValue() as ReadonlyArray<Document>;
+
+    const index = documents.findIndex(
+      (doc) => doc.cardCode == cardCode
+    );
+
+    const newDocument = { ...documents[index], ...document };
+
+    let newDocuments = [...documents];
+
+    newDocuments.splice(index, 1, newDocument);
+
+    this.documents$.next(newDocuments);
+  }
+
+  deleteDocument(cardCode: string) {
+    const documents = this.documents$.getValue() as ReadonlyArray<Document>;
+
+    const index = documents.findIndex(
+      (document) => document.cardCode == cardCode
+    );
+
+    let newDocuments = [...documents];
+
+    newDocuments.splice(index, 1);
+
+    this.documents$.next(newDocuments);
   }
 
   loadDocumentUtilsDateStore() {
     this.getDocumentsService
       .getDocumentUtilsDateStore()
       .subscribe((dateStore) => {
-        if (dateStore.years?.length > 0) {
-          this.dateStore$.next(dateStore);
-        }
+        this.dateStore$.next(dateStore);
       });
   }
 
   getDocumentUtilsDateStore(): Observable<DateStore> {
-    this.dateStore$.pipe(take(2)).subscribe((dateStore) => {
-      if (dateStore.years?.length < 1) {
-        this.loadDocumentUtilsDateStore();
-      }
-    });
+    const dateStore = this.dateStore$.getValue();
+
+    if (dateStore.years?.length < 1) {
+      this.loadDocumentUtilsDateStore();
+    }
 
     return this.dateStore$;
   }
