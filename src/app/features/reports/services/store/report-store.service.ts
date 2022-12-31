@@ -1,42 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Report } from '@features/reports/report.interface';
-import { BehaviorSubject, map, Observable, take } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { GetReportsService } from '../firestore/get-reports.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReportStoreService {
-  private reports$ = new BehaviorSubject<Report[]>([]);
+  private readonly reports$ = new BehaviorSubject<Report[]>([]);
 
   constructor(private getReportsService: GetReportsService) {}
 
   loadReports() {
     this.getReportsService.getReports().subscribe((reports) => {
-      if (reports?.length > 0) {
-        this.reports$.next(reports);
-      }
+      this.reports$.next(reports);
     });
   }
 
   getReports(): Observable<Report[]> {
-    this.reports$.pipe(take(2)).subscribe((reports) => {
-      if (reports.length < 1) {
-        this.loadReports();
-      }
-    });
+    const reports = this.reports$.getValue();
+
+    if (reports.length < 1) {
+      this.loadReports();
+    }
 
     return this.reports$;
   }
 
   getReport(id: string): Observable<Report> {
-    const reports$ = this.getReports();
-
-    const report$ = reports$.pipe(
+    const report$ = this.getReports().pipe(
       map((reports) => {
-        const report = reports.find((r) => r.metadata?.id == id) ?? {};
+        const report = reports.find(
+          (rep) => rep.metadata?.id == id ?? {}
+        ) as Report;
 
-        return report as Report;
+        return report;
       })
     );
 
