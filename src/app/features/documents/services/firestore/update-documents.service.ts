@@ -12,26 +12,26 @@ export class UpdateDocumentsService {
   updateDocument(
     id: string,
     document: Document | Partial<Document>
-  ): Observable<string> {
+  ): Observable<boolean> {
     const docRef = doc(this.firestore, 'documents/' + id);
 
-    const documentRef$ = from(updateDoc(docRef, { ...document })).pipe(
-      map((docRef) => {
-        if (docRef == undefined) {
-          return id;
+    const res$ = from(updateDoc(docRef, { ...document })).pipe(
+      map((res) => {
+        if (res == undefined) {
+          return true;
         } else {
           throw new Error('could not update document');
         }
       })
     );
 
-    return documentRef$.pipe(
+    return res$.pipe(
       take(1),
       tap((_) => {
         console.log(`updated document w/ id=${id}`);
       }),
       catchError(
-        this.handleError<string>('UpdateDocumentsService', 'updateDocument')
+        this.handleError<boolean>('UpdateDocumentsService', 'updateDocument')
       )
     );
   }

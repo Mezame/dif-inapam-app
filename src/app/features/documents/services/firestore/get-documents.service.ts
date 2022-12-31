@@ -33,6 +33,11 @@ export class GetDocumentsService {
 
     return documents$.pipe(
       take(1),
+      tap((documents) => {
+        if (documents) {
+          console.log('got documents');
+        }
+      }),
       catchError(
         this.handleError<Document[]>('GetDocumentService', 'getDocuments', [])
       )
@@ -49,17 +54,19 @@ export class GetDocumentsService {
 
     const document$ = querySnapshot$.pipe(
       map((querySnapshot) => {
-        let document;
+        let document: Document;
 
-        querySnapshot.forEach((doc) => (document = doc.data()));
+        querySnapshot.forEach((doc) => (document = doc.data() as Document));
 
-        return document as unknown as Document;
+        return document!;
       })
     );
 
     return document$.pipe(
       tap((document) => {
-        if (!document) throw new Error('could not get document');
+        if (!document) throw new Error(`could not get document w/ cardCode=${cardCode}`);
+
+        console.log(`got document w/ cardCode=${cardCode}`);
       }),
       catchError(
         this.handleError<Document>(
@@ -76,15 +83,17 @@ export class GetDocumentsService {
     const docSnap$ = from(getDoc(docRef));
 
     const dateStore$ = docSnap$.pipe(
-      map((createDate) => {
-        return createDate.data() as DateStore;
+      map((dateStore) => {
+        return dateStore.data() as DateStore;
       })
     );
 
     return dateStore$.pipe(
       take(1),
       tap((dateStore) => {
-        if (!dateStore) throw new Error('could not get dateStore');
+        if (!dateStore) throw new Error('could not get date store');
+
+        console.log(`got date store`);
       }),
       catchError(
         this.handleError<DateStore>(
