@@ -12,9 +12,11 @@ export async function onDeleteAssistantDeleteUser(
   try {
     const assistant = snapshot.data() as Assistant;
 
-    await auth.deleteUser(assistant.metadata.id);
+    const id = assistant.metadata.id;
 
-    await deleteUser(assistant.metadata.id);
+    await auth.deleteUser(id);
+
+    await deleteUser(id);
 
     return;
   } catch (error) {
