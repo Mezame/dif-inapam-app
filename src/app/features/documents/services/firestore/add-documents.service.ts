@@ -8,11 +8,12 @@ import {
   Firestore,
   setDoc,
 } from '@angular/fire/firestore';
-import { Document } from '@features/documents/document.interface';
 import {
   FirebaseErrorHandlerService,
   HandleError,
 } from '@core/error-handlers/firebase-error-handler.service';
+import { LoggerService } from '@core/logger/logger.service';
+import { Document } from '@features/documents/document.interface';
 import { catchError, from, map, Observable, take, tap } from 'rxjs';
 
 @Injectable({
@@ -23,7 +24,8 @@ export class AddDocumentsService {
 
   constructor(
     private firestore: Firestore,
-    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService,
+    private loggerService: LoggerService
   ) {
     this.handleError = this.firebaseErrorHandlerService.createHandleError(
       'AddDocumentsService'
@@ -38,7 +40,7 @@ export class AddDocumentsService {
     return documentRef$.pipe(
       take(1),
       tap((docRef) => {
-        console.log(`added document w/ id=${docRef.id}`);
+        this.loggerService.info(`added document w/ id=${docRef.id}`);
       }),
       catchError(
         this.handleError<DocumentReference<DocumentData>>('addDocument')
@@ -62,7 +64,7 @@ export class AddDocumentsService {
     return res$.pipe(
       take(1),
       tap((_) => {
-        console.log(`set document w/ id=${id}`);
+        this.loggerService.info(`set document w/ id=${id}`);
       }),
       catchError(this.handleError<boolean>('setDocument'))
     );

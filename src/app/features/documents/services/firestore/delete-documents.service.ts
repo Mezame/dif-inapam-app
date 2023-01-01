@@ -4,6 +4,7 @@ import {
   FirebaseErrorHandlerService,
   HandleError,
 } from '@core/error-handlers/firebase-error-handler.service';
+import { LoggerService } from '@core/logger/logger.service';
 import { catchError, from, map, Observable, take, tap } from 'rxjs';
 
 @Injectable({
@@ -14,7 +15,8 @@ export class DeleteDocumentsService {
 
   constructor(
     private firestore: Firestore,
-    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService,
+    private loggerService: LoggerService
   ) {
     this.handleError = this.firebaseErrorHandlerService.createHandleError(
       'DeleteDocumentsService'
@@ -37,7 +39,7 @@ export class DeleteDocumentsService {
     return documentRes$.pipe(
       take(1),
       tap((_) => {
-        console.log(`deleted document w/ id=${id}`);
+        this.loggerService.info(`deleted document w/ id=${id}`);
       }),
       catchError(this.handleError<boolean>('deleteDocument'))
     );

@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 export class LoggerService {
   logs: string[] = [];
   devMode: boolean = !environment.production;
+  debugMode: boolean = false;
 
   log: (message: string) => void = this.info;
 
@@ -19,7 +20,7 @@ export class LoggerService {
   }
 
   error(message: string) {
-    if (this.devMode) return;
+    if (this.devMode && this.debugMode) return;
 
     console.error(message);
   }

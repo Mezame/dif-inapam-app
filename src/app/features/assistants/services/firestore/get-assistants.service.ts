@@ -6,11 +6,12 @@ import {
   DocumentData,
   Firestore,
 } from '@angular/fire/firestore';
-import { Assistant } from '@features/assistants/assistant.interface';
 import {
   FirebaseErrorHandlerService,
   HandleError,
 } from '@core/error-handlers/firebase-error-handler.service';
+import { LoggerService } from '@core/logger/logger.service';
+import { Assistant } from '@features/assistants/assistant.interface';
 import { catchError, Observable, take, tap } from 'rxjs';
 
 @Injectable({
@@ -26,7 +27,8 @@ export class GetAssistantsService {
 
   constructor(
     private firestore: Firestore,
-    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService,
+    private loggerService: LoggerService
   ) {
     this.handleError = this.firebaseErrorHandlerService.createHandleError(
       'GetAssistantsService'
@@ -42,9 +44,9 @@ export class GetAssistantsService {
       take(1),
       tap((assistants) => {
         if (assistants.length > 0) {
-          console.log('got assistants');
+          this.loggerService.info('got assistants');
         } else {
-          console.log('did not found any assistant');
+          this.loggerService.info('did not found any assistant');
         }
       }),
       catchError(this.handleError<Assistant[]>('getAssistants', []))

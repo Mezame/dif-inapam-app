@@ -4,6 +4,7 @@ import {
   FirebaseErrorHandlerService,
   HandleError,
 } from '@core/error-handlers/firebase-error-handler.service';
+import { LoggerService } from '@core/logger/logger.service';
 import { catchError, from, map, Observable, take, tap } from 'rxjs';
 
 @Injectable({
@@ -11,10 +12,11 @@ import { catchError, from, map, Observable, take, tap } from 'rxjs';
 })
 export class DeleteAssistantsService {
   private handleError: HandleError;
-  
+
   constructor(
     private firestore: Firestore,
-    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService,
+    private loggerService: LoggerService
   ) {
     this.handleError = this.firebaseErrorHandlerService.createHandleError(
       'DeleteAssistantsService'
@@ -37,7 +39,7 @@ export class DeleteAssistantsService {
     return assistantRes$.pipe(
       take(1),
       tap((_) => {
-        console.log(`deleted assistant w/ id=${id}`);
+        this.loggerService.info(`deleted assistant w/ id=${id}`);
       }),
       catchError(this.handleError<boolean>('deleteAssistant'))
     );

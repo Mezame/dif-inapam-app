@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { doc, Firestore, updateDoc } from '@angular/fire/firestore';
-import { Document } from '@features/documents/document.interface';
 import {
   FirebaseErrorHandlerService,
   HandleError,
 } from '@core/error-handlers/firebase-error-handler.service';
+import { LoggerService } from '@core/logger/logger.service';
+import { Document } from '@features/documents/document.interface';
 import { catchError, from, map, Observable, take, tap } from 'rxjs';
 
 @Injectable({
@@ -15,7 +16,8 @@ export class UpdateDocumentsService {
 
   constructor(
     private firestore: Firestore,
-    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService,
+    private loggerService: LoggerService
   ) {
     this.handleError = this.firebaseErrorHandlerService.createHandleError(
       'UpdateDocumentsService'
@@ -41,7 +43,7 @@ export class UpdateDocumentsService {
     return res$.pipe(
       take(1),
       tap((_) => {
-        console.log(`updated document w/ id=${id}`);
+        this.loggerService.info(`updated document w/ id=${id}`);
       }),
       catchError(this.handleError<boolean>('updateDocument'))
     );

@@ -10,11 +10,12 @@ import {
   serverTimestamp,
   setDoc,
 } from '@angular/fire/firestore';
-import { Assistant } from '@features/assistants/assistant.interface';
 import {
   FirebaseErrorHandlerService,
   HandleError,
 } from '@core/error-handlers/firebase-error-handler.service';
+import { LoggerService } from '@core/logger/logger.service';
+import { Assistant } from '@features/assistants/assistant.interface';
 import { catchError, from, map, Observable, take, tap } from 'rxjs';
 
 @Injectable({
@@ -30,7 +31,8 @@ export class AddAssistantsService {
 
   constructor(
     private firestore: Firestore,
-    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService,
+    private loggerService: LoggerService
   ) {
     this.handleError = this.firebaseErrorHandlerService.createHandleError(
       'AddAssistantsService'
@@ -45,7 +47,7 @@ export class AddAssistantsService {
     return assistantRef$.pipe(
       take(1),
       tap((docRef) => {
-        console.log(`added assistant w/ id=${docRef.id}`);
+        this.loggerService.info(`added assistant w/ id=${docRef.id}`);
       }),
       catchError(
         this.handleError<DocumentReference<DocumentData>>('addAssistant')
@@ -101,7 +103,7 @@ export class AddAssistantsService {
     return assistantRes$.pipe(
       take(1),
       tap((_) => {
-        console.log(`set assistant w/ id=${assistantId}`);
+        this.loggerService.info(`set assistant w/ id=${assistantId}`);
       }),
       catchError(this.handleError<any>('setAssistant'))
     );

@@ -11,12 +11,13 @@ import {
   query,
   where,
 } from '@angular/fire/firestore';
-import { DateStore } from '@features/documents/date-store.interface';
-import { Document } from '@features/documents/document.interface';
 import {
   FirebaseErrorHandlerService,
   HandleError,
 } from '@core/error-handlers/firebase-error-handler.service';
+import { LoggerService } from '@core/logger/logger.service';
+import { DateStore } from '@features/documents/date-store.interface';
+import { Document } from '@features/documents/document.interface';
 import { catchError, from, map, Observable, take, tap } from 'rxjs';
 
 @Injectable({
@@ -32,7 +33,8 @@ export class GetDocumentsService {
 
   constructor(
     private firestore: Firestore,
-    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService,
+    private loggerService: LoggerService
   ) {
     this.handleError = this.firebaseErrorHandlerService.createHandleError(
       'GetDocumentsService'
@@ -48,9 +50,9 @@ export class GetDocumentsService {
       take(1),
       tap((documents) => {
         if (documents.length > 0) {
-          console.log('got documents');
+          this.loggerService.info('got documents');
         } else {
-          console.log('did not found any document');
+          this.loggerService.info('did not found any document');
         }
       }),
       catchError(this.handleError<Document[]>('getDocuments', []))
@@ -81,7 +83,7 @@ export class GetDocumentsService {
         if (!document)
           throw new Error(`did not found any document w/ cardCode=${cardCode}`);
 
-        console.log(`got document w/ cardCode=${cardCode}`);
+        this.loggerService.info(`got document w/ cardCode=${cardCode}`);
       }),
       catchError(
         this.handleError<Document>(
@@ -107,7 +109,7 @@ export class GetDocumentsService {
       tap((dateStore) => {
         if (!dateStore) throw new Error('did not found any date store');
 
-        console.log(`got date store`);
+        this.loggerService.info(`got date store`);
       }),
       catchError(this.handleError<DateStore>('getDocumentUtilsDateStore'))
     );
