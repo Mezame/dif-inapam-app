@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { FireAuthService } from '../fire-auth.service';
+import { FireAuthService } from '../auth/fire-auth.service';
 
 @Injectable({
   providedIn: 'root',
