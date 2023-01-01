@@ -52,7 +52,7 @@
         <span>Mi cuenta</span>
       </a>
 
-      <a mat-list-item routerLink="/login" tabindex="-1">
+      <a mat-list-item tabindex="-1" (click)="logOut()">
         <mat-icon matListItemIcon>logout</mat-icon>
         <span matListItemTitle>Cerrar sesión</span>
       </a>
