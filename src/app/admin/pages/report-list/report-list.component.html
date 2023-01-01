@@ -1,5 +1,8 @@
-<app-primary-layout
-  toolbar-title="Reportes mensuales de oficios"
->
-  <app-report-list-table *ngIf="reports$" [data]="reports$"></app-report-list-table>
+<app-primary-layout toolbar-title="Reportes mensuales de oficios">
+  <div class="column">
+    <app-report-list-table
+      *ngIf="reports$"
+      [data]="reports$"
+    ></app-report-list-table>
+  </div>
 </app-primary-layout>
