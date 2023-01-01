@@ -21,11 +21,8 @@ import { User } from './user.interface';
 @Injectable({ providedIn: 'root' })
 export class FireAuthService {
   user$: Observable<User | null>;
-
   isLoggedIn$: Observable<boolean>;
-
   isLoggedOut$: Observable<boolean>;
-
   isAdmin$: Observable<boolean>;
 
   //isEmailVerified$: Observable<boolean>;
@@ -33,7 +30,9 @@ export class FireAuthService {
   constructor(private fireAuth: Auth) {
     this.user$ = authState(this.fireAuth).pipe(
       map((user) => {
-        return !!user ? { username: user.displayName!, email: user.email! } : null;
+        return !!user
+          ? { username: user.displayName!, email: user.email! }
+          : null;
       })
     );
 
@@ -43,7 +42,6 @@ export class FireAuthService {
 
     this.isAdmin$ = authState(this.fireAuth).pipe(
       switchMap(async (user) => {
-        //console.log(user);
         const idTokenResult = await user?.getIdTokenResult();
 
         return idTokenResult?.claims['role'] == 'admin' ? true : false;
@@ -53,19 +51,15 @@ export class FireAuthService {
     //this.isEmailVerified$ = authState(this.fireAuth).pipe(map((user) => !!user?.emailVerified));
   }
 
-  signIn(email: string, password: string): Observable<User> {
+  signIn(email: string, password: string): Observable<any> {
     const userCredential$ = from(
       signInWithEmailAndPassword(this.fireAuth, email, password)
     ).pipe(
       map((userCredential) => {
         if (userCredential) {
-          const user = {
-            username: userCredential.user.displayName,
-            email: userCredential.user.email,
-            //emailVerified: userCredential.user.emailVerified,
-          };
+          const user = userCredential.user;
 
-          return user as User;
+          return user;
         } else {
           throw new Error('could not signed in');
         }
@@ -79,7 +73,7 @@ export class FireAuthService {
           console.log(`signed in user w/ email=${user.email}`);
         }
       }),
-      catchError(this.handleError<User>('FireAuthService', 'signIn'))
+      catchError(this.handleError<any>('FireAuthService', 'signIn'))
     );
   }
 
