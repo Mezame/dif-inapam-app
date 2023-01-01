@@ -11,12 +11,7 @@ const routes: Routes = [
       {
         path: '',
         component: CustomLoginComponent
-      },
-      {
-        path: '',
-        redirectTo: '',
-        pathMatch: 'full',
-      },
+      }
     ],
   },
 ];
