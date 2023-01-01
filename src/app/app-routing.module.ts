@@ -6,7 +6,6 @@ import {
   redirectUnauthorizedTo,
 } from '@angular/fire/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginGuard } from '@core/auth/guards/login.guard';
 import { SelectivePreloadingStrategyService } from '@core/preloading-strategies/selective-preloading-strategy.service';
 import { map, pipe } from 'rxjs';
 
@@ -24,7 +23,8 @@ const redirectLoggedInToAdminOrHome = () =>
     )
   );
 
-const redirectLoggedInToToMain = () => map((loggedIn) => (!loggedIn ? true : ['/']));
+const redirectLoggedInToToMain = () =>
+  map((loggedIn) => (!loggedIn ? true : ['/']));
 
 const routes: Routes = [
   {
