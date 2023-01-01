@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FireAuthService } from '@core/auth/fire-auth.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-primary-layout',
@@ -10,9 +10,11 @@ import { Observable } from 'rxjs';
 })
 export class PrimaryLayoutComponent {
   isAdmin$: Observable<boolean>;
+  isNotAdmin$: Observable<boolean>;
 
   @Input('toolbar-title') toolbarTitle?: string;
   constructor(private fireAuthService: FireAuthService) {
     this.isAdmin$ = this.fireAuthService.isAdmin$;
+    this.isNotAdmin$ = this.isAdmin$.pipe(map((isAdmin) => !isAdmin));
   }
 }
