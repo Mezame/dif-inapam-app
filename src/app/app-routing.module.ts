@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
 import { map } from 'rxjs';
-import { SelectivePreloadingStrategyService } from './core/selective-preloading-strategy.service';
 import { User } from 'firebase/auth';
+import { SelectivePreloadingStrategyService } from '@core/preloading-strategies/selective-preloading-strategy.service';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo('login');
 /*const redirectLoggedInToAdminOrHome = () =>
