@@ -4,7 +4,7 @@ import { DocumentFormValue } from '@features/documents/document-add-edit-form/do
 import { Document } from '@features/documents/document.interface';
 import { AddDocumentsService } from '@features/documents/services/firestore/add-documents.service';
 import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
-import { UploadFilesService } from '@shared/services/firebase-storage/upload-files.service';
+import { UploadFilesService } from '@shared/services/firestorage/upload-files.service';
 
 @Component({
   selector: 'app-document-add',

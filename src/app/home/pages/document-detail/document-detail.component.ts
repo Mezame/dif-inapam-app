@@ -5,7 +5,7 @@ import { DeleteDocumentsService } from '@features/documents/services/firestore/d
 import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { UpdateDocumentsService } from '@features/documents/services/firestore/update-documents.service';
 import { map, Observable } from 'rxjs';
-import { DeleteFilesService } from '@shared/services/firebase-storage/delete-files.service';
+import { DeleteFilesService } from '@shared/services/firestorage/delete-files.service';
 import { FireAuthService } from '@core/auth/fire-auth.service';
 
 @Component({

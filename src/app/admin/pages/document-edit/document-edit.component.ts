@@ -4,8 +4,8 @@ import { DocumentFormValue } from '@features/documents/document-add-edit-form/do
 import { Document } from '@features/documents/document.interface';
 import { UpdateDocumentsService } from '@features/documents/services/firestore/update-documents.service';
 import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
-import { DeleteFilesService } from '@shared/services/firebase-storage/delete-files.service';
-import { UploadFilesService } from '@shared/services/firebase-storage/upload-files.service';
+import { DeleteFilesService } from '@shared/services/firestorage/delete-files.service';
+import { UploadFilesService } from '@shared/services/firestorage/upload-files.service';
 import { map, Observable } from 'rxjs';
 
 @Component({
