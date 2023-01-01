@@ -1,4 +1,6 @@
 export const environment = {
+  production: false,
+  useEmulators: true,
   firebase: {
     projectId: 'dif-inapam-app',
     appId: '1:227451757890:web:16acec35ad07debe4e14db',
@@ -8,6 +10,4 @@ export const environment = {
     authDomain: 'dif-inapam-app.firebaseapp.com',
     messagingSenderId: '227451757890',
   },
-  useEmulators: true,
-  production: false,
 };
