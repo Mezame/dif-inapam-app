@@ -10,7 +10,7 @@ import { Report } from '@features/reports/report.interface';
 import {
   FirebaseErrorHandlerService,
   HandleError,
-} from '@shared/services/error-handlers/firebase-error-handler.service';
+} from '@core/error-handlers/firebase-error-handler.service';
 import { catchError, Observable, take, tap } from 'rxjs';
 
 @Injectable({

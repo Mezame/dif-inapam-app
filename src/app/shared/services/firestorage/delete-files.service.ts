@@ -4,7 +4,7 @@ import { catchError, from, map, Observable, take, tap } from 'rxjs';
 import {
   FirebaseErrorHandlerService,
   HandleError,
-} from '../error-handlers/firebase-error-handler.service';
+} from '@core/error-handlers/firebase-error-handler.service';
 
 @Injectable({
   providedIn: 'any',
