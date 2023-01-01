@@ -11,6 +11,7 @@ import { catchError, from, map, Observable, take, tap } from 'rxjs';
 })
 export class DeleteDocumentsService {
   private handleError: HandleError;
+
   constructor(
     private firestore: Firestore,
     private firebaseErrorHandlerService: FirebaseErrorHandlerService
