@@ -1,13 +1,21 @@
 import { NgModule } from '@angular/core';
+import { AuthGuard, customClaims } from '@angular/fire/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
 import { DocumentDetailResolverService } from '@features/documents/services/resolvers/document-detail-resolver.service';
 import { ReportDetailResolverService } from '@features/reports/services/resolvers/report-detail-resolver.service';
-import { AdminComponent } from './admin.component';
+import { map, pipe } from 'rxjs';
+
+const adminOnly = () =>
+  pipe(
+    customClaims,
+    map((claims) => claims.role == 'admin')
+  );
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: adminOnly },
     children: [
       {
         path: 'panel-reportes',
@@ -29,9 +37,9 @@ const routes: Routes = [
           import('./pages/report-detail/report-detail.module').then(
             (m) => m.ReportDetailModule
           ),
-          resolve: {
-            report: ReportDetailResolverService,
-          },
+        resolve: {
+          report: ReportDetailResolverService,
+        },
       },
       {
         path: 'oficios/:cardCode/editar',
@@ -39,9 +47,9 @@ const routes: Routes = [
           import('./pages/document-edit/document-edit.module').then(
             (m) => m.DocumentEditModule
           ),
-          resolve: {
-            document: DocumentDetailResolverService,
-          },
+        resolve: {
+          document: DocumentDetailResolverService,
+        },
       },
       {
         path: 'asistentes',

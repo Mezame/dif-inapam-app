@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
+import { AuthGuard, customClaims } from '@angular/fire/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home.component';
-import {
-  AuthGuard,
-  hasCustomClaim,
-  redirectUnauthorizedTo,
-} from '@angular/fire/auth-guard';
 import { DocumentDetailResolverService } from '@features/documents/services/resolvers/document-detail-resolver.service';
+import { map, pipe } from 'rxjs';
+
+const assistantOnly = () =>
+  pipe(
+    customClaims,
+    map((claims) => claims.role != 'admin')
+  );
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
     children: [
       {
         path: 'oficios',
@@ -43,6 +44,8 @@ const routes: Routes = [
           import('./pages/user-edit/user-edit.module').then(
             (m) => m.UserEditModule
           ),
+        canActivate: [AuthGuard],
+        data: { authGuardPipe: assistantOnly },
       },
       {
         path: '',
