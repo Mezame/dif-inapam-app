@@ -5,13 +5,25 @@ import {
   Storage,
   uploadBytes,
 } from '@angular/fire/storage';
-import { catchError, from, Observable, of, switchMap, take, tap } from 'rxjs';
+import { catchError, from, Observable, switchMap, take, tap } from 'rxjs';
+import {
+  FirebaseErrorHandlerService,
+  HandleError,
+} from '../error-handlers/firebase-error-handler.service';
 
 @Injectable({
   providedIn: 'any',
 })
 export class UploadFilesService {
-  constructor(private fireStorage: Storage) {}
+  private handleError: HandleError;
+
+  constructor(
+    private fireStorage: Storage,
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+  ) {
+    this.handleError =
+      this.firebaseErrorHandlerService.createHandleError('UploadFilesService');
+  }
 
   uploadFromBlob(file: File, filename: string): Observable<string> {
     const storageRef = ref(this.fireStorage, `documents/${filename}`);
@@ -32,20 +44,8 @@ export class UploadFilesService {
         }
       }),
       catchError(
-        this.handleError<string>('UploadFilesService', 'uploadFromBlob')
+        this.handleError<string>('uploadFromBlob')
       )
     );
-  }
-
-  private handleError<T>(
-    serviceName = '',
-    operation = 'operation',
-    result = {} as T
-  ) {
-    return (error: any): Observable<T> => {
-      console.log(`${serviceName}: ${operation} failed: ${error.message}`);
-
-      return of(result);
-    };
   }
 }
