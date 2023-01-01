@@ -9,13 +9,25 @@ import {
   setDoc,
 } from '@angular/fire/firestore';
 import { Document } from '@features/documents/document.interface';
-import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
+import {
+  FirebaseErrorHandlerService,
+  HandleError,
+} from '@shared/services/error-handlers/firebase-error-handler.service';
+import { catchError, from, map, Observable, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'any',
 })
 export class AddDocumentsService {
-  constructor(private firestore: Firestore) {}
+  private handleError: HandleError;
+  constructor(
+    private firestore: Firestore,
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+  ) {
+    this.handleError = this.firebaseErrorHandlerService.createHandleError(
+      'AddDocumentsService'
+    );
+  }
 
   addDocument(document: Document): Observable<DocumentReference<DocumentData>> {
     const documentsCollection = collection(this.firestore, 'documents');
@@ -28,10 +40,7 @@ export class AddDocumentsService {
         console.log(`added document w/ id=${docRef.id}`);
       }),
       catchError(
-        this.handleError<DocumentReference<DocumentData>>(
-          'AddDocumentsService',
-          'addDocument'
-        )
+        this.handleError<DocumentReference<DocumentData>>('addDocument')
       )
     );
   }
@@ -54,21 +63,7 @@ export class AddDocumentsService {
       tap((_) => {
         console.log(`set document w/ id=${id}`);
       }),
-      catchError(
-        this.handleError<boolean>('AddDocumentsService', 'setDocument')
-      )
+      catchError(this.handleError<boolean>('setDocument'))
     );
-  }
-
-  private handleError<T>(
-    serviceName = '',
-    operation = 'operation',
-    result = {} as T
-  ) {
-    return (error: any): Observable<T> => {
-      console.log(`${serviceName}: ${operation} failed: ${error.message}`);
-
-      return of(result);
-    };
   }
 }

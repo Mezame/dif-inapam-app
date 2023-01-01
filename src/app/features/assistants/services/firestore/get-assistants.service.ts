@@ -7,7 +7,11 @@ import {
   Firestore,
 } from '@angular/fire/firestore';
 import { Assistant } from '@features/assistants/assistant.interface';
-import { catchError, Observable, of, take, tap } from 'rxjs';
+import {
+  FirebaseErrorHandlerService,
+  HandleError,
+} from '@shared/services/error-handlers/firebase-error-handler.service';
+import { catchError, Observable, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'any',
@@ -18,7 +22,16 @@ export class GetAssistantsService {
     'assistants'
   ) as CollectionReference<DocumentData>;
 
-  constructor(private firestore: Firestore) {}
+  private handleError: HandleError;
+
+  constructor(
+    private firestore: Firestore,
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+  ) {
+    this.handleError = this.firebaseErrorHandlerService.createHandleError(
+      'GetAssistantsService'
+    );
+  }
 
   getAssistants(): Observable<Assistant[]> {
     const assistants$ = collectionData(
@@ -31,28 +44,10 @@ export class GetAssistantsService {
         if (assistants.length > 0) {
           console.log('got assistants');
         } else {
-          console.log('there were no assistants')
+          console.log('did not found any assistant');
         }
       }),
-      catchError(
-        this.handleError<Assistant[]>(
-          'GetAssistantsService',
-          'getAssistants',
-          []
-        )
-      )
+      catchError(this.handleError<Assistant[]>('getAssistants', []))
     );
-  }
-
-  private handleError<T>(
-    serviceName = '',
-    operation = 'operation',
-    result = {} as T
-  ) {
-    return (error: any): Observable<T> => {
-      console.log(`${serviceName}: ${operation} failed: ${error.message}`);
-
-      return of(result);
-    };
   }
 }

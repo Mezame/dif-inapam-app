@@ -11,7 +11,11 @@ import {
   setDoc,
 } from '@angular/fire/firestore';
 import { Assistant } from '@features/assistants/assistant.interface';
-import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
+import {
+  FirebaseErrorHandlerService,
+  HandleError,
+} from '@shared/services/error-handlers/firebase-error-handler.service';
+import { catchError, from, map, Observable, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'any',
@@ -22,7 +26,16 @@ export class AddAssistantsService {
     'assistants'
   ) as CollectionReference<DocumentData>;
 
-  constructor(private firestore: Firestore) {}
+  private handleError: HandleError;
+
+  constructor(
+    private firestore: Firestore,
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+  ) {
+    this.handleError = this.firebaseErrorHandlerService.createHandleError(
+      'AddAssistantsService'
+    );
+  }
 
   addAssistant(
     assistant: Assistant | Partial<Assistant>
@@ -35,15 +48,15 @@ export class AddAssistantsService {
         console.log(`added assistant w/ id=${docRef.id}`);
       }),
       catchError(
-        this.handleError<DocumentReference<DocumentData>>(
-          'AddAssistantsService',
-          'addAssistant'
-        )
+        this.handleError<DocumentReference<DocumentData>>('addAssistant')
       )
     );
   }
 
-  setAssistant(assistant: Assistant | Partial<Assistant>, id?: string): Observable<any> {
+  setAssistant(
+    assistant: Assistant | Partial<Assistant>,
+    id?: string
+  ): Observable<any> {
     let assistantRes$: Observable<any>;
     let assistantId: string;
 
@@ -90,19 +103,7 @@ export class AddAssistantsService {
       tap((_) => {
         console.log(`set assistant w/ id=${assistantId}`);
       }),
-      catchError(this.handleError<any>('AddAssistantsService', 'setAssistant'))
+      catchError(this.handleError<any>('setAssistant'))
     );
-  }
-
-  private handleError<T>(
-    serviceName = '',
-    operation = 'operation',
-    result = {} as T
-  ) {
-    return (error: any): Observable<T> => {
-      console.log(`${serviceName}: ${operation} failed: ${error.message}`);
-
-      return of(result);
-    };
   }
 }

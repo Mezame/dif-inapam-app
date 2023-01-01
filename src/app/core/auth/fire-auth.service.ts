@@ -7,6 +7,10 @@ import {
   updatePassword,
 } from '@angular/fire/auth';
 import {
+  FirebaseErrorHandlerService,
+  HandleError,
+} from '@shared/services/error-handlers/firebase-error-handler.service';
+import {
   catchError,
   from,
   map,
@@ -20,14 +24,17 @@ import { User } from './user.interface';
 
 @Injectable({ providedIn: 'root' })
 export class FireAuthService {
+  private handleError: HandleError;
+
   user$: Observable<User | null>;
   isLoggedIn$: Observable<boolean>;
   isLoggedOut$: Observable<boolean>;
   isAdmin$: Observable<boolean>;
 
-  //isEmailVerified$: Observable<boolean>;
-
-  constructor(private fireAuth: Auth) {
+  constructor(
+    private fireAuth: Auth,
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+  ) {
     this.user$ = authState(this.fireAuth).pipe(
       map((user) => {
         return !!user
@@ -48,7 +55,8 @@ export class FireAuthService {
       })
     );
 
-    //this.isEmailVerified$ = authState(this.fireAuth).pipe(map((user) => !!user?.emailVerified));
+    this.handleError =
+      this.firebaseErrorHandlerService.createHandleError('FireAuthService');
   }
 
   signIn(email: string, password: string): Observable<any> {
@@ -73,7 +81,7 @@ export class FireAuthService {
           console.log(`signed in user w/ email=${user.email}`);
         }
       }),
-      catchError(this.handleError<any>('FireAuthService', 'signIn'))
+      catchError(this.handleError<any>('signIn'))
     );
   }
 
@@ -93,7 +101,7 @@ export class FireAuthService {
       tap((_) => {
         console.log(`signed out successfully`);
       }),
-      catchError(this.handleError<boolean>('FireAuthService', 'signOut'))
+      catchError(this.handleError<boolean>('signOut'))
     );
   }
 
@@ -118,19 +126,7 @@ export class FireAuthService {
       tap((_) => {
         console.log(`updated password successfully`);
       }),
-      catchError(this.handleError<boolean>('FireAuthService', 'updatePassword'))
+      catchError(this.handleError<boolean>('updatePassword'))
     );
-  }
-
-  private handleError<T>(
-    serviceName = '',
-    operation = 'operation',
-    result = {} as T
-  ) {
-    return (error: any): Observable<T> => {
-      console.log(`${serviceName}: ${operation} failed: ${error.message}`);
-
-      return of(result);
-    };
   }
 }

@@ -7,7 +7,11 @@ import {
   Firestore,
 } from '@angular/fire/firestore';
 import { Report } from '@features/reports/report.interface';
-import { catchError, Observable, of, take, tap } from 'rxjs';
+import {
+  FirebaseErrorHandlerService,
+  HandleError,
+} from '@shared/services/error-handlers/firebase-error-handler.service';
+import { catchError, Observable, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'any',
@@ -18,7 +22,15 @@ export class GetReportsService {
     'reports'
   ) as CollectionReference<DocumentData>;
 
-  constructor(private firestore: Firestore) {}
+  private handleError: HandleError;
+
+  constructor(
+    private firestore: Firestore,
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+  ) {
+    this.handleError =
+      this.firebaseErrorHandlerService.createHandleError('GetReportsService');
+  }
 
   getReports(): Observable<Report[]> {
     const reports$ = collectionData(this.reportsCollectionRef) as Observable<
@@ -27,28 +39,14 @@ export class GetReportsService {
 
     return reports$.pipe(
       take(1),
-      tap(reports =>{
-        if(reports.length > 0) {
+      tap((reports) => {
+        if (reports.length > 0) {
           console.log('got reports');
         } else {
-          console.log('there were no reports')
+          console.log('did not found any report');
         }
       }),
-      catchError(
-        this.handleError<Report[]>('GetReportsService', 'getReports', [])
-      )
+      catchError(this.handleError<Report[]>('getReports', []))
     );
-  }
-
-  private handleError<T>(
-    serviceName = '',
-    operation = 'operation',
-    result = {} as T
-  ) {
-    return (error: any): Observable<T> => {
-      console.log(`${serviceName}: ${operation} failed: ${error.message}`);
-
-      return of(result);
-    };
   }
 }

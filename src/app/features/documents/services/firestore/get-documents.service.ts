@@ -13,7 +13,11 @@ import {
 } from '@angular/fire/firestore';
 import { DateStore } from '@features/documents/date-store.interface';
 import { Document } from '@features/documents/document.interface';
-import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
+import {
+  FirebaseErrorHandlerService,
+  HandleError,
+} from '@shared/services/error-handlers/firebase-error-handler.service';
+import { catchError, from, map, Observable, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'any',
@@ -24,7 +28,16 @@ export class GetDocumentsService {
     'documents'
   ) as CollectionReference<DocumentData>;
 
-  constructor(private firestore: Firestore) {}
+  private handleError: HandleError;
+
+  constructor(
+    private firestore: Firestore,
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+  ) {
+    this.handleError = this.firebaseErrorHandlerService.createHandleError(
+      'GetDocumentsService'
+    );
+  }
 
   getDocuments(): Observable<Document[]> {
     const documents$ = collectionData(
@@ -37,12 +50,10 @@ export class GetDocumentsService {
         if (documents.length > 0) {
           console.log('got documents');
         } else {
-          console.log('there were no documents')
+          console.log('did not found any document');
         }
       }),
-      catchError(
-        this.handleError<Document[]>('GetDocumentService', 'getDocuments', [])
-      )
+      catchError(this.handleError<Document[]>('getDocuments', []))
     );
   }
 
@@ -67,13 +78,13 @@ export class GetDocumentsService {
     return document$.pipe(
       take(1),
       tap((document) => {
-        if (!document) throw new Error(`could not get document w/ cardCode=${cardCode}`);
+        if (!document)
+          throw new Error(`did not found any document w/ cardCode=${cardCode}`);
 
         console.log(`got document w/ cardCode=${cardCode}`);
       }),
       catchError(
         this.handleError<Document>(
-          'GetDocumentService',
           `getDocumentByCardCode w/ cardCode=${cardCode}`
         )
       )
@@ -94,28 +105,11 @@ export class GetDocumentsService {
     return dateStore$.pipe(
       take(1),
       tap((dateStore) => {
-        if (!dateStore) throw new Error('could not get date store');
+        if (!dateStore) throw new Error('did not found any date store');
 
         console.log(`got date store`);
       }),
-      catchError(
-        this.handleError<DateStore>(
-          'GetDocumentService',
-          'getDocumentUtilsDateStore'
-        )
-      )
+      catchError(this.handleError<DateStore>('getDocumentUtilsDateStore'))
     );
-  }
-
-  private handleError<T>(
-    serviceName = '',
-    operation = 'operation',
-    result = {} as T
-  ) {
-    return (error: any): Observable<T> => {
-      console.log(`${serviceName}: ${operation} failed: ${error.message}`);
-
-      return of(result);
-    };
   }
 }

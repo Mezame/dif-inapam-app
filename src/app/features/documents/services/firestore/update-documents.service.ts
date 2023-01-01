@@ -1,13 +1,26 @@
 import { Injectable } from '@angular/core';
 import { doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import { Document } from '@features/documents/document.interface';
-import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
+import {
+  FirebaseErrorHandlerService,
+  HandleError,
+} from '@shared/services/error-handlers/firebase-error-handler.service';
+import { catchError, from, map, Observable, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'any',
 })
 export class UpdateDocumentsService {
-  constructor(private firestore: Firestore) {}
+  private handleError: HandleError;
+
+  constructor(
+    private firestore: Firestore,
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+  ) {
+    this.handleError = this.firebaseErrorHandlerService.createHandleError(
+      'UpdateDocumentsService'
+    );
+  }
 
   updateDocument(
     id: string,
@@ -30,21 +43,7 @@ export class UpdateDocumentsService {
       tap((_) => {
         console.log(`updated document w/ id=${id}`);
       }),
-      catchError(
-        this.handleError<boolean>('UpdateDocumentsService', 'updateDocument')
-      )
+      catchError(this.handleError<boolean>('updateDocument'))
     );
-  }
-
-  private handleError<T>(
-    serviceName = '',
-    operation = 'operation',
-    result = {} as T
-  ) {
-    return (error: any): Observable<T> => {
-      console.log(`${serviceName}: ${operation} failed: ${error.message}`);
-
-      return of(result);
-    };
   }
 }
