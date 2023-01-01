@@ -1,25 +1,38 @@
 import { NgModule } from '@angular/core';
-import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import {
+  AuthGuard,
+  canActivate,
+  customClaims,
+  redirectUnauthorizedTo,
+} from '@angular/fire/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
-import { map } from 'rxjs';
-import { User } from 'firebase/auth';
+import { LoginGuard } from '@core/auth/guards/login.guard';
 import { SelectivePreloadingStrategyService } from '@core/preloading-strategies/selective-preloading-strategy.service';
+import { map, pipe } from 'rxjs';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo('login');
-/*const redirectLoggedInToAdminOrHome = () =>
+
+const redirectLoggedInToAdminOrHome = () =>
   pipe(
     customClaims,
     map((claims) =>
-      claims.role == 'admin' ? 'admin/panel-reportes' : 'home/oficios'
+      claims.role
+        ? claims.role == 'admin'
+          ? 'admin/panel-reportes'
+          : 'home/oficios'
+        : 'login'
     )
-  );*/
+  );
+
+const redirectLoggedInToToMain = () => map((loggedIn) => (!loggedIn ? true : ['/']));
 
 const routes: Routes = [
   {
     path: 'login',
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginModule),
-    data: { preload: true },
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedInToToMain, preload: true },
   },
   {
     path: 'home',
@@ -43,7 +56,13 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin),
     data: { preload: false },
   },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedInToAdminOrHome },
+  },
   { path: '**', redirectTo: 'page-not-found' },
 ];
 
