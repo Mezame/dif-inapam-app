@@ -1,0 +1,13 @@
+<span matSnackBarLabel>
+  {{ data.message }}
+</span>
+<div matSnackBarActions *ngIf="hasAction; else defaultAction">
+  <button mat-button matSnackBarAction (click)="action()">
+    {{ data.action }}
+  </button>
+</div>
+<ng-template #defaultAction>
+  <button mat-icon-button matSnackBarAction (click)="action()">
+    <mat-icon>close</mat-icon>
+  </button>
+</ng-template>

@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutsModule } from '@shared/layouts/layouts.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AlertModule } from '@shared/components/alert/alert.module';
 
 import { environment } from '../environments/environment';
 
@@ -33,6 +34,7 @@ import {
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutsModule,
+    AlertModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => {
       const firestore = getFirestore();
