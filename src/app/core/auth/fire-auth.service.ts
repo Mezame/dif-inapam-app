@@ -10,6 +10,8 @@ import {
   FirebaseErrorHandlerService,
   HandleError,
 } from '@core/error-handlers/firebase-error-handler.service';
+import { LoggerService } from '@core/logger/logger.service';
+import { AlertsService } from '@shared/components/alert/services/alerts.service';
 import {
   catchError,
   from,
@@ -33,7 +35,8 @@ export class FireAuthService {
 
   constructor(
     private fireAuth: Auth,
-    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService,
+    private loggerService: LoggerService
   ) {
     this.user$ = authState(this.fireAuth).pipe(
       map((user) => {
@@ -78,7 +81,7 @@ export class FireAuthService {
       take(1),
       tap((user) => {
         if (user) {
-          console.log(`signed in user w/ email=${user.email}`);
+          this.loggerService.info(`signed in user w/ email=${user.email}`);
         }
       }),
       catchError(this.handleError<any>('signIn'))
@@ -99,7 +102,7 @@ export class FireAuthService {
     return res$.pipe(
       take(1),
       tap((_) => {
-        console.log(`signed out successfully`);
+        this.loggerService.info(`signed out successfully`);
       }),
       catchError(this.handleError<boolean>('signOut'))
     );
@@ -124,7 +127,7 @@ export class FireAuthService {
     return res$.pipe(
       take(1),
       tap((_) => {
-        console.log(`updated password successfully`);
+        this.loggerService.info(`updated password successfully`);
       }),
       catchError(this.handleError<boolean>('updatePassword'))
     );
