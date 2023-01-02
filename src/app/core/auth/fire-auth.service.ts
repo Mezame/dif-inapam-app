@@ -36,6 +36,7 @@ export class FireAuthService {
   constructor(
     private fireAuth: Auth,
     private firebaseErrorHandlerService: FirebaseErrorHandlerService,
+    private alertsService: AlertsService,
     private loggerService: LoggerService
   ) {
     this.user$ = authState(this.fireAuth).pipe(
@@ -65,17 +66,7 @@ export class FireAuthService {
   signIn(email: string, password: string): Observable<any> {
     const userCredential$ = from(
       signInWithEmailAndPassword(this.fireAuth, email, password)
-    ).pipe(
-      map((userCredential) => {
-        if (userCredential) {
-          const user = userCredential.user;
-
-          return user;
-        } else {
-          throw new Error('could not signed in');
-        }
-      })
-    );
+    ).pipe(map((userCredential) => userCredential.user));
 
     return userCredential$.pipe(
       take(1),
@@ -102,7 +93,7 @@ export class FireAuthService {
     return res$.pipe(
       take(1),
       tap((_) => {
-        this.loggerService.info(`signed out successfully`);
+        this.loggerService.info('signed out successfully');
       }),
       catchError(this.handleError<boolean>('signOut'))
     );
@@ -118,6 +109,10 @@ export class FireAuthService {
           if (res == undefined) {
             return true;
           } else {
+            this.alertsService.setAlert(
+              'No ha sido posible cambiar la contraseña.'
+            );
+
             throw new Error('could not update password');
           }
         })
@@ -128,6 +123,8 @@ export class FireAuthService {
       take(1),
       tap((_) => {
         this.loggerService.info(`updated password successfully`);
+
+        this.alertsService.setAlert('Se ha cambiado la contraseña.');
       }),
       catchError(this.handleError<boolean>('updatePassword'))
     );
