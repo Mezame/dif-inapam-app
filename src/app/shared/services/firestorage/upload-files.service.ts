@@ -5,11 +5,12 @@ import {
   Storage,
   uploadBytes,
 } from '@angular/fire/storage';
-import { catchError, from, Observable, switchMap, take, tap } from 'rxjs';
+import { catchError, from, map, Observable, switchMap, take, tap } from 'rxjs';
 import {
   FirebaseErrorHandlerService,
   HandleError,
 } from '@core/error-handlers/firebase-error-handler.service';
+import { LoggerService } from '@core/logger/logger.service';
 
 @Injectable({
   providedIn: 'any',
@@ -19,7 +20,8 @@ export class UploadFilesService {
 
   constructor(
     private fireStorage: Storage,
-    private firebaseErrorHandlerService: FirebaseErrorHandlerService
+    private firebaseErrorHandlerService: FirebaseErrorHandlerService,
+    private loggerService: LoggerService
   ) {
     this.handleError =
       this.firebaseErrorHandlerService.createHandleError('UploadFilesService');
@@ -28,24 +30,30 @@ export class UploadFilesService {
   uploadFromBlob(file: File, filename: string): Observable<string> {
     const storageRef = ref(this.fireStorage, `documents/${filename}`);
 
-    const fileRef$ = from(uploadBytes(storageRef, file));
+    const uploadResult$ = from(uploadBytes(storageRef, file)).pipe(
+      map((uploadResult) => {
+        if (!uploadResult) throw new Error('could not upload file');
 
-    const downloadUrl$ = fileRef$.pipe(
-      switchMap((snapshot) => getDownloadURL(snapshot.ref))
+        this.loggerService.info('uploaded file');
+
+        return uploadResult;
+      })
+    );
+
+    const downloadUrl$ = uploadResult$.pipe(
+      switchMap((uploadResult) => getDownloadURL(uploadResult.ref))
     );
 
     return downloadUrl$.pipe(
       take(1),
       tap((downloadUrl) => {
         if (downloadUrl) {
-          console.log('uploaded file');
+          this.loggerService.info('got file download url');
         } else {
-          throw new Error('could not upload file');
+          throw new Error('could not get file download url');
         }
       }),
-      catchError(
-        this.handleError<string>('uploadFromBlob')
-      )
+      catchError(this.handleError<string>('uploadFromBlob'))
     );
   }
 }
