@@ -4,6 +4,7 @@ import { DocumentFormValue } from '@features/documents/document-add-edit-form/do
 import { Document } from '@features/documents/document.interface';
 import { UpdateDocumentsService } from '@features/documents/services/firestore/update-documents.service';
 import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
+import { AlertsService } from '@shared/components/alert/services/alerts.service';
 import { DeleteFilesService } from '@shared/services/firestorage/delete-files.service';
 import { UploadFilesService } from '@shared/services/firestorage/upload-files.service';
 import { map, Observable } from 'rxjs';
@@ -24,6 +25,7 @@ export class DocumentEditComponent implements OnInit {
     private updateDocumentsService: UpdateDocumentsService,
     private uploadFilesService: UploadFilesService,
     private deleteFilesService: DeleteFilesService,
+    private alertsService: AlertsService,
     private router: Router
   ) {
     this.cardCode = this.route.snapshot.params['cardCode'];
@@ -58,9 +60,17 @@ export class DocumentEditComponent implements OnInit {
           .subscribe((deleteResult) => {
             if (deleteResult == true) {
               document.imageUrl = null;
-            }
 
-            this.editDocument(document);
+              this.editDocument(document);
+            } else {
+              this.alertsService.setAlert(
+                `No ha sido posible eliminar la foto`
+              );
+
+              setTimeout(() => {
+                this.editDocument(document);
+              }, 2000);
+            }
           });
       }
 
@@ -70,9 +80,15 @@ export class DocumentEditComponent implements OnInit {
           .subscribe((downloadUrl) => {
             if (downloadUrl && typeof downloadUrl == 'string') {
               document.imageUrl = downloadUrl;
-            }
 
-            this.editDocument(document);
+              this.editDocument(document);
+            } else {
+              this.alertsService.setAlert(`No ha sido posible agregar la foto`);
+
+              setTimeout(() => {
+                this.editDocument(document);
+              }, 2000);
+            }
           });
       }
 

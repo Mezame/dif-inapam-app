@@ -5,6 +5,7 @@ import {
   HandleError,
 } from '@core/error-handlers/firebase-error-handler.service';
 import { LoggerService } from '@core/logger/logger.service';
+import { AlertsService } from '@shared/components/alert/services/alerts.service';
 import { catchError, from, map, Observable, take, tap } from 'rxjs';
 
 @Injectable({
@@ -16,6 +17,7 @@ export class DeleteAssistantsService {
   constructor(
     private firestore: Firestore,
     private firebaseErrorHandlerService: FirebaseErrorHandlerService,
+    private alertsService: AlertsService,
     private loggerService: LoggerService
   ) {
     this.handleError = this.firebaseErrorHandlerService.createHandleError(
@@ -31,6 +33,10 @@ export class DeleteAssistantsService {
         if (res == undefined) {
           return true;
         } else {
+          this.alertsService.setAlert(
+            `No ha sido posible eliminar el asistente`
+          );
+
           throw new Error('could not delete assistant');
         }
       })
@@ -40,6 +46,8 @@ export class DeleteAssistantsService {
       take(1),
       tap((_) => {
         this.loggerService.info(`deleted assistant w/ id=${id}`);
+
+        this.alertsService.setAlert(`Se ha eliminado el asistente`);
       }),
       catchError(this.handleError<boolean>('deleteAssistant'))
     );

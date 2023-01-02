@@ -6,6 +6,7 @@ import {
 } from '@core/error-handlers/firebase-error-handler.service';
 import { LoggerService } from '@core/logger/logger.service';
 import { Document } from '@features/documents/document.interface';
+import { AlertsService } from '@shared/components/alert/services/alerts.service';
 import { catchError, from, map, Observable, take, tap } from 'rxjs';
 
 @Injectable({
@@ -17,6 +18,7 @@ export class UpdateDocumentsService {
   constructor(
     private firestore: Firestore,
     private firebaseErrorHandlerService: FirebaseErrorHandlerService,
+    private alertsService: AlertsService,
     private loggerService: LoggerService
   ) {
     this.handleError = this.firebaseErrorHandlerService.createHandleError(
@@ -35,6 +37,10 @@ export class UpdateDocumentsService {
         if (res == undefined) {
           return true;
         } else {
+          this.alertsService.setAlert(
+            `No ha sido posible editar el oficio ${id}`
+          );
+
           throw new Error('could not update document');
         }
       })
@@ -44,6 +50,8 @@ export class UpdateDocumentsService {
       take(1),
       tap((_) => {
         this.loggerService.info(`updated document w/ id=${id}`);
+
+        this.alertsService.setAlert(`Se ha editado el oficio ${id}`);
       }),
       catchError(this.handleError<boolean>('updateDocument'))
     );
