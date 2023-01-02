@@ -25,7 +25,7 @@ export class FirebaseErrorHandlerService {
     result = {} as T
   ) {
     return (error: Error): Observable<T> => {
-      this.loggerService.error(error.toString());
+      this.loggerService.error(error as any);
 
       const message = !(error instanceof FirebaseError)
         ? error.message
