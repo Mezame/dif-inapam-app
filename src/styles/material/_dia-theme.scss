@@ -39,4 +39,5 @@ $dia-theme: mat.define-light-theme(
 @include mat.table-theme($dia-theme);
 @include mat.input-theme($dia-theme);
 @include mat.datepicker-theme($dia-theme);
+@include mat.snack-bar-theme($dia-theme);
 @include mat.typography-hierarchy($dia-theme);
