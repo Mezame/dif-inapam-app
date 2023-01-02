@@ -4,6 +4,7 @@ import { DocumentFormValue } from '@features/documents/document-add-edit-form/do
 import { Document } from '@features/documents/document.interface';
 import { AddDocumentsService } from '@features/documents/services/firestore/add-documents.service';
 import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
+import { AlertsService } from '@shared/components/alert/services/alerts.service';
 import { UploadFilesService } from '@shared/services/firestorage/upload-files.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class DocumentAddComponent {
     private addDocumentsService: AddDocumentsService,
     private documentStoreService: DocumentStoreService,
     private uploadFilesService: UploadFilesService,
+    private alertsService: AlertsService,
     private router: Router
   ) {}
 
@@ -39,7 +41,11 @@ export class DocumentAddComponent {
             this.addDocument(document);
           });
       } else {
-        this.addDocument(document);
+        this.alertsService.setAlert(`No ha sido posible agregar la foto`);
+
+        setTimeout(() => {
+          this.addDocument(document);
+        }, 2000);
       }
     }
   }
