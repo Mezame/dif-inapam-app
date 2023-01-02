@@ -46,8 +46,8 @@ export class DocumentDetailComponent implements OnInit {
 
       this.deleteDocumentsService
         .deleteDocument(filename)
-        .subscribe((docRef) => {
-          if (docRef == true) {
+        .subscribe((res) => {
+          if (res == true) {
             this.documentStoreService.deleteDocument(filename);
 
             this.router.navigate(['/home/oficios']);
@@ -62,8 +62,8 @@ export class DocumentDetailComponent implements OnInit {
     if (confirm('¿Confirmas cancelar tarjeta?') == true) {
       this.updateDocumentsService
         .updateDocument(id, { isCardCanceled: true })
-        .subscribe((docRef) => {
-          if (docRef == true) {
+        .subscribe((res) => {
+          if (res == true) {
             this.documentStoreService.updateDocument(id, document);
           }
         });
