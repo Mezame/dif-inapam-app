@@ -28,8 +28,14 @@ export class DocumentStoreService {
     });
   }
 
+  getDocumentsValue(): readonly Document[] {
+    const documents = this.documents$.getValue() as ReadonlyArray<Document>;
+
+    return documents;
+  }
+
   getDocuments(): Observable<Document[]> {
-    const documents = this.documents$.getValue();
+    const documents = this.getDocumentsValue();
 
     if (documents?.length < 1) {
       this.loadDocuments();
@@ -53,7 +59,7 @@ export class DocumentStoreService {
   }
 
   addDocument(document: Document) {
-    const documents = this.documents$.getValue() as ReadonlyArray<Document>;
+    const documents = this.getDocumentsValue();
 
     const newDocuments = [...documents, document];
 
@@ -61,7 +67,7 @@ export class DocumentStoreService {
   }
 
   updateDocument(cardCode: string, document: Partial<Document>) {
-    const documents = this.documents$.getValue() as ReadonlyArray<Document>;
+    const documents = this.getDocumentsValue();
 
     const index = documents.findIndex((doc) => doc.cardCode == cardCode);
 
@@ -75,7 +81,7 @@ export class DocumentStoreService {
   }
 
   deleteDocument(cardCode: string) {
-    const documents = this.documents$.getValue() as ReadonlyArray<Document>;
+    const documents = this.getDocumentsValue();
 
     const index = documents.findIndex(
       (document) => document.cardCode == cardCode
@@ -97,7 +103,7 @@ export class DocumentStoreService {
   }
 
   getDocumentUtilsDateStore(): Observable<DateStore> {
-    const dateStore = this.dateStore$.getValue();
+    const dateStore = this.dateStore$.getValue() as Readonly<DateStore>;
 
     if (dateStore.years?.length < 1) {
       this.loadDocumentUtilsDateStore();
