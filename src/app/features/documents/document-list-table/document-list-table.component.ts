@@ -1,15 +1,11 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
-  ViewChild,
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Document } from '../document.interface';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-document-list-table',
