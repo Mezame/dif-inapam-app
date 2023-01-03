@@ -22,6 +22,7 @@ import { AssistantFormValue } from './assistant-form-value.interface';
 })
 export class AssistantAddFormComponent implements OnInit {
   defaultErrorMessage: any;
+  isSubmitButtonDisabled = false;
 
   assistantForm!: FormGroup<{
     name: FormControl<string | null>;
@@ -56,9 +57,15 @@ export class AssistantAddFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isSubmitButtonDisabled = true;
+
     const assistantFormValue = this.assistantForm.value as AssistantFormValue;
 
     this.emitAddAssistantAction(assistantFormValue);
+
+    setTimeout(() => {
+      this.isSubmitButtonDisabled = false;
+    }, 4000);
   }
 
   emitAddAssistantAction(data: {}, action = 'addAssistant') {

@@ -31,12 +31,10 @@ import { DocumentFormValue } from './document-form-value.interface';
 })
 export class DocumentAddEditFormComponent implements OnInit {
   operationCodesOptions!: string[];
-
   statesOptions!: string[];
-
   defaultFormValue: any;
-
   defaultErrorMessage: any;
+  isSubmitButtonDisabled = false;
 
   documentForm!: FormGroup<{
     createDate: FormControl<Date | string | null>;
@@ -209,6 +207,8 @@ export class DocumentAddEditFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isSubmitButtonDisabled = true;
+
     let documentFormValue: Partial<DocumentFormValue>;
 
     if (this.action == 'addDocument') {
@@ -232,6 +232,10 @@ export class DocumentAddEditFormComponent implements OnInit {
 
       this.emitEditDocumentAction({ documentFormValue, hasImage });
     }
+
+    setTimeout(() => {
+      this.isSubmitButtonDisabled = false;
+    }, 4000);
   }
 
   emitAddDocumentAction(data: {}, action = 'addDocument') {

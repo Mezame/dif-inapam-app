@@ -42,7 +42,7 @@
       <span>Cancelar</span>
     </a>
 
-    <button mat-flat-button color="primary" type="submit" [disabled]="!assistantForm.valid">
+    <button mat-flat-button color="primary" type="submit" [disabled]="!assistantForm.valid || isSubmitButtonDisabled">
       <span>Agregar asistente</span>
     </button>
   </div>

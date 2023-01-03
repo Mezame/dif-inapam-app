@@ -295,7 +295,7 @@
       mat-flat-button
       color="primary"
       type="submit"
-      [disabled]="!documentForm.valid || !documentForm.dirty"
+      [disabled]="!documentForm.valid || isSubmitButtonDisabled"
     >
       <span *ngIf="action == 'addDocument'">Agregar oficio</span>
       <span *ngIf="action == 'editDocument'">Editar oficio</span>
