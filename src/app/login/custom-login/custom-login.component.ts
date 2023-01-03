@@ -1,18 +1,19 @@
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-  Optional,
-} from '@angular/core';
-import {
-  Auth,
-  authState,
-  signInWithEmailAndPassword,
-  signOut,
-  User,
-} from '@angular/fire/auth';
-import { EMPTY, map, Observable, Subscription } from 'rxjs';
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { FireAuthService } from '@core/auth/fire-auth.service';
+import { AlertsService } from '@shared/components/alert/services/alerts.service';
+import { Observable } from 'rxjs';
+
+interface LoginFormValue {
+  email: string;
+  password: string;
+}
 
 @Component({
   selector: 'app-custom-login',
@@ -20,47 +21,70 @@ import { EMPTY, map, Observable, Subscription } from 'rxjs';
   styleUrls: ['./custom-login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CustomLoginComponent implements OnInit, OnDestroy {
-  private readonly userDisposable: Subscription | undefined;
-  public readonly user: Observable<User | null> = EMPTY;
+export class CustomLoginComponent implements OnInit {
+  isAdmin$: Observable<boolean>;
+  isLoggedIn$: Observable<boolean>;
+  user$: Observable<any>;
 
-  showLoginButton = false;
-  showLogoutButton = false;
+  loginForm!: FormGroup<{
+    email: FormControl<string | null>;
+    password: FormControl<string | null>;
+  }>;
 
-  constructor(@Optional() private auth: Auth) {
-    if (auth) {
-      this.user = authState(this.auth);
-      this.userDisposable = authState(this.auth)
-        .pipe(map((u) => !!u))
-        .subscribe((isLoggedIn) => {
-          this.showLoginButton = !isLoggedIn;
-          this.showLogoutButton = isLoggedIn;
-        });
-    }
+  constructor(
+    private fb: FormBuilder,
+    private fireAuthService: FireAuthService,
+    private alertsService: AlertsService,
+    private router: Router
+  ) {
+    this.isAdmin$ = this.fireAuthService.isAdmin$;
+    this.isLoggedIn$ = this.fireAuthService.isLoggedIn$;
+    this.user$ = this.fireAuthService.user$;
+  }
+
+  get emailCtrl() {
+    return this.loginForm.controls['email'];
+  }
+
+  get passwordCtrl() {
+    return this.loginForm.controls['password'];
   }
 
   ngOnInit(): void {
-    this.user.subscribe(user => console.log(user));
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+    });
+
+    this.emailCtrl.setValue('mezametranslations@gmail.com');
+    this.passwordCtrl.setValue('admin123');
   }
 
-  ngOnDestroy(): void {
-    if (this.userDisposable) {
-      this.userDisposable.unsubscribe();
-    }
+  onSubmit() {
+    const loginFormValue = this.loginForm.value as LoginFormValue;
+    const email = loginFormValue.email;
+    const password = loginFormValue.password;
+
+    this.logIn(email, password);
   }
 
-  async login() {
-    try {
-      const email = 'mezametranslations@gmail.com';
-      const password = 'admin123';
+  logIn(email: string, password: string) {
+    this.fireAuthService.signIn(email, password).subscribe(async (user) => {
+      if (user.email) {
+        const idTokenResult = await user?.getIdTokenResult();
 
-      const user = await signInWithEmailAndPassword(this.auth, email, password);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+        const isAdmin = idTokenResult?.claims['role'] == 'admin';
 
-  logout() {
-    signOut(this.auth);
+        if (isAdmin) {
+          this.router.navigate(['/admin/panel-reportes']);
+        } else {
+          this.router.navigate(['/home/oficios']);
+        }
+      } else {
+        this.alertsService.setAlert(
+          'No ha sido posible iniciar sesión. Verifica que los datos sean correctos.'
+        );
+      }
+    });
   }
 }

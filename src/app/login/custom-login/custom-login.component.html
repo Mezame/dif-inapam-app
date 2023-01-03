@@ -1,21 +1,39 @@
-<p>
-  <a routerLink="/home/oficios">Go to Oficios</a>
-</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Correo electrónico</mat-label>
+    <input matInput placeholder="" formControlName="email" />
 
-<p>
-  <label>Correo</label><br />
-  <input type="text" />
-</p>
+    <mat-error *ngIf="emailCtrl.errors?.['required']"
+      >Debes ingresar un correo.</mat-error
+    >
 
-<p>
-  <label>Contraseña</label><br />
-  <input type="text" />
-</p>
+    <mat-error *ngIf="emailCtrl.errors?.['email']"
+      >Debes ingresar un correo válido.</mat-error
+    >
+  </mat-form-field>
 
-<p>
-  <button type="button" (click)="login()">Ingresar</button>
-</p>
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Contraseña</mat-label>
+    <input
+      type="password"
+      matInput
+      placeholder="••••••••"
+      formControlName="password"
+    />
 
-<p>
-  <button type="button" (click)="logout()">Cerrar sesión</button>
-</p>
+    <mat-error *ngIf="passwordCtrl.errors?.['required']"
+      >Debes ingresar una contraseña.</mat-error
+    >
+  </mat-form-field>
+
+  <div>
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="!loginForm.valid"
+    >
+      <span>Iniciar sesión</span>
+    </button>
+  </div>
+</form>
