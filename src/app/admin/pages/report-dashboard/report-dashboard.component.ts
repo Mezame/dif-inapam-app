@@ -92,7 +92,7 @@ export class ReportDashboardComponent implements OnInit {
 
     const parsedCsvData = parseDataSourceToCsv(dataSource) as string;
 
-    this.objectUrl = createCsvDownloadUrl(parsedCsvData);
+    this.objectUrl = createCsvDownloadUrl(parsedCsvData) as string;
 
     this.renderer.setAttribute(anchor, 'href', this.objectUrl);
 
@@ -127,7 +127,7 @@ export class ReportDashboardComponent implements OnInit {
       this.renderer.setProperty(el, 'disabled', 'false');
 
       this.cDRef.markForCheck();
-    }, 2500);
+    }, 4500);
   }
 
   downloadDocumentsReportCsv(el: MatAnchor, data: { documents: Document[] }) {
@@ -139,7 +139,7 @@ export class ReportDashboardComponent implements OnInit {
 
     const parsedCsvData = parseDataSourceToCsv(dataSource) as string;
 
-    this.objectUrl = createCsvDownloadUrl(parsedCsvData);
+    this.objectUrl = createCsvDownloadUrl(parsedCsvData) as string;
 
     this.renderer.setAttribute(anchor, 'href', this.objectUrl);
 
@@ -175,6 +175,6 @@ export class ReportDashboardComponent implements OnInit {
       this.renderer.setProperty(el, 'disabled', 'false');
 
       this.cDRef.markForCheck();
-    }, 2500);
+    }, 4500);
   }
 }
