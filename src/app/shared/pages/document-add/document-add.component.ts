@@ -34,18 +34,20 @@ export class DocumentAddComponent {
         this.uploadFilesService
           .uploadFromBlob(imageBlob, document.cardCode)
           .subscribe((downloadUrl) => {
-            if (typeof downloadUrl == 'string') {
+            if (downloadUrl && typeof downloadUrl == 'string') {
               document.imageUrl = downloadUrl;
-            }
 
-            this.addDocument(document);
+              this.addDocument(document);
+            } else {
+              this.alertsService.setAlert(`No ha sido posible agregar la foto`);
+
+              setTimeout(() => {
+                this.addDocument(document);
+              }, 2000);
+            }
           });
       } else {
-        this.alertsService.setAlert(`No ha sido posible agregar la foto`);
-
-        setTimeout(() => {
-          this.addDocument(document);
-        }, 2000);
+        this.addDocument(document);
       }
     }
   }
