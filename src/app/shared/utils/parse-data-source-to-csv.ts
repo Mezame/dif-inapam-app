@@ -1,9 +1,9 @@
-export interface DataSourceCsv {
+export interface CsvDataSource {
   header: string[];
   body: string[][];
 }
 
-export function parseToCsv(dataSource: DataSourceCsv): string {
+export function parseDataSourceToCsv(dataSource: CsvDataSource): string {
   let parsedData: string;
 
   parsedData = dataSource.header.join() + '\n';
