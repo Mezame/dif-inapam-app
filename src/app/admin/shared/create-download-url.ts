@@ -3,30 +3,36 @@ import { Report } from '@features/reports/report.interface';
 import { Document } from '@features/documents/document.interface';
 import { MatAnchor } from '@angular/material/button';
 import { DataSourceCsv, parseToCsv } from '@shared/utils/parse-to-csv';
+import { AlertsService } from '@shared/components/alert/services/alerts.service';
 
 export function createDownloadUrl(
   el: MatAnchor,
   data: { report: Report; documents?: Document[] },
   objectUrl: string | null,
   renderer: Renderer2,
-  cDRef: ChangeDetectorRef
+  cDRef: ChangeDetectorRef,
+  alertsService: AlertsService
 ) {
   let dataSource: DataSourceCsv;
   let parsedData: string;
   let blob: Blob;
   let fileName: string;
+  let isMonthlyReport: boolean;
+  let isDocumentsReport: boolean;
   const anchor = el._elementRef.nativeElement as HTMLAnchorElement;
+  const reportLocaleMonth = new Date(data.report.date).toLocaleDateString(
+    'es-MX',
+    { month: 'long' }
+  );
+  const reportYear = new Date(data.report.date).getFullYear().toString();
 
   if (anchor.href) return;
 
   if (data) {
-    const reportLocaleMonth = new Date(data.report.date).toLocaleDateString(
-      'es-MX',
-      { month: 'long' }
-    );
-    const reportYear = new Date(data.report.date).getFullYear().toString();
+    isMonthlyReport = !data.documents;
+    isDocumentsReport = !!data.documents;
 
-    if (!data.documents) {
+    if (isMonthlyReport) {
       fileName = `reporte-mensual-${reportLocaleMonth}-${reportYear}`;
 
       dataSource = {
@@ -61,7 +67,7 @@ export function createDownloadUrl(
       };
     }
 
-    if (data.documents) {
+    if (isDocumentsReport) {
       fileName = `reporte-oficios-${reportLocaleMonth}-${reportYear}`;
 
       dataSource = {
@@ -150,6 +156,20 @@ export function createDownloadUrl(
     anchor.click();
 
     renderer.setProperty(el, 'disabled', 'true');
+
+    setTimeout(() => {
+      if (isMonthlyReport) {
+        alertsService.setAlert(
+          `Se ha descargado el reporte mensual de ${reportLocaleMonth}, ${reportYear}`
+        );
+      }
+
+      if (isDocumentsReport) {
+        alertsService.setAlert(
+          `Se ha descargado el reporte de oficios de ${reportLocaleMonth}, ${reportYear}`
+        );
+      }
+    }, 1500);
 
     setTimeout(() => {
       URL.revokeObjectURL(objectUrl as string);

@@ -11,6 +11,7 @@ import { Document } from '@features/documents/document.interface';
 import { SortDocumentsService } from '@features/documents/services/sorts/sort-documents.service';
 import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { Report } from '@features/reports/report.interface';
+import { AlertsService } from '@shared/components/alert/services/alerts.service';
 import { map, Observable, switchMap } from 'rxjs';
 import { createDownloadUrl } from '../../shared/create-download-url';
 
@@ -31,7 +32,8 @@ export class ReportDetailComponent implements OnInit {
     private documentStoreService: DocumentStoreService,
     private sortDocumentsService: SortDocumentsService,
     private renderer: Renderer2,
-    private cDRef: ChangeDetectorRef
+    private cDRef: ChangeDetectorRef,
+    private alertsService: AlertsService
   ) {
     this.reportId = this.route.snapshot.params['id'];
 
@@ -71,6 +73,13 @@ export class ReportDetailComponent implements OnInit {
   }
 
   onClick(el: MatAnchor, data: { report: Report; documents?: Document[] }) {
-    createDownloadUrl(el, data, this.objectUrl, this.renderer, this.cDRef);
+    createDownloadUrl(
+      el,
+      data,
+      this.objectUrl,
+      this.renderer,
+      this.cDRef,
+      this.alertsService
+    );
   }
 }

@@ -12,6 +12,7 @@ import { DocumentStoreService } from '@features/documents/services/store/documen
 import { Report } from '@features/reports/report.interface';
 import { SortReportsService } from '@features/reports/services/sorts/sort-reports.service';
 import { ReportStoreService } from '@features/reports/services/store/report-store.service';
+import { AlertsService } from '@shared/components/alert/services/alerts.service';
 import { map, Observable, switchMap } from 'rxjs';
 import { createDownloadUrl } from '../../shared/create-download-url';
 
@@ -32,7 +33,8 @@ export class ReportDashboardComponent implements OnInit {
     private reportStoreService: ReportStoreService,
     private sortReportsService: SortReportsService,
     private renderer: Renderer2,
-    private cDRef: ChangeDetectorRef
+    private cDRef: ChangeDetectorRef,
+    private alertsService: AlertsService
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +75,13 @@ export class ReportDashboardComponent implements OnInit {
   }
 
   onClick(el: MatAnchor, data: { report: Report; documents?: Document[] }) {
-    createDownloadUrl(el, data, this.objectUrl, this.renderer, this.cDRef);
+    createDownloadUrl(
+      el,
+      data,
+      this.objectUrl,
+      this.renderer,
+      this.cDRef,
+      this.alertsService
+    );
   }
 }
