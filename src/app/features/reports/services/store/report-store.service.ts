@@ -17,8 +17,14 @@ export class ReportStoreService {
     });
   }
 
+  getReportsValue(): readonly Report[] {
+    const reports = this.reports$.getValue() as ReadonlyArray<Report>;
+
+    return reports;
+  }
+
   getReports(): Observable<Report[]> {
-    const reports = this.reports$.getValue();
+    const reports = this.getReportsValue();
 
     if (reports.length < 1) {
       this.loadReports();
