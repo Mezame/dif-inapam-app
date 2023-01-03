@@ -20,8 +20,7 @@ export class DocumentListComponent implements OnInit {
   selectedMonth?: MonthNumber;
 
   constructor(private documentStoreService: DocumentStoreService) {
-    const documents = this.documentStoreService.getDocumentsValue();
-    whenAddFirstDocumentPatch(documents);
+    whenAddFirstDocumentPatch(this.documentStoreService);
   }
 
   ngOnInit() {
