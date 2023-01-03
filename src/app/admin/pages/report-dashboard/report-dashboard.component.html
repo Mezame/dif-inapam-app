@@ -8,9 +8,9 @@
       <a
         mat-flat-button
         color="primary"
-        (click)="onClick(monthlyReport, { report })"
+        (click)="downloadMonthlyReportCsv(monthlyReportAnchorRef, { report })"
         [disabled]="!report.cardsStats"
-        #monthlyReport
+        #monthlyReportAnchorRef
       >
         <mat-icon>download</mat-icon>
         <span>Descargar reporte</span>
@@ -33,9 +33,9 @@
         <a
           mat-flat-button
           color="primary"
-          (click)="onClick(documentsReport, { report, documents })"
+          (click)="downloadDocumentsReportCsv(documentsReportAnchorRef, { documents })"
           [disabled]="!report.cardsStats"
-          #documentsReport
+          #documentsReportAnchorRef
         >
           <mat-icon>download</mat-icon>
           <span>Descargar reporte</span>

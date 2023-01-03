@@ -12,8 +12,16 @@ import { SortDocumentsService } from '@features/documents/services/sorts/sort-do
 import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { Report } from '@features/reports/report.interface';
 import { AlertsService } from '@shared/components/alert/services/alerts.service';
+import {
+  CsvDataSource,
+  parseDataSourceToCsv,
+} from '@shared/utils/parse-data-source-to-csv';
 import { map, Observable, switchMap } from 'rxjs';
-import { createDownloadUrl } from '../../shared/create-download-url';
+import { createCsvDownloadUrl } from '../../shared/create-csv-download-url';
+import {
+  generateDocumentsReportDataSource,
+  generateMonthlyReportDataSource,
+} from '../../shared/reports-data-source';
 
 @Component({
   selector: 'app-report-detail',
@@ -22,9 +30,10 @@ import { createDownloadUrl } from '../../shared/create-download-url';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReportDetailComponent implements OnInit {
-  reportId: string;
   report$: Observable<Report>;
   documents$?: Observable<Document[]>;
+
+  reportId: string;
   objectUrl: string | null = null;
 
   constructor(
@@ -72,14 +81,98 @@ export class ReportDetailComponent implements OnInit {
     }
   }
 
-  onClick(el: MatAnchor, data: { report: Report; documents?: Document[] }) {
-    createDownloadUrl(
-      el,
-      data,
-      this.objectUrl,
-      this.renderer,
-      this.cDRef,
-      this.alertsService
+  downloadMonthlyReportCsv(el: MatAnchor, data: { report: Report }) {
+    const anchor = el._elementRef.nativeElement as HTMLAnchorElement;
+
+    if (anchor.href) return;
+
+    const dataSource = generateMonthlyReportDataSource(data) as CsvDataSource;
+
+    const parsedCsvData = parseDataSourceToCsv(dataSource) as string;
+
+    this.objectUrl = createCsvDownloadUrl(parsedCsvData);
+
+    this.renderer.setAttribute(anchor, 'href', this.objectUrl);
+
+    const reportLocaleMonth = new Date(data.report.date).toLocaleDateString(
+      'es-MX',
+      { month: 'long' }
     );
+    const reportYear = new Date(data.report.date).getFullYear().toString();
+    const fileName = `reporte-mensual-${reportLocaleMonth}-${reportYear}`;
+
+    this.renderer.setAttribute(anchor, 'download', fileName!);
+
+    anchor.click();
+
+    this.renderer.setProperty(el, 'disabled', 'true');
+
+    setTimeout(() => {
+      this.alertsService.setAlert(
+        `Se ha descargado el reporte mensual de ${reportLocaleMonth}, ${reportYear}`
+      );
+    }, 1500);
+
+    setTimeout(() => {
+      URL.revokeObjectURL(this.objectUrl as string);
+
+      this.objectUrl = null;
+
+      this.renderer.removeAttribute(anchor, 'href');
+
+      this.renderer.removeAttribute(anchor, 'download');
+
+      this.renderer.setProperty(el, 'disabled', 'false');
+
+      this.cDRef.markForCheck();
+    }, 2500);
+  }
+
+  downloadDocumentsReportCsv(el: MatAnchor, data: { documents: Document[] }) {
+    const anchor = el._elementRef.nativeElement as HTMLAnchorElement;
+
+    if (anchor.href) return;
+
+    const dataSource = generateDocumentsReportDataSource(data) as CsvDataSource;
+
+    const parsedCsvData = parseDataSourceToCsv(dataSource) as string;
+
+    this.objectUrl = createCsvDownloadUrl(parsedCsvData);
+
+    this.renderer.setAttribute(anchor, 'href', this.objectUrl);
+
+    const reportLocaleMonth = new Date(
+      data.documents[0].createDate
+    ).toLocaleDateString('es-MX', { month: 'long' });
+    const reportYear = new Date(data.documents[0].createDate)
+      .getFullYear()
+      .toString();
+    const fileName = `reporte-oficios-${reportLocaleMonth}-${reportYear}`;
+
+    this.renderer.setAttribute(anchor, 'download', fileName!);
+
+    anchor.click();
+
+    this.renderer.setProperty(el, 'disabled', 'true');
+
+    setTimeout(() => {
+      this.alertsService.setAlert(
+        `Se ha descargado el reporte de oficios de ${reportLocaleMonth}, ${reportYear}`
+      );
+    }, 1500);
+
+    setTimeout(() => {
+      URL.revokeObjectURL(this.objectUrl as string);
+
+      this.objectUrl = null;
+
+      this.renderer.removeAttribute(anchor, 'href');
+
+      this.renderer.removeAttribute(anchor, 'download');
+
+      this.renderer.setProperty(el, 'disabled', 'false');
+
+      this.cDRef.markForCheck();
+    }, 2500);
   }
 }
