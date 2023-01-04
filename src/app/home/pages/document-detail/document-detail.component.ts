@@ -1,12 +1,18 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FireAuthService } from '@core/auth/fire-auth.service';
 import { Document } from '@features/documents/document.interface';
 import { DeleteDocumentsService } from '@features/documents/services/firestore/delete-documents.service';
-import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { UpdateDocumentsService } from '@features/documents/services/firestore/update-documents.service';
-import { map, Observable } from 'rxjs';
+import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
+import { AlertsService } from '@shared/components/alert/services/alerts.service';
 import { DeleteFilesService } from '@shared/services/firestorage/delete-files.service';
-import { FireAuthService } from '@core/auth/fire-auth.service';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-document-detail',
@@ -26,6 +32,8 @@ export class DocumentDetailComponent implements OnInit {
     private updateDocumentsService: UpdateDocumentsService,
     private deleteDocumentsService: DeleteDocumentsService,
     private deleteFilesService: DeleteFilesService,
+    private cDRef: ChangeDetectorRef,
+    private alertsService: AlertsService,
     private router: Router
   ) {
     this.cardCode = this.route.snapshot.params['cardCode'];
@@ -44,15 +52,13 @@ export class DocumentDetailComponent implements OnInit {
         this.deleteFilesService.deleteFile(filename).subscribe();
       }
 
-      this.deleteDocumentsService
-        .deleteDocument(filename)
-        .subscribe((res) => {
-          if (res == true) {
-            this.documentStoreService.deleteDocument(filename);
+      this.deleteDocumentsService.deleteDocument(filename).subscribe((res) => {
+        if (res == true) {
+          this.documentStoreService.deleteDocument(filename);
 
-            this.router.navigate(['/home/oficios']);
-          }
-        });
+          this.router.navigate(['/home/oficios']);
+        }
+      });
     }
   }
 
@@ -64,7 +70,16 @@ export class DocumentDetailComponent implements OnInit {
         .updateDocument(id, { isCardCanceled: true })
         .subscribe((res) => {
           if (res == true) {
-            this.documentStoreService.updateDocument(id, document);
+            const newDocument = { ...document, isCardCanceled: true };
+
+            this.documentStoreService.updateDocument(id, newDocument);
+
+            this.document$ =
+              this.documentStoreService.getDocumentByCardCode(id);
+
+            this.cDRef.markForCheck();
+
+            this.alertsService.setAlert('Se ha cancelado la tarjeta');
           }
         });
     }
