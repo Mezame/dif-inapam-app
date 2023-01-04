@@ -4,7 +4,6 @@ import { Document } from '@features/documents/document.interface';
 import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
 import { MonthNumber } from '@shared/types/month-number.type';
 import { Observable } from 'rxjs';
-import { whenAddFirstDocumentPatch } from './when-add-first-document-patch';
 
 @Component({
   selector: 'app-document-list',
@@ -19,9 +18,7 @@ export class DocumentListComponent implements OnInit {
   selectedYear?: string;
   selectedMonth?: MonthNumber;
 
-  constructor(private documentStoreService: DocumentStoreService) {
-    whenAddFirstDocumentPatch(this.documentStoreService);
-  }
+  constructor(private documentStoreService: DocumentStoreService) {}
 
   ngOnInit() {
     this.dateStore$ = this.documentStoreService.getDocumentUtilsDateStore();
