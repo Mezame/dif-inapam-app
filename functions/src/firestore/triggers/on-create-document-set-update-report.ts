@@ -20,10 +20,12 @@ export async function onCreateDocumentSetUpdateReport(
     const reportId = `VER-TUXPAN-${reportDate.toLocaleDateString('es-MX', {
       month: 'long',
     })}-${documentYear}`;
-    const report = (await getReport(reportId)) as Report;
-    const newReport = { ...defaultReport };
+
+    const report = (await getReport(reportId)) as Readonly<Report>;
 
     if (!report) {
+      const newReport = { ...defaultReport };
+
       newReport.date = reportDate.toString();
 
       if (document.operationCode == 'NUEVO REG') {
@@ -54,33 +56,35 @@ export async function onCreateDocumentSetUpdateReport(
 
       await setReport(newReport);
     } else {
+      const updatedReport = { ...report };
+
       if (document.operationCode == 'NUEVO REG') {
-        report.cardsStats.newRecord++;
+        updatedReport.cardsStats.newRecord++;
       }
 
       if (document.operationCode == 'REPOSICION') {
-        report.cardsStats.replacement++;
+        updatedReport.cardsStats.replacement++;
       }
 
       if (document.operationCode == 'CANJE') {
-        report.cardsStats.change++;
+        updatedReport.cardsStats.change++;
       }
 
       if (document.isCardCanceled) {
-        report.cardsStats.cancel++;
+        updatedReport.cardsStats.cancel++;
       }
 
-      report.cardCodesRange[1] = document.cardCode;
+      updatedReport.cardCodesRange[1] = document.cardCode;
 
       if (document.sex == 'Hombre') {
-        report.sexStats.male++;
+        updatedReport.sexStats.male++;
       }
 
       if (document.sex == 'Mujer') {
-        report.sexStats.female++;
+        updatedReport.sexStats.female++;
       }
 
-      await updateReport(report);
+      await updateReport(updatedReport);
     }
 
     return;

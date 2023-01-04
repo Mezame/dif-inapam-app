@@ -21,55 +21,57 @@ export async function onUpdateDocumentUpdateReport(
       month: 'long',
     })}-${documentYear}`;
 
-    const report = (await getReport(reportId)) as Report;
+    const report = (await getReport(reportId)) as Readonly<Report>;
 
     if (!report) {
       return;
     }
 
+    const updatedReport = { ...report };
+
     if (document.operationCode != oldDocument.operationCode) {
       if (document.operationCode == 'NUEVO REG') {
-        report.cardsStats.newRecord++;
+        updatedReport.cardsStats.newRecord++;
       }
 
       if (document.operationCode == 'REPOSICION') {
-        report.cardsStats.replacement++;
+        updatedReport.cardsStats.replacement++;
       }
 
       if (document.operationCode == 'CANJE') {
-        report.cardsStats.change++;
+        updatedReport.cardsStats.change++;
       }
 
       if (oldDocument.operationCode == 'NUEVO REG') {
-        report.cardsStats.newRecord--;
+        updatedReport.cardsStats.newRecord--;
       }
 
       if (oldDocument.operationCode == 'REPOSICION') {
-        report.cardsStats.replacement--;
+        updatedReport.cardsStats.replacement--;
       }
 
       if (oldDocument.operationCode == 'CANJE') {
-        report.cardsStats.change--;
+        updatedReport.cardsStats.change--;
       }
     }
 
     if (document.isCardCanceled) {
-      report.cardsStats.cancel++;
+      updatedReport.cardsStats.cancel++;
     }
 
     if (document.sex != oldDocument.sex) {
       if (document.sex == 'Hombre') {
-        report.sexStats.male++;
-        report.sexStats.female--;
+        updatedReport.sexStats.male++;
+        updatedReport.sexStats.female--;
       }
 
       if (document.sex == 'Mujer') {
-        report.sexStats.female++;
-        report.sexStats.male--;
+        updatedReport.sexStats.female++;
+        updatedReport.sexStats.male--;
       }
     }
 
-    await updateReport(report);
+    await updateReport(updatedReport);
 
     return;
   } catch (error) {

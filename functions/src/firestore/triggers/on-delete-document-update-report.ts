@@ -21,24 +21,26 @@ export async function onDeleteDocumentUpdateReport(
       month: 'long',
     })}-${documentYear}`;
 
-    const report = (await getReport(reportId)) as Report;
+    const report = (await getReport(reportId)) as Readonly<Report>;
 
     if (!report) {
       return;
     }
 
+    const updatedReport = { ...report };
+
     if (
-      report.cardsStats.newRecord == 0 &&
-      report.cardsStats.replacement == 0 &&
-      report.cardsStats.change == 0
+      updatedReport.cardsStats.newRecord == 0 &&
+      updatedReport.cardsStats.replacement == 0 &&
+      updatedReport.cardsStats.change == 0
     ) {
       return;
     }
 
     if (
-      report.cardsStats.newRecord == 1 ||
-      report.cardsStats.replacement == 1 ||
-      report.cardsStats.change == 1
+      updatedReport.cardsStats.newRecord == 1 ||
+      updatedReport.cardsStats.replacement == 1 ||
+      updatedReport.cardsStats.change == 1
     ) {
       await deleteReport(reportId);
 
@@ -46,58 +48,58 @@ export async function onDeleteDocumentUpdateReport(
     }
 
     if (document.operationCode == 'NUEVO REG') {
-      report.cardsStats.newRecord--;
+      updatedReport.cardsStats.newRecord--;
     }
 
     if (document.operationCode == 'REPOSICION') {
-      report.cardsStats.replacement--;
+      updatedReport.cardsStats.replacement--;
     }
 
     if (document.operationCode == 'CANJE') {
-      report.cardsStats.change--;
+      updatedReport.cardsStats.change--;
     }
 
     if (document.isCardCanceled) {
-      report.cardsStats.cancel--;
+      updatedReport.cardsStats.cancel--;
     }
 
     if (
-      report.cardCodesRange[0] == document.cardCode &&
-      report.cardCodesRange[1] == document.cardCode
+      updatedReport.cardCodesRange[0] == document.cardCode &&
+      updatedReport.cardCodesRange[1] == document.cardCode
     ) {
-      report.cardCodesRange[0] = '';
-      report.cardCodesRange[1] = '';
+      updatedReport.cardCodesRange[0] = '';
+      updatedReport.cardCodesRange[1] = '';
     }
 
     if (
-      report.cardCodesRange[0] == document.cardCode &&
-      report.cardCodesRange[1] != document.cardCode
+      updatedReport.cardCodesRange[0] == document.cardCode &&
+      updatedReport.cardCodesRange[1] != document.cardCode
     ) {
-      report.cardCodesRange[0] = setCardCodesRangeLeftZeros(
+      updatedReport.cardCodesRange[0] = setCardCodesRangeLeftZeros(
         document.cardCode,
         'first'
       );
     }
 
     if (
-      report.cardCodesRange[0] != document.cardCode &&
-      report.cardCodesRange[1] == document.cardCode
+      updatedReport.cardCodesRange[0] != document.cardCode &&
+      updatedReport.cardCodesRange[1] == document.cardCode
     ) {
-      report.cardCodesRange[1] = setCardCodesRangeLeftZeros(
+      updatedReport.cardCodesRange[1] = setCardCodesRangeLeftZeros(
         document.cardCode,
         'last'
       );
     }
 
     if (document.sex == 'Hombre') {
-      report.sexStats.male--;
+      updatedReport.sexStats.male--;
     }
 
     if (document.sex == 'Mujer') {
-      report.sexStats.female--;
+      updatedReport.sexStats.female--;
     }
 
-    await updateReport(report);
+    await updateReport(updatedReport);
 
     return;
   } catch (error) {
