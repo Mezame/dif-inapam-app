@@ -27,4 +27,4 @@ export const defaultReport = {
   metadata: {
     id: '',
   },
-} as Report;
+} as Readonly<Report>;

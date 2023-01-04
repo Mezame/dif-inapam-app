@@ -20,39 +20,39 @@ export async function onCreateDocumentSetUpdateReport(
     const reportId = `VER-TUXPAN-${reportDate.toLocaleDateString('es-MX', {
       month: 'long',
     })}-${documentYear}`;
-
     const report = (await getReport(reportId)) as Report;
+    const newReport = { ...defaultReport };
 
     if (!report) {
-      defaultReport.date = reportDate.toString();
+      newReport.date = reportDate.toString();
 
       if (document.operationCode == 'NUEVO REG') {
-        defaultReport.cardsStats.newRecord++;
+        newReport.cardsStats.newRecord++;
       }
 
       if (document.operationCode == 'REPOSICION') {
-        defaultReport.cardsStats.replacement++;
+        newReport.cardsStats.replacement++;
       }
 
       if (document.operationCode == 'CANJE') {
-        defaultReport.cardsStats.change++;
+        newReport.cardsStats.change++;
       }
 
-      defaultReport.cardCodesRange[0] = document.cardCode;
+      newReport.cardCodesRange[0] = document.cardCode;
 
-      defaultReport.cardCodesRange[1] = document.cardCode;
+      newReport.cardCodesRange[1] = document.cardCode;
 
       if (document.sex == 'Hombre') {
-        defaultReport.sexStats.male++;
+        newReport.sexStats.male++;
       }
 
       if (document.sex == 'Mujer') {
-        defaultReport.sexStats.female++;
+        newReport.sexStats.female++;
       }
 
-      defaultReport.metadata!.id = reportId;
+      newReport.metadata!.id = reportId;
 
-      await setReport(defaultReport);
+      await setReport(newReport);
     } else {
       if (document.operationCode == 'NUEVO REG') {
         report.cardsStats.newRecord++;
