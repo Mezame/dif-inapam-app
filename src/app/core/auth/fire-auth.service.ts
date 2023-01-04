@@ -72,7 +72,9 @@ export class FireAuthService {
       take(1),
       tap((user) => {
         if (user) {
-          this.loggerService.info(`signed in user w/ email=${user.email}`);
+          this.loggerService.info(
+            `FireAuthService: signIn: signed in user w/ email=${user.email}`
+          );
         }
       }),
       catchError(this.handleError<any>('signIn'))
@@ -93,7 +95,9 @@ export class FireAuthService {
     return res$.pipe(
       take(1),
       tap((_) => {
-        this.loggerService.info('signed out successfully');
+        this.loggerService.info(
+          'FireAuthService: signOut: signed out successfully'
+        );
       }),
       catchError(this.handleError<boolean>('signOut'))
     );
@@ -122,7 +126,9 @@ export class FireAuthService {
     return res$.pipe(
       take(1),
       tap((_) => {
-        this.loggerService.info(`updated password successfully`);
+        this.loggerService.info(
+          'FireAuthService: updatePassword: updated password successfully'
+        );
 
         this.alertsService.setAlert('Se ha cambiado la contraseña.');
       }),

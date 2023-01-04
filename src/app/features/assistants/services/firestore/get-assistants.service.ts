@@ -44,9 +44,13 @@ export class GetAssistantsService {
       take(1),
       tap((assistants) => {
         if (assistants.length > 0) {
-          this.loggerService.info('got assistants');
+          this.loggerService.info(
+            'GetAssistantsService: getAssistants: got assistants'
+          );
         } else {
-          this.loggerService.info('did not found any assistant');
+          this.loggerService.info(
+            'GetAssistantsService: getAssistants: did not found any assistant'
+          );
         }
       }),
       catchError(this.handleError<Assistant[]>('getAssistants', []))

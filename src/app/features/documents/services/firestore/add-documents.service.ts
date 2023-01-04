@@ -42,7 +42,7 @@ export class AddDocumentsService {
     return documentRef$.pipe(
       take(1),
       tap((docRef) => {
-        this.loggerService.info(`added document w/ id=${docRef.id}`);
+        this.loggerService.info(`AddDocumentsService: addDocument: added document w/ id=${docRef.id}`);
       }),
       catchError(
         this.handleError<DocumentReference<DocumentData>>('addDocument')
@@ -58,7 +58,7 @@ export class AddDocumentsService {
         if (res == undefined) {
           return true;
         } else {
-          this.alertsService.setAlert(`No ha sido posible agregar el oficio`);
+          this.alertsService.setAlert('No ha sido posible agregar el oficio.');
 
           throw new Error('could not set document');
         }
@@ -68,9 +68,9 @@ export class AddDocumentsService {
     return res$.pipe(
       take(1),
       tap((_) => {
-        this.loggerService.info(`set document w/ id=${id}`);
+        this.loggerService.info(`AddDocumentsService: setDocument: set document w/ id=${id}`);
 
-        this.alertsService.setAlert(`Se ha agregado el oficio ${id}`);
+        this.alertsService.setAlert(`Se ha agregado el oficio ${id}.`);
       }),
       catchError(this.handleError<boolean>('setDocument'))
     );

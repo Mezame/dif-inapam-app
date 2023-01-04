@@ -34,7 +34,7 @@ export class DeleteAssistantsService {
           return true;
         } else {
           this.alertsService.setAlert(
-            `No ha sido posible eliminar el asistente`
+            'No ha sido posible eliminar el asistente.'
           );
 
           throw new Error('could not delete assistant');
@@ -45,9 +45,11 @@ export class DeleteAssistantsService {
     return assistantRes$.pipe(
       take(1),
       tap((_) => {
-        this.loggerService.info(`deleted assistant w/ id=${id}`);
+        this.loggerService.info(
+          `DeleteAssistantsService: deleteAssistant: deleted assistant w/ id=${id}`
+        );
 
-        this.alertsService.setAlert(`Se ha eliminado el asistente`);
+        this.alertsService.setAlert('Se ha eliminado el asistente.');
       }),
       catchError(this.handleError<boolean>('deleteAssistant'))
     );

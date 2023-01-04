@@ -34,7 +34,7 @@ export class UploadFilesService {
       map((uploadResult) => {
         if (!uploadResult) throw new Error('could not upload file');
 
-        this.loggerService.info('uploaded file');
+        this.loggerService.info('UploadFilesService: uploadFromBlob: uploaded file');
 
         return uploadResult;
       })
@@ -48,7 +48,7 @@ export class UploadFilesService {
       take(1),
       tap((downloadUrl) => {
         if (downloadUrl) {
-          this.loggerService.info('got file download url');
+          this.loggerService.info('UploadFilesService: uploadFromBlob: got file download url');
         } else {
           throw new Error('could not get file download url');
         }

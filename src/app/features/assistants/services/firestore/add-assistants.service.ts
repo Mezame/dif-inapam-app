@@ -49,7 +49,9 @@ export class AddAssistantsService {
     return assistantRef$.pipe(
       take(1),
       tap((docRef) => {
-        this.loggerService.info(`added assistant w/ id=${docRef.id}`);
+        this.loggerService.info(
+          `AddAssistantsService: addAssistant: added assistant w/ id=${docRef.id}`
+        );
       }),
       catchError(
         this.handleError<DocumentReference<DocumentData>>('addAssistant')
@@ -97,7 +99,7 @@ export class AddAssistantsService {
             return ref;
           } else {
             this.alertsService.setAlert(
-              `No ha sido posible agregar el asistente`
+              'No ha sido posible agregar el asistente.'
             );
 
             throw new Error('could not set assistant');
@@ -109,9 +111,11 @@ export class AddAssistantsService {
     return assistantRes$.pipe(
       take(1),
       tap((_) => {
-        this.loggerService.info(`set assistant w/ id=${assistantId}`);
+        this.loggerService.info(
+          `AddAssistantsService: setAssistant: set assistant w/ id=${assistantId}`
+        );
 
-        this.alertsService.setAlert(`Se ha agregado el asistente`);
+        this.alertsService.setAlert('Se ha agregado el asistente.');
       }),
       catchError(this.handleError<any>('setAssistant'))
     );

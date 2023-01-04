@@ -38,7 +38,7 @@ export class UpdateDocumentsService {
           return true;
         } else {
           this.alertsService.setAlert(
-            `No ha sido posible editar el oficio ${id}`
+            `No ha sido posible editar el oficio ${id}.`
           );
 
           throw new Error('could not update document');
@@ -49,9 +49,11 @@ export class UpdateDocumentsService {
     return res$.pipe(
       take(1),
       tap((_) => {
-        this.loggerService.info(`updated document w/ id=${id}`);
+        this.loggerService.info(
+          `UpdateDocumentsService: updateDocument: updated document w/ id=${id}`
+        );
 
-        this.alertsService.setAlert(`Se ha editado el oficio ${id}`);
+        this.alertsService.setAlert(`Se ha editado el oficio ${id}.`);
       }),
       catchError(this.handleError<boolean>('updateDocument'))
     );

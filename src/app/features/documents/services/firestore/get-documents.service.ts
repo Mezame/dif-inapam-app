@@ -50,9 +50,13 @@ export class GetDocumentsService {
       take(1),
       tap((documents) => {
         if (documents.length > 0) {
-          this.loggerService.info('got documents');
+          this.loggerService.info(
+            'GetDocumentsService: getDocuments: got documents'
+          );
         } else {
-          this.loggerService.info('did not found any document');
+          this.loggerService.info(
+            'GetDocumentsService: getDocuments: did not found any document'
+          );
         }
       }),
       catchError(this.handleError<Document[]>('getDocuments', []))
@@ -85,14 +89,12 @@ export class GetDocumentsService {
       take(1),
       tap((document) => {
         if (document) {
-          this.loggerService.info(`got document w/ cardCode=${cardCode}`);
+          this.loggerService.info(
+            `GetDocumentsService: getDocumentByCardCode: got document w/ cardCode=${cardCode}`
+          );
         }
       }),
-      catchError(
-        this.handleError<Document>(
-          `getDocumentByCardCode w/ cardCode=${cardCode}`
-        )
-      )
+      catchError(this.handleError<Document>('getDocumentByCardCode'))
     );
   }
 
@@ -117,7 +119,9 @@ export class GetDocumentsService {
       take(1),
       tap((dateStore) => {
         if (dateStore) {
-          this.loggerService.info(`got date store`);
+          this.loggerService.info(
+            'GetDocumentsService: getDocumentUtilsDateStore: got date store'
+          );
         }
       }),
       catchError(this.handleError<DateStore>('getDocumentUtilsDateStore'))

@@ -43,9 +43,11 @@ export class GetReportsService {
       take(1),
       tap((reports) => {
         if (reports.length > 0) {
-          this.loggerService.info('got reports');
+          this.loggerService.info('GetReportsService: getReports: got reports');
         } else {
-          this.loggerService.info('did not found any report');
+          this.loggerService.info(
+            'GetReportsService: getReports: did not found any report'
+          );
         }
       }),
       catchError(this.handleError<Report[]>('getReports', []))
