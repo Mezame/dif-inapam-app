@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions';
 import { Document } from '../../utils/document-utils';
 import { Report } from '../../utils/report-utils';
+import { deleteReport } from '../database/delete-reports';
 import { getReport } from '../database/get-reports';
 import { updateReport } from '../database/update-reports';
 
@@ -31,6 +32,16 @@ export async function onDeleteDocumentUpdateReport(
       report.cardsStats.replacement == 0 &&
       report.cardsStats.change == 0
     ) {
+      return;
+    }
+
+    if (
+      report.cardsStats.newRecord == 1 ||
+      report.cardsStats.replacement == 1 ||
+      report.cardsStats.change == 1
+    ) {
+      await deleteReport(reportId);
+
       return;
     }
 
