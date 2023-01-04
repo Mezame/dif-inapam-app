@@ -32,11 +32,28 @@
     </div>
   </div>
 
-  <div *ngIf="chartData" class="column">
+  <div
+    *ngIf="
+      !(report.metadata?.id == 'VER-TUXPAN-noviembre-2022');
+      else sexStatsPieChart
+    "
+    class="column"
+  >
     <div class="chart-container">
-      <app-chart-pie [data]="chartData"></app-chart-pie>
+      <app-chart-pie
+        [data]="setSexStatsPieChartData(report.sexStats)"
+      ></app-chart-pie>
     </div>
   </div>
+  <ng-template #sexStatsPieChart>
+    <div class="column">
+      <div class="chart-container">
+        <app-chart-pie
+          [data]="setSexStatsPieChartData(report.sexStats)"
+        ></app-chart-pie>
+      </div>
+    </div>
+  </ng-template>
 
   <div class="column col-group">
     <span class="mat-subtitle-2">Folios</span>

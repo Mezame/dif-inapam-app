@@ -1,9 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChartPieData } from '@shared/components/chart-pie/chart-pie-data.interface';
 import { Report } from '../report.interface';
 
 @Component({
@@ -12,23 +8,21 @@ import { Report } from '../report.interface';
   styleUrls: ['./report-detail-content.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReportDetailContentComponent implements OnInit {
-  chartData!: { value: number; name: string }[];
-
+export class ReportDetailContentComponent {
   @Input('data') report!: Report;
 
-  ngOnInit(): void {
-    if (this.report.sexStats) {
-      this.chartData = [
-        {
-          value: this.report.sexStats.male,
-          name: 'Hombre',
-        },
-        {
-          value: this.report.sexStats.female,
-          name: 'Mujer',
-        },
-      ];
-    }
+  setSexStatsPieChartData(sexStats: Report['sexStats']): ChartPieData[] {
+    const chartPieData = [
+      {
+        value: sexStats.male,
+        name: 'Hombre',
+      },
+      {
+        value: sexStats.female,
+        name: 'Mujer',
+      },
+    ] as ChartPieData[];
+
+    return chartPieData;
   }
 }
