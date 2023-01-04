@@ -6,15 +6,16 @@ import {
   OnInit,
 } from '@angular/core';
 
-import * as echarts from 'echarts/core';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
 import {
-  TooltipComponent,
-  TooltipComponentOption,
   LegendComponent,
   LegendComponentOption,
+  TooltipComponent,
+  TooltipComponentOption,
 } from 'echarts/components';
+import * as echarts from 'echarts/core';
 import { SVGRenderer } from 'echarts/renderers';
+import { ChartPieData } from './chart-pie-data.interface';
 
 type ECOption = echarts.ComposeOption<
   PieSeriesOption | TooltipComponentOption | LegendComponentOption
@@ -29,11 +30,15 @@ type ECOption = echarts.ComposeOption<
 export class ChartPieComponent implements OnInit {
   options!: ECOption;
 
-  @Input() data!: { value: number; name: string }[];
+  @Input() data!: ChartPieData[];
 
   constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
+    this.createPieChart(this.data);
+  }
+
+  createPieChart(source: ChartPieData[]) {
     const divEl = this.el.nativeElement.firstChild as HTMLDivElement;
     let pieChart: echarts.ECharts;
 
@@ -76,7 +81,7 @@ export class ChartPieComponent implements OnInit {
           },
           legendHoverLink: false,
           animation: false,
-          data: this.data,
+          data: source,
         },
       ],
     };
