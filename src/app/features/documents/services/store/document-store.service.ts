@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DateStore } from '@features/documents/date-store.interface';
 import { Document } from '@features/documents/document.interface';
-import { BehaviorSubject, filter, map, mergeMap, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { GetDocumentsService } from '../firestore/get-documents.service';
 
 @Injectable({
@@ -124,9 +124,10 @@ export class DocumentStoreService {
   loadDocumentUtilsDateStore() {
     this.getDocumentsService
       .getDocumentUtilsDateStore()
-      .pipe(map((dateStore) => (dateStore.years?.length > 0 ? dateStore : null)))
+      .pipe(
+        map((dateStore) => (dateStore.years?.length > 0 ? dateStore : null))
+      )
       .subscribe((dateStore) => {
-        console.log(dateStore);
         if (dateStore) {
           this.dateStore$.next(dateStore);
         }
