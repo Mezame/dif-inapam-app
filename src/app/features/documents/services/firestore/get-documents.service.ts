@@ -73,8 +73,9 @@ export class GetDocumentsService {
 
         querySnapshot.forEach((doc) => (document = doc.data() as Document));
 
-        if (!document!)
+        if (!document!) {
           throw new Error(`did not found any document w/ cardCode=${cardCode}`);
+        }
 
         return document!;
       })
@@ -83,8 +84,9 @@ export class GetDocumentsService {
     return document$.pipe(
       take(1),
       tap((document) => {
-        if (document)
+        if (document) {
           this.loggerService.info(`got document w/ cardCode=${cardCode}`);
+        }
       }),
       catchError(
         this.handleError<Document>(
@@ -103,7 +105,9 @@ export class GetDocumentsService {
       map((documentData) => {
         const dateStore = documentData.data() as DateStore;
 
-        if (!dateStore) throw new Error('did not found any date store');
+        if (!dateStore) {
+          throw new Error('did not found any date store');
+        }
 
         return dateStore;
       })
@@ -112,7 +116,9 @@ export class GetDocumentsService {
     return dateStore$.pipe(
       take(1),
       tap((dateStore) => {
-        if (dateStore) this.loggerService.info(`got date store`);
+        if (dateStore) {
+          this.loggerService.info(`got date store`);
+        }
       }),
       catchError(this.handleError<DateStore>('getDocumentUtilsDateStore'))
     );
