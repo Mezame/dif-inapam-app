@@ -6,7 +6,6 @@ import {
   Renderer2,
 } from '@angular/core';
 import { MatAnchor } from '@angular/material/button';
-import { Router } from '@angular/router';
 import { Document } from '@features/documents/document.interface';
 import { SortDocumentsService } from '@features/documents/services/sorts/sort-documents.service';
 import { DocumentStoreService } from '@features/documents/services/store/document-store.service';
@@ -24,7 +23,6 @@ import {
   generateDocumentsReportDataSource,
   generateMonthlyReportDataSource,
 } from '../../shared/reports-data-source';
-import { whenNoReportExistPatch } from '../../shared/when-no-report-exists-patch';
 
 @Component({
   selector: 'app-report-dashboard',
@@ -45,11 +43,8 @@ export class ReportDashboardComponent implements OnInit {
     private sortReportsService: SortReportsService,
     private renderer: Renderer2,
     private cDRef: ChangeDetectorRef,
-    private alertsService: AlertsService,
-    private router: Router
-  ) {
-    whenNoReportExistPatch(this.reportStoreService, this.router);
-  }
+    private alertsService: AlertsService
+  ) {}
 
   ngOnInit(): void {
     const sortedDocuments$ =
