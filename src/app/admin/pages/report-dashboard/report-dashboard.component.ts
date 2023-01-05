@@ -51,7 +51,7 @@ export class ReportDashboardComponent implements OnInit {
       this.sortDocumentsService.sortDocumentsByCreateDate(
         this.documentStoreService.getDocuments(),
         'des'
-      );
+      ) as Observable<Document[]>;
 
     this.report$ = this.sortReportsService
       .sortReportsByDate(this.reportStoreService.getReports(), 'asc')
@@ -60,17 +60,18 @@ export class ReportDashboardComponent implements OnInit {
     if (this.report$ && sortedDocuments$) {
       this.documents$ = this.report$.pipe(
         switchMap((report) => {
-          const reportYear = new Date(report.date).getFullYear();
-          const reportMonth = new Date(report.date).getMonth();
+          const reportYear = new Date(report.date).getFullYear() as number;
+          const reportMonth = new Date(report.date).getMonth() as number;
 
           return sortedDocuments$.pipe(
             map((documents) => {
               return documents.filter((document) => {
                 const documentYear = new Date(
                   document.createDate
-                ).getFullYear();
-
-                const documentMonth = new Date(document.createDate).getMonth();
+                ).getFullYear() as number;
+                const documentMonth = new Date(
+                  document.createDate
+                ).getMonth() as number;
 
                 return (
                   documentYear == reportYear && documentMonth == reportMonth
@@ -84,24 +85,30 @@ export class ReportDashboardComponent implements OnInit {
   }
 
   downloadMonthlyReportCsv(el: MatAnchor, data: { report: Report }) {
-    const anchor = el._elementRef.nativeElement as HTMLAnchorElement;
+    let anchor: HTMLAnchorElement;
+    let dataSource: CsvDataSource;
+    let parsedCsvData: string;
+    let reportLocaleMonth: string;
+    let reportYear: string;
+    let fileName: string;
+
+    anchor = el._elementRef.nativeElement;
 
     if (anchor.href) return;
 
-    const dataSource = generateMonthlyReportDataSource(data) as CsvDataSource;
+    dataSource = generateMonthlyReportDataSource(data);
 
-    const parsedCsvData = parseDataSourceToCsv(dataSource) as string;
+    parsedCsvData = parseDataSourceToCsv(dataSource);
 
-    this.objectUrl = createCsvDownloadUrl(parsedCsvData) as string;
+    this.objectUrl = createCsvDownloadUrl(parsedCsvData);
 
     this.renderer.setAttribute(anchor, 'href', this.objectUrl);
 
-    const reportLocaleMonth = new Date(data.report.date).toLocaleDateString(
-      'es-MX',
-      { month: 'long' }
-    );
-    const reportYear = new Date(data.report.date).getFullYear().toString();
-    const fileName = `reporte-mensual-${reportLocaleMonth}-${reportYear}`;
+    reportLocaleMonth = new Date(data.report.date).toLocaleDateString('es-MX', {
+      month: 'long',
+    });
+    reportYear = new Date(data.report.date).getFullYear().toString();
+    fileName = `reporte-mensual-${reportLocaleMonth}-${reportYear}`;
 
     this.renderer.setAttribute(anchor, 'download', fileName!);
 
@@ -131,25 +138,32 @@ export class ReportDashboardComponent implements OnInit {
   }
 
   downloadDocumentsReportCsv(el: MatAnchor, data: { documents: Document[] }) {
-    const anchor = el._elementRef.nativeElement as HTMLAnchorElement;
+    let anchor: HTMLAnchorElement;
+    let dataSource: CsvDataSource;
+    let parsedCsvData: string;
+    let reportLocaleMonth: string;
+    let reportYear: string;
+    let fileName: string;
+
+    anchor = el._elementRef.nativeElement;
 
     if (anchor.href) return;
 
-    const dataSource = generateDocumentsReportDataSource(data) as CsvDataSource;
+    dataSource = generateDocumentsReportDataSource(data);
 
-    const parsedCsvData = parseDataSourceToCsv(dataSource) as string;
+    parsedCsvData = parseDataSourceToCsv(dataSource);
 
-    this.objectUrl = createCsvDownloadUrl(parsedCsvData) as string;
+    this.objectUrl = createCsvDownloadUrl(parsedCsvData);
 
     this.renderer.setAttribute(anchor, 'href', this.objectUrl);
 
-    const reportLocaleMonth = new Date(
+    reportLocaleMonth = new Date(
       data.documents[0].createDate
     ).toLocaleDateString('es-MX', { month: 'long' });
-    const reportYear = new Date(data.documents[0].createDate)
+    reportYear = new Date(data.documents[0].createDate)
       .getFullYear()
       .toString();
-    const fileName = `reporte-oficios-${reportLocaleMonth}-${reportYear}`;
+    fileName = `reporte-oficios-${reportLocaleMonth}-${reportYear}`;
 
     this.renderer.setAttribute(anchor, 'download', fileName!);
 
