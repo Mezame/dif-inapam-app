@@ -1,56 +1,63 @@
 <app-primary-layout toolbar-title="Panel de reportes">
   <div *ngIf="report$ | async as report" class="content">
-    <span class="mat-small"
-      >Reporte mensual: {{ report.date | date : "MMMM, y" }}</span
-    >
-
-    <div class="button-group">
-      <a
-        mat-flat-button
-        color="primary"
-        (click)="downloadMonthlyReportCsv(monthlyReportAnchorRef, { report })"
-        [disabled]="!report.cardsStats"
-        #monthlyReportAnchorRef
-      >
-        <mat-icon>download</mat-icon>
-        <span>Descargar reporte</span>
-      </a>
-
-      <a mat-stroked-button color="primary" routerLink="/admin/reportes">
-        <mat-icon>read_more</mat-icon>
-        <span>Ir a lista de reportes</span>
-      </a>
-    </div>
-
-    <app-report-detail-content *ngIf="report.cardsStats" [data]="report"></app-report-detail-content>
-
-    <ng-container *ngIf="documents$ | async as documents">
+    <div class="section">
       <span class="mat-small"
-        >Reporte de oficios: {{ report.date | date : "MMMM, y" }}</span
+        >Reporte mensual: {{ report.date | date : "MMMM, y" }}</span
       >
 
       <div class="button-group">
         <a
           mat-flat-button
           color="primary"
-          (click)="downloadDocumentsReportCsv(documentsReportAnchorRef, { documents })"
+          (click)="downloadMonthlyReportCsv(monthlyReportAnchorRef, { report })"
           [disabled]="!report.cardsStats"
-          #documentsReportAnchorRef
+          #monthlyReportAnchorRef
         >
           <mat-icon>download</mat-icon>
           <span>Descargar reporte</span>
         </a>
 
-        <a mat-stroked-button color="primary" routerLink="/home/oficios">
+        <a mat-stroked-button color="primary" routerLink="/admin/reportes">
           <mat-icon>read_more</mat-icon>
-          <span>Ir a lista de oficios</span>
+          <span>Ir a lista de reportes</span>
         </a>
       </div>
 
-      <app-document-list-table
-        [ngClass]="{ 'fixed-height': documents.length > 4 }"
-        [data]="documents$! | sortDocumentsByDate : 'asc'"
-      ></app-document-list-table>
+      <app-report-detail-content
+        *ngIf="report.cardsStats"
+        [data]="report"
+      ></app-report-detail-content>
+    </div>
+
+    <ng-container *ngIf="documents$ | async as documents">
+      <div class="section">
+        <span class="mat-small"
+          >Reporte de oficios: {{ report.date | date : "MMMM, y" }}</span
+        >
+
+        <div class="button-group">
+          <a
+            mat-flat-button
+            color="primary"
+            (click)="downloadDocumentsReportCsv(documentsReportAnchorRef, { documents })"
+            [disabled]="!report.cardsStats"
+            #documentsReportAnchorRef
+          >
+            <mat-icon>download</mat-icon>
+            <span>Descargar reporte</span>
+          </a>
+
+          <a mat-stroked-button color="primary" routerLink="/home/oficios">
+            <mat-icon>read_more</mat-icon>
+            <span>Ir a lista de oficios</span>
+          </a>
+        </div>
+
+        <app-document-list-table
+          [ngClass]="{ 'fixed-height': documents.length > 4 }"
+          [data]="documents$! | sortDocumentsByDate : 'asc'"
+        ></app-document-list-table>
+      </div>
     </ng-container>
   </div>
 </app-primary-layout>

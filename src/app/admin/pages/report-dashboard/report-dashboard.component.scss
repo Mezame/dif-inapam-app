@@ -1,16 +1,22 @@
 .content {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    width: 704px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .button-group {
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
 }
 
 .fixed-height {
-    height: 290px;
+  height: 290px;
 }

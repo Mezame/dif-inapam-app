@@ -1,45 +1,90 @@
-<mat-toolbar>
-  <a
-    mat-icon-button
-    aria-label="Navega a una página superior"
-    [routerLink]="toolbarBackLink"
-  >
-    <mat-icon>arrow_back</mat-icon>
-  </a>
-
-  <span *ngIf="toolbarTitle">{{ toolbarTitle }}</span>
-
-  <!-- ng-container *ngIf="cardCode">
-    <span class="spacer"></span>
-
-    <ng-container *ngIf="toolbarIconButton && toolbarMenu">
-      <button
-        mat-icon-button
-        aria-label="Abre menu con opciones de oficio"
-        [matMenuTriggerFor]="menu"
+<div class="container">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav
+      class="side-nav"
+      role="navigation"
+      [mode]="sideNavMode"
+      [opened]="isSideNavOpened"
+      #sidenav
+    >
+      <mat-nav-list
+        (click)="isTabletScreen ? sidenav.close() : sidenav.open()"
+        disableRipple
       >
-        <mat-icon>{{ toolbarIconButton }}</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <a mat-menu-item [routerLink]="['/admin/oficios', cardCode, 'editar']">
-          <mat-icon>edit</mat-icon>
-          <span>Editar oficio</span>
+        <a
+          *ngIf="isAdmin$ | async"
+          mat-list-item
+          routerLink="/admin/panel-reportes"
+          routerLinkActive="active-link"
+          tabindex="-1"
+        >
+          <span>Panel</span>
         </a>
 
-        <button mat-menu-item (click)="deleteDocumentAction(cardCode)">
-          <mat-icon>delete</mat-icon>
-          <span>Eliminar oficio</span>
-        </button>
+        <a
+          *ngIf="isAdmin$ | async"
+          mat-list-item
+          routerLink="/admin/reportes"
+          routerLinkActive="active-link"
+          tabindex="-1"
+        >
+          <span>Reportes</span>
+        </a>
 
-        <button mat-menu-item (click)="cancelCardAction(cardCode)">
-          <mat-icon>cancel</mat-icon>
-          <span>Cancelar tarjeta</span>
-        </button>
-      </mat-menu>
-    </ng-container>
-  </ng-container -->
-</mat-toolbar>
+        <a
+          mat-list-item
+          routerLink="/home/oficios"
+          routerLinkActive="active-link"
+          tabindex="-1"
+        >
+          <span>Oficios</span>
+        </a>
 
-<div class="content">
-  <ng-content></ng-content>
+        <a
+          *ngIf="isAdmin$ | async"
+          mat-list-item
+          routerLink="/admin/asistentes"
+          routerLinkActive="active-link"
+          tabindex="-1"
+        >
+          <span>Asistentes</span>
+        </a>
+
+        <mat-divider class="divider"></mat-divider>
+
+        <a
+          *ngIf="isNotAdmin$ | async"
+          mat-list-item
+          routerLink="/home/mi-cuenta"
+          routerLinkActive="active-link"
+          tabindex="-1"
+        >
+          <span>Mi cuenta</span>
+        </a>
+
+        <a mat-list-item tabindex="-1" (click)="logOut()">
+          <mat-icon matListItemIcon>logout</mat-icon>
+          <span matListItemTitle>Cerrar sesión</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content role="main">
+      <mat-toolbar>
+        <a
+          mat-icon-button
+          aria-label="Navega a una página superior"
+          [routerLink]="toolbarBackLink"
+        >
+          <mat-icon>arrow_back</mat-icon>
+        </a>
+
+        <span *ngIf="toolbarTitle">{{ toolbarTitle }}</span>
+      </mat-toolbar>
+
+      <div class="content">
+        <ng-content></ng-content>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
