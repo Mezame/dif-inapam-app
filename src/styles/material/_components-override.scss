@@ -49,4 +49,10 @@ mat-toolbar {
   mat-snack-bar-container {
     margin-top: 64px !important;
   }
+
+  @media only screen and (min-width: 1279.98px) {
+    mat-snack-bar-container {
+      margin-left: 360px !important;
+    }
+  }
 }
