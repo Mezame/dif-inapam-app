@@ -34,7 +34,7 @@ export class DocumentAddEditFormComponent implements OnInit {
   statesOptions!: string[];
   defaultFormValue: any;
   defaultErrorMessage: any;
-  isSubmitButtonDisabled = false;
+  isSubmitButtonDisabled!: boolean;
 
   documentForm!: FormGroup<{
     createDate: FormControl<Date | string | null>;
@@ -113,6 +113,8 @@ export class DocumentAddEditFormComponent implements OnInit {
     this.defaultErrorMessage = defaultErrorMessage;
 
     this.defaultFormValue = documentDefaultFormValue;
+
+    this.isSubmitButtonDisabled = false;
 
     this.documentForm = this.fb.group({
       createDate: [{ value: new Date(), disabled: true }],
