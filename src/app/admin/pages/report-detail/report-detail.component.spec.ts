@@ -10,15 +10,16 @@ import { AlertsService } from '@shared/components/alert/services/alerts.service'
 import { SecondaryLayoutModule } from '@shared/layouts/secondary/secondary-layout.module';
 import { ReportDetailComponent } from './report-detail.component';
 
-fdescribe('ReportDetailComponent', () => {
+describe('ReportDetailComponent', () => {
   let component: ReportDetailComponent;
   let fixture: ComponentFixture<ReportDetailComponent>;
 
   beforeEach(async () => {
     const routeSpy = jasmine.createSpyObj('ActivatedRoute', ['']);
-    const reportStoreServiceSpy = jasmine.createSpyObj('DocumentStoreService', [
-      'getDocuments',
-    ]);
+    const documentStoreServiceSpy = jasmine.createSpyObj(
+      'DocumentStoreService',
+      ['getDocuments']
+    );
 
     await TestBed.configureTestingModule({
       imports: [
@@ -29,7 +30,7 @@ fdescribe('ReportDetailComponent', () => {
       declarations: [ReportDetailComponent],
       providers: [
         { provide: ActivatedRoute, useValue: routeSpy },
-        { provide: DocumentStoreService, useValue: reportStoreServiceSpy },
+        { provide: DocumentStoreService, useValue: documentStoreServiceSpy },
         { provide: GetDocumentsService, useValue: {} },
         { provide: AlertsService, useValue: {} },
         { provide: FireAuthService, useValue: {} },
