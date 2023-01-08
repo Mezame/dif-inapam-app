@@ -11,7 +11,7 @@ import { AlertsService } from '@shared/components/alert/services/alerts.service'
 import { PrimaryLayoutModule } from '@shared/layouts/primary/primary-layout.module';
 import { ReportDashboardComponent } from './report-dashboard.component';
 
-fdescribe('ReportDashboardComponent', () => {
+describe('ReportDashboardComponent', () => {
   let component: ReportDashboardComponent;
   let fixture: ComponentFixture<ReportDashboardComponent>;
 
