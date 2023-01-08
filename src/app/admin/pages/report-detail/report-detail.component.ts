@@ -44,9 +44,9 @@ export class ReportDetailComponent implements OnInit {
     private cDRef: ChangeDetectorRef,
     private alertsService: AlertsService
   ) {
-    this.reportId = this.route.snapshot.params['id'];
+    this.reportId = this.route.snapshot?.params['id'];
 
-    this.report$ = this.route.data.pipe(map((data) => data['report']));
+    this.report$ = this.route.data?.pipe(map((data) => data['report']));
   }
 
   ngOnInit(): void {
