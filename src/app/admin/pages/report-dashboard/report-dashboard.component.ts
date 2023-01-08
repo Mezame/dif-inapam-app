@@ -47,31 +47,39 @@ export class ReportDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const sortedDocuments$ =
-      this.sortDocumentsService.sortDocumentsByCreateDate(
-        this.documentStoreService.getDocuments(),
-        'des'
-      ) as Observable<Document[]>;
+    let sortedDocuments$: Observable<Document[]>;
+    let reports$: Observable<Report[]>;
 
-    this.report$ = this.sortReportsService
-      .sortReportsByDate(this.reportStoreService.getReports(), 'asc')
-      .pipe(map((reports) => reports[0] ?? {}));
+    sortedDocuments$ = this.sortDocumentsService.sortDocumentsByCreateDate(
+      this.documentStoreService.getDocuments(),
+      'des'
+    );
+
+    reports$ = this.reportStoreService.getReports();
+
+    if (reports$) {
+      this.report$ = this.sortReportsService
+        .sortReportsByDate(reports$, 'asc')
+        .pipe(map((reports) => reports[0] ?? {}));
+    }
 
     if (this.report$ && sortedDocuments$) {
       this.documents$ = this.report$.pipe(
         switchMap((report) => {
-          const reportYear = new Date(report.date).getFullYear() as number;
-          const reportMonth = new Date(report.date).getMonth() as number;
+          let reportYear: number;
+          let reportMonth: number;
+
+          reportYear = new Date(report.date).getFullYear();
+          reportMonth = new Date(report.date).getMonth();
 
           return sortedDocuments$.pipe(
             map((documents) => {
               return documents.filter((document) => {
-                const documentYear = new Date(
-                  document.createDate
-                ).getFullYear() as number;
-                const documentMonth = new Date(
-                  document.createDate
-                ).getMonth() as number;
+                let documentYear: number;
+                let documentMonth: number;
+
+                documentYear = new Date(document.createDate).getFullYear();
+                documentMonth = new Date(document.createDate).getMonth();
 
                 return (
                   documentYear == reportYear && documentMonth == reportMonth
