@@ -36,9 +36,9 @@ export class DocumentDetailComponent implements OnInit {
     private alertsService: AlertsService,
     private router: Router
   ) {
-    this.cardCode = this.route.snapshot.params['cardCode'];
+    this.cardCode = this.route.snapshot?.params['cardCode'];
 
-    this.document$ = this.route.data.pipe(map((data) => data['document']));
+    this.document$ = this.route.data?.pipe(map((data) => data['document']));
 
     this.isAdmin$ = this.fireAuthService.isAdmin$;
   }

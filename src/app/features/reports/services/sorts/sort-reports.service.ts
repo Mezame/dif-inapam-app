@@ -28,7 +28,7 @@ export class SortReportsService {
       };
     }
 
-    this.orderedReports$ = documents.pipe(
+    this.orderedReports$ = documents?.pipe(
       map((documents) => {
         return documents.sort(this.orderFn);
       })

@@ -6,7 +6,9 @@ describe('DeleteDocumentsService', () => {
   let service: DeleteDocumentsService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [{ provide: DeleteDocumentsService, useValue: {} }],
+    });
     service = TestBed.inject(DeleteDocumentsService);
   });
 

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InputFileImageComponent } from './input-file-image.component';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('InputFileImageComponent', () => {
   let component: InputFileImageComponent;
@@ -8,9 +9,9 @@ describe('InputFileImageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InputFileImageComponent ]
-    })
-    .compileComponents();
+      imports: [MatIconModule],
+      declarations: [InputFileImageComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(InputFileImageComponent);
     component = fixture.componentInstance;

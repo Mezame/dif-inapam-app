@@ -8,9 +8,8 @@ describe('ReportListTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReportListTableComponent ]
-    })
-    .compileComponents();
+      declarations: [ReportListTableComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ReportListTableComponent);
     component = fixture.componentInstance;

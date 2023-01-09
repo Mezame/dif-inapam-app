@@ -6,7 +6,9 @@ describe('FireAuthService', () => {
   let service: FireAuthService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [{ provide: FireAuthService, useValue: {} }],
+    });
     service = TestBed.inject(FireAuthService);
   });
 

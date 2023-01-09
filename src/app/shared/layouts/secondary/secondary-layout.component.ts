@@ -35,7 +35,7 @@ export class SecondaryLayoutComponent {
     private router: Router
   ) {
     this.isAdmin$ = this.fireAuthService.isAdmin$;
-    this.isNotAdmin$ = this.isAdmin$.pipe(map((isAdmin) => !isAdmin));
+    this.isNotAdmin$ = this.isAdmin$?.pipe(map((isAdmin) => !isAdmin));
 
     this.isTabletScreen = false;
     this.isMediumScreen = false;

@@ -40,7 +40,7 @@ export class PrimaryLayoutComponent {
     private router: Router
   ) {
     this.isAdmin$ = this.fireAuthService.isAdmin$;
-    this.isNotAdmin$ = this.isAdmin$.pipe(map((isAdmin) => !isAdmin));
+    this.isNotAdmin$ = this.isAdmin$?.pipe(map((isAdmin) => !isAdmin));
 
     this.setSideNavMode();
   }

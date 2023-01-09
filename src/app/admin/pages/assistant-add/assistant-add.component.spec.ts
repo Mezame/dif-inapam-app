@@ -9,7 +9,7 @@ import { AssistantStoreService } from '@features/assistants/services/store/assis
 import { SecondaryLayoutModule } from '@shared/layouts/secondary/secondary-layout.module';
 import { AssistantAddComponent } from './assistant-add.component';
 
-fdescribe('AssistantAddComponent', () => {
+describe('AssistantAddComponent', () => {
   let component: AssistantAddComponent;
   let fixture: ComponentFixture<AssistantAddComponent>;
 

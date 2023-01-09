@@ -6,7 +6,9 @@ describe('UploadFilesService', () => {
   let service: UploadFilesService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [{ provide: UploadFilesService, useValue: {} }],
+    });
     service = TestBed.inject(UploadFilesService);
   });
 

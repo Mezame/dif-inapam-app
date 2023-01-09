@@ -33,7 +33,7 @@ export class ReportDetailComponent implements OnInit {
   report$: Observable<Report>;
   documents$?: Observable<Document[]>;
 
-  reportId: string;
+  //reportId: string;
   objectUrl: string | null = null;
 
   constructor(
@@ -44,7 +44,7 @@ export class ReportDetailComponent implements OnInit {
     private cDRef: ChangeDetectorRef,
     private alertsService: AlertsService
   ) {
-    this.reportId = this.route.snapshot?.params['id'];
+    //this.reportId = this.route.snapshot?.params['id'];
 
     this.report$ = this.route.data?.pipe(map((data) => data['report']));
   }
@@ -59,16 +59,20 @@ export class ReportDetailComponent implements OnInit {
     if (this.report$ && sortedDocuments$) {
       this.documents$ = this.report$.pipe(
         switchMap((report) => {
-          const reportYear = new Date(report.date).getFullYear();
-          const reportMonth = new Date(report.date).getMonth();
+          let reportYear: number;
+          let reportMonth: number;
+
+          reportYear = new Date(report.date).getFullYear();
+          reportMonth = new Date(report.date).getMonth();
 
           return sortedDocuments$.pipe(
             map((documents) => {
               return documents.filter((document) => {
-                const documentYear = new Date(
-                  document.createDate
-                ).getFullYear();
-                const documentMonth = new Date(document.createDate).getMonth();
+                let documentYear: number;
+                let documentMonth: number;
+
+                documentYear = new Date(document.createDate).getFullYear();
+                documentMonth = new Date(document.createDate).getMonth();
 
                 return (
                   documentYear == reportYear && documentMonth == reportMonth

@@ -8,9 +8,8 @@ describe('AssistantListTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AssistantListTableComponent ]
-    })
-    .compileComponents();
+      declarations: [AssistantListTableComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AssistantListTableComponent);
     component = fixture.componentInstance;
