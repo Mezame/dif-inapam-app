@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class LoggerService {
   logs: string[] = [];
-  devMode: boolean = true;
+  devMode: boolean = false;
   debugMode: boolean = false;
 
   log: (message: string) => void = this.info;
