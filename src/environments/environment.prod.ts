@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  useEmulators: true,
+  useEmulators: false,
   firebase: {
     projectId: 'dif-inapam-app',
     appId: '1:227451757890:web:16acec35ad07debe4e14db',
