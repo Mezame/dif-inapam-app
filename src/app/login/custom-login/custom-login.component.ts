@@ -55,9 +55,6 @@ export class CustomLoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
-
-    this.emailCtrl.setValue('mezametranslations@gmail.com');
-    this.passwordCtrl.setValue('admin123');
   }
 
   onSubmit() {
