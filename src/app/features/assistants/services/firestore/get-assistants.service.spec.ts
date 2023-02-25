@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { GetAssistantsService } from './get-assistants.service';
-import { environment } from '../../../../../environments/environment';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { environment } from '@environments/environment';
 import { Assistant } from '@features/assistants/assistant.interface';
 import { of } from 'rxjs';
+import { GetAssistantsService } from './get-assistants.service';
 
 describe('GetAssistantsService', () => {
   let getAssistantsService: jasmine.SpyObj<GetAssistantsService>;
@@ -62,7 +62,7 @@ describe('GetAssistantsService', () => {
           expect(assistants.length)
             .withContext('should return assistants')
             .toBeGreaterThan(0),
-        error: fail,
+        error: () => fail,
       });
     });
 
@@ -74,7 +74,7 @@ describe('GetAssistantsService', () => {
           expect(assistants.length)
             .withContext('should have empty assistants array')
             .toEqual(0),
-        error: fail,
+        error: () => fail,
       });
     });
   });
