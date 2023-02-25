@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { PageNotFoundComponent } from './page-not-found.component';
 
-xdescribe('PageNotFoundPage', () => {
+describe('PageNotFoundPage', () => {
   let component: PageNotFoundComponent;
   let fixture: ComponentFixture<PageNotFoundComponent>;
 
