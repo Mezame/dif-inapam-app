@@ -12,7 +12,7 @@ import {
 } from '@core/error-handlers/firebase-error-handler.service';
 import { LoggerService } from '@core/logger/logger.service';
 import { Assistant } from '@features/assistants/assistant.interface';
-import { catchError, Observable, take, tap } from 'rxjs';
+import { catchError, Observable, of, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'any',

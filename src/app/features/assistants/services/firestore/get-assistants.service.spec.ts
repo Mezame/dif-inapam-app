@@ -52,7 +52,7 @@ describe('GetAssistantsService', () => {
       ];
     });
 
-    it('should return at least one assistant', () => {
+    it('should return assistants', () => {
       getAssistantsService.getAssistants.and.returnValue(
         of(expectedAssistants)
       );
@@ -60,7 +60,7 @@ describe('GetAssistantsService', () => {
       getAssistantsService.getAssistants().subscribe({
         next: (assistants) =>
           expect(assistants.length)
-            .withContext('should return assistants')
+            .withContext('should have array with at least one assistant')
             .toBeGreaterThan(0),
         error: () => fail,
       });
